@@ -15,7 +15,6 @@ namespace AppInguiri
 {
     public partial class FrmActualizaDato : Form
     {
-        //jlio
         ProductoHistorialNegocio objProdHistNeg = new ProductoHistorialNegocio();
         private bool cerrarFormulario = true;
         ProductoHistorial _productoHistorial;
