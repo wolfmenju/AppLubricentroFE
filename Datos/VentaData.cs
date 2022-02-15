@@ -33,7 +33,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Serie", objVenta.sSerie);
                 cmd.Parameters.AddWithValue("@Numero", objVenta.nNumero);
                 cmd.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
-                cmd.Parameters.AddWithValue("@Porcentaje", objVenta.nPorcentaje);
+                cmd.Parameters.AddWithValue("@Porcentaje", objVenta.fPorcentajeIgv);
                 cmd.Parameters.AddWithValue("@SubTotal", objVenta.fSubTotal);
                 cmd.Parameters.AddWithValue("@Igv", objVenta.fIgv);
                 cmd.Parameters.AddWithValue("@Total", objVenta.fTotal);
@@ -192,7 +192,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Serie", objVenta.sSerie);
                 cmd.Parameters.AddWithValue("@Numero", objVenta.nNumero);
                 cmd.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
-                cmd.Parameters.AddWithValue("@Porcentaje", objVenta.nPorcentaje);
+                cmd.Parameters.AddWithValue("@Porcentaje", objVenta.fPorcentajeIgv);
                 cmd.Parameters.AddWithValue("@SubTotal", objVenta.fSubTotal);
                 cmd.Parameters.AddWithValue("@Igv", objVenta.fIgv);
                 cmd.Parameters.AddWithValue("@Total", objVenta.fTotal);
@@ -264,7 +264,7 @@ namespace Datos
                     cmdPedido.Parameters.AddWithValue("@IdAlmacen", objVenta.nIdAlmacen);
                     cmdPedido.Parameters.AddWithValue("@Numero", objVenta.nNumero);
                     cmdPedido.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
-                    cmdPedido.Parameters.AddWithValue("@Porcentaje", objVenta.nPorcentaje);
+                    cmdPedido.Parameters.AddWithValue("@Porcentaje", objVenta.fPorcentajeIgv);
                     cmdPedido.Parameters.AddWithValue("@SubTotal", objVenta.fSubTotal);
                     cmdPedido.Parameters.AddWithValue("@Igv", objVenta.fIgv);
                     cmdPedido.Parameters.AddWithValue("@IdCliente", objVenta.nIdCliente);
@@ -451,7 +451,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Numero", objVenta.nNumero);
                 cmd.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
                 cmd.Parameters.AddWithValue("@Codigo", objVenta.nCodigo);
-                cmd.Parameters.AddWithValue("@Porcentaje", objVenta.nPorcentaje);
+                cmd.Parameters.AddWithValue("@Porcentaje", objVenta.fPorcentajeIgv);
                 cmd.Parameters.AddWithValue("@SubTotal", objVenta.fSubTotal);
                 cmd.Parameters.AddWithValue("@Igv", objVenta.fIgv);
                 cmd.Parameters.AddWithValue("@Total", objVenta.fTotal);

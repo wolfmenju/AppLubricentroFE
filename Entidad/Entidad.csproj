@@ -64,6 +64,8 @@
     <Compile Include="Permiso.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="WsDocumentoFeResponse.cs" />
+    <Compile Include="WsDocumentoFeResponseData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTO\" />

@@ -65,6 +65,10 @@
     <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Comun\Librerias\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>Libreria\NPOI.dll</HintPath>
     </Reference>
@@ -254,6 +258,12 @@
     </Compile>
     <Compile Include="FrmAjusteStock.Designer.cs">
       <DependentUpon>FrmAjusteStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frmtest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frmtest.Designer.cs">
+      <DependentUpon>Frmtest.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmVentaListar.cs">
       <SubType>Form</SubType>
@@ -658,6 +668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAjusteStock.resx">
       <DependentUpon>FrmAjusteStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frmtest.resx">
+      <DependentUpon>Frmtest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVentaListar.resx">
       <DependentUpon>FrmVentaListar.cs</DependentUpon>

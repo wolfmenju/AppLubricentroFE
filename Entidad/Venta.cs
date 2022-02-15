@@ -20,7 +20,7 @@ namespace Entidad
             this.sSerie = "";
             this.nNumero = 0;
             this.dFecha = DateTime.Now;
-            this.nPorcentaje = 0;
+            this.fPorcentajeIgv = 0M;
             this.fDescuento = 0M;
             this.fSubTotal = 0M;
             this.fIgv = 0M;
@@ -51,7 +51,7 @@ namespace Entidad
         public int? nNumero { get; set; }
         public DateTime dFecha { get; set; }
         public DateTime dFechaRegistrado { get; set; }
-        public int nPorcentaje { get; set; }
+        public decimal fPorcentajeIgv { get; set; }
         public decimal fDescuento { get; set; }
         public decimal fSubTotal { get; set; }
         public decimal fIgv { get; set; }
@@ -67,7 +67,44 @@ namespace Entidad
         public bool bEstado { get; set; }
         public int nIdHistorial { get; set; }
         public int nIdTarjeta { get; set; }
+        //FE
+        public string sTipOperacion { get; set; }
+        public decimal fTotalGravadas { get; set; }
+        public decimal fTotalInafecta { get; set; }
+        public decimal fTtotalExoneradas { get; set; }
+        public decimal fTotalGratuitas { get; set; }
+        public decimal fTotalExportacion { get; set; }
+        public decimal fTotalDescuento { get; set; }
+        public decimal fTotalIgv { get; set; }
+        public decimal fTotalIsc { get; set; }
+        public decimal fTotalOtrImp { get; set; }
+        public string sNroGuiaRemision { get; set; }
+        public string sCodGuiaRemision { get; set; }
+        public string sNroOtrComprobante { get; set; }
+        public string sCondicionPago { get; set; }
+        public string sCodMoneda { get; set; }
+        public string sTipoTributo { get; set; }
+        public string sTipoIgv { get; set; }
+        public string sClienteNumerodocumento { get; set; }
+        public string sClienteNombre { get; set; }
+        public string sClienteTipodocumento { get; set; }
+        public string sClienteDireccion { get; set; }
+        public string sClientePais { get; set; }
+        public string sClienteCiudad { get; set; }
+        public string sClienteCodigoUbigeo { get; set; }
+        public string sClienteDepartamento { get; set; }
+        public string sClienteProvincia { get; set; }
+        public string sClienteDistrito { get; set; }
 
         public List<VentaDetalle> listVentaDetalle { get; set; }
+
+        
+
+        //public string serie_comprobante { get; set; }
+        //public string numero_comprobante { get; set; }
+        //public string fecha_comprobante { get; set; }
+        //public DateTime dFechaVtoComprobante { get; set; }
+        //public string sCodTipoDocumento { get; set; }
+
     }
 }
