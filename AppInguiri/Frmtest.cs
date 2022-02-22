@@ -40,7 +40,7 @@ namespace AppInguiri
             data.total_isc = "0.00";
             data.total_otr_imp = "0.00";
             data.total = "50.00";
-            data.total_letras = Funciones.NumeroALetras(523.20); //"CINCUENTA Y 00/100 SOLES";
+            //data.total_letras = Funciones.NumeroALetras(523.20); //"CINCUENTA Y 00/100 SOLES";
             data.nro_guia_remision = "null";
             data.cod_guia_remision = "null";
             data.nro_otr_comprobante = "null";

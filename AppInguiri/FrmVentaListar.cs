@@ -272,7 +272,7 @@ namespace AppInguiri
 
                     ReciboRpt reciboRpt = new ReciboRpt();
                     reciboRpt.sDocumento = nombre_Lo.Replace(nombre_Lo[0], nombre_Up[0]);
-                    reciboRpt.nNumero = Convert.ToInt32(item.nNumero);
+                    reciboRpt.nNumero = string.Format("{0:00000000}", item.nNumero);
                     reciboRpt.fTotal = item.fTotal;
                     reciboRpt.fDescuento = item.fDescuento;
                     reciboRpt.fPrecio = item.fPrecioVenta;

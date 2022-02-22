@@ -17,6 +17,10 @@ using CrystalDecisions.CrystalReports.Engine;
 using AppInguiri.EntidadReporte;
 using AppInguiri.Reporte;
 using Newtonsoft.Json;
+using System.Configuration;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+using System.IO;
 
 namespace AppInguiri
 {
@@ -35,6 +39,10 @@ namespace AppInguiri
         int DocDefault = 0;
         int nidVentaRespu = 0;
         WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
+        string sDireccion = "", sRuc = "", sRazonSocial = "", 
+            sUbigeo = "", sDepart="", sProvi="",sDist="",
+            _sUrlSunat="", _RutaArchivosXml="";
+
 
         //Singleton
         public static FrmVenta Instance()
@@ -51,6 +59,25 @@ namespace AppInguiri
         {
             InitializeComponent();
             CargarMaestro();
+            CargarDatosEmpresa();
+            CargarDatosConfiguracion();
+        }
+
+        private void CargarDatosConfiguracion()
+        {
+            _sUrlSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlSunat"]);
+            _RutaArchivosXml = Convert.ToString(ConfigurationManager.AppSettings["RutaArchivosXml"]);
+        }
+
+        private void CargarDatosEmpresa()
+        {
+            sDireccion = objParamNeg.LeerUnParametro("ID_DIRECCION");
+            sRuc = objParamNeg.LeerUnParametro("ID_RUC");
+            sRazonSocial = objParamNeg.LeerUnParametro("ID_RAZON_SOCIAL");
+            sUbigeo = objParamNeg.LeerUnParametro("ID_UBIGEO");
+            sDepart = objParamNeg.LeerUnParametro("ID_DIRECCION_DEPA");
+            sProvi = objParamNeg.LeerUnParametro("ID_DIRECCION_PROV");
+            sDist = objParamNeg.LeerUnParametro("ID_DIRECCION_DIST");
         }
 
         public void CargarMaestro()
@@ -254,7 +281,7 @@ namespace AppInguiri
             foreach (var item in listDocumentoSerie)
             {
                 lblSerie.Text = item.sSerie;
-                lblNumero.Text = string.Format("{0:0000000000}", item.nUltimo + 1);
+                lblNumero.Text = string.Format("{0:00000000}", item.nUltimo + 1);
                 break;
             }    
         }
@@ -401,6 +428,7 @@ namespace AppInguiri
                     if (NotificacionSunat(nidVentaRespu))
                     {
                         MessageBox.Show("La Venta Se Realizó Con Éxito", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ImprimirComprobante();
                     }
                     else
                     {
@@ -412,14 +440,16 @@ namespace AppInguiri
                     CargaSerieDocumento();
                     Contado();
 
-                    if (MessageBox.Show("¿Desea Imprimir El Comprobante?", "Informativo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        ImprimirComprobante();
-                    }
-                    else
-                    {
-                        nidVentaRespu = 0;
-                    }
+                    nidVentaRespu = 0;
+
+                    //if (MessageBox.Show("¿Desea Imprimir El Comprobante?", "Informativo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    //{
+                    //    ImprimirComprobante();
+                    //}
+                    //else
+                    //{
+                    //    nidVentaRespu = 0;
+                    //}
                 }
                 else
                 {
@@ -431,41 +461,44 @@ namespace AppInguiri
 
         private bool NotificacionSunat( int nidVentaRespu)
         {
+            if (cboDocumento.Text.Equals("TICKET")) return true;
+
             Venta objVenta = new Venta() { nTipo = 8, nIdVenta = nidVentaRespu };
 
             List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
 
-            if (LisVenRep.Count == 0)
+            if (LisVenRep.Count > 0)
             {
                 WsDocumentoFeResponseData data = new WsDocumentoFeResponseData();
                 data.tipo_operacion = "0101";
-                data.total_gravadas = "42.37";
+                data.total_gravadas = (LisVenRep[0].fTotal - fIgvResto).ToString();
                 data.total_inafecta = "0.00";
                 data.total_exoneradas = "0.00";
                 data.total_gratuitas = "0.00";
                 data.total_exportacion = "0.00";
                 data.total_descuento = "0.00";
-                data.sub_total = "42.37";
-                data.porcentaje_igv = "18.00";
-                data.total_igv = "7.63";
+                data.sub_total = (LisVenRep[0].fTotal - fIgvResto).ToString();
+                data.porcentaje_igv = fIgv.ToString();
+                data.total_igv = fIgvResto.ToString();
                 data.total_isc = "0.00";
                 data.total_otr_imp = "0.00";
-                data.total = "50.00";
-                data.total_letras =Funciones.NumerosLetras(50);
+                data.total = LisVenRep[0].fTotal.ToString();
+                data.total_letras = Funciones.NumerosLetras(LisVenRep[0].fTotal);
                 data.nro_guia_remision = "null";
                 data.cod_guia_remision = "null";
                 data.nro_otr_comprobante = "null";
                 data.condicion_pago = "CONTADO";
-                data.serie_comprobante = "F001";
-                data.numero_comprobante = "00000596";
-                data.fecha_comprobante = "2022-01-20";
-                data.fecha_vto_comprobante = "2022-01-20";
-                data.cod_tipo_documento = "01";
+                data.serie_comprobante = cboDocumento.Text.Substring(0,1) + lblSerie.Text;
+                data.numero_comprobante = lblNumero.Text;
+                data.fecha_comprobante = dtFecha.Value.ToString("yyyy-MM-dd");
+                data.fecha_vto_comprobante = dtFecha.Value.ToString("yyyy-MM-dd");
+                data.cod_tipo_documento = cboDocumento.SelectedValue.ToString();
                 data.cod_moneda = "PEN";
                 data.tipo_tributo = "IGV";
                 data.tipo_igv = "1000";
-                data.cliente_numerodocumento = "20160123517";
-                data.cliente_nombre = "COOPERATIVA DE SERVICIOS ESPECIALES PACHACUTEC LTDA";
+                data.cliente_numerodocumento = txtRuc.Text;
+                data.cliente_nombre = txtNombre.Text;
+                //Preguntar que codigo es 6
                 data.cliente_tipodocumento = "6";
                 data.cliente_direccion = "null";
                 data.cliente_pais = "PE";
@@ -473,67 +506,84 @@ namespace AppInguiri
                 data.cliente_codigoubigeo = "null";
                 data.cliente_departamento = "null";
                 data.cliente_provincia = "null";
-                data.cliente_distrito = "null"; 
+                data.cliente_distrito = "null";
                 data.detalle = new detalle[LisVenRep.Count];
 
                 for (int i = 0; i < LisVenRep.Count; i++)
                 {
                     data.detalle[i] = new detalle();
-                    data.detalle[i].txtITEM = (i+1).ToString();
+                    data.detalle[i].txtITEM = (i + 1).ToString();
                     data.detalle[i].txtUNIDAD_MEDIDA_DET = "ZZ";
-                    data.detalle[i].txtCANTIDAD_DET = "1.00";
-                    data.detalle[i].txtPRECIO_UNIT = "50.00";
-                    data.detalle[i].txtPRECIO_UNIT_SIN_IGV = "42.37";
+                    data.detalle[i].txtCANTIDAD_DET = LisVenRep[i].nCodigo.ToString();
+                    data.detalle[i].txtPRECIO_UNIT = LisVenRep[i].fPrecioVenta.ToString();
+                    data.detalle[i].txtPRECIO_UNIT_SIN_IGV = (LisVenRep[0].fTotal - fIgvResto).ToString();
                     data.detalle[i].txtPRECIO_TIPO_CODIGO = "01";
-                    data.detalle[i].txtIGV = "7.63";
+                    data.detalle[i].txtIGV = fIgvResto.ToString();
                     data.detalle[i].txtISC = "0";
-                    data.detalle[i].txtIMPORTE_TOTAL = "50.00";
-                    data.detalle[i].txtIMPORTE_TOTAL_SIN_IGV = "42.37";
-                    data.detalle[i].txtCODIGO_DET = "1";
-                    data.detalle[i].txtDESCRIPCION_DET = "DD DSDS DSD";
+                    data.detalle[i].txtIMPORTE_TOTAL = (LisVenRep[i].fPrecioVenta * LisVenRep[i].nCodigo).ToString();
+                    data.detalle[i].txtIMPORTE_TOTAL_SIN_IGV = (LisVenRep[0].fTotal - fIgvResto).ToString();
+                    data.detalle[i].txtCODIGO_DET = (i + 1).ToString();
+                    data.detalle[i].txtDESCRIPCION_DET = LisVenRep[0].sNombre;
                     data.detalle[i].txtCODIGO_PROD_SUNAT = "78181505";
                     data.detalle[i].txtAFECTACION_CODIGO = "1000";
                     data.detalle[i].txtAFECTACION_CODIGO_ALT = "10";
                     data.detalle[i].txtAFECTACION_NOMBRE = "IGV";
                     data.detalle[i].txtAFECTACION_TIPO = "VAT";
                 }
-                
+
                 data.cuotas = new cuotas();
                 data.cuotas.detalle_cuota = "Cuota001";
-                data.cuotas.total_cuota = "50.00";
+                data.cuotas.total_cuota = LisVenRep[0].fTotal.ToString();
                 data.emisor = new emisor();
-                data.emisor.ruc = "20100066603";
+                data.emisor.ruc = sRuc;
                 data.emisor.tipo_doc = "6";
-                data.emisor.razon_social = "CITV LIDER SUR S.R.L.";
-                data.emisor.codigo_ubigeo = "210101";
-                data.emisor.direccion = "MZA. Ñ LOTE. 06 PARQUE INDUSTRIAL (COSTADO DE SENATI NUEVO) PUNO - PUNO - PUNO";
-                data.emisor.direccion_departamento = "Puno";
-                data.emisor.direccion_provincia = "Puno";
-                data.emisor.direccion_distrito = "Puno";
+                data.emisor.razon_social = sRazonSocial;
+                data.emisor.codigo_ubigeo = sUbigeo;
+                data.emisor.direccion = sDireccion;
+                data.emisor.direccion_departamento = sDepart;
+                data.emisor.direccion_provincia = sProvi;
+                data.emisor.direccion_distrito = sDist;
                 data.emisor.direccion_codigopais = "PE";
                 data.emisor.sede = "Test";
                 data.emisor.usuariosol = "MODDATOS";
                 data.emisor.clavesol = "moddatos";
                 data.emisor.clave_certificado = "123456";
                 data.emisor.url_xml = "beta/";
-                data.emisor.url_ws = "https://e-beta.sunat.gob.pe:443/ol-ti-itcpfegem-beta/billService";
+                data.emisor.url_ws = _sUrlSunat;
                 data.emisor.codigo_estab_anexo_sun = "0000";
+
                 string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
                 var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput);
 
-                if (resultado.code == "200")
+                if (resultado.code.Equals("200") && resultado.data.respuesta.Equals("ok"))
                 {
+                    Venta objVentaFE = new Venta();
+                    objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
+                    objVentaFE.sCdr = resultado.data.cdr;
+                    objVentaFE.sUsuario = Funciones.UsuarioActual();
+
+                    int resp = objVentNeg.ActualizarVentaNotficacionSunat(objVentaFE);
+
+                    if (resp >0)
+                    {
+                        File.WriteAllText(Path.Combine(_RutaArchivosXml, resultado.data.nombre_file + ".xml"), resultado.data.xml);
+                    }
+                    
                     return true;
                 }
                 else
                 {
-                    MessageBox.Show("", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(resultado.mensaje.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
-                
+
+            }
+            else
+            {
+                return true;
             }
 
-            return true;
+           
         }
 
         private void ImprimirComprobante()
@@ -541,56 +591,126 @@ namespace AppInguiri
             var instance = new System.Drawing.Printing.PrinterSettings();
             string impresosaPredt = instance.PrinterName;
             ReportDocument Rep = new ReportDocument();
+
+            Venta objVenta = new Venta() { nTipo = 8, nIdVenta = nidVentaRespu };
+            List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
             List<ReciboRpt> LisRecibo = new List<ReciboRpt>();
 
-            try
+            if (LisVenRep.Count == 0)
             {
-                Venta objVenta = new Venta() { nTipo = 8, nIdVenta = nidVentaRespu };
-                
-                List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
-
-                if (LisVenRep.Count ==0)
-                {
-                    MessageBox.Show("No se puede imprimir", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string nombre_Up = "";
-                string nombre_Lo = "";
-                
-                foreach (var item in LisVenRep)
-                {
-                    nombre_Up = item.sIdDocumento;
-                    nombre_Lo = nombre_Up.ToLower();
-                   
-                    ReciboRpt reciboRpt = new ReciboRpt();
-                    reciboRpt.sDocumento = nombre_Lo.Replace(nombre_Lo[0], nombre_Up[0]);
-                    reciboRpt.nNumero =Convert.ToInt32(item.nNumero);
-                    reciboRpt.fTotal = item.fTotal;
-                    reciboRpt.fPrecio = item.fPrecioVenta;
-                    reciboRpt.nCantidad = item.nCodigo;
-                    reciboRpt.sIdVendedor = item.sIdVendedor;
-                    reciboRpt.sNombre = item.sNombre;
-                    reciboRpt.fDescuento = item.fDescuento;
-                    reciboRpt.sProducto = item.sProducto;
-                    reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
-                    LisRecibo.Add(reciboRpt);
-                }
-
-                Rep.Load(Application.StartupPath + "\\RptRecibo.rpt");
-                //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
-                
-                Rep.SetDataSource(LisRecibo);
-                Rep.PrintOptions.PrinterName = impresosaPredt;
-                Rep.PrintToPrinter(1, false, 0, 0);
-                nidVentaRespu = 0;
-                Rep = null;
+                MessageBox.Show("No se puede imprimir", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch (Exception ex)
+
+            //Ticket
+            if (cboDocumento.SelectedValue.Equals("12"))
             {
-                MessageBox.Show("Error: "+ex.Message.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                try
+                {
+                    string nombre_Up = "";
+                    string nombre_Lo = "";
+
+                    foreach (var item in LisVenRep)
+                    {
+                        nombre_Up = item.sIdDocumento;
+                        nombre_Lo = nombre_Up.ToLower();
+
+                        ReciboRpt reciboRpt = new ReciboRpt();
+                        reciboRpt.sDocumento = nombre_Lo.Replace(nombre_Lo[0], nombre_Up[0]);
+                        reciboRpt.nNumero = string.Format("{0:00000000}", item.nNumero); 
+                        reciboRpt.fTotal = item.fTotal;
+                        reciboRpt.fPrecio = item.fPrecioVenta;
+                        reciboRpt.nCantidad = item.nCodigo;
+                        reciboRpt.sIdVendedor = item.sIdVendedor;
+                        reciboRpt.sNombre = item.sNombre;
+                        reciboRpt.fDescuento = item.fDescuento;
+                        reciboRpt.sProducto = item.sProducto;
+                        reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
+                        reciboRpt.yCodigoQR = ImageToByte(codigoQR("JULIO EL MEN"));
+                        LisRecibo.Add(reciboRpt);
+                    }
+
+                    Rep.Load(Application.StartupPath + "\\RptRecibo.rpt");
+                    //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
+
+                    Rep.SetDataSource(LisRecibo);
+                 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
+            //Factura
+            else if (cboDocumento.SelectedValue.Equals("01"))
+            {
+                try
+                {
+                    string sSerie = "";
+
+                    foreach (var item in LisVenRep)
+                    {
+                        ReciboRpt reciboRpt = new ReciboRpt();
+                        sSerie = "F" + item.sSerie;
+                        reciboRpt.nNumero = sSerie + "-" + string.Format("{0:00000000}", item.nNumero);
+                        reciboRpt.fTotal = item.fTotal;
+                        reciboRpt.fPrecio = item.fPrecioVenta;
+                        reciboRpt.nCantidad = item.nCodigo;
+                        reciboRpt.sIdVendedor = item.sIdVendedor;
+                        reciboRpt.sNombre = item.sNombre;
+                        reciboRpt.fDescuento = item.fDescuento;
+                        reciboRpt.fIgv = item.fIgv;
+                        reciboRpt.fSubTotal = item.fSubTotal;
+                        reciboRpt.sProducto = item.sProducto;
+                        reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
+                        reciboRpt.sTotalLetras = Funciones.NumeroALetras(item.fTotal);
+                        reciboRpt.yCodigoQR = ImageToByte(codigoQR(sRuc + "|" + item.sIdDocumento + "|" 
+                            + sSerie+"|"+ string.Format("{0:00000000}",item.nNumero + "|"
+                            + item.fTotal.ToString() + "|"
+                            +item.dFecha.ToShortDateString()+"|"
+                            + "RUC|"+ txtRuc.Text)));
+                        reciboRpt.sRuc = txtRuc.Text;
+                        LisRecibo.Add(reciboRpt);
+                    }
+
+                    Rep.Load(Application.StartupPath + "\\RptFactura.rpt");
+                    //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
+
+                    Rep.SetDataSource(LisRecibo);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            Rep.PrintOptions.PrinterName = impresosaPredt;
+            Rep.PrintToPrinter(1, false, 0, 0);
+            nidVentaRespu = 0;
+            Rep = null;
         }
+
+        protected static byte[] ImageToByte(Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
+        protected Image codigoQR(string snumero)
+        {
+            QrEncoder qrEncoder = new QrEncoder(ErrorCorrectionLevel.H);
+            QrCode qrCode = new QrCode();
+            string sParametros = snumero;
+            qrEncoder.TryEncode(sParametros, out qrCode);
+            GraphicsRenderer renderer = new GraphicsRenderer(new FixedCodeSize(400, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+            MemoryStream ms = new MemoryStream();
+            renderer.WriteToStream(qrCode.Matrix, System.Drawing.Imaging.ImageFormat.Png, ms);
+            var imageTemporal = new Bitmap(ms);
+            var imagen = new Bitmap(imageTemporal, new Size(new Point(150, 150)));
+            return imagen;
+        }
+
 
         private void dgvProducto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

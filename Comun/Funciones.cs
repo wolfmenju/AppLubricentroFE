@@ -165,7 +165,7 @@ namespace Comun
             return 1;
         }
 
-        public static string NumeroALetras(this double numberAsString)
+        public static string NumeroALetras(this decimal numberAsString)
         {
             string dec;
 
@@ -174,19 +174,19 @@ namespace Comun
             if (decimales > 0)
             {
                 //dec = " PESOS CON " + decimales.ToString() + "/100";
-                dec = $" CON {decimales:0,0} /100 SOLES";
+                dec = $" Y {decimales:0,0} /100 SOLES";
             }
             //Código agregado por mí
             else
             {
                 //dec = " PESOS CON " + decimales.ToString() + "/100";
-                dec = $" CON {decimales:0,0} /100 SOLES";
+                dec = $" Y {decimales:0,0} /100 SOLES";
             }
-            var res = NumerosLetras(Convert.ToDouble(entero)) + dec;
+            var res = NumerosLetras(Convert.ToDecimal(entero)) + dec;
             return res;
         }
 
-        public static string NumerosLetras( double value)
+        public static string NumerosLetras( decimal value)
         {
             string Num2Text = "";
             value = Math.Truncate(value);

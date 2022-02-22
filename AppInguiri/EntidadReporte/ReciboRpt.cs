@@ -9,14 +9,20 @@ namespace AppInguiri.EntidadReporte
     public class ReciboRpt
     {
         public string sDocumento { get; set; }
-        public int nNumero { get; set; }
+        public string nNumero { get; set; }
         public decimal fTotal { get; set; }
+        public string sTotalLetras { get; set; }
         public decimal fDescuento { get; set; }
         public string sProducto { get; set; }
         public string sNombre { get; set; }
+        public string sRuc { get; set; }
         public decimal fPrecio { get; set; }
         public int nCantidad { get; set; }
         public string sIdVendedor { get; set; }
         public string sFechaRegistro { get; set; }
+        public byte[] yCodigoQR { get; set; }
+        public decimal fSubTotal { get; set; }
+        public decimal fIgv { get; set; }
+
     }
 }

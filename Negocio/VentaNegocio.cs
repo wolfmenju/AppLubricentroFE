@@ -27,5 +27,10 @@ namespace Negocio
         {
             return VentaData.AnularVenta(objVenta);
         }
+
+        public int ActualizarVentaNotficacionSunat(Venta objVenta)
+        {
+            return VentaData.ActualizarVentaNotficacionSunat(objVenta);
+        }
     }
 }

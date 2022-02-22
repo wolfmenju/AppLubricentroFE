@@ -65,14 +65,16 @@ namespace Datos
                         objVent.sSerie = dr[2].ToString();
                         objVent.sIdDocumento= dr[3].ToString();
                         objVent.nNumero = Convert.ToInt32(dr[4]);
-                        objVent.fTotal =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Convert.ToDecimal(dr[5]);
-                        objVent.sNombre= dr[6].ToString();
-                        objVent.sProducto= dr[7].ToString();
-                        objVent.fPrecioVenta= Convert.ToDecimal(dr[8]);
-                        objVent.nCodigo =Convert.ToInt32(dr[9]);
-                        objVent.sIdVendedor =dr[10].ToString();
-                        objVent.dFechaRegistrado= Convert.ToDateTime(dr[11].ToString());
-                        objVent.fDescuento = Convert.ToDecimal(dr[12].ToString());
+                        objVent.fTotal = Convert.ToDecimal(dr[5]);
+                        objVent.fSubTotal = Convert.ToDecimal(dr[6]);
+                        objVent.fIgv = Convert.ToDecimal(dr[7]);
+                        objVent.sNombre= dr[8].ToString();
+                        objVent.sProducto= dr[9].ToString();
+                        objVent.fPrecioVenta= Convert.ToDecimal(dr[10]);
+                        objVent.nCodigo =Convert.ToInt32(dr[11]);
+                        objVent.sIdVendedor =dr[12].ToString();
+                        objVent.dFechaRegistrado= Convert.ToDateTime(dr[13].ToString());
+                        objVent.fDescuento = Convert.ToDecimal(dr[14].ToString());
                     }
                     else if (objVenta.nTipo == 9)
                     {
@@ -601,6 +603,40 @@ namespace Datos
             {
                 xTrans.Rollback();
                 MessageBox.Show(ex.Message, "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                cnx.Close();
+                cnx.Dispose();
+            }
+
+            return respuesta;
+        }
+
+        public static int ActualizarVentaNotficacionSunat(Venta objVenta)
+        {
+            int respuesta = 0;
+
+            SqlCommand cmd = null;
+            Conexion cn = new Conexion();
+            SqlConnection cnx = cn.getConecta();
+
+            try
+            {
+                cnx.Open();
+                cmd = new SqlCommand("IAE_VentaFE", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Tipo", 1);
+                cmd.Parameters.AddWithValue("@IdVenta", objVenta.nIdVenta);
+                cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                cmd.Parameters.AddWithValue("@cdr", objVenta.sCdr);
+                respuesta = cmd.ExecuteNonQuery();
+                
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {
