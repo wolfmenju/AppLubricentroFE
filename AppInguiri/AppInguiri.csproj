@@ -68,6 +68,10 @@
       <HintPath>..\Comun\Librerias\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.5\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Comun\Librerias\Newtonsoft.Json.dll</HintPath>
@@ -558,8 +562,8 @@
       <DependentUpon>RptProveedor.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reporte\RptFactura.cs">
-      <DependentUpon>RptFactura.rpt</DependentUpon>
+    <Compile Include="Reporte\RptDocumentoFE.cs">
+      <DependentUpon>RptDocumentoFE.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -843,9 +847,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptProveedor.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reporte\RptFactura.rpt">
+    <EmbeddedResource Include="Reporte\RptDocumentoFE.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RptFactura.cs</LastGenOutput>
+      <LastGenOutput>RptDocumentoFE.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\RptStockMinimo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -872,6 +876,7 @@
       <LastGenOutput>RptDeudasVencer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
