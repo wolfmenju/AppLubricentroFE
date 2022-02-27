@@ -30,22 +30,22 @@ namespace Entidad
         public string numero_comprobante { get; set; }
         public string fecha_comprobante { get; set; }
         public string fecha_vto_comprobante { get; set; }
-        public string cod_tipo_documento { get; set; }
-        public string cod_moneda { get; set; }
+        public string tipo_comprobante_cod { get; set; }
+        public string moneda_cod { get; set; }
         public string tipo_tributo { get; set; }
         public string tipo_igv { get; set; }
-        public string cliente_numerodocumento { get; set; }
+
+        public string cliente_nro_doc { get; set; }
         public string cliente_nombre { get; set; }
-        public string cliente_tipodocumento { get; set; }
+        public string cliente_tipo_doc { get; set; }
         public string cliente_direccion { get; set; }
         public string cliente_pais { get; set; }
-        public string cliente_ciudad { get; set; }
-        public string cliente_codigoubigeo { get; set; }
+        public string cliente_codigo_ubigeo { get; set; }
         public string cliente_departamento { get; set; }
         public string cliente_provincia { get; set; }
         public string cliente_distrito { get; set; }
+
         public detalle[] detalle { get; set; }
-        public cuotas cuotas { get; set; }
         public emisor emisor { get; set; }
 
     }
@@ -71,12 +71,6 @@ namespace Entidad
         public string txtAFECTACION_TIPO { get; set; }
     }
 
-    public class cuotas
-    {
-       public string detalle_cuota { get; set; }
-       public string total_cuota { get; set; }
-    }
-
     public class emisor
     {
         public string ruc { get; set; }
@@ -88,7 +82,6 @@ namespace Entidad
         public string direccion_provincia { get; set; }
         public string direccion_distrito { get; set; }
         public string direccion_codigopais { get; set; }
-        public string sede { get; set; }
         public string usuariosol { get; set; }
         public string clavesol { get; set; }
         public string clave_certificado { get; set; }

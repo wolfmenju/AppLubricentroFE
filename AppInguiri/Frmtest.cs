@@ -49,17 +49,16 @@ namespace AppInguiri
             data.numero_comprobante = "00000596";
             data.fecha_comprobante = "2022-01-20";
             data.fecha_vto_comprobante = "2022-01-20";
-            data.cod_tipo_documento = "01";
-            data.cod_moneda = "PEN";
+            data.cliente_tipo_doc = "01";
+            data.moneda_cod = "PEN";
             data.tipo_tributo = "IGV";
             data.tipo_igv = "1000";
-            data.cliente_numerodocumento = "20160123517";
+            //data. = "20160123517";
             data.cliente_nombre = "COOPERATIVA DE SERVICIOS ESPECIALES PACHACUTEC LTDA";
-            data.cliente_tipodocumento = "6";
+            data.cliente_tipo_doc = "6";
             data.cliente_direccion = "null";
             data.cliente_pais = "PE";
-            data.cliente_ciudad = "null";
-            data.cliente_codigoubigeo = "null";
+            data.cliente_codigo_ubigeo = "null";
             data.cliente_departamento = "null";
             data.cliente_provincia = "null";
             data.cliente_distrito = "null";
@@ -86,9 +85,6 @@ namespace AppInguiri
             data.detalle[0].txtAFECTACION_NOMBRE = "IGV";
             data.detalle[0].txtAFECTACION_TIPO = "VAT";
             
-            data.cuotas = new cuotas();
-            data.cuotas.detalle_cuota = "Cuota001";
-            data.cuotas.total_cuota = "50.00";
             data.emisor = new emisor();
             data.emisor.ruc = "20100066603";
             data.emisor.tipo_doc = "6";
@@ -99,7 +95,6 @@ namespace AppInguiri
             data.emisor.direccion_provincia = "Puno";
             data.emisor.direccion_distrito = "Puno";
             data.emisor.direccion_codigopais = "PE";
-            data.emisor.sede = "Test";
             data.emisor.usuariosol = "MODDATOS";
             data.emisor.clavesol = "moddatos";
             data.emisor.clave_certificado = "123456";

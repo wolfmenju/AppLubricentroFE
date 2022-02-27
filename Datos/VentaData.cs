@@ -68,13 +68,15 @@ namespace Datos
                         objVent.fTotal = Convert.ToDecimal(dr[5]);
                         objVent.fSubTotal = Convert.ToDecimal(dr[6]);
                         objVent.fIgv = Convert.ToDecimal(dr[7]);
-                        objVent.sNombre= dr[8].ToString();
-                        objVent.sProducto= dr[9].ToString();
-                        objVent.fPrecioVenta= Convert.ToDecimal(dr[10]);
-                        objVent.nCodigo =Convert.ToInt32(dr[11]);
-                        objVent.sIdVendedor =dr[12].ToString();
-                        objVent.dFechaRegistrado= Convert.ToDateTime(dr[13].ToString());
-                        objVent.fDescuento = Convert.ToDecimal(dr[14].ToString());
+                        objVent.fIgvDetalle = Convert.ToDecimal(dr[8]);
+                        objVent.sNombre= dr[9].ToString();
+                        objVent.sCodigoInterno = dr[10].ToString();
+                        objVent.sProducto= dr[11].ToString();
+                        objVent.fPrecioVenta= Convert.ToDecimal(dr[12]);
+                        objVent.nCodigo =Convert.ToInt32(dr[13]);
+                        objVent.sIdVendedor =dr[14].ToString();
+                        objVent.dFechaRegistrado= Convert.ToDateTime(dr[15].ToString());
+                        objVent.fDescuento = Convert.ToDecimal(dr[16].ToString());
                     }
                     else if (objVenta.nTipo == 9)
                     {
@@ -380,6 +382,7 @@ namespace Datos
                     cmdDetalle.Parameters.AddWithValue("@Precio", item.fPrecioVenta);
                     cmdDetalle.Parameters.AddWithValue("@Ganancia", item.fGanancia);
                     cmdDetalle.Parameters.AddWithValue("@Lote", item.sLote);
+                    cmdDetalle.Parameters.AddWithValue("@IgvDetalle", item.fIgvDetalle);
                     cmdDetalle.Parameters.AddWithValue("@Descuento", item.fDescuento);
                     cmdDetalle.Parameters.AddWithValue("@Total", objVenta.fTotal);
                     cmdDetalle.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
@@ -576,6 +579,7 @@ namespace Datos
                     cmdDetalle.Parameters.AddWithValue("@IdProducto", item.nIdProducto);
                     cmdDetalle.Parameters.AddWithValue("@Cantidad", item.nCantidad);
                     cmdDetalle.Parameters.AddWithValue("@Precio", item.fPrecioVenta);
+                    cmdDetalle.Parameters.AddWithValue("@IgvDetalle", item.fIgvDetalle);
                     cmdDetalle.Parameters.AddWithValue("@Ganancia", item.fGanancia);
                     cmdDetalle.Parameters.AddWithValue("@Lote", item.sLote);
                     cmdDetalle.Parameters.AddWithValue("@Descuento", item.fDescuento);

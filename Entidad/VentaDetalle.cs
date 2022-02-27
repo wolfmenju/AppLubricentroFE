@@ -23,6 +23,7 @@ namespace Entidad
         public DateTime dFechaVencimiento { get; set; }
         public int nCantidad { get; set; }
         public decimal fPrecioCompra { get; set; }
+        public decimal fIgvDetalle { get; set; }
         public decimal fGanancia { get; set; }
         public decimal fPrecioVenta { get; set; }
         public decimal fSubTotal { get; set; }

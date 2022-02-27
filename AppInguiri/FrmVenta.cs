@@ -222,7 +222,7 @@ namespace AppInguiri
                 frmDescuento.frmVenta = frmInstance;
                 frmDescuento.lblTotal.Text = Convert.ToDecimal(row.Cells["fSubTotal"].Value).ToString("#0.00");
                 frmDescuento.lblVuelto.Text = "0.00";
-                frmDescuento.txtPago.Text = Convert.ToDecimal(row.Cells["fSubTotal"].Value).ToString("#0.00");
+                //frmDescuento.txtPago.Text = Convert.ToDecimal(row.Cells["fSubTotal"].Value).ToString("#0.00");
                 frmDescuento.ShowDialog();
                 
                 CalcularTotal();
@@ -409,6 +409,9 @@ namespace AppInguiri
                     objVentDeta.nCantidad = Convert.ToInt32(item.Cells["nCantidad"].Value);
                     objVentDeta.fPrecioCompra = Convert.ToDecimal(item.Cells["fPrecioCompra"].Value);
                     objVentDeta.sLote = item.Cells["sLote"].Value.ToString();
+                    objVentDeta.fIgvDetalle =decimal.Round(((objVentDeta.nCantidad * 
+                        Convert.ToDecimal(item.Cells["fPrecioVenta"].Value)-((objVentDeta.nCantidad 
+                        * Convert.ToDecimal(item.Cells["fPrecioVenta"].Value)) * (fIgv / 100)))* (fIgv / 100)),2);
                     objVentDeta.fGanancia = Convert.ToDecimal(item.Cells["fGanancia"].Value);
                     objVentDeta.fPrecioVenta = Convert.ToDecimal(item.Cells["fPrecioVenta"].Value);
                     objVentDeta.fSubTotal = Convert.ToDecimal(item.Cells["fSubTotal"].Value);
@@ -470,70 +473,59 @@ namespace AppInguiri
             if (LisVenRep.Count > 0)
             {
                 WsDocumentoFeResponseData data = new WsDocumentoFeResponseData();
-                data.tipo_operacion = "0101";
-                data.total_gravadas = (LisVenRep[0].fTotal - fIgvResto).ToString();
+                data.tipo_operacion = "01";
+                data.total_gravadas = (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - fIgvResto) * (fIgv / 100)), 2)).ToString();
                 data.total_inafecta = "0.00";
                 data.total_exoneradas = "0.00";
                 data.total_gratuitas = "0.00";
                 data.total_exportacion = "0.00";
                 data.total_descuento = "0.00";
-                data.sub_total = (LisVenRep[0].fTotal - fIgvResto).ToString();
+                data.sub_total = "";
                 data.porcentaje_igv = fIgv.ToString();
-                data.total_igv = fIgvResto.ToString();
+                data.total_igv = (Decimal.Round(((LisVenRep[0].fTotal - fIgvResto) * (fIgv / 100)), 2)).ToString();
                 data.total_isc = "0.00";
                 data.total_otr_imp = "0.00";
                 data.total = LisVenRep[0].fTotal.ToString();
-                data.total_letras = Funciones.NumerosLetras(LisVenRep[0].fTotal);
-                data.nro_guia_remision = "null";
-                data.cod_guia_remision = "null";
-                data.nro_otr_comprobante = "null";
+                data.total_letras = Funciones.NumeroALetras(LisVenRep[0].fTotal);
+                data.nro_guia_remision = "";
+                data.cod_guia_remision = "";
+                data.nro_otr_comprobante = "";
                 data.condicion_pago = "CONTADO";
+
+                if (cboDocumento.SelectedValue.ToString().Length > 8)
+                {
+                    data.cliente_tipo_doc = "6";
+                }
+                else
+                {
+                    if (txtRuc.Text.Equals("00000000"))
+                    {
+                        data.cliente_tipo_doc = "0";
+                    }
+                    else
+                    {
+                        data.cliente_tipo_doc = "1";
+                    }
+                }
+
+                data.cliente_nro_doc = txtRuc.Text;
+                data.cliente_nombre = txtNombre.Text;
+                data.cliente_direccion = "null";
+
                 data.serie_comprobante = cboDocumento.Text.Substring(0,1) + lblSerie.Text;
                 data.numero_comprobante = lblNumero.Text;
                 data.fecha_comprobante = dtFecha.Value.ToString("yyyy-MM-dd");
                 data.fecha_vto_comprobante = dtFecha.Value.ToString("yyyy-MM-dd");
-                data.cod_tipo_documento = cboDocumento.SelectedValue.ToString();
-                data.cod_moneda = "PEN";
+                data.moneda_cod = "PEN";
                 data.tipo_tributo = "IGV";
                 data.tipo_igv = "1000";
-                data.cliente_numerodocumento = txtRuc.Text;
-                data.cliente_nombre = txtNombre.Text;
-                //Preguntar que codigo es 6
-                data.cliente_tipodocumento = "6";
-                data.cliente_direccion = "null";
+                data.tipo_comprobante_cod = cboDocumento.SelectedValue.ToString();
                 data.cliente_pais = "PE";
-                data.cliente_ciudad = "null";
-                data.cliente_codigoubigeo = "null";
+                data.cliente_codigo_ubigeo = "null";
                 data.cliente_departamento = "null";
                 data.cliente_provincia = "null";
                 data.cliente_distrito = "null";
-                data.detalle = new detalle[LisVenRep.Count];
 
-                for (int i = 0; i < LisVenRep.Count; i++)
-                {
-                    data.detalle[i] = new detalle();
-                    data.detalle[i].txtITEM = (i + 1).ToString();
-                    data.detalle[i].txtUNIDAD_MEDIDA_DET = "ZZ";
-                    data.detalle[i].txtCANTIDAD_DET = LisVenRep[i].nCodigo.ToString();
-                    data.detalle[i].txtPRECIO_UNIT = LisVenRep[i].fPrecioVenta.ToString();
-                    data.detalle[i].txtPRECIO_UNIT_SIN_IGV = (LisVenRep[0].fTotal - fIgvResto).ToString();
-                    data.detalle[i].txtPRECIO_TIPO_CODIGO = "01";
-                    data.detalle[i].txtIGV = fIgvResto.ToString();
-                    data.detalle[i].txtISC = "0";
-                    data.detalle[i].txtIMPORTE_TOTAL = (LisVenRep[i].fPrecioVenta * LisVenRep[i].nCodigo).ToString();
-                    data.detalle[i].txtIMPORTE_TOTAL_SIN_IGV = (LisVenRep[0].fTotal - fIgvResto).ToString();
-                    data.detalle[i].txtCODIGO_DET = (i + 1).ToString();
-                    data.detalle[i].txtDESCRIPCION_DET = LisVenRep[0].sNombre;
-                    data.detalle[i].txtCODIGO_PROD_SUNAT = "78181505";
-                    data.detalle[i].txtAFECTACION_CODIGO = "1000";
-                    data.detalle[i].txtAFECTACION_CODIGO_ALT = "10";
-                    data.detalle[i].txtAFECTACION_NOMBRE = "IGV";
-                    data.detalle[i].txtAFECTACION_TIPO = "VAT";
-                }
-
-                data.cuotas = new cuotas();
-                data.cuotas.detalle_cuota = "Cuota001";
-                data.cuotas.total_cuota = LisVenRep[0].fTotal.ToString();
                 data.emisor = new emisor();
                 data.emisor.ruc = sRuc;
                 data.emisor.tipo_doc = "6";
@@ -544,13 +536,36 @@ namespace AppInguiri
                 data.emisor.direccion_provincia = sProvi;
                 data.emisor.direccion_distrito = sDist;
                 data.emisor.direccion_codigopais = "PE";
-                data.emisor.sede = "Test";
                 data.emisor.usuariosol = "MODDATOS";
                 data.emisor.clavesol = "moddatos";
                 data.emisor.clave_certificado = "123456";
                 data.emisor.url_xml = "beta/";
                 data.emisor.url_ws = _sUrlSunat;
                 data.emisor.codigo_estab_anexo_sun = "0000";
+
+                data.detalle = new detalle[LisVenRep.Count];
+
+                for (int i = 0; i < LisVenRep.Count; i++)
+                {
+                    data.detalle[i] = new detalle();
+                    data.detalle[i].txtITEM = (i + 1).ToString();
+                    data.detalle[i].txtUNIDAD_MEDIDA_DET = "NI";
+                    data.detalle[i].txtCANTIDAD_DET = LisVenRep[i].nCodigo.ToString();
+                    data.detalle[i].txtPRECIO_UNIT = (LisVenRep[i].fPrecioVenta/LisVenRep[i].nCodigo).ToString();
+                    data.detalle[i].txtPRECIO_UNIT_SIN_IGV = ((LisVenRep[i].fPrecioVenta- LisVenRep[i].fIgvDetalle) / LisVenRep[i].nCodigo).ToString();
+                    data.detalle[i].txtPRECIO_TIPO_CODIGO = "01";
+                    data.detalle[i].txtIGV = LisVenRep[i].fIgvDetalle.ToString();
+                    data.detalle[i].txtISC = "0";
+                    data.detalle[i].txtIMPORTE_TOTAL = LisVenRep[i].fIgvDetalle.ToString();
+                    data.detalle[i].txtIMPORTE_TOTAL_SIN_IGV = (LisVenRep[i].fPrecioVenta - LisVenRep[i].fIgvDetalle).ToString();
+                    data.detalle[i].txtCODIGO_DET = (i + 1).ToString();
+                    data.detalle[i].txtDESCRIPCION_DET = LisVenRep[i].sCodigoInterno+"-"+LisVenRep[i].sProducto;
+                    data.detalle[i].txtCODIGO_PROD_SUNAT = "";
+                    data.detalle[i].txtAFECTACION_CODIGO = "1000";
+                    data.detalle[i].txtAFECTACION_CODIGO_ALT = "10";
+                    data.detalle[i].txtAFECTACION_NOMBRE = "IGV";
+                    data.detalle[i].txtAFECTACION_TIPO = "VAT";
+                }
 
                 string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
                 var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput);
@@ -629,7 +644,7 @@ namespace AppInguiri
                         reciboRpt.yCodigoQR = ImageToByte(codigoQR("JULIO EL MEN"));
                         LisRecibo.Add(reciboRpt);
                     }
-
+                    
                     Rep.Load(Application.StartupPath + "\\RptRecibo.rpt");
                     //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
 
@@ -641,17 +656,29 @@ namespace AppInguiri
                     MessageBox.Show("Error: " + ex.Message.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            //Factura
-            else if (cboDocumento.SelectedValue.Equals("01"))
+            //Factura O boleta
+            else 
             {
                 try
                 {
-                    string sSerie = "";
+                    string sSerie = "", sDescripcionDocumento="", sSigla="";
+
+                    if (cboDocumento.SelectedValue.Equals("01"))
+                    {
+                        sDescripcionDocumento = "FACTURA ELECTRÓNICA";
+                        sSigla = "F";
+                    }
+                    else
+                    {
+                        sDescripcionDocumento = "BOLETA ELECTRÓNICA";
+                        sSigla = "B";
+                    }
 
                     foreach (var item in LisVenRep)
                     {
                         ReciboRpt reciboRpt = new ReciboRpt();
-                        sSerie = "F" + item.sSerie;
+                        sSerie = sSigla + item.sSerie;
+                        reciboRpt.sDocumento = sDescripcionDocumento;
                         reciboRpt.nNumero = sSerie + "-" + string.Format("{0:00000000}", item.nNumero);
                         reciboRpt.fTotal = item.fTotal;
                         reciboRpt.fPrecio = item.fPrecioVenta;
@@ -672,8 +699,9 @@ namespace AppInguiri
                         reciboRpt.sRuc = txtRuc.Text;
                         LisRecibo.Add(reciboRpt);
                     }
+                    
 
-                    Rep.Load(Application.StartupPath + "\\RptFactura.rpt");
+                    Rep.Load(Application.StartupPath + "\\RptDocumentoFE.rpt");
                     //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
 
                     Rep.SetDataSource(LisRecibo);

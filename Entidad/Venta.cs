@@ -40,6 +40,7 @@ namespace Entidad
             this.bSunat = false;
             this.dFechaNotificacionSunat=null;
             this.sCdr = "";
+            this.sCodigoInterno = "";
 
         }
         
@@ -71,10 +72,13 @@ namespace Entidad
         public bool bEstado { get; set; }
         public int nIdHistorial { get; set; }
         public int nIdTarjeta { get; set; }
+        public decimal fIgvDetalle { get; set; }
+        public string sCodigoInterno { get; set; }
+        
         public bool bSunat  { get; set; }
         public DateTime? dFechaNotificacionSunat { get; set; }
         public string sCdr { get; set; }
-        
+
         public List<VentaDetalle> listVentaDetalle { get; set; }
 
     }
