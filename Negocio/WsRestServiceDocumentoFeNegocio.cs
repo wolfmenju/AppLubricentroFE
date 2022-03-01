@@ -1,4 +1,5 @@
 ﻿using Entidad;
+using log4net;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Negocio
 {
     public class WsRestServiceDocumentoFeNegocio
     {
+        private static ILog Log = LogManager.GetLogger(typeof(WsRestServiceDocumentoFeNegocio));
+
         public WsDocumentoFeResponse RegistroDocumentoFe(string SerializeRequestPerOutput)
         {
             WsDocumentoFeResponse rqResponse = new WsDocumentoFeResponse();
@@ -26,6 +29,7 @@ namespace Negocio
         T DoRequest<T>(string serviceUrl, string request)
         {
             T response;
+
             try
             {
                 string ContentType = "application/json";
@@ -47,11 +51,13 @@ namespace Negocio
                 reader.Close();
                 stream.Close();
                 responsews.Close();
+
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
+
             return response;
         }
 

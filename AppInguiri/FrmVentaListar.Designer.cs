@@ -73,12 +73,6 @@
             this.nNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabDetalle = new System.Windows.Forms.TabPage();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
-            this.PanSuperior = new System.Windows.Forms.Panel();
-            this.chAnuladas = new System.Windows.Forms.CheckBox();
-            this.Label9 = new System.Windows.Forms.Label();
-            this.dFechaFin = new System.Windows.Forms.DateTimePicker();
-            this.dFechaInicio = new System.Windows.Forms.DateTimePicker();
-            this.RdFecha = new System.Windows.Forms.RadioButton();
             this.nIdVentaDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nIdVentas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nIdTarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,6 +84,12 @@
             this.fSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fTotals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PanSuperior = new System.Windows.Forms.Panel();
+            this.chAnuladas = new System.Windows.Forms.CheckBox();
+            this.Label9 = new System.Windows.Forms.Label();
+            this.dFechaFin = new System.Windows.Forms.DateTimePicker();
+            this.dFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.RdFecha = new System.Windows.Forms.RadioButton();
             this.PanOpciones.SuspendLayout();
             this.PanInferior.SuspendLayout();
             this.TabConsulta.SuspendLayout();
@@ -492,6 +492,129 @@
             this.dgvDetalle.Size = new System.Drawing.Size(783, 327);
             this.dgvDetalle.TabIndex = 0;
             // 
+            // nIdVentaDetalle
+            // 
+            this.nIdVentaDetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdVentaDetalle.DataPropertyName = "nIdVentaDetalle";
+            this.nIdVentaDetalle.HeaderText = "IdDetalleVenta";
+            this.nIdVentaDetalle.Name = "nIdVentaDetalle";
+            this.nIdVentaDetalle.ReadOnly = true;
+            this.nIdVentaDetalle.Visible = false;
+            // 
+            // nIdVentas
+            // 
+            this.nIdVentas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdVentas.DataPropertyName = "nIdVenta";
+            this.nIdVentas.HeaderText = "IdVenta";
+            this.nIdVentas.Name = "nIdVentas";
+            this.nIdVentas.ReadOnly = true;
+            this.nIdVentas.Visible = false;
+            // 
+            // nIdTarjeta
+            // 
+            this.nIdTarjeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdTarjeta.DataPropertyName = "nIdTarjeta";
+            this.nIdTarjeta.HeaderText = "IdTarjeta";
+            this.nIdTarjeta.Name = "nIdTarjeta";
+            this.nIdTarjeta.ReadOnly = true;
+            this.nIdTarjeta.Visible = false;
+            // 
+            // nIdProducto
+            // 
+            this.nIdProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdProducto.DataPropertyName = "nIdProducto";
+            this.nIdProducto.HeaderText = "IdProducto";
+            this.nIdProducto.Name = "nIdProducto";
+            this.nIdProducto.ReadOnly = true;
+            this.nIdProducto.Visible = false;
+            // 
+            // sProducto
+            // 
+            this.sProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sProducto.DataPropertyName = "sProducto";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sProducto.DefaultCellStyle = dataGridViewCellStyle13;
+            this.sProducto.HeaderText = "Descripción";
+            this.sProducto.Name = "sProducto";
+            this.sProducto.ReadOnly = true;
+            this.sProducto.Width = 99;
+            // 
+            // sLote
+            // 
+            this.sLote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sLote.DataPropertyName = "sLote";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sLote.DefaultCellStyle = dataGridViewCellStyle14;
+            this.sLote.HeaderText = "Lote";
+            this.sLote.Name = "sLote";
+            this.sLote.ReadOnly = true;
+            this.sLote.Visible = false;
+            // 
+            // nCantidad
+            // 
+            this.nCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nCantidad.DataPropertyName = "nCantidad";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Format = "N0";
+            dataGridViewCellStyle15.NullValue = null;
+            this.nCantidad.DefaultCellStyle = dataGridViewCellStyle15;
+            this.nCantidad.HeaderText = "Cantidad";
+            this.nCantidad.Name = "nCantidad";
+            this.nCantidad.ReadOnly = true;
+            this.nCantidad.Width = 82;
+            // 
+            // fPrecioVenta
+            // 
+            this.fPrecioVenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fPrecioVenta.DataPropertyName = "fPrecioVenta";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "C2";
+            dataGridViewCellStyle16.NullValue = null;
+            this.fPrecioVenta.DefaultCellStyle = dataGridViewCellStyle16;
+            this.fPrecioVenta.HeaderText = "Precio";
+            this.fPrecioVenta.Name = "fPrecioVenta";
+            this.fPrecioVenta.ReadOnly = true;
+            this.fPrecioVenta.Width = 68;
+            // 
+            // fSubTotal
+            // 
+            this.fSubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fSubTotal.DataPropertyName = "fSubTotal";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "C2";
+            dataGridViewCellStyle17.NullValue = null;
+            this.fSubTotal.DefaultCellStyle = dataGridViewCellStyle17;
+            this.fSubTotal.HeaderText = "SubTotal";
+            this.fSubTotal.Name = "fSubTotal";
+            this.fSubTotal.ReadOnly = true;
+            this.fSubTotal.Width = 83;
+            // 
+            // fDescuento
+            // 
+            this.fDescuento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fDescuento.DataPropertyName = "fDescuento";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "C2";
+            dataGridViewCellStyle18.NullValue = null;
+            this.fDescuento.DefaultCellStyle = dataGridViewCellStyle18;
+            this.fDescuento.HeaderText = "Descuento";
+            this.fDescuento.Name = "fDescuento";
+            this.fDescuento.ReadOnly = true;
+            this.fDescuento.Width = 93;
+            // 
+            // fTotals
+            // 
+            this.fTotals.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fTotals.DataPropertyName = "fTotal";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "C2";
+            dataGridViewCellStyle19.NullValue = null;
+            this.fTotals.DefaultCellStyle = dataGridViewCellStyle19;
+            this.fTotals.HeaderText = "Total";
+            this.fTotals.Name = "fTotals";
+            this.fTotals.ReadOnly = true;
+            this.fTotals.Width = 61;
+            // 
             // PanSuperior
             // 
             this.PanSuperior.BackColor = System.Drawing.Color.White;
@@ -558,134 +681,6 @@
             this.RdFecha.TabStop = true;
             this.RdFecha.Text = "[F1] - Fechas";
             this.RdFecha.UseVisualStyleBackColor = true;
-            // 
-            // nIdVentaDetalle
-            // 
-            this.nIdVentaDetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdVentaDetalle.DataPropertyName = "nIdVentaDetalle";
-            this.nIdVentaDetalle.HeaderText = "IdDetalleVenta";
-            this.nIdVentaDetalle.Name = "nIdVentaDetalle";
-            this.nIdVentaDetalle.ReadOnly = true;
-            this.nIdVentaDetalle.Visible = false;
-            this.nIdVentaDetalle.Width = 97;
-            // 
-            // nIdVentas
-            // 
-            this.nIdVentas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdVentas.DataPropertyName = "nIdVenta";
-            this.nIdVentas.HeaderText = "IdVenta";
-            this.nIdVentas.Name = "nIdVentas";
-            this.nIdVentas.ReadOnly = true;
-            this.nIdVentas.Visible = false;
-            this.nIdVentas.Width = 57;
-            // 
-            // nIdTarjeta
-            // 
-            this.nIdTarjeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdTarjeta.DataPropertyName = "nIdTarjeta";
-            this.nIdTarjeta.HeaderText = "IdTarjeta";
-            this.nIdTarjeta.Name = "nIdTarjeta";
-            this.nIdTarjeta.ReadOnly = true;
-            this.nIdTarjeta.Visible = false;
-            this.nIdTarjeta.Width = 64;
-            // 
-            // nIdProducto
-            // 
-            this.nIdProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdProducto.DataPropertyName = "nIdProducto";
-            this.nIdProducto.HeaderText = "IdProducto";
-            this.nIdProducto.Name = "nIdProducto";
-            this.nIdProducto.ReadOnly = true;
-            this.nIdProducto.Visible = false;
-            this.nIdProducto.Width = 75;
-            // 
-            // sProducto
-            // 
-            this.sProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sProducto.DataPropertyName = "sProducto";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sProducto.DefaultCellStyle = dataGridViewCellStyle13;
-            this.sProducto.HeaderText = "Descripción";
-            this.sProducto.Name = "sProducto";
-            this.sProducto.ReadOnly = true;
-            this.sProducto.Width = 99;
-            // 
-            // sLote
-            // 
-            this.sLote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sLote.DataPropertyName = "sLote";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sLote.DefaultCellStyle = dataGridViewCellStyle14;
-            this.sLote.HeaderText = "Lote";
-            this.sLote.Name = "sLote";
-            this.sLote.ReadOnly = true;
-            this.sLote.Visible = false;
-            this.sLote.Width = 57;
-            // 
-            // nCantidad
-            // 
-            this.nCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nCantidad.DataPropertyName = "nCantidad";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.Format = "N0";
-            dataGridViewCellStyle15.NullValue = null;
-            this.nCantidad.DefaultCellStyle = dataGridViewCellStyle15;
-            this.nCantidad.HeaderText = "Cantidad";
-            this.nCantidad.Name = "nCantidad";
-            this.nCantidad.ReadOnly = true;
-            this.nCantidad.Width = 82;
-            // 
-            // fPrecioVenta
-            // 
-            this.fPrecioVenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fPrecioVenta.DataPropertyName = "fPrecioVenta";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "C2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.fPrecioVenta.DefaultCellStyle = dataGridViewCellStyle16;
-            this.fPrecioVenta.HeaderText = "Precio";
-            this.fPrecioVenta.Name = "fPrecioVenta";
-            this.fPrecioVenta.ReadOnly = true;
-            this.fPrecioVenta.Width = 68;
-            // 
-            // fSubTotal
-            // 
-            this.fSubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fSubTotal.DataPropertyName = "fSubTotal";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "C2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.fSubTotal.DefaultCellStyle = dataGridViewCellStyle17;
-            this.fSubTotal.HeaderText = "SubTotal";
-            this.fSubTotal.Name = "fSubTotal";
-            this.fSubTotal.ReadOnly = true;
-            this.fSubTotal.Width = 83;
-            // 
-            // fDescuento
-            // 
-            this.fDescuento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fDescuento.DataPropertyName = "fDescuento";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "C2";
-            dataGridViewCellStyle18.NullValue = null;
-            this.fDescuento.DefaultCellStyle = dataGridViewCellStyle18;
-            this.fDescuento.HeaderText = "Descuento";
-            this.fDescuento.Name = "fDescuento";
-            this.fDescuento.ReadOnly = true;
-            this.fDescuento.Width = 93;
-            // 
-            // fTotals
-            // 
-            this.fTotals.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fTotals.DataPropertyName = "fTotal";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "C2";
-            dataGridViewCellStyle19.NullValue = null;
-            this.fTotals.DefaultCellStyle = dataGridViewCellStyle19;
-            this.fTotals.HeaderText = "Total";
-            this.fTotals.Name = "fTotals";
-            this.fTotals.ReadOnly = true;
-            this.fTotals.Width = 61;
             // 
             // FrmVentaListar
             // 

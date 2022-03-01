@@ -23,6 +23,7 @@ namespace AppInguiri.EntidadReporte
         public byte[] yCodigoQR { get; set; }
         public decimal fSubTotal { get; set; }
         public decimal fIgv { get; set; }
+        public string sPaginaPie { get; set; }
 
     }
 }
