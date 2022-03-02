@@ -915,6 +915,7 @@
     <Content Include="Imagenes\Sede.fw.png" />
     <Content Include="Imagenes\shopping cart.ico" />
     <Content Include="Imagenes\Sistema.ico" />
+    <None Include="Imagenes\sunat.png" />
     <Content Include="Imagenes\Wordpad.ico" />
     <Content Include="Imagenes\X.ico" />
     <Content Include="Imagenes\xActivar.ico" />

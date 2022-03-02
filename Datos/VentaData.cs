@@ -44,6 +44,8 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Codigo", objVenta.nCodigo);
                 cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+                cmd.Parameters.AddWithValue("@IgvAplica", objVenta.bIgvAplica);
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 cnx.Open();
                 dr = cmd.ExecuteReader();
@@ -63,20 +65,24 @@ namespace Datos
                         objVent.nIdVenta = int.Parse(dr[0].ToString());
                         objVent.dFecha =Convert.ToDateTime(dr[1].ToString());
                         objVent.sSerie = dr[2].ToString();
-                        objVent.sIdDocumento= dr[3].ToString();
-                        objVent.nNumero = Convert.ToInt32(dr[4]);
-                        objVent.fTotal = Convert.ToDecimal(dr[5]);
-                        objVent.fSubTotal = Convert.ToDecimal(dr[6]);
-                        objVent.fIgv = Convert.ToDecimal(dr[7]);
-                        objVent.fIgvDetalle = Convert.ToDecimal(dr[8]);
-                        objVent.sNombre= dr[9].ToString();
-                        objVent.sCodigoInterno = dr[10].ToString();
-                        objVent.sProducto= dr[11].ToString();
-                        objVent.fPrecioVenta= Convert.ToDecimal(dr[12]);
-                        objVent.nCodigo =Convert.ToInt32(dr[13]);
-                        objVent.sIdVendedor =dr[14].ToString();
-                        objVent.dFechaRegistrado= Convert.ToDateTime(dr[15].ToString());
-                        objVent.fDescuento = Convert.ToDecimal(dr[16].ToString());
+                        objVent.sIdDocumento = dr[3].ToString();
+                        objVent.sDescripDocumento= dr[4].ToString();
+                        objVent.nNumero = Convert.ToInt32(dr[5]);
+                        objVent.nIdCliente = Convert.ToInt32(dr[6]);
+                        objVent.fTotal = Convert.ToDecimal(dr[7]);
+                        objVent.fPorcentajeIgv= Convert.ToDecimal(dr[8]);
+                        objVent.fSubTotal = Convert.ToDecimal(dr[9]);
+                        objVent.fIgv = Convert.ToDecimal(dr[10]);
+                        objVent.fIgvDetalle = Convert.ToDecimal(dr[11]);
+                        objVent.sNombre= dr[12].ToString();
+                        objVent.sCodigoInterno = dr[13].ToString();
+                        objVent.sProducto= dr[14].ToString();
+                        objVent.fPrecioVenta= Convert.ToDecimal(dr[15]);
+                        objVent.nCodigo =Convert.ToInt32(dr[16]);
+                        objVent.sIdVendedor =dr[17].ToString();
+                        objVent.dFechaRegistrado= Convert.ToDateTime(dr[18].ToString());
+                        objVent.fDescuento = Convert.ToDecimal(dr[19].ToString());
+                        objVent.bIgvAplica = Convert.ToBoolean(dr[20]);
                     }
                     else if (objVenta.nTipo == 9)
                     {
@@ -118,7 +124,10 @@ namespace Datos
                         objVent.bEstado = Convert.ToBoolean(dr[8]);
                         if(DBNull.Value== dr[9]) objVent.nNumero = null;
                         else objVent.nNumero = Convert.ToInt32(dr[9]);
-
+                        objVent.bSunat = Convert.ToBoolean(dr[10]);
+                        objVent.sSunat = Convert.ToString(dr[11]);
+                        if (DBNull.Value == dr[12]) objVent.dFechaNotificacionSunat = null;
+                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[12]);
                     }
                     else if (objVenta.nTipo == 3)
                     {
@@ -202,6 +211,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Total", objVenta.fTotal);
                 cmd.Parameters.AddWithValue("@IdVendedor", objVenta.sIdVendedor);
                 cmd.Parameters.AddWithValue("@IdCajero", objVenta.sIdCajero);
+                cmd.Parameters.AddWithValue("@IgvAplica", objVenta.bIgvAplica);
 
                 SqlParameter paramResultado = new SqlParameter("@Codigo", SqlDbType.Int);
                 paramResultado.Direction = ParameterDirection.Output;
@@ -464,6 +474,8 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdCajero", objVenta.sIdCajero);
                 cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+                cmd.Parameters.AddWithValue("@IgvAplica", objVenta.bIgvAplica);
+
                 cmd.Transaction = xTrans;
 
                 respuesta = cmd.ExecuteNonQuery();

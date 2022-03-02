@@ -37,12 +37,13 @@ namespace AppInguiri
         private DocumentoSerieNegocio objDocumentSerieNeg = new DocumentoSerieNegocio();
         private List<DocumentoSerie> listDocumentoSerie = new List<DocumentoSerie>();
         private ClienteNegocio objCliNeg = new ClienteNegocio();
+        private Cliente cliente= new Cliente();
         int DocDefault = 0;
         int nidVentaRespu = 0;
         WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
         string sDireccion = "", sRuc = "", sRazonSocial = "", 
             sUbigeo = "", sDepart="", sProvi="",sDist="",
-            _sUrlSunat="", _RutaArchivosXml="";
+            _sUrlSunat="", _RutaArchivosXml="", sAplicaIgv="";
         private static ILog Log= LogManager.GetLogger(typeof(FrmVenta));
 
         //Singleton
@@ -79,6 +80,7 @@ namespace AppInguiri
             sDepart = objParamNeg.LeerUnParametro("ID_DIRECCION_DEPA");
             sProvi = objParamNeg.LeerUnParametro("ID_DIRECCION_PROV");
             sDist = objParamNeg.LeerUnParametro("ID_DIRECCION_DIST");
+            sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
         }
 
         public void CargarMaestro()
@@ -198,11 +200,15 @@ namespace AppInguiri
             }
 
             lblTotal.Text = fTotal.ToString("C");
-            lblIgv.Text = ((fIgv / 100) * fTotal).ToString("C");
-            lblSubtotal.Text = (fTotal - ((fIgv / 100) * fTotal)).ToString("C");
-            fSubTotal2 = decimal.Round((fTotal - ((fIgv / 100) * fTotal)), 2);
             fTotal = decimal.Round(fTotal, 2);
-            fIgvResto = decimal.Round(((fIgv / 100) * fTotal), 2);
+           
+            if (sAplicaIgv.Equals("SI"))
+            {
+                lblIgv.Text = ((fIgv / 100) * fTotal).ToString("C");
+                lblSubtotal.Text = (fTotal - ((fIgv / 100) * fTotal)).ToString("C");
+                fSubTotal2 = decimal.Round((fTotal - ((fIgv / 100) * fTotal)), 2);
+                fIgvResto = decimal.Round(((fIgv / 100) * fTotal), 2);
+            }
         }
         
         private void btnDescuento_Click(object sender, EventArgs e)
@@ -393,13 +399,18 @@ namespace AppInguiri
                 objVenta.sIdDocumento = cboDocumento.SelectedValue.ToString();
                 objVenta.sSerie = lblSerie.Text;
                 objVenta.nNumero = Convert.ToInt32(lblNumero.Text);
-                objVenta.fSubTotal = fSubTotal2;
-                objVenta.fIgv = fIgvResto;
                 objVenta.fTotal = fTotal;
-                objVenta.fPorcentajeIgv = (decimal)fIgv;
                 objVenta.sUsuario = Funciones.UsuarioActual();
                 objVenta.sIdCajero = Funciones.UsuarioActual();
                 objVenta.sIdVendedor = txtPedido.Text.Length > 0 ? lblVendedor.Text : Funciones.UsuarioActual();
+                objVenta.bIgvAplica = sAplicaIgv.Equals("SI") ? true : false;
+
+                if (sAplicaIgv.Equals("SI"))
+                {
+                    objVenta.fIgv = fIgvResto;
+                    objVenta.fPorcentajeIgv = (decimal)fIgv;
+                    objVenta.fSubTotal = fSubTotal2;
+                }
 
                 foreach (DataGridViewRow item in dgvProducto.Rows)
                 {
@@ -410,12 +421,17 @@ namespace AppInguiri
                     objVentDeta.nCantidad = Convert.ToInt32(item.Cells["nCantidad"].Value);
                     objVentDeta.fPrecioCompra = Convert.ToDecimal(item.Cells["fPrecioCompra"].Value);
                     objVentDeta.sLote = item.Cells["sLote"].Value.ToString();
-                    objVentDeta.fIgvDetalle = decimal.Round(((objVentDeta.nCantidad *
+
+                    if (sAplicaIgv.Equals("SI"))
+                    {
+                        objVentDeta.fIgvDetalle = decimal.Round(((objVentDeta.nCantidad *
                         Convert.ToDecimal(item.Cells["fPrecioVenta"].Value) - ((objVentDeta.nCantidad
                         * Convert.ToDecimal(item.Cells["fPrecioVenta"].Value)) * (fIgv / 100))) * (fIgv / 100)), 2);
+                        objVentDeta.fSubTotal = Convert.ToDecimal(item.Cells["fSubTotal"].Value);
+                    }
+
                     objVentDeta.fGanancia = Convert.ToDecimal(item.Cells["fGanancia"].Value);
                     objVentDeta.fPrecioVenta = Convert.ToDecimal(item.Cells["fPrecioVenta"].Value);
-                    objVentDeta.fSubTotal = Convert.ToDecimal(item.Cells["fSubTotal"].Value);
                     objVentDeta.bServicio = Convert.ToBoolean(item.Cells["bServicio"].Value);
                     objVentDeta.fDescuento = Convert.ToDecimal(item.Cells["fDescuento"].Value.ToString().Replace("S/", ""));
 
@@ -455,12 +471,11 @@ namespace AppInguiri
 
         private bool NotificacionSunat( int nidVentaRespu)
         {
-            if (cboDocumento.Text.Equals("TICKET")) return true;
-
             Venta objVenta = new Venta() { nTipo = 8, nIdVenta = nidVentaRespu };
-
+            
             List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
             WsDocumentoFeResponseData data = null;
+            if (LisVenRep[0].sDescripDocumento.Equals("TICKET")) return true;
 
             if (LisVenRep.Count > 0)
             {
@@ -469,15 +484,15 @@ namespace AppInguiri
 
                     data = new WsDocumentoFeResponseData();
                     data.tipo_operacion = "01";
-                    data.total_gravadas = (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - fIgvResto) * (fIgv / 100)), 2)).ToString();
+                    data.total_gravadas = LisVenRep[0].bIgvAplica? (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString():"0.00";
                     data.total_inafecta = "0.00";
-                    data.total_exoneradas = "0.00";
+                    data.total_exoneradas = LisVenRep[0].bIgvAplica ? "0.00" : LisVenRep[0].fTotal.ToString();
                     data.total_gratuitas = "0.00";
                     data.total_exportacion = "0.00";
                     data.total_descuento = "0.00";
                     data.sub_total = "";
-                    data.porcentaje_igv = fIgv.ToString();
-                    data.total_igv = (Decimal.Round(((LisVenRep[0].fTotal - fIgvResto) * (fIgv / 100)), 2)).ToString();
+                    data.porcentaje_igv = LisVenRep[0].fPorcentajeIgv.ToString();
+                    data.total_igv = (Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString();
                     data.total_isc = "0.00";
                     data.total_otr_imp = "0.00";
                     data.total = LisVenRep[0].fTotal.ToString();
@@ -487,13 +502,15 @@ namespace AppInguiri
                     data.nro_otr_comprobante = "";
                     data.condicion_pago = "CONTADO";
 
-                    if (txtRuc.Text.ToString().Length > 8)
+                    cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
+
+                    if (cliente.sDni.Length > 8)
                     {
                         data.cliente_tipo_doc = "6";
                     }
                     else
                     {
-                        if (txtRuc.Text.Equals("00000000"))
+                        if (cliente.sDni.Length.Equals("00000000"))
                         {
                             data.cliente_tipo_doc = "0";
                         }
@@ -503,18 +520,18 @@ namespace AppInguiri
                         }
                     }
 
-                    data.cliente_nro_doc = txtRuc.Text;
-                    data.cliente_nombre = txtNombre.Text;
-                    data.cliente_direccion = "null";
+                    data.cliente_nro_doc = cliente.sDni;
+                    data.cliente_nombre = cliente.sNombres;
+                    data.cliente_direccion = cliente.sDireccion==""? "null": cliente.sDireccion;
 
-                    data.serie_comprobante = cboDocumento.Text.Substring(0, 1) + lblSerie.Text;
-                    data.numero_comprobante = lblNumero.Text;
-                    data.fecha_comprobante = dtFecha.Value.ToString("yyyy-MM-dd");
-                    data.fecha_vto_comprobante = dtFecha.Value.ToString("yyyy-MM-dd");
+                    data.serie_comprobante = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie;
+                    data.numero_comprobante = string.Format("{0:00000000}", LisVenRep[0].nNumero); 
+                    data.fecha_comprobante = LisVenRep[0].dFechaRegistrado.ToString("yyyy-MM-dd");
+                    data.fecha_vto_comprobante = LisVenRep[0].dFechaRegistrado.ToString("yyyy-MM-dd");
                     data.moneda_cod = "PEN";
-                    data.tipo_tributo = "IGV";
-                    data.tipo_igv = "1000";
-                    data.tipo_comprobante_cod = cboDocumento.SelectedValue.ToString();
+                    data.tipo_tributo = LisVenRep[0].bIgvAplica ? "IGV" : "EXO";
+                    data.tipo_igv = LisVenRep[0].bIgvAplica? "1000" : "9997";
+                    data.tipo_comprobante_cod = LisVenRep[0].sIdDocumento;
                     data.cliente_pais = "PE";
                     data.cliente_codigo_ubigeo = "null";
                     data.cliente_departamento = "null";
@@ -556,9 +573,9 @@ namespace AppInguiri
                         data.detalle[i].txtCODIGO_DET = (i + 1).ToString();
                         data.detalle[i].txtDESCRIPCION_DET = LisVenRep[i].sCodigoInterno + "-" + LisVenRep[i].sProducto;
                         data.detalle[i].txtCODIGO_PROD_SUNAT = "";
-                        data.detalle[i].txtAFECTACION_CODIGO = "1000";
-                        data.detalle[i].txtAFECTACION_CODIGO_ALT = "10";
-                        data.detalle[i].txtAFECTACION_NOMBRE = "IGV";
+                        data.detalle[i].txtAFECTACION_CODIGO = LisVenRep[0].bIgvAplica ? "1000" : "9997";
+                        data.detalle[i].txtAFECTACION_CODIGO_ALT = LisVenRep[0].bIgvAplica ? "10" : "20";
+                        data.detalle[i].txtAFECTACION_NOMBRE = LisVenRep[0].bIgvAplica ? "IGV": "EXO";
                         data.detalle[i].txtAFECTACION_TIPO = "VAT";
                     }
 
@@ -622,20 +639,14 @@ namespace AppInguiri
             }
 
             //Ticket
-            if (cboDocumento.SelectedValue.Equals("12"))
+            if (LisVenRep[0].sIdDocumento.Equals("12"))
             {
                 try
                 {
-                    string nombre_Up = "";
-                    string nombre_Lo = "";
-
                     foreach (var item in LisVenRep)
                     {
-                        nombre_Up = item.sIdDocumento;
-                        nombre_Lo = nombre_Up.ToLower();
-
                         ReciboRpt reciboRpt = new ReciboRpt();
-                        reciboRpt.sDocumento = nombre_Lo.Replace(nombre_Lo[0], nombre_Up[0]);
+                        reciboRpt.sDocumento = item.sDescripDocumento;
                         reciboRpt.nNumero = string.Format("{0:00000000}", item.nNumero); 
                         reciboRpt.fTotal = item.fTotal;
                         reciboRpt.fPrecio = item.fPrecioVenta;
@@ -664,19 +675,41 @@ namespace AppInguiri
             {
                 try
                 {
-                    string sSerie = "", sDescripcionDocumento="", sSigla="", sPaginaPie="";
 
-                    if (cboDocumento.SelectedValue.Equals("01"))
+                    cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
+
+                    string sSerie = "", sDescripcionDocumento="", sSigla="", sPaginaPie="", sTipoDoc="";
+
+                    if (cliente.sDni.Length > 8)
+                    {
+                        sTipoDoc = "6";
+                    }
+                    else
+                    {
+                        if (cliente.sDni.Length.Equals("00000000"))
+                        {
+                            sTipoDoc = "0";
+                        }
+                        else
+                        {
+                            sTipoDoc = "1";
+                        }
+                    }
+                    
+                    if (LisVenRep[0].sIdDocumento.Equals("01"))
                     {
                         sDescripcionDocumento = "FACTURA ELECTRÓNICA";
                         sSigla = "F";
                         sPaginaPie = "Representación impresa de la FACTURA DE VENTA ELECTRÓNICA";
+                        //Ruc
+                        sTipoDoc = "6";
                     }
                     else
                     {
                         sDescripcionDocumento = "BOLETA ELECTRÓNICA";
                         sSigla = "B";
                         sPaginaPie = "Representación impresa de la BOLETA DE VENTA ELECTRÓNICA";
+                        sTipoDoc = "DNI";
                     }
 
                     foreach (var item in LisVenRep)
@@ -687,22 +720,26 @@ namespace AppInguiri
                         reciboRpt.nNumero = sSerie + "-" + string.Format("{0:00000000}", item.nNumero);
                         reciboRpt.fTotal = item.fTotal;
                         reciboRpt.fPrecio = item.fPrecioVenta;
+                        reciboRpt.fPrecioUnitario =decimal.Round((item.fPrecioVenta / item.nCodigo),2);
                         reciboRpt.nCantidad = item.nCodigo;
                         reciboRpt.sIdVendedor = item.sIdVendedor;
                         reciboRpt.sNombre = item.sNombre;
                         reciboRpt.sPaginaPie = sPaginaPie;
+                        reciboRpt.sPaginaTextoExo = item.bIgvAplica?"": "BIENES TRANSFERIDOS EN LA AMAZONÍA PARA SER CONSUMIDOS EN LA MISMA";
                         reciboRpt.fDescuento = item.fDescuento;
                         reciboRpt.fIgv = item.fIgv;
+                        reciboRpt.sDireccion = cliente.sDireccion.Length == 0 ? "-" : cliente.sDireccion;
                         reciboRpt.fSubTotal = item.fSubTotal;
-                        reciboRpt.sProducto = item.sProducto;
+                        reciboRpt.fExogerado = item.bIgvAplica ? 0.0M : item.fTotal;
+                       reciboRpt.sProducto = item.sProducto;
                         reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
                         reciboRpt.sTotalLetras = Funciones.NumeroALetras(item.fTotal);
                         reciboRpt.yCodigoQR = ImageToByte(codigoQR(sRuc + "|" + item.sIdDocumento + "|" 
-                            + sSerie+"|"+ string.Format("{0:00000000}",item.nNumero + "|"
+                            + sSerie+"|"+ string.Format("{0:00000000}",item.nNumero + "|" + item.fPorcentajeIgv.ToString() + "|"
                             + item.fTotal.ToString() + "|"
                             +item.dFecha.ToShortDateString()+"|"
-                            + "RUC|"+ txtRuc.Text)));
-                        reciboRpt.sRuc = txtRuc.Text;
+                            + sTipoDoc +"|"+ cliente.sDni)));
+                        reciboRpt.sRuc = cliente.sDni;
                         LisRecibo.Add(reciboRpt);
                     }
                     

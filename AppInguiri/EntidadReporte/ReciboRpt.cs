@@ -16,14 +16,18 @@ namespace AppInguiri.EntidadReporte
         public string sProducto { get; set; }
         public string sNombre { get; set; }
         public string sRuc { get; set; }
+        public string sDireccion { get; set; }
         public decimal fPrecio { get; set; }
+        public decimal fPrecioUnitario { get; set; }
         public int nCantidad { get; set; }
         public string sIdVendedor { get; set; }
         public string sFechaRegistro { get; set; }
         public byte[] yCodigoQR { get; set; }
         public decimal fSubTotal { get; set; }
+        public decimal fExogerado { get; set; }
         public decimal fIgv { get; set; }
         public string sPaginaPie { get; set; }
+        public string sPaginaTextoExo { get; set; }
 
     }
 }

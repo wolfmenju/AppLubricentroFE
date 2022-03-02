@@ -17,6 +17,25 @@ namespace Negocio
             return ClienteData.ListarCliente(objCliente);
         }
 
+        //Listar
+        public Cliente LeerCliente(int IdCliente)
+        {
+            List<Cliente> ListaCliente = new List<Cliente>();
+            Cliente objClienteRes = new Cliente() { nTipo = 5, bEstado = true};
+            ListaCliente =ClienteData.ListarCliente(objClienteRes);
+
+            foreach (var item in ListaCliente)
+            {
+                if (item.nIdCliente == IdCliente)
+                {
+                    objClienteRes = item;
+                    break;
+                }
+            }
+
+            return objClienteRes;
+        }
+
         //Registrar
         public int RegistrarCliente(Cliente objClien)
         {

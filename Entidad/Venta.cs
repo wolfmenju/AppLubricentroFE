@@ -15,6 +15,7 @@ namespace Entidad
             this.nIdAlmacen = 0;
             this.nIdPedido = 0;
             this.sIdDocumento = "";
+            this.sDescripDocumento = "";
             this.sLaboratorio = "";
             this.sProducto = "";
             this.sSerie = "";
@@ -38,10 +39,12 @@ namespace Entidad
             this.nIdHistorial = 0;
             this.nIdTarjeta = 0;
             this.bSunat = false;
+            this.sSunat = "";
             this.dFechaNotificacionSunat=null;
             this.sCdr = "";
             this.sCodigoInterno = "";
-
+            this.bIgvAplica = false;
+            
         }
         
         public int nTipo { get; set; }
@@ -50,6 +53,7 @@ namespace Entidad
         public int nIdAlmacen { get; set; }
         public int nIdPedido { get; set; }
         public string sIdDocumento { get; set; }
+        public string sDescripDocumento { get; set; }
         public string sLaboratorio { get; set; }
         public string sProducto { get; set; }
         public string sSerie { get; set; }
@@ -73,11 +77,12 @@ namespace Entidad
         public int nIdHistorial { get; set; }
         public int nIdTarjeta { get; set; }
         public decimal fIgvDetalle { get; set; }
-        public string sCodigoInterno { get; set; }
-        
+        public string sCodigoInterno { get; set; } 
         public bool bSunat  { get; set; }
+        public string sSunat { get; set; }
         public DateTime? dFechaNotificacionSunat { get; set; }
         public string sCdr { get; set; }
+        public bool bIgvAplica { get; set; }
 
         public List<VentaDetalle> listVentaDetalle { get; set; }
 
