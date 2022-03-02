@@ -327,17 +327,33 @@ namespace AppInguiri
             {
                 try
                 {
-
                     cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
 
                     string sSerie = "", sDescripcionDocumento = "", sSigla = "", sPaginaPie = "", sTipoDoc = "";
+
+                    if (cliente.sDni.Length > 8)
+                    {
+                        sTipoDoc = "6";
+                    }
+                    else
+                    {
+                        if (cliente.sDni.Length.Equals("00000000"))
+                        {
+                            sTipoDoc = "0";
+                        }
+                        else
+                        {
+                            sTipoDoc = "1";
+                        }
+                    }
 
                     if (LisVenRep[0].sIdDocumento.Equals("01"))
                     {
                         sDescripcionDocumento = "FACTURA ELECTRÓNICA";
                         sSigla = "F";
                         sPaginaPie = "Representación impresa de la FACTURA DE VENTA ELECTRÓNICA";
-                        sTipoDoc = "RUC";
+                        //Ruc
+                        sTipoDoc = "6";
                     }
                     else
                     {
@@ -355,18 +371,22 @@ namespace AppInguiri
                         reciboRpt.nNumero = sSerie + "-" + string.Format("{0:00000000}", item.nNumero);
                         reciboRpt.fTotal = item.fTotal;
                         reciboRpt.fPrecio = item.fPrecioVenta;
+                        reciboRpt.fPrecioUnitario = decimal.Round((item.fPrecioVenta / item.nCodigo), 2);
                         reciboRpt.nCantidad = item.nCodigo;
                         reciboRpt.sIdVendedor = item.sIdVendedor;
                         reciboRpt.sNombre = item.sNombre;
                         reciboRpt.sPaginaPie = sPaginaPie;
+                        reciboRpt.sPaginaTextoExo = item.bIgvAplica ? "" : "BIENES TRANSFERIDOS EN LA AMAZONÍA PARA SER CONSUMIDOS EN LA MISMA";
                         reciboRpt.fDescuento = item.fDescuento;
                         reciboRpt.fIgv = item.fIgv;
-                        reciboRpt.fSubTotal = item.fSubTotal;
+                        reciboRpt.sDireccion = cliente.sDireccion.Length == 0 ? "-" : cliente.sDireccion;
+                        reciboRpt.fSubTotal = item.bIgvAplica ? item.fSubTotal: 0.0M;
+                        reciboRpt.fExogerado = item.bIgvAplica ? 0.0M : item.fTotal;
                         reciboRpt.sProducto = item.sProducto;
                         reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
                         reciboRpt.sTotalLetras = Funciones.NumeroALetras(item.fTotal);
                         reciboRpt.yCodigoQR = ImageToByte(codigoQR(sRuc + "|" + item.sIdDocumento + "|"
-                            + sSerie + "|" + string.Format("{0:00000000}", item.nNumero + "|"
+                            + sSerie + "|" + string.Format("{0:00000000}", item.nNumero + "|" + item.fPorcentajeIgv.ToString() + "|"
                             + item.fTotal.ToString() + "|"
                             + item.dFecha.ToShortDateString() + "|"
                             + sTipoDoc + "|" + cliente.sDni)));
@@ -488,9 +508,9 @@ namespace AppInguiri
                 {
                     data = new WsDocumentoFeResponseData();
                     data.tipo_operacion = "01";
-                    data.total_gravadas = (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString();
+                    data.total_gravadas = LisVenRep[0].bIgvAplica ? (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString() : "0.00";
                     data.total_inafecta = "0.00";
-                    data.total_exoneradas = "0.00";
+                    data.total_exoneradas = LisVenRep[0].bIgvAplica ? "0.00" : LisVenRep[0].fTotal.ToString();
                     data.total_gratuitas = "0.00";
                     data.total_exportacion = "0.00";
                     data.total_descuento = "0.00";
@@ -533,8 +553,8 @@ namespace AppInguiri
                     data.fecha_comprobante = LisVenRep[0].dFechaRegistrado.ToString("yyyy-MM-dd");
                     data.fecha_vto_comprobante = LisVenRep[0].dFechaRegistrado.ToString("yyyy-MM-dd");
                     data.moneda_cod = "PEN";
-                    data.tipo_tributo = "IGV";
-                    data.tipo_igv = "1000";
+                    data.tipo_tributo = LisVenRep[0].bIgvAplica ? "IGV" : "EXO";
+                    data.tipo_igv = LisVenRep[0].bIgvAplica ? "1000" : "9997";
                     data.tipo_comprobante_cod = LisVenRep[0].sIdDocumento;
                     data.cliente_pais = "PE";
                     data.cliente_codigo_ubigeo = "null";
@@ -577,9 +597,9 @@ namespace AppInguiri
                         data.detalle[i].txtCODIGO_DET = (i + 1).ToString();
                         data.detalle[i].txtDESCRIPCION_DET = LisVenRep[i].sCodigoInterno + "-" + LisVenRep[i].sProducto;
                         data.detalle[i].txtCODIGO_PROD_SUNAT = "";
-                        data.detalle[i].txtAFECTACION_CODIGO = "1000";
-                        data.detalle[i].txtAFECTACION_CODIGO_ALT = "10";
-                        data.detalle[i].txtAFECTACION_NOMBRE = "IGV";
+                        data.detalle[i].txtAFECTACION_CODIGO = LisVenRep[0].bIgvAplica ? "1000" : "9997";
+                        data.detalle[i].txtAFECTACION_CODIGO_ALT = LisVenRep[0].bIgvAplica ? "10" : "20";
+                        data.detalle[i].txtAFECTACION_NOMBRE = LisVenRep[0].bIgvAplica ? "IGV" : "EXO";
                         data.detalle[i].txtAFECTACION_TIPO = "VAT";
                     }
 
@@ -618,7 +638,6 @@ namespace AppInguiri
                     Log.Error("Error de Not. Sunat:" + ex.Message + "->" + data.serie_comprobante + "-" + data.numero_comprobante);
                     return false;
                 }
-
             }
             else
             {

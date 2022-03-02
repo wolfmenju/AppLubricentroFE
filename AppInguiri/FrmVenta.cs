@@ -81,6 +81,9 @@ namespace AppInguiri
             sProvi = objParamNeg.LeerUnParametro("ID_DIRECCION_PROV");
             sDist = objParamNeg.LeerUnParametro("ID_DIRECCION_DIST");
             sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
+
+            if (sAplicaIgv.Equals("NO")) lblTotalTextoSinIgv.Visible = true;
+            
         }
 
         public void CargarMaestro()
@@ -675,7 +678,6 @@ namespace AppInguiri
             {
                 try
                 {
-
                     cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
 
                     string sSerie = "", sDescripcionDocumento="", sSigla="", sPaginaPie="", sTipoDoc="";
@@ -720,30 +722,29 @@ namespace AppInguiri
                         reciboRpt.nNumero = sSerie + "-" + string.Format("{0:00000000}", item.nNumero);
                         reciboRpt.fTotal = item.fTotal;
                         reciboRpt.fPrecio = item.fPrecioVenta;
-                        reciboRpt.fPrecioUnitario =decimal.Round((item.fPrecioVenta / item.nCodigo),2);
+                        reciboRpt.fPrecioUnitario = decimal.Round((item.fPrecioVenta / item.nCodigo), 2);
                         reciboRpt.nCantidad = item.nCodigo;
                         reciboRpt.sIdVendedor = item.sIdVendedor;
                         reciboRpt.sNombre = item.sNombre;
                         reciboRpt.sPaginaPie = sPaginaPie;
-                        reciboRpt.sPaginaTextoExo = item.bIgvAplica?"": "BIENES TRANSFERIDOS EN LA AMAZONÍA PARA SER CONSUMIDOS EN LA MISMA";
+                        reciboRpt.sPaginaTextoExo = item.bIgvAplica ? "" : "BIENES TRANSFERIDOS EN LA AMAZONÍA PARA SER CONSUMIDOS EN LA MISMA";
                         reciboRpt.fDescuento = item.fDescuento;
                         reciboRpt.fIgv = item.fIgv;
                         reciboRpt.sDireccion = cliente.sDireccion.Length == 0 ? "-" : cliente.sDireccion;
-                        reciboRpt.fSubTotal = item.fSubTotal;
+                        reciboRpt.fSubTotal = item.bIgvAplica ? item.fSubTotal : 0.0M;
                         reciboRpt.fExogerado = item.bIgvAplica ? 0.0M : item.fTotal;
-                       reciboRpt.sProducto = item.sProducto;
+                        reciboRpt.sProducto = item.sProducto;
                         reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
                         reciboRpt.sTotalLetras = Funciones.NumeroALetras(item.fTotal);
-                        reciboRpt.yCodigoQR = ImageToByte(codigoQR(sRuc + "|" + item.sIdDocumento + "|" 
-                            + sSerie+"|"+ string.Format("{0:00000000}",item.nNumero + "|" + item.fPorcentajeIgv.ToString() + "|"
+                        reciboRpt.yCodigoQR = ImageToByte(codigoQR(sRuc + "|" + item.sIdDocumento + "|"
+                            + sSerie + "|" + string.Format("{0:00000000}", item.nNumero + "|" + item.fPorcentajeIgv.ToString() + "|"
                             + item.fTotal.ToString() + "|"
-                            +item.dFecha.ToShortDateString()+"|"
-                            + sTipoDoc +"|"+ cliente.sDni)));
+                            + item.dFecha.ToShortDateString() + "|"
+                            + sTipoDoc + "|" + cliente.sDni)));
                         reciboRpt.sRuc = cliente.sDni;
                         LisRecibo.Add(reciboRpt);
                     }
                     
-
                     Rep.Load(Application.StartupPath + "\\RptDocumentoFE.rpt");
                     //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
 
