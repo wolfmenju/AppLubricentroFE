@@ -36,7 +36,9 @@ namespace AppInguiri
         private WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
         string sDireccion = "", sRuc = "", sRazonSocial = "",
             sUbigeo = "", sDepart = "", sProvi = "", sDist = "",
-            _sUrlSunat = "", _RutaArchivosXml = "";
+            _sUrlSunat = "", _RutaArchivosXml = "",
+            sUserSunat = "", sPassSunat = "", sCertClaSunat = "",
+            sUrlXmlSunat = "";
 
         #endregion
 
@@ -62,6 +64,10 @@ namespace AppInguiri
             sDepart = objParamNeg.LeerUnParametro("ID_DIRECCION_DEPA");
             sProvi = objParamNeg.LeerUnParametro("ID_DIRECCION_PROV");
             sDist = objParamNeg.LeerUnParametro("ID_DIRECCION_DIST");
+            sUserSunat = objParamNeg.LeerUnParametro("ID_USER_SUNAT");
+            sPassSunat = objParamNeg.LeerUnParametro("ID_PASS_SUNAT");
+            sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
+            sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
         }
 
         private void BtnBuscar_Click(object sender, EventArgs e)
@@ -572,10 +578,10 @@ namespace AppInguiri
                     data.emisor.direccion_provincia = sProvi;
                     data.emisor.direccion_distrito = sDist;
                     data.emisor.direccion_codigopais = "PE";
-                    data.emisor.usuariosol = "MODDATOS";
-                    data.emisor.clavesol = "moddatos";
-                    data.emisor.clave_certificado = "123456";
-                    data.emisor.url_xml = "beta/";
+                    data.emisor.usuariosol = sUserSunat;
+                    data.emisor.clavesol = sPassSunat;
+                    data.emisor.clave_certificado = sCertClaSunat;
+                    data.emisor.url_xml = sUrlXmlSunat;
                     data.emisor.url_ws = _sUrlSunat;
                     data.emisor.codigo_estab_anexo_sun = "0000";
 

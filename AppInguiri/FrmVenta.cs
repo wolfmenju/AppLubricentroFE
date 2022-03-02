@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Entidad;
 using Negocio;
-using System.Drawing;
 using Microsoft.VisualBasic;
 using Comun;
 using CrystalDecisions.CrystalReports.Engine;
@@ -43,7 +42,9 @@ namespace AppInguiri
         WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
         string sDireccion = "", sRuc = "", sRazonSocial = "", 
             sUbigeo = "", sDepart="", sProvi="",sDist="",
-            _sUrlSunat="", _RutaArchivosXml="", sAplicaIgv="";
+            _sUrlSunat="", _RutaArchivosXml="", sAplicaIgv="",
+            sUserSunat="",sPassSunat="",sCertClaSunat="",
+            sUrlXmlSunat="";
         private static ILog Log= LogManager.GetLogger(typeof(FrmVenta));
 
         //Singleton
@@ -81,6 +82,10 @@ namespace AppInguiri
             sProvi = objParamNeg.LeerUnParametro("ID_DIRECCION_PROV");
             sDist = objParamNeg.LeerUnParametro("ID_DIRECCION_DIST");
             sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
+            sUserSunat = objParamNeg.LeerUnParametro("ID_USER_SUNAT");
+            sPassSunat = objParamNeg.LeerUnParametro("ID_PASS_SUNAT");
+            sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
+            sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
 
             if (sAplicaIgv.Equals("NO")) lblTotalTextoSinIgv.Visible = true;
             
@@ -551,10 +556,10 @@ namespace AppInguiri
                     data.emisor.direccion_provincia = sProvi;
                     data.emisor.direccion_distrito = sDist;
                     data.emisor.direccion_codigopais = "PE";
-                    data.emisor.usuariosol = "MODDATOS";
-                    data.emisor.clavesol = "moddatos";
-                    data.emisor.clave_certificado = "123456";
-                    data.emisor.url_xml = "beta/";
+                    data.emisor.usuariosol = sUserSunat;
+                    data.emisor.clavesol = sPassSunat;
+                    data.emisor.clave_certificado = sCertClaSunat;
+                    data.emisor.url_xml = sUrlXmlSunat;
                     data.emisor.url_ws = _sUrlSunat;
                     data.emisor.codigo_estab_anexo_sun = "0000";
 
