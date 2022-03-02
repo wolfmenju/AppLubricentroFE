@@ -116,18 +116,19 @@ namespace Datos
                         objVent.nIdVenta = int.Parse(dr[0].ToString());
                         objVent.nIdAlmacen = int.Parse(dr[1].ToString());
                         objVent.sIdDocumento = dr[2].ToString();
-                        objVent.sSerie = dr[3].ToString();
-                        objVent.nIdCliente = Convert.ToInt32(dr[4]);
-                        objVent.sNombre = dr[5].ToString();
-                        objVent.dFecha = Convert.ToDateTime(dr[6].ToString());
-                        objVent.fTotal = Convert.ToDecimal(dr[7]);
-                        objVent.bEstado = Convert.ToBoolean(dr[8]);
-                        if(DBNull.Value== dr[9]) objVent.nNumero = null;
-                        else objVent.nNumero = Convert.ToInt32(dr[9]);
-                        objVent.bSunat = Convert.ToBoolean(dr[10]);
-                        objVent.sSunat = Convert.ToString(dr[11]);
-                        if (DBNull.Value == dr[12]) objVent.dFechaNotificacionSunat = null;
-                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[12]);
+                        objVent.sDescripDocumento = dr[3].ToString();
+                        objVent.sSerie = dr[4].ToString();
+                        objVent.nIdCliente = Convert.ToInt32(dr[5]);
+                        objVent.sNombre = dr[6].ToString();
+                        objVent.dFecha = Convert.ToDateTime(dr[7].ToString());
+                        objVent.fTotal = Convert.ToDecimal(dr[8]);
+                        objVent.bEstado = Convert.ToBoolean(dr[9]);
+                        if(DBNull.Value== dr[10]) objVent.nNumero = null;
+                        else objVent.nNumero = Convert.ToInt32(dr[10]);
+                        objVent.bSunat = Convert.ToBoolean(dr[11]);
+                        objVent.sSunat = Convert.ToString(dr[12]);
+                        if (DBNull.Value == dr[13]) objVent.dFechaNotificacionSunat = null;
+                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[13]);
                     }
                     else if (objVenta.nTipo == 3)
                     {

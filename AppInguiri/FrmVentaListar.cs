@@ -474,6 +474,13 @@ namespace AppInguiri
                     Int32 filaselecionada = dgvVenta.CurrentCell.RowIndex;
                     Venta _venta = (Venta)dgvVenta.Rows[filaselecionada].DataBoundItem;
 
+                    if (_venta.sIdDocumento.Equals("12"))
+                    {
+                        MessageBox.Show("El tipo de documento no es válido para notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cerrarFormulario = false;
+                        return;
+                    }
+
                     if (!_venta.bSunat)
                     {
                         if (MessageBox.Show("¿Desea Notificar a Sunat La Venta Seleccionada?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

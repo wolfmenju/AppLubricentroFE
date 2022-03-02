@@ -137,6 +137,12 @@ namespace AppInguiri
 
         private void FrmVenta_KeyDown(object sender, KeyEventArgs e)
         {
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual())
+            {
+                MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             switch (e.KeyCode)
             {
                 case Keys.F1:
@@ -319,6 +325,20 @@ namespace AppInguiri
         private void chkCliente_Click(object sender, EventArgs e)
         {
             Contado();
+        }
+
+        private void FrmVenta_Load(object sender, EventArgs e)
+        {
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual())
+            {
+                btnGuardar.Enabled = false;
+                btnEliminar.Enabled = false;
+                btnDescuento.Enabled = false;
+                btnBuscar.Enabled = false;
+                MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            CalcularTotal();
         }
 
         private void Contado()

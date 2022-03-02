@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icono-InguiriSoft-correo.ico</ApplicationIcon>
+    <ApplicationIcon>Icono-InguiriSoft.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>AppInguiri.Program</StartupObject>
@@ -900,7 +900,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icono-InguiriSoft-correo.ico" />
+    <Content Include="Icono-InguiriSoft.ico" />
     <Content Include="Imagenes\1405979407_96395.ico" />
     <Content Include="Imagenes\1405981010_43663.ico" />
     <None Include="Imagenes\Aceite.png" />
@@ -909,6 +909,7 @@
     <Content Include="Imagenes\Excel.png" />
     <Content Include="Imagenes\Green-Cart.ico" />
     <Content Include="Imagenes\Icono-InguiriSoft-correo.ico" />
+    <Content Include="Imagenes\Icono-InguiriSoft.ico" />
     <Content Include="Imagenes\Izquierda.ico" />
     <Content Include="Imagenes\pills_2.ico" />
     <Content Include="Imagenes\report.ico" />
