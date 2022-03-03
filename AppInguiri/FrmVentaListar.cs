@@ -207,11 +207,18 @@ namespace AppInguiri
                 {
                     int resp = 0;
 
+                    Int32 filaselecionada = dgvVenta.CurrentCell.RowIndex;
+                    Venta _venta = (Venta)dgvVenta.Rows[filaselecionada].DataBoundItem;
+
+                    if (Globales.FechaActual().Date != _venta.dFecha)
+                    {
+                        MessageBox.Show("No puede Anular el Documento con Fecha Anterior a la Fecha Actual.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        cerrarFormulario = false;
+                        return;
+                    }
+
                     if (MessageBox.Show("¿Desea Anular La Venta Seleccionada?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        Int32 filaselecionada = dgvVenta.CurrentCell.RowIndex;
-                        Venta _venta = (Venta)dgvVenta.Rows[filaselecionada].DataBoundItem;
-                        
                         List<VentaDetalle> listVentDeta = new List<VentaDetalle>();
                         VentaDetalle objVentDeta = null;
 

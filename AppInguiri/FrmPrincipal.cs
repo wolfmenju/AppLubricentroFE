@@ -6,6 +6,7 @@ using Negocio;
 using System.Runtime.InteropServices;
 using System.Configuration;
 using System.Windows.Forms;
+using DevExpress.XtraBars.Ribbon;
 
 namespace AppInguiri
 {
@@ -48,16 +49,19 @@ namespace AppInguiri
         FrmRptDeudaPorVencer frmRptDeudaPorVencer = null;
         FrmRptReporteGenerales frmRptReporteGenerales = null;
         FrmRptProductos frmRptProductos = null;
+        List<Form> ListaFormu = new List<Form>();
         
         #endregion
 
         List<Permiso> listPerm = new List<Permiso>();
         PermisoNegocio objPermNeg = new PermisoNegocio();
+        CajaNegocio objCajNeg = new CajaNegocio();
+
         public FrmLogin frmLogin = null;
         public bool bloqueado = false;
         private LASTINPUTINFO INPUT = new LASTINPUTINFO();
         int _VidaUtil = 0;
-
+        
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -83,9 +87,7 @@ namespace AppInguiri
                 frmCaja.Focus();
             }
         }
-
-        CajaNegocio objCajNeg = new CajaNegocio();
-
+        
         private bool VerCaja()
         {
             Caja objCaja = new Caja();
@@ -99,7 +101,7 @@ namespace AppInguiri
             
             return VerCaja;
         }
-
+        
         public void ValidarPermisosUsuario()
         {
             listPerm = objPermNeg.ListarPermiso(CodUsuario.Caption,1);
@@ -153,67 +155,114 @@ namespace AppInguiri
             }
         }
 
+        private void VerificarFormulario(Form frm)
+        {
+            List<Form> dd = new List<Form>();
+            foreach (var item in ListaFormu) { if (item.Name == frm.Name) dd.Add(item); }
+            if (dd.Count == 0) ListaFormu.Add(frm);
+        }
+
+        private void ValidarFormularioActivos()
+        {
+            List<Form> ListaFormu2 = new List<Form>();
+
+            foreach (var elemento in ListaFormu)
+            {
+                if (((elemento == null) || (elemento.IsDisposed == true)))
+                {
+                    ListaFormu2.Add(elemento);
+                    pbLogoInguiri.Visible = true;
+                }
+                else pbLogoInguiri.Visible = false;
+
+                break;
+            }
+
+            if (ListaFormu2.Count > 0) ListaFormu.Remove(ListaFormu2[0]);
+            if (ListaFormu.Count == 0) pbLogoInguiri.Visible = true;
+        }
+
         private void barBtnPresentacion_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmPresentacion = FrmPresentacion.Instance();
             frmPresentacion.MdiParent = this;
             frmPresentacion.Show();
+            VerificarFormulario(frmPresentacion);
         }
 
         private void barBtnProveedor_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmProveedor = FrmProveedor.Instance();
             frmProveedor.MdiParent = this;
             frmProveedor.Show();
+            VerificarFormulario(frmProveedor);
+
         }
 
         private void barBtnUsuario_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmUsuario = FrmUsuario.Instance();
             frmUsuario.MdiParent = this;
             frmUsuario.Show();
+            VerificarFormulario(frmUsuario);
         }
 
         private void barBtnCategoria_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmCategoria = FrmCategoria.Instance();
             frmCategoria.MdiParent = this;
             frmCategoria.Show();
+            VerificarFormulario(frmCategoria);
         }
 
         private void barBtnSede_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmSede = FrmSede.Instance();
             frmSede.MdiParent = this;
             frmSede.Show();
+            VerificarFormulario(frmSede);
         }
 
         private void barBtnAlmacen_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmAlmacen = FrmAlmacen.Instance();
             frmAlmacen.MdiParent = this;
             frmAlmacen.Show();
+            VerificarFormulario(frmAlmacen);
         }
 
         private void barBtnDocumentos_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmDocumento = FrmDocumento.Instance();
             frmDocumento.MdiParent = this;
             frmDocumento.Show();
+            VerificarFormulario(frmDocumento);
         }
 
         private void barBtnDocumentosSerie_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmDocumentoSerie = FrmDocumentoSerie.Instance();
             frmDocumentoSerie.MdiParent = this;
             frmDocumentoSerie.Show();
+            VerificarFormulario(frmDocumentoSerie);
         }
         
         private void barBtnParametros_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
+            pbLogoInguiri.Visible = false;
             frmParametro = FrmParametro.Instance();
             frmParametro.MdiParent = this;
             frmParametro.Show();
+            VerificarFormulario(frmParametro);
         }
 
         private void barBtnCambiarClave_ItemClick(object sender, ItemClickEventArgs e)
@@ -226,58 +275,74 @@ namespace AppInguiri
         
         private void barBtnPermisos_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmPermiso = FrmPermiso.Instance();
             frmPermiso.MdiParent = this;
             frmPermiso.Show();
+            VerificarFormulario(frmPermiso);
         }
 
         private void barBtnCliente_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmCliente = FrmCliente.Instance();
             frmCliente.MdiParent = this;
             frmCliente.Show();
+            VerificarFormulario(frmCliente);
         }
 
         private void barBtnProducto_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmProducto = FrmProducto.Instance();
             frmProducto.MdiParent = this;
             frmProducto.Show();
+            VerificarFormulario(frmProducto);
         }
 
         private void barBtnCompra_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmCompra = FrmCompra.Instance();
             frmCompra.MdiParent = this;
             frmCompra.Show();
+            VerificarFormulario(frmCompra);
         }
 
         private void barBtnVenta_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmVenta = FrmVenta.Instance();
             frmVenta.MdiParent = this;
             frmVenta.Show();
+            VerificarFormulario(frmVenta);
         }
 
         private void barBtnProductoVendido_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptProductoVendido = FrmRptProductoVendido.Instance();
             frmRptProductoVendido.MdiParent = this;
-            frmRptProductoVendido.Show();   
+            frmRptProductoVendido.Show();
+            VerificarFormulario(frmRptProductoVendido);
         }
 
         private void barBtnActualizarPrecio_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmActualizarPrecio = FrmActualizarPrecio.Instance();
             frmActualizarPrecio.MdiParent = this;
             frmActualizarPrecio.Show();
+            VerificarFormulario(frmActualizarPrecio);
         }
 
         private void barBtnLoteProductoPorVencer_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptLoteProductoPorVencer = FrmRptLoteProductoPorVencer.Instance();
             frmRptLoteProductoPorVencer.MdiParent = this;
             frmRptLoteProductoPorVencer.Show();
+            VerificarFormulario(frmRptLoteProductoPorVencer);
         }
 
         private void barBtnCerrarCaja_ItemClick(object sender, ItemClickEventArgs e)
@@ -289,9 +354,11 @@ namespace AppInguiri
 
         private void barBtnReporteCompra_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptCompras = FrmRptCompras.Instance();
             frmRptCompras.MdiParent = this;
             frmRptCompras.Show();
+            VerificarFormulario(frmRptCompras);
         }
 
         private void barBtnReporteVenta_ItemClick(object sender, ItemClickEventArgs e)
@@ -302,72 +369,92 @@ namespace AppInguiri
 
         private void barBtnStockMinimo_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptSockMinimo = FrmRptSockMinimo.Instance();
             frmRptSockMinimo.MdiParent = this;
             frmRptSockMinimo.Show();
+            VerificarFormulario(frmRptSockMinimo);
         }
 
         private void barBtnCuentasPorPagar_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmDeudasPorPagar = FrmDeudasPorPagar.Instance();
             frmDeudasPorPagar.MdiParent = this;
             frmDeudasPorPagar.Show();
+            VerificarFormulario(frmDeudasPorPagar);
         }
 
         private void barBtnIventario_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmInventario = FrmInventario.Instance();
             frmInventario.MdiParent = this;
             frmInventario.Show();
+            VerificarFormulario(frmInventario);
         }
         
         private void barBtnRptCajaChica_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptCajaChica = FrmRptCajaChica.Instance();
             frmRptCajaChica.MdiParent = this;
             frmRptCajaChica.Show();
+            VerificarFormulario(frmRptCajaChica);
         }
 
         private void barBtnRptHistorialPrecio_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptHistorialPrecio = FrmRptHistorialPrecio.Instance();
             frmRptHistorialPrecio.MdiParent = this;
             frmRptHistorialPrecio.Show();
+            VerificarFormulario(frmRptHistorialPrecio);
         }
 
         private void barBtnUtilidadesProducto_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptUtilidades = FrmRptUtilidades.Instance();
             frmRptUtilidades.MdiParent = this;
             frmRptUtilidades.Show();
+            VerificarFormulario(frmRptUtilidades);
         }
         
         private void barBtnConsultaStock_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptProductoStock = FrmRptProductoStock.Instance();
             frmRptProductoStock.MdiParent = this;
             frmRptProductoStock.Show();
+            VerificarFormulario(frmRptProductoStock);
         }
 
         private void barBtnKardex_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptKardex = FrmRptKardex.Instance();
             frmRptKardex.MdiParent = this;
             frmRptKardex.Show();
+            VerificarFormulario(frmRptKardex);
         }
         
         private void barBtnDevuelveProducto_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmDevuelve = FrmAjusteStock.Instance();
             frmDevuelve.MdiParent = this;
             frmDevuelve.Show();
+            VerificarFormulario(frmDevuelve);
         }
 
         private void barBtnDeudasPorVencer_ItemClick(object sender, ItemClickEventArgs e)
         {
+            pbLogoInguiri.Visible = false;
             frmRptDeudaPorVencer = FrmRptDeudaPorVencer.Instance();
             frmRptDeudaPorVencer.MdiParent = this;
             frmRptDeudaPorVencer.Show();
+            VerificarFormulario(frmRptDeudaPorVencer);
         }
         
         private void barBtnReporteGenerales_ItemClick(object sender, ItemClickEventArgs e)
@@ -381,7 +468,12 @@ namespace AppInguiri
             frmRptProductos = FrmRptProductos.Instance();
             frmRptProductos.ShowDialog();
         }
-        
+
+        private void FrmPrincipal_SizeChanged(object sender, EventArgs e)
+        {
+            pbLogoInguiri.Location = new System.Drawing.Point(this.Width-240, this.Height-130);
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             GetLastInputInfo(ref INPUT); //'COMPROBAMOS LA FUNCION CADA SEGUNDO
@@ -411,7 +503,10 @@ namespace AppInguiri
                     this.Dispose();
                 }
             }
+
+            ValidarFormularioActivos();
         }
+        
     }
 }
 

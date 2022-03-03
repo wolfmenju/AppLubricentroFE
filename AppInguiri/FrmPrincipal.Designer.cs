@@ -103,8 +103,10 @@
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem30 = new DevExpress.XtraBars.BarButtonItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pbLogoInguiri = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogoInguiri)).BeginInit();
             this.SuspendLayout();
             // 
             // RibbonControl
@@ -784,12 +786,24 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // pbLogoInguiri
+            // 
+            this.pbLogoInguiri.BackColor = System.Drawing.Color.Transparent;
+            this.pbLogoInguiri.Image = global::AppInguiri.Properties.Resources.Logo_Inguiri_Soft_png;
+            this.pbLogoInguiri.Location = new System.Drawing.Point(973, 335);
+            this.pbLogoInguiri.Name = "pbLogoInguiri";
+            this.pbLogoInguiri.Size = new System.Drawing.Size(194, 73);
+            this.pbLogoInguiri.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLogoInguiri.TabIndex = 3;
+            this.pbLogoInguiri.TabStop = false;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1179, 445);
             this.Controls.Add(this.ribbonStatusBar);
+            this.Controls.Add(this.pbLogoInguiri);
             this.Controls.Add(this.RibbonControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -799,8 +813,10 @@
             this.StatusBar = this.ribbonStatusBar;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
+            this.SizeChanged += new System.EventHandler(this.FrmPrincipal_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogoInguiri)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,5 +896,6 @@
         private DevExpress.XtraBars.BarButtonItem barBtnDevuelveProducto;
         private DevExpress.XtraBars.BarButtonItem barBtnActualizaStock;
         private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.PictureBox pbLogoInguiri;
     }
 }

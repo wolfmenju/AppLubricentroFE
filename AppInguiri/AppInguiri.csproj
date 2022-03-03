@@ -911,6 +911,7 @@
     <Content Include="Imagenes\Icono-InguiriSoft-correo.ico" />
     <Content Include="Imagenes\Icono-InguiriSoft.ico" />
     <Content Include="Imagenes\Izquierda.ico" />
+    <None Include="Imagenes\Logo Inguiri Soft png.png" />
     <Content Include="Imagenes\pills_2.ico" />
     <Content Include="Imagenes\report.ico" />
     <Content Include="Imagenes\Sede.fw.png" />

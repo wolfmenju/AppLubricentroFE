@@ -21,7 +21,6 @@ namespace AppInguiri
         private List<Presentacion> listPresenta = new List<Presentacion>();
         private bool estado = true;
         private static FrmPresentacion frmInstance = null;
-
         #endregion
 
         #region Principal Load

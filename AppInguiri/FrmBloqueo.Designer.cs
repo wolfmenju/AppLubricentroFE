@@ -151,6 +151,7 @@
             this.Controls.Add(this.CmdCancelar);
             this.Controls.Add(this.CmdGuardar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmBloqueo";
