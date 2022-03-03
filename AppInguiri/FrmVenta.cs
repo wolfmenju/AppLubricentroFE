@@ -139,7 +139,7 @@ namespace AppInguiri
         {
             if (Globales.FechaActual().Date != Funciones.CodFechaActual())
             {
-                MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique si se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -335,7 +335,7 @@ namespace AppInguiri
                 btnEliminar.Enabled = false;
                 btnDescuento.Enabled = false;
                 btnBuscar.Enabled = false;
-                MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique si se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             CalcularTotal();
