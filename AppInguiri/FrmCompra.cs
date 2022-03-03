@@ -99,7 +99,7 @@ namespace AppInguiri
 
         private void FrmCompra_Load(object sender, EventArgs e)
         {
-            if (Globales.FechaActual().Date != Funciones.CodFechaActual())
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date)
             {
                 BtnGuardar.Enabled = false;
                 BtnEliminar.Enabled = false;
@@ -114,7 +114,7 @@ namespace AppInguiri
 
         private void FrmCompra_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Globales.FechaActual().Date != Funciones.CodFechaActual())
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date)
             {
                 MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique si se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

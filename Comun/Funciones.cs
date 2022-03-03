@@ -23,6 +23,26 @@ namespace Comun
             return User;
         }
 
+        public static bool VerificarConexionInternet()
+        {
+            System.Uri Url = new System.Uri("https://www.google.com/");
+            System.Net.WebRequest WebRequest;
+            WebRequest = System.Net.WebRequest.Create(Url);
+            System.Net.WebResponse objetoResp;
+
+            try
+            {
+                //Se establecio conexión a internet corretamente.
+                objetoResp = WebRequest.GetResponse();
+                objetoResp.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //No se pudo conectar a Internet "
+                return false;
+            }            
+        }
         
         public static int CodAlmacenActual()
         {

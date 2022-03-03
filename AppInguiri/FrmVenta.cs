@@ -137,7 +137,7 @@ namespace AppInguiri
 
         private void FrmVenta_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Globales.FechaActual().Date != Funciones.CodFechaActual())
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date)
             {
                 MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique si se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -329,7 +329,7 @@ namespace AppInguiri
 
         private void FrmVenta_Load(object sender, EventArgs e)
         {
-            if (Globales.FechaActual().Date != Funciones.CodFechaActual())
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date)
             {
                 btnGuardar.Enabled = false;
                 btnEliminar.Enabled = false;
@@ -499,6 +499,11 @@ namespace AppInguiri
 
         private bool NotificacionSunat( int nidVentaRespu)
         {
+            if (!Funciones.VerificarConexionInternet())
+            {
+                Log.Info("No existe Conexion a Internet. No se Puede Realizar la Venta del codigo N° "+ nidVentaRespu+" "+ DateTime.Now);
+                return false;
+            }
             Venta objVenta = new Venta() { nTipo = 8, nIdVenta = nidVentaRespu };
             
             List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
@@ -617,6 +622,7 @@ namespace AppInguiri
                         Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante + "->" + resultado.mensaje);
 
                         Venta objVentaFE = new Venta();
+                        objVentaFE.nTipo = 1;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
                         objVentaFE.sCdr = resultado.data.cdr;
                         objVentaFE.sUsuario = Funciones.UsuarioActual();

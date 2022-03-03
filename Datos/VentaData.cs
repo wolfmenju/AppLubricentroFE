@@ -123,12 +123,16 @@ namespace Datos
                         objVent.dFecha = Convert.ToDateTime(dr[7].ToString());
                         objVent.fTotal = Convert.ToDecimal(dr[8]);
                         objVent.bEstado = Convert.ToBoolean(dr[9]);
-                        if(DBNull.Value== dr[10]) objVent.nNumero = null;
-                        else objVent.nNumero = Convert.ToInt32(dr[10]);
-                        objVent.bSunat = Convert.ToBoolean(dr[11]);
-                        objVent.sSunat = Convert.ToString(dr[12]);
-                        if (DBNull.Value == dr[13]) objVent.dFechaNotificacionSunat = null;
-                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[13]);
+                        objVent.sEstado = dr[10].ToString();
+                        if (DBNull.Value== dr[11]) objVent.nNumero = null;
+                        else objVent.nNumero = Convert.ToInt32(dr[11]);
+                        objVent.bSunat = Convert.ToInt32(dr[12]);
+                        objVent.sSunat = Convert.ToString(dr[13]);
+                        if (DBNull.Value == dr[14]) objVent.dFechaNotificacionSunat = null;
+                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[14]);
+                        if (DBNull.Value == dr[15]) objVent.FechaAnuladoSunat = null;
+                        else objVent.FechaAnuladoSunat = Convert.ToDateTime(dr[15]);
+
                     }
                     else if (objVenta.nTipo == 3)
                     {
@@ -643,7 +647,7 @@ namespace Datos
                 cnx.Open();
                 cmd = new SqlCommand("IAE_VentaFE", cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Tipo", 1);
+                cmd.Parameters.AddWithValue("@Tipo", objVenta.nTipo);
                 cmd.Parameters.AddWithValue("@IdVenta", objVenta.nIdVenta);
                 cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
                 cmd.Parameters.AddWithValue("@cdr", objVenta.sCdr);

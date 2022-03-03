@@ -35,18 +35,20 @@ namespace Entidad
             this.sUsuario = "";
             this.bAlternativo = false;
             this.bEstado = true;
+            this.sEstado = "";
             this.listVentaDetalle = new List<VentaDetalle>();
             this.nIdHistorial = 0;
             this.nIdTarjeta = 0;
-            this.bSunat = false;
+            this.bSunat = 0;
             this.sSunat = "";
             this.dFechaNotificacionSunat=null;
+            this.FechaAnuladoSunat = null;
             this.sCdr = "";
             this.sCodigoInterno = "";
             this.bIgvAplica = false;
             
         }
-        
+
         public int nTipo { get; set; }
         public int nIdVenta { get; set; }
         public int nIdProducto { get; set; }
@@ -74,13 +76,15 @@ namespace Entidad
         public String sUsuario { get; set; }
         public bool bAlternativo { get; set; }
         public bool bEstado { get; set; }
+        public string sEstado { get; set; }
         public int nIdHistorial { get; set; }
         public int nIdTarjeta { get; set; }
         public decimal fIgvDetalle { get; set; }
         public string sCodigoInterno { get; set; } 
-        public bool bSunat  { get; set; }
+        public int bSunat  { get; set; }
         public string sSunat { get; set; }
         public DateTime? dFechaNotificacionSunat { get; set; }
+        public DateTime? FechaAnuladoSunat { get; set; }
         public string sCdr { get; set; }
         public bool bIgvAplica { get; set; }
 
