@@ -114,7 +114,7 @@ namespace AppInguiri
 
         private void FrmCompra_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date)
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date && e.KeyCode != Keys.Escape)
             {
                 MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique si se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
