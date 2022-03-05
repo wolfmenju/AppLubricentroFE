@@ -121,9 +121,6 @@
   <data name="xDetalle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\xDetalle.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shopping cart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shopping cart.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="xHistorial1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\xHistorial.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -153,6 +150,9 @@
   </data>
   <data name="Izquierda" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Izquierda.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="guardar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\guardar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xImprimir" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\xImprimir.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,6 +199,9 @@
   <data name="X" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\X.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="xCambiaClave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\xCambiaClave.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="xTransferenciax" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\xTransferenciax.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -223,11 +226,17 @@
   <data name="xInventario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\xInventario.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="limpiar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\limpiar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="xDetalle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\xDetalle.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xPedido1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\xPedido.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xCaja" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\xCaja.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xCaja1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\xCaja1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,16 +253,19 @@
   <data name="xActivar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\xActivar.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="xCaja" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\xCaja.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Logo Inguiri Soft png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Logo Inguiri Soft png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="xCambiaClave" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\xCambiaClave.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buscar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\buscar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shopping cart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shopping cart.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Derecha" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Derecha.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Logo Inguiri Soft png" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Imagenes\Logo Inguiri Soft png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cancelar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\cancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

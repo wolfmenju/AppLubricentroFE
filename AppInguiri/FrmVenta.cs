@@ -37,6 +37,7 @@ namespace AppInguiri
         private List<DocumentoSerie> listDocumentoSerie = new List<DocumentoSerie>();
         private ClienteNegocio objCliNeg = new ClienteNegocio();
         private Cliente cliente= new Cliente();
+        
         int DocDefault = 0;
         int nidVentaRespu = 0;
         WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
@@ -184,7 +185,7 @@ namespace AppInguiri
             if (frmCliente._cliente != null)
             {
                 LblCodigoCliente.Text = frmCliente._cliente.nIdCliente.ToString();
-                txtRuc.Text = frmCliente._cliente.sDni.ToUpper();
+                txtRuc.Text = frmCliente._cliente.sNumeroDoc.ToUpper();
                 txtNombre.Text = frmCliente._cliente.sNombres.ToUpper();
             }
         }
@@ -366,7 +367,7 @@ namespace AppInguiri
             {
                 LblCodigoCliente.Text = ListCliente[0].nIdCliente.ToString();
                 txtNombre.Text = ListCliente[0].sNombres.ToString();
-                txtRuc.Text = ListCliente[0].sDni.ToString();
+                txtRuc.Text = ListCliente[0].sNumeroDoc.ToString();
             }
             else
             {
@@ -514,7 +515,6 @@ namespace AppInguiri
             {
                 try
                 {
-
                     data = new WsDocumentoFeResponseData();
                     data.tipo_operacion = "01";
                     data.total_gravadas = LisVenRep[0].bIgvAplica? (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString():"0.00";
@@ -537,13 +537,13 @@ namespace AppInguiri
 
                     cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
 
-                    if (cliente.sDni.Length > 8)
+                    if (cliente.sNumeroDoc.Length > 8)
                     {
                         data.cliente_tipo_doc = "6";
                     }
                     else
                     {
-                        if (cliente.sDni.Length.Equals("00000000"))
+                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
                         {
                             data.cliente_tipo_doc = "0";
                         }
@@ -553,7 +553,7 @@ namespace AppInguiri
                         }
                     }
 
-                    data.cliente_nro_doc = cliente.sDni;
+                    data.cliente_nro_doc = cliente.sNumeroDoc;
                     data.cliente_nombre = cliente.sNombres;
                     data.cliente_direccion = cliente.sDireccion==""? "null": cliente.sDireccion;
 
@@ -713,13 +713,13 @@ namespace AppInguiri
 
                     string sSerie = "", sDescripcionDocumento="", sSigla="", sPaginaPie="", sTipoDoc="";
 
-                    if (cliente.sDni.Length > 8)
+                    if (cliente.sNumeroDoc.Length > 8)
                     {
                         sTipoDoc = "6";
                     }
                     else
                     {
-                        if (cliente.sDni.Length.Equals("00000000"))
+                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
                         {
                             sTipoDoc = "0";
                         }
@@ -771,8 +771,8 @@ namespace AppInguiri
                             + sSerie + "|" + string.Format("{0:00000000}", item.nNumero + "|" + item.fPorcentajeIgv.ToString() + "|"
                             + item.fTotal.ToString() + "|"
                             + item.dFecha.ToShortDateString() + "|"
-                            + sTipoDoc + "|" + cliente.sDni)));
-                        reciboRpt.sRuc = cliente.sDni;
+                            + sTipoDoc + "|" + cliente.sNumeroDoc)));
+                        reciboRpt.sRuc = cliente.sNumeroDoc;
                         LisRecibo.Add(reciboRpt);
                     }
                     

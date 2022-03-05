@@ -27,14 +27,19 @@ namespace Datos
                 cmd = new SqlCommand("IAE_Cliente", cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Tipo", objCliente.nTipo);
-                cmd.Parameters.AddWithValue("@IdCliente", 0);
-                cmd.Parameters.AddWithValue("@Nombres", "");
-                cmd.Parameters.AddWithValue("@TipoPersona", false);
-                cmd.Parameters.AddWithValue("@Dni", "");
-                cmd.Parameters.AddWithValue("@Direccion", "");
-                cmd.Parameters.AddWithValue("@Celular", "");
-                cmd.Parameters.AddWithValue("@Usuario", "");
+                cmd.Parameters.AddWithValue("@IdCliente", objCliente.nIdCliente);
+                cmd.Parameters.AddWithValue("@Nombres", objCliente.sNombres);
+                cmd.Parameters.AddWithValue("@TipoPersona", objCliente.bTipoPersona);
+                cmd.Parameters.AddWithValue("@TipoDoc", objCliente.sTipoDoc);
+                cmd.Parameters.AddWithValue("@NumDoc", objCliente.sNumeroDoc);
+                cmd.Parameters.AddWithValue("@Direccion", objCliente.sDireccion);
+                cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
+                cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
+                cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
+                cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
+                cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
+                cmd.Parameters.AddWithValue("@ValidadoSunat", objCliente.bValidadoSunat);
 
                 cnx.Open();
                 dr = cmd.ExecuteReader();
@@ -47,13 +52,13 @@ namespace Datos
 
                     if (objCliente.nTipo == 6 || objCliente.nTipo == 5)
                     {
-                        objUser.sDni = dr[2].ToString();
+                        objUser.sNumeroDoc = dr[2].ToString();
                         objUser.sDireccion = dr[3].ToString();
                     }
                     else
                     {
                         objUser.bTipoPersona = Convert.ToBoolean(dr[2].ToString());
-                        objUser.sDni = dr[3].ToString();
+                        objUser.sNumeroDoc = dr[3].ToString();
                         objUser.sDireccion = dr[4].ToString();
                         objUser.sCelular = dr[5].ToString();
                     }
@@ -91,11 +96,16 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdCliente", objCliente.nIdCliente);
                 cmd.Parameters.AddWithValue("@Nombres", objCliente.sNombres);
                 cmd.Parameters.AddWithValue("@TipoPersona", objCliente.bTipoPersona);
-                cmd.Parameters.AddWithValue("@Dni", objCliente.sDni);
+                cmd.Parameters.AddWithValue("@TipoDoc", objCliente.sTipoDoc);
+                cmd.Parameters.AddWithValue("@NumDoc", objCliente.sNumeroDoc);
                 cmd.Parameters.AddWithValue("@Direccion", objCliente.sDireccion);
+                cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
+                cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
+                cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
+                cmd.Parameters.AddWithValue("@ValidadoSunat", objCliente.bValidadoSunat);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cnx.Open();
 
@@ -131,11 +141,16 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdCliente", objCliente.nIdCliente);
                 cmd.Parameters.AddWithValue("@Nombres", objCliente.sNombres);
                 cmd.Parameters.AddWithValue("@TipoPersona", objCliente.bTipoPersona);
-                cmd.Parameters.AddWithValue("@Dni", objCliente.sDni);
+                cmd.Parameters.AddWithValue("@TipoDoc", objCliente.sTipoDoc);
+                cmd.Parameters.AddWithValue("@NumDoc", objCliente.sNumeroDoc);
                 cmd.Parameters.AddWithValue("@Direccion", objCliente.sDireccion);
+                cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
+                cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
+                cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
+                cmd.Parameters.AddWithValue("@ValidadoSunat", objCliente.bValidadoSunat);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cnx.Open();
 
@@ -171,11 +186,16 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdCliente", objCliente.nIdCliente);
                 cmd.Parameters.AddWithValue("@Nombres", objCliente.sNombres);
                 cmd.Parameters.AddWithValue("@TipoPersona", objCliente.bTipoPersona);
-                cmd.Parameters.AddWithValue("@Dni", objCliente.sDni);
+                cmd.Parameters.AddWithValue("@TipoDoc", objCliente.sTipoDoc);
+                cmd.Parameters.AddWithValue("@NumDoc", objCliente.sNumeroDoc);
                 cmd.Parameters.AddWithValue("@Direccion", objCliente.sDireccion);
+                cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
+                cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
+                cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
+                cmd.Parameters.AddWithValue("@ValidadoSunat", objCliente.bValidadoSunat);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cnx.Open();
                 respuesta = cmd.ExecuteNonQuery();

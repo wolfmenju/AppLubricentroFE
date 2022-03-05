@@ -98,7 +98,7 @@ namespace AppInguiri
             foreach (Cliente item in listCli)
             {
                 ClienteRpt objProvRpt = new ClienteRpt();
-                objProvRpt.sDni = item.sDni;
+                objProvRpt.sDni = item.sNumeroDoc;
                 objProvRpt.sRazonSocial = item.sNombres;
                 objProvRpt.sTelefono = item.sCelular;
                 lisClienteRpt.Add(objProvRpt);

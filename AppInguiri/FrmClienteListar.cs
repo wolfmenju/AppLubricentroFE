@@ -113,7 +113,7 @@ namespace AppInguiri
                     }
                     else
                     {
-                        if (col.sDni.Contains(txtRuc.Text.ToUpper()))
+                        if (col.sNumeroDoc.Contains(txtRuc.Text.ToUpper()))
                         {
                             dt.Add(col);
                         }

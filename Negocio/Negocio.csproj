@@ -71,6 +71,7 @@
     <Compile Include="UsuarioNegocio.cs" />
     <Compile Include="PresentacionNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WsRestServiceConsultaDocumentoNegocio.cs" />
     <Compile Include="WsRestServiceDocumentoFeNegocio.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using log4net;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,13 +15,12 @@ namespace Negocio
     public class WsRestServiceDocumentoFeNegocio
     {
         private static ILog Log = LogManager.GetLogger(typeof(WsRestServiceDocumentoFeNegocio));
+        private string _UrlServicioIntermedioSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermedioSunat"]);
 
         public WsDocumentoFeResponse RegistroDocumentoFe(string SerializeRequestPerOutput)
         {
             WsDocumentoFeResponse rqResponse = new WsDocumentoFeResponse();
-            string serviceUrl = "http://localhost/cpe_api/public/api/cp";
-            
-            rqResponse = DoRequest<WsDocumentoFeResponse>(serviceUrl,SerializeRequestPerOutput);
+            rqResponse = DoRequest<WsDocumentoFeResponse>(_UrlServicioIntermedioSunat, SerializeRequestPerOutput);
 
             return rqResponse;
 

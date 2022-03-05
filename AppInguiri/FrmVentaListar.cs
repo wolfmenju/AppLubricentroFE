@@ -387,13 +387,13 @@ namespace AppInguiri
 
                     string sSerie = "", sDescripcionDocumento = "", sSigla = "", sPaginaPie = "", sTipoDoc = "";
 
-                    if (cliente.sDni.Length > 8)
+                    if (cliente.sNumeroDoc.Length > 8)
                     {
                         sTipoDoc = "6";
                     }
                     else
                     {
-                        if (cliente.sDni.Length.Equals("00000000"))
+                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
                         {
                             sTipoDoc = "0";
                         }
@@ -445,8 +445,8 @@ namespace AppInguiri
                             + sSerie + "|" + string.Format("{0:00000000}", item.nNumero + "|" + item.fPorcentajeIgv.ToString() + "|"
                             + item.fTotal.ToString() + "|"
                             + item.dFecha.ToShortDateString() + "|"
-                            + sTipoDoc + "|" + cliente.sDni)));
-                        reciboRpt.sRuc = cliente.sDni;
+                            + sTipoDoc + "|" + cliente.sNumeroDoc)));
+                        reciboRpt.sRuc = cliente.sNumeroDoc;
                         LisRecibo.Add(reciboRpt);
                     }
 
@@ -635,13 +635,13 @@ namespace AppInguiri
 
                     cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
 
-                    if (cliente.sDni.Length > 8)
+                    if (cliente.sNumeroDoc.Length > 8)
                     {
                         data.cliente_tipo_doc = "6";
                     }
                     else
                     {
-                        if (cliente.sDni.Length.Equals("00000000"))
+                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
                         {
                             data.cliente_tipo_doc = "0";
                         }
@@ -651,7 +651,7 @@ namespace AppInguiri
                         }
                     }
 
-                    data.cliente_nro_doc = cliente.sDni;
+                    data.cliente_nro_doc = cliente.sNumeroDoc;
                     data.cliente_nombre = cliente.sNombres;
                     data.cliente_direccion = cliente.sDireccion == "" ? "null" : cliente.sDireccion;
 
