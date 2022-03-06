@@ -22,6 +22,7 @@ namespace AppInguiri.EntidadReporte
         public int nCantidad { get; set; }
         public string sIdVendedor { get; set; }
         public string sFechaRegistro { get; set; }
+        public string sHash { get; set; }
         public byte[] yCodigoQR { get; set; }
         public decimal fSubTotal { get; set; }
         public decimal fExogerado { get; set; }

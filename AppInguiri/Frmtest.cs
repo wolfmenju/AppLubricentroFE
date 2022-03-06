@@ -104,7 +104,7 @@ namespace AppInguiri
 
             string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
 
-            var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput);
+            var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput,1);
 
             MessageBox.Show("Mensaje " + resultado.mensaje);
 

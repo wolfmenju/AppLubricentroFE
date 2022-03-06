@@ -33,6 +33,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -44,14 +52,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanOpciones = new System.Windows.Forms.Panel();
             this.btnNotificar = new System.Windows.Forms.Button();
             this.BtnEliminar = new System.Windows.Forms.Button();
@@ -64,6 +64,21 @@
             this.TabConsulta = new System.Windows.Forms.TabControl();
             this.TabCompras = new System.Windows.Forms.TabPage();
             this.dgvVenta = new System.Windows.Forms.DataGridView();
+            this.nIdVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nIdAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sIdDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sDescripDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sSerie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nIdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dFechaNotificacionSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaAnuladoSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabDetalle = new System.Windows.Forms.TabPage();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
             this.nIdVentaDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,21 +98,6 @@
             this.dFechaFin = new System.Windows.Forms.DateTimePicker();
             this.dFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.RdFecha = new System.Windows.Forms.RadioButton();
-            this.nIdVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nIdAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sIdDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sDescripDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sSerie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nIdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dFechaNotificacionSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaAnuladoSunat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanOpciones.SuspendLayout();
             this.PanInferior.SuspendLayout();
             this.TabConsulta.SuspendLayout();
@@ -338,6 +338,165 @@
             this.dgvVenta.Size = new System.Drawing.Size(920, 386);
             this.dgvVenta.TabIndex = 0;
             // 
+            // nIdVenta
+            // 
+            this.nIdVenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdVenta.DataPropertyName = "nIdVenta";
+            this.nIdVenta.HeaderText = "IdVenta";
+            this.nIdVenta.Name = "nIdVenta";
+            this.nIdVenta.ReadOnly = true;
+            this.nIdVenta.Visible = false;
+            // 
+            // nIdAlmacen
+            // 
+            this.nIdAlmacen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdAlmacen.DataPropertyName = "nIdAlmacen";
+            this.nIdAlmacen.HeaderText = "IdAlmacen";
+            this.nIdAlmacen.Name = "nIdAlmacen";
+            this.nIdAlmacen.ReadOnly = true;
+            this.nIdAlmacen.Visible = false;
+            // 
+            // sIdDocumento
+            // 
+            this.sIdDocumento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sIdDocumento.DataPropertyName = "sIdDocumento";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sIdDocumento.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sIdDocumento.HeaderText = "sIdDocumento";
+            this.sIdDocumento.Name = "sIdDocumento";
+            this.sIdDocumento.ReadOnly = true;
+            this.sIdDocumento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sIdDocumento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sIdDocumento.Visible = false;
+            // 
+            // sDescripDocumento
+            // 
+            this.sDescripDocumento.DataPropertyName = "sDescripDocumento";
+            this.sDescripDocumento.HeaderText = "Documento";
+            this.sDescripDocumento.Name = "sDescripDocumento";
+            this.sDescripDocumento.ReadOnly = true;
+            // 
+            // sSerie
+            // 
+            this.sSerie.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sSerie.DataPropertyName = "sSerie";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sSerie.DefaultCellStyle = dataGridViewCellStyle4;
+            this.sSerie.HeaderText = "Numeración";
+            this.sSerie.Name = "sSerie";
+            this.sSerie.ReadOnly = true;
+            this.sSerie.Width = 99;
+            // 
+            // nIdCliente
+            // 
+            this.nIdCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdCliente.DataPropertyName = "nIdCliente";
+            this.nIdCliente.HeaderText = "IdCliente";
+            this.nIdCliente.Name = "nIdCliente";
+            this.nIdCliente.ReadOnly = true;
+            this.nIdCliente.Visible = false;
+            // 
+            // sNombre
+            // 
+            this.sNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sNombre.DataPropertyName = "sNombre";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sNombre.DefaultCellStyle = dataGridViewCellStyle5;
+            this.sNombre.HeaderText = "Nombres";
+            this.sNombre.Name = "sNombre";
+            this.sNombre.ReadOnly = true;
+            this.sNombre.Width = 81;
+            // 
+            // dFecha
+            // 
+            this.dFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dFecha.DataPropertyName = "dFecha";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dFecha.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dFecha.HeaderText = "Fecha";
+            this.dFecha.Name = "dFecha";
+            this.dFecha.ReadOnly = true;
+            this.dFecha.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dFecha.Width = 48;
+            // 
+            // fTotal
+            // 
+            this.fTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fTotal.DataPropertyName = "fTotal";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.fTotal.DefaultCellStyle = dataGridViewCellStyle7;
+            this.fTotal.HeaderText = "Total";
+            this.fTotal.Name = "fTotal";
+            this.fTotal.ReadOnly = true;
+            this.fTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.fTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fTotal.Width = 42;
+            // 
+            // nNumero
+            // 
+            this.nNumero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nNumero.DataPropertyName = "nNumero";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.nNumero.DefaultCellStyle = dataGridViewCellStyle8;
+            this.nNumero.HeaderText = "Pedido";
+            this.nNumero.Name = "nNumero";
+            this.nNumero.ReadOnly = true;
+            this.nNumero.Visible = false;
+            // 
+            // sEstado
+            // 
+            this.sEstado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sEstado.DataPropertyName = "sEstado";
+            this.sEstado.HeaderText = "Estado";
+            this.sEstado.Name = "sEstado";
+            this.sEstado.ReadOnly = true;
+            this.sEstado.Width = 71;
+            // 
+            // sSunat
+            // 
+            this.sSunat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sSunat.DataPropertyName = "sSunat";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sSunat.DefaultCellStyle = dataGridViewCellStyle9;
+            this.sSunat.HeaderText = "Estado Sunat";
+            this.sSunat.Name = "sSunat";
+            this.sSunat.ReadOnly = true;
+            this.sSunat.Width = 99;
+            // 
+            // bSunat
+            // 
+            this.bSunat.DataPropertyName = "bSunat";
+            this.bSunat.HeaderText = "bSunat";
+            this.bSunat.Name = "bSunat";
+            this.bSunat.ReadOnly = true;
+            this.bSunat.Visible = false;
+            // 
+            // dFechaNotificacionSunat
+            // 
+            this.dFechaNotificacionSunat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dFechaNotificacionSunat.DataPropertyName = "dFechaNotificacionSunat";
+            dataGridViewCellStyle10.Format = "G";
+            dataGridViewCellStyle10.NullValue = null;
+            this.dFechaNotificacionSunat.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dFechaNotificacionSunat.HeaderText = "Fecha de Acep. Sunat";
+            this.dFechaNotificacionSunat.Name = "dFechaNotificacionSunat";
+            this.dFechaNotificacionSunat.ReadOnly = true;
+            this.dFechaNotificacionSunat.Width = 115;
+            // 
+            // FechaAnuladoSunat
+            // 
+            this.FechaAnuladoSunat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FechaAnuladoSunat.DataPropertyName = "FechaAnuladoSunat";
+            this.FechaAnuladoSunat.HeaderText = "Fecha de Anul. Sunat";
+            this.FechaAnuladoSunat.Name = "FechaAnuladoSunat";
+            this.FechaAnuladoSunat.ReadOnly = true;
+            this.FechaAnuladoSunat.Width = 112;
+            // 
             // TabDetalle
             // 
             this.TabDetalle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
@@ -345,7 +504,7 @@
             this.TabDetalle.Location = new System.Drawing.Point(4, 22);
             this.TabDetalle.Name = "TabDetalle";
             this.TabDetalle.Padding = new System.Windows.Forms.Padding(3);
-            this.TabDetalle.Size = new System.Drawing.Size(789, 333);
+            this.TabDetalle.Size = new System.Drawing.Size(926, 392);
             this.TabDetalle.TabIndex = 1;
             this.TabDetalle.Text = "Detalle De Ventas";
             // 
@@ -405,7 +564,7 @@
             this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(783, 327);
+            this.dgvDetalle.Size = new System.Drawing.Size(920, 386);
             this.dgvDetalle.TabIndex = 0;
             // 
             // nIdVentaDetalle
@@ -597,170 +756,6 @@
             this.RdFecha.TabStop = true;
             this.RdFecha.Text = "[F1] - Fechas";
             this.RdFecha.UseVisualStyleBackColor = true;
-            // 
-            // nIdVenta
-            // 
-            this.nIdVenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdVenta.DataPropertyName = "nIdVenta";
-            this.nIdVenta.HeaderText = "IdVenta";
-            this.nIdVenta.Name = "nIdVenta";
-            this.nIdVenta.ReadOnly = true;
-            this.nIdVenta.Visible = false;
-            this.nIdVenta.Width = 57;
-            // 
-            // nIdAlmacen
-            // 
-            this.nIdAlmacen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdAlmacen.DataPropertyName = "nIdAlmacen";
-            this.nIdAlmacen.HeaderText = "IdAlmacen";
-            this.nIdAlmacen.Name = "nIdAlmacen";
-            this.nIdAlmacen.ReadOnly = true;
-            this.nIdAlmacen.Visible = false;
-            this.nIdAlmacen.Width = 72;
-            // 
-            // sIdDocumento
-            // 
-            this.sIdDocumento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sIdDocumento.DataPropertyName = "sIdDocumento";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sIdDocumento.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sIdDocumento.HeaderText = "sIdDocumento";
-            this.sIdDocumento.Name = "sIdDocumento";
-            this.sIdDocumento.ReadOnly = true;
-            this.sIdDocumento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sIdDocumento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sIdDocumento.Visible = false;
-            this.sIdDocumento.Width = 94;
-            // 
-            // sDescripDocumento
-            // 
-            this.sDescripDocumento.DataPropertyName = "sDescripDocumento";
-            this.sDescripDocumento.HeaderText = "Documento";
-            this.sDescripDocumento.Name = "sDescripDocumento";
-            this.sDescripDocumento.ReadOnly = true;
-            // 
-            // sSerie
-            // 
-            this.sSerie.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sSerie.DataPropertyName = "sSerie";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sSerie.DefaultCellStyle = dataGridViewCellStyle4;
-            this.sSerie.HeaderText = "Numeración";
-            this.sSerie.Name = "sSerie";
-            this.sSerie.ReadOnly = true;
-            this.sSerie.Width = 99;
-            // 
-            // nIdCliente
-            // 
-            this.nIdCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdCliente.DataPropertyName = "nIdCliente";
-            this.nIdCliente.HeaderText = "IdCliente";
-            this.nIdCliente.Name = "nIdCliente";
-            this.nIdCliente.ReadOnly = true;
-            this.nIdCliente.Visible = false;
-            this.nIdCliente.Width = 82;
-            // 
-            // sNombre
-            // 
-            this.sNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sNombre.DataPropertyName = "sNombre";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sNombre.DefaultCellStyle = dataGridViewCellStyle5;
-            this.sNombre.HeaderText = "Nombres";
-            this.sNombre.Name = "sNombre";
-            this.sNombre.ReadOnly = true;
-            this.sNombre.Width = 81;
-            // 
-            // dFecha
-            // 
-            this.dFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dFecha.DataPropertyName = "dFecha";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Format = "d";
-            dataGridViewCellStyle6.NullValue = null;
-            this.dFecha.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dFecha.HeaderText = "Fecha";
-            this.dFecha.Name = "dFecha";
-            this.dFecha.ReadOnly = true;
-            this.dFecha.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dFecha.Width = 48;
-            // 
-            // fTotal
-            // 
-            this.fTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fTotal.DataPropertyName = "fTotal";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.fTotal.DefaultCellStyle = dataGridViewCellStyle7;
-            this.fTotal.HeaderText = "Total";
-            this.fTotal.Name = "fTotal";
-            this.fTotal.ReadOnly = true;
-            this.fTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.fTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fTotal.Width = 42;
-            // 
-            // nNumero
-            // 
-            this.nNumero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nNumero.DataPropertyName = "nNumero";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.nNumero.DefaultCellStyle = dataGridViewCellStyle8;
-            this.nNumero.HeaderText = "Pedido";
-            this.nNumero.Name = "nNumero";
-            this.nNumero.ReadOnly = true;
-            this.nNumero.Visible = false;
-            this.nNumero.Width = 71;
-            // 
-            // sEstado
-            // 
-            this.sEstado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sEstado.DataPropertyName = "sEstado";
-            this.sEstado.HeaderText = "Estado";
-            this.sEstado.Name = "sEstado";
-            this.sEstado.ReadOnly = true;
-            this.sEstado.Width = 71;
-            // 
-            // sSunat
-            // 
-            this.sSunat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sSunat.DataPropertyName = "sSunat";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sSunat.DefaultCellStyle = dataGridViewCellStyle9;
-            this.sSunat.HeaderText = "Estado Sunat";
-            this.sSunat.Name = "sSunat";
-            this.sSunat.ReadOnly = true;
-            this.sSunat.Width = 99;
-            // 
-            // bSunat
-            // 
-            this.bSunat.DataPropertyName = "bSunat";
-            this.bSunat.HeaderText = "bSunat";
-            this.bSunat.Name = "bSunat";
-            this.bSunat.ReadOnly = true;
-            this.bSunat.Visible = false;
-            // 
-            // dFechaNotificacionSunat
-            // 
-            this.dFechaNotificacionSunat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dFechaNotificacionSunat.DataPropertyName = "dFechaNotificacionSunat";
-            dataGridViewCellStyle10.Format = "G";
-            dataGridViewCellStyle10.NullValue = null;
-            this.dFechaNotificacionSunat.DefaultCellStyle = dataGridViewCellStyle10;
-            this.dFechaNotificacionSunat.HeaderText = "Fecha de Acep. Sunat";
-            this.dFechaNotificacionSunat.Name = "dFechaNotificacionSunat";
-            this.dFechaNotificacionSunat.ReadOnly = true;
-            this.dFechaNotificacionSunat.Width = 115;
-            // 
-            // FechaAnuladoSunat
-            // 
-            this.FechaAnuladoSunat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FechaAnuladoSunat.DataPropertyName = "FechaAnuladoSunat";
-            this.FechaAnuladoSunat.HeaderText = "Fecha de Anul. Sunat";
-            this.FechaAnuladoSunat.Name = "FechaAnuladoSunat";
-            this.FechaAnuladoSunat.ReadOnly = true;
-            this.FechaAnuladoSunat.Width = 112;
             // 
             // FrmVentaListar
             // 

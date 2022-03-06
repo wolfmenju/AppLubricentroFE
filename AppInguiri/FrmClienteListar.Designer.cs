@@ -52,7 +52,8 @@
             this.PanTodo = new System.Windows.Forms.Panel();
             this.DgvCliente = new System.Windows.Forms.DataGridView();
             this.nIdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTipoDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sNumeroDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sNombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanSuperior.SuspendLayout();
@@ -260,7 +261,8 @@
             this.DgvCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvCliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nIdCliente,
-            this.sDni,
+            this.sTipoDoc,
+            this.sNumeroDoc,
             this.sNombres,
             this.sDireccion});
             this.DgvCliente.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -290,17 +292,27 @@
             this.nIdCliente.Name = "nIdCliente";
             this.nIdCliente.ReadOnly = true;
             this.nIdCliente.Visible = false;
+            this.nIdCliente.Width = 62;
             // 
-            // sDni
+            // sTipoDoc
             // 
-            this.sDni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sDni.DataPropertyName = "sDni";
+            this.sTipoDoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sTipoDoc.DataPropertyName = "sTipoDoc";
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sDni.DefaultCellStyle = dataGridViewCellStyle8;
-            this.sDni.HeaderText = "Dni";
-            this.sDni.Name = "sDni";
-            this.sDni.ReadOnly = true;
-            this.sDni.Width = 47;
+            this.sTipoDoc.DefaultCellStyle = dataGridViewCellStyle8;
+            this.sTipoDoc.HeaderText = "Tipo Doc.";
+            this.sTipoDoc.Name = "sTipoDoc";
+            this.sTipoDoc.ReadOnly = true;
+            this.sTipoDoc.Width = 77;
+            // 
+            // sNumeroDoc
+            // 
+            this.sNumeroDoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sNumeroDoc.DataPropertyName = "sNumeroDoc";
+            this.sNumeroDoc.HeaderText = "Número";
+            this.sNumeroDoc.Name = "sNumeroDoc";
+            this.sNumeroDoc.ReadOnly = true;
+            this.sNumeroDoc.Width = 69;
             // 
             // sNombres
             // 
@@ -365,7 +377,8 @@
         internal System.Windows.Forms.Panel PanTodo;
         internal System.Windows.Forms.DataGridView DgvCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdCliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sDni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTipoDoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sNumeroDoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn sNombres;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDireccion;
     }

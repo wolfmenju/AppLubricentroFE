@@ -615,9 +615,9 @@ namespace AppInguiri
                     string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
                     Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante);
 
-                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput);
+                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput,1);
 
-                    if (resultado.code.Equals("200") && resultado.data.respuesta.Equals("ok"))
+                    if (!resultado.data.cdr.Equals("") && resultado.data.respuesta.Equals("ok"))
                     {
                         Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante + "->" + resultado.mensaje);
 
@@ -625,6 +625,10 @@ namespace AppInguiri
                         objVentaFE.nTipo = 1;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
                         objVentaFE.sCdr = resultado.data.cdr;
+                        objVentaFE.sHash = resultado.data.hash_cpe;
+                        objVentaFE.sCodigoResp = resultado.data.status_code;
+                        objVentaFE.sMensajeResp = resultado.data.respuesta;
+
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
 
                         int resp = objVentNeg.ActualizarVentaNotficacionSunat(objVentaFE);
@@ -638,7 +642,7 @@ namespace AppInguiri
                     }
                     else
                     {
-                        Log.Error("Error de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante + " " + resultado.mensaje);
+                        Log.Error("Error de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante + " Mensaje: " + resultado.mensaje+" Codigo: "+resultado.code);
                         MessageBox.Show(resultado.mensaje.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
@@ -690,6 +694,7 @@ namespace AppInguiri
                         reciboRpt.fDescuento = item.fDescuento;
                         reciboRpt.sProducto = item.sProducto;
                         reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
+                        reciboRpt.sHash = item.dFecha.ToShortDateString();
                         LisRecibo.Add(reciboRpt);
                     }
                     

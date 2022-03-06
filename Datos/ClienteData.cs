@@ -36,6 +36,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
                 cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
                 cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
+                cmd.Parameters.AddWithValue("@Ubigeo", objCliente.sUbigeo);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
@@ -52,15 +53,17 @@ namespace Datos
 
                     if (objCliente.nTipo == 6 || objCliente.nTipo == 5)
                     {
-                        objUser.sNumeroDoc = dr[2].ToString();
-                        objUser.sDireccion = dr[3].ToString();
+                        objUser.sTipoDoc = dr[2].ToString();
+                        objUser.sNumeroDoc = dr[3].ToString();
+                        objUser.sDireccion = dr[4].ToString();
                     }
                     else
                     {
                         objUser.bTipoPersona = Convert.ToBoolean(dr[2].ToString());
-                        objUser.sNumeroDoc = dr[3].ToString();
-                        objUser.sDireccion = dr[4].ToString();
-                        objUser.sCelular = dr[5].ToString();
+                        objUser.sTipoDoc= dr[3].ToString();
+                        objUser.sNumeroDoc = dr[4].ToString();
+                        objUser.sDireccion = dr[5].ToString();
+                        objUser.sCelular = dr[6].ToString();
                     }
 
                     listCliente.Add(objUser);
@@ -102,6 +105,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
                 cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
                 cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
+                cmd.Parameters.AddWithValue("@Ubigeo", objCliente.sUbigeo);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
@@ -147,6 +151,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
                 cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
                 cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
+                cmd.Parameters.AddWithValue("@Ubigeo", objCliente.sUbigeo);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);
@@ -192,6 +197,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Distrito", objCliente.sDistrito);
                 cmd.Parameters.AddWithValue("@Provincia", objCliente.sProvincia);
                 cmd.Parameters.AddWithValue("@Departamento", objCliente.sDepartamento);
+                cmd.Parameters.AddWithValue("@Ubigeo", objCliente.sUbigeo);
                 cmd.Parameters.AddWithValue("@Celular", objCliente.sCelular);
                 cmd.Parameters.AddWithValue("@Usuario", objCliente.sUsuario);
                 cmd.Parameters.AddWithValue("@Estado", objCliente.bEstado);

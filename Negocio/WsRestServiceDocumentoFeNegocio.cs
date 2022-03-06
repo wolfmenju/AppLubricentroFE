@@ -16,11 +16,18 @@ namespace Negocio
     {
         private static ILog Log = LogManager.GetLogger(typeof(WsRestServiceDocumentoFeNegocio));
         private string _UrlServicioIntermedioSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermedioSunat"]);
+        private string _UrlServicioIntermeAnuladocionSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermeAnuladocionSunat"]);
 
-        public WsDocumentoFeResponse RegistroDocumentoFe(string SerializeRequestPerOutput)
+        public WsDocumentoFeResponse RegistroDocumentoFe(string SerializeRequestPerOutput, int xTipo)
         {
             WsDocumentoFeResponse rqResponse = new WsDocumentoFeResponse();
-            rqResponse = DoRequest<WsDocumentoFeResponse>(_UrlServicioIntermedioSunat, SerializeRequestPerOutput);
+
+            string sUrl = _UrlServicioIntermeAnuladocionSunat;
+
+            if (xTipo == 2) sUrl = _UrlServicioIntermeAnuladocionSunat;
+
+
+            rqResponse = DoRequest<WsDocumentoFeResponse>(sUrl, SerializeRequestPerOutput);
 
             return rqResponse;
 

@@ -44,11 +44,14 @@ namespace Entidad
             this.dFechaNotificacionSunat=null;
             this.FechaAnuladoSunat = null;
             this.sCdr = "";
+            this.sHash = "";
+            this.sCodigoResp = "";
+            this.sMensajeResp = "";
             this.sCodigoInterno = "";
             this.bIgvAplica = false;
             
         }
-
+        
         public int nTipo { get; set; }
         public int nIdVenta { get; set; }
         public int nIdProducto { get; set; }
@@ -85,10 +88,15 @@ namespace Entidad
         public string sSunat { get; set; }
         public DateTime? dFechaNotificacionSunat { get; set; }
         public DateTime? FechaAnuladoSunat { get; set; }
-        public string sCdr { get; set; }
         public bool bIgvAplica { get; set; }
 
         public List<VentaDetalle> listVentaDetalle { get; set; }
+
+        //Complemento
+        public string sCdr { get; set; }
+        public string sHash { get; set; }
+        public string sCodigoResp { get; set; }
+        public string sMensajeResp { get; set; }
 
     }
 }

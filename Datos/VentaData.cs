@@ -650,7 +650,11 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Tipo", objVenta.nTipo);
                 cmd.Parameters.AddWithValue("@IdVenta", objVenta.nIdVenta);
                 cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
-                cmd.Parameters.AddWithValue("@cdr", objVenta.sCdr);
+                cmd.Parameters.AddWithValue("@Cdr", objVenta.sCdr);
+                cmd.Parameters.AddWithValue("@Hash", objVenta.sHash);
+                cmd.Parameters.AddWithValue("@CodigoResp", objVenta.sCodigoResp);
+                cmd.Parameters.AddWithValue("@Mensaje", objVenta.sMensajeResp);
+
                 respuesta = cmd.ExecuteNonQuery();
                 
             }

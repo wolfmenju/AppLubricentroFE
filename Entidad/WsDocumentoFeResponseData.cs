@@ -34,6 +34,12 @@ namespace Entidad
         public string moneda_cod { get; set; }
         public string tipo_tributo { get; set; }
         public string tipo_igv { get; set; }
+        
+        public string tipo_doc { get; set; }
+        public string nro_serie { get; set; }
+        public string nro_correlativo { get; set; }
+        public string fecha_emision { get; set; }
+        public string fecha_envio { get; set; }
 
         public string cliente_nro_doc { get; set; }
         public string cliente_nombre { get; set; }
@@ -44,7 +50,6 @@ namespace Entidad
         public string cliente_departamento { get; set; }
         public string cliente_provincia { get; set; }
         public string cliente_distrito { get; set; }
-
         public detalle[] detalle { get; set; }
         public emisor emisor { get; set; }
 
@@ -69,14 +74,23 @@ namespace Entidad
         public string txtAFECTACION_CODIGO_ALT { get; set; }
         public string txtAFECTACION_NOMBRE { get; set; }
         public string txtAFECTACION_TIPO { get; set; }
+        public string tipo_comprobante_cod { get; set; }
+        
+        public string item { get; set; }
+        public string nro_serie { get; set; }
+        public string nro_comprobante { get; set; }
+        public string motivo { get; set; }
+
     }
 
     public class emisor
     {
         public string ruc { get; set; }
         public string tipo_doc { get; set; }
+        public string nom_comercial { get; set; }
         public string razon_social { get; set; }
         public string codigo_ubigeo { get; set; }
+        public string sede { get; set; }
         public string direccion { get; set; }
         public string direccion_departamento { get; set; }
         public string direccion_provincia { get; set; }
