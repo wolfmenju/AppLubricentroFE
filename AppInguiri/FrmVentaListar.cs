@@ -29,6 +29,7 @@ namespace AppInguiri
         private bool cerrarFormulario = true;
         private bool? xBandero = false;
         private List<Venta> ListVenta = new List<Venta>();
+        private List<Venta> ListVentas = new List<Venta>();
         private Cliente cliente = new Cliente();
         private ClienteNegocio objCliNeg = new ClienteNegocio();
         private DocumentoSerieNegocio objDocumentSerieNeg = new DocumentoSerieNegocio();
@@ -36,6 +37,7 @@ namespace AppInguiri
         private static ILog Log = LogManager.GetLogger(typeof(FrmVentaListar));
         private ParametroNegocio objParamNeg = new ParametroNegocio();
         private WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
+        private int nNumeroEnvioMasivo =0;
         string sDireccion = "", sRuc = "", sRazonSocial = "",
             sUbigeo = "", sDepart = "", sProvi = "", sDist = "",
             _sUrlSunat = "", _sUrlAnulacionIntermSunat = "", _UrlServicioIntermedioSunat = "", _RutaArchivosXml = "",
@@ -49,10 +51,9 @@ namespace AppInguiri
             InitializeComponent();
             CargarDatosEmpresa();
             CargarDatosConfiguracion();
-            CargarCorrelativo();
         }
 
-        private void CargarCorrelativo()
+        private string CargarCorrelativo()
         {
             DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5, sIdDocumento ="14", bEstado = true };
 
@@ -61,14 +62,17 @@ namespace AppInguiri
             if (listDocumentoSerie.Count == 0)
             {
                 MessageBox.Show("Debe Registrar un Correlativo para este El Documento de Baja de Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                return "";
             }
            
+            
             foreach (var item in listDocumentoSerie)
             {
                 sNumeroDocAnula = string.Format("{0:0000}", item.nUltimo + 1);
                 break;
             }
+
+            return sNumeroDocAnula;
 
         }
 
@@ -94,6 +98,8 @@ namespace AppInguiri
             sPassSunat = objParamNeg.LeerUnParametro("ID_PASS_SUNAT");
             sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
             sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
+            nNumeroEnvioMasivo=Convert.ToInt32(objParamNeg.LeerUnParametro("ID_NUMERO_ENVIO_MASIVO"));
+
         }
 
         private void BtnBuscar_Click(object sender, EventArgs e)
@@ -117,7 +123,8 @@ namespace AppInguiri
                 nIdAlmacen=Funciones.CodAlmacenActual()
             };
 
-            List<Venta> ListVentas= objVentNeg.ListarVentas(objVenta);
+            ListVentas = new List<Venta>();
+            ListVentas= objVentNeg.ListarVentas(objVenta);
 
             if (ListVentas.Count > 0)
             {
@@ -129,8 +136,60 @@ namespace AppInguiri
                 dgvVenta.DataSource = null;
             }
 
+            chkVentasParaEnvioSunat.Checked = false;
+            lblCantidadNotificar.Visible = false;
             LblTotal.Text = "Se Encontraron " + dgvVenta.Rows.Count + " Registros";
             cerrarFormulario = false;
+        }
+
+        private void chkVentasParaEnvioSunat_Click(object sender, EventArgs e)
+        {
+            if (dgvVenta.RowCount == 0)
+            {
+                chkVentasParaEnvioSunat.Checked = false;
+                lblCantidadNotificar.Visible = false;
+                dgvVenta.AutoGenerateColumns = false;
+                btnImprimir.Enabled = true;
+                BtnEliminar.Enabled = true;
+                dgvVenta.DataSource = ListVentas;
+                return;
+            }
+            if (chkVentasParaEnvioSunat.Checked)
+            {
+                btnImprimir.Enabled = false;
+                BtnEliminar.Enabled = false;
+                lblCantidadNotificar.Text = "Se notificadará de "+ nNumeroEnvioMasivo + "  en " + nNumeroEnvioMasivo + " Documentos.";
+                lblCantidadNotificar.Visible = true;
+                List<Venta> dt = new List<Venta>();
+
+                foreach (Venta col in ListVentas)
+                {
+                    if (col.bSunat == 0 && (col.sIdDocumento.Equals("01") || col.sIdDocumento.Equals("03")))
+                    {
+                        dt.Add(col);
+                    }
+
+                }
+                if (dt.Count > 0)
+                {
+                    
+                    dgvVenta.DataSource = dt;
+                }
+                else
+                {
+                    dgvVenta.DataSource = null;
+                }
+
+                dgvVenta.AutoGenerateColumns = false;
+            }
+            else
+            {
+                btnImprimir.Enabled = true;
+                BtnEliminar.Enabled = true;
+                lblCantidadNotificar.Visible = false;
+                dgvVenta.AutoGenerateColumns = false;
+                dgvVenta.DataSource = ListVentas;
+            }
         }
 
         private void FrmVentaListar_FormClosing(object sender, FormClosingEventArgs e)
@@ -473,6 +532,7 @@ namespace AppInguiri
                             + item.dFecha.ToShortDateString() + "|"
                             + sTipoDoc + "|" + cliente.sNumeroDoc)));
                         reciboRpt.sRuc = cliente.sNumeroDoc;
+                        reciboRpt.sHash = item.sHash;
                         LisRecibo.Add(reciboRpt);
                     }
 
@@ -545,57 +605,115 @@ namespace AppInguiri
         {
             if (dgvVenta.RowCount > 0)
             {
-                if (dgvVenta.CurrentCell != null || dgvVenta.CurrentCell.RowIndex != 0)
+                //Uno por Uno
+                if (!chkVentasParaEnvioSunat.Checked)
                 {
-                    Int32 filaselecionada = dgvVenta.CurrentCell.RowIndex;
-                    Venta _venta = (Venta)dgvVenta.Rows[filaselecionada].DataBoundItem;
-
-                    if (_venta.sIdDocumento.Equals("12"))
+                    if (dgvVenta.CurrentCell != null || dgvVenta.CurrentCell.RowIndex != 0)
                     {
-                        MessageBox.Show("El tipo de documento no es válido para notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cerrarFormulario = false;
-                        return;
-                    }
-                    
-                    if (_venta.bSunat==1)
-                    {
-                        if (_venta.bSunat == 2)
+                        Int32 filaselecionada = dgvVenta.CurrentCell.RowIndex;
+                        Venta _venta = (Venta)dgvVenta.Rows[filaselecionada].DataBoundItem;
+
+                        if (_venta.sIdDocumento.Equals("12"))
                         {
-                            MessageBox.Show("El Documento Ya fue notificado a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("El tipo de documento no es válido para notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             cerrarFormulario = false;
                             return;
                         }
 
-                        if (_venta.bSunat==0)
+                        if (_venta.bEstado)
                         {
-                            MessageBox.Show("El Documento Aun no fue notificado a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            cerrarFormulario = false;
-                            return;
-                        }
-                        
-                        if (Globales.FechaActual().Date < _venta.dFecha.Date)
-                        {
-                            MessageBox.Show(" No puede Notificar el Documento de Fecha Anterior a la Fecha Actual.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            cerrarFormulario = false;
-                            return;
-                        }
-
-                        if (MessageBox.Show("¿Desea Notificar a Sunat La Venta Seleccionada?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            if (NotificacionSunat(_venta.nIdVenta))
+                            if (_venta.bSunat == 0)
                             {
-                                MessageBox.Show("La Notificó del Documento se Realizó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                ListarVenta();
+                                if (MessageBox.Show("¿Desea Notificar a Sunat La Venta Seleccionada?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    if (NotificacionSunat(_venta.nIdVenta))
+                                    {
+                                        MessageBox.Show("La Notificó del Documento se Realizó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        ListarVenta();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("La notificación a Sunat No se Pudo Realizar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
+                            }
+                            else if (_venta.bSunat == 1)
+                            {
+                                MessageBox.Show("El Documento Ya fue notificado a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                cerrarFormulario = false;
+                                return;
+                            }
+                            else if (_venta.bSunat == 2)
+                            {
+                                //Este caso es imposible.
+                                MessageBox.Show("Comuniquese con InguiriSoft.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                cerrarFormulario = false;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (_venta.bSunat == 0)
+                            {
+                                MessageBox.Show("Documento se encuentra Anulado en el Sistema", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                cerrarFormulario = false;
+                                return;
+                            }
+                            else if (_venta.bSunat == 1)
+                            {
+                                if (NotificacionAnulado(_venta.nIdVenta))
+                                {
+                                    MessageBox.Show("La Notificó a Sunat de la Anulación se realizó Correctamente.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    ListarVenta();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("La notificación a Sunat No se Pudo Realizar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else if (_venta.bSunat == 2)
+                            {
+                                MessageBox.Show("El Documento Anulado Ya fue notificado a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                cerrarFormulario = false;
+                                return;
+                            }
+
+                        }                      
+                    }
+                }
+                else
+                {
+                    int contador = 0;
+                    if (MessageBox.Show("¿Está Seguro que Desea Notificar Masivamente?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        foreach (DataGridViewRow item in dgvVenta.Rows)
+                        {
+                            Venta venta = (Venta)item.DataBoundItem;
+                            
+                            if (NotificacionSunat(venta.nIdVenta))
+                            {
+                                contador++;
+
+                                if (nNumeroEnvioMasivo == contador)
+                                {
+                                    MessageBox.Show("Se notificaron a Sunat " + contador + " Documentos Satisfatoriamente. Espere 1 minutos y vuelva Ejecutar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    break;
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("La notificación a Sunat No se Pudo Realizar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                if (MessageBox.Show("¿No se pudo realizar la notificacion con el Documento " + venta.sDescripDocumento + ". ¿Desea Continuar con los siguientes Registros?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                { }
+                                else { break; }
                             }
+
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("El documento selecionado ya fue nofificado a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        if (contador > 0)
+                        {
+                            MessageBox.Show("Se notificaron a Sunat " + contador + " Documentos Satisfatoriamente.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ListarVenta();
+                        }
                     }
                 }
             }
@@ -616,7 +734,8 @@ namespace AppInguiri
                     data = new WsDocumentoFeResponseData();
                     data.tipo_doc = "RA";
                     data.nro_serie = Globales.FechaActual().ToString("yyyyMMdd");
-                    data.nro_correlativo = sNumeroDocAnula;
+                    data.nro_correlativo = CargarCorrelativo();
+                    if (data.nro_correlativo.Equals("")) return false;
                     data.fecha_emision = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
                     data.fecha_envio = Globales.FechaActual().ToString("yyyy-MM-dd"); ; 
 
@@ -663,7 +782,9 @@ namespace AppInguiri
                         Venta objVentaFE = new Venta();
                         objVentaFE.nTipo = 2;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
+                        objVentaFE.sIdDocumento = "14";
                         objVentaFE.sCdr = resultado.data.cdr;
+                        objVentaFE.sSerie = "001";
                         objVentaFE.sMensajeResp = data.tipo_doc + "-" + data.nro_serie + "-" + data.nro_correlativo;
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
 

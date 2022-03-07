@@ -644,14 +644,19 @@ namespace Datos
         public static int ActualizarVentaNotficacionSunat(Venta objVenta)
         {
             int respuesta = 0;
+            
 
             SqlCommand cmd = null;
-            Conexion cn = new Conexion();
-            SqlConnection cnx = cn.getConecta();
+            SqlCommand cmdDocumento = null;
 
+            Conexion cn = new Conexion();
+            SqlTransaction xTrans;
+            SqlConnection cnx = cn.getConecta();
+            cnx.Open();
+            xTrans = cnx.BeginTransaction();
             try
             {
-                cnx.Open();
+                //cnx.Open();
                 cmd = new SqlCommand("IAE_VentaFE", cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Tipo", objVenta.nTipo);
@@ -661,14 +666,39 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Hash", objVenta.sHash);
                 cmd.Parameters.AddWithValue("@CodigoResp", objVenta.sCodigoResp);
                 cmd.Parameters.AddWithValue("@Mensaje", objVenta.sMensajeResp);
-
+                cmd.Transaction = xTrans;
                 respuesta = cmd.ExecuteNonQuery();
-                
+
+                if (respuesta <= 0)
+                {
+                    xTrans.Rollback();
+                }
+                else
+                {
+                    respuesta = 0;
+                    cmdDocumento = new SqlCommand("IAE_DocumentoSerie", cnx);
+                    cmdDocumento.Parameters.AddWithValue("@Tipo", 6);
+                    cmdDocumento.Parameters.AddWithValue("@IdDocumentoSerie", 0);
+                    cmdDocumento.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
+                    cmdDocumento.Parameters.AddWithValue("@Serie", objVenta.sSerie);
+                    cmdDocumento.Parameters.AddWithValue("@Ultimo", 0);
+                    cmdDocumento.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                    cmdDocumento.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+                    cmdDocumento.CommandType = CommandType.StoredProcedure;
+                    cmdDocumento.Transaction = xTrans;
+                    respuesta = cmdDocumento.ExecuteNonQuery();
+                }
+
+                if (respuesta > 0)
+                {
+                    xTrans.Commit();
+                }
             }
 
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                xTrans.Rollback();
+                MessageBox.Show(ex.Message, "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
