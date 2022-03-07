@@ -21,6 +21,8 @@ namespace AppInguiri
         private List<Parametro> listParamet = new List<Parametro>();
         private bool estado = true;
         private static FrmParametro frmInstance = null;
+        public FrmPrincipal frmPrincipal = null;
+
         #endregion
 
         #region Principal Load
@@ -258,6 +260,7 @@ namespace AppInguiri
             //frmPresent.MdiParent = this.MdiParent;
             frmParame.tipo = 3;
             frmParame.Text = "Actualizar Parametro";
+            frmParame.frmPrincipal = frmPrincipal;
             
             if (frmParame.ShowDialog() == DialogResult.OK)
             {

@@ -557,7 +557,7 @@ namespace AppInguiri
                         return;
                     }
                     
-                    if (_venta.bSunat==10)
+                    if (_venta.bSunat==1)
                     {
                         if (_venta.bSunat == 2)
                         {

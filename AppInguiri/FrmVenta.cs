@@ -45,7 +45,7 @@ namespace AppInguiri
             sUbigeo = "", sDepart="", sProvi="",sDist="",
             _sUrlSunat="", _RutaArchivosXml="", sAplicaIgv="",
             sUserSunat="",sPassSunat="",sCertClaSunat="",
-            sUrlXmlSunat="";
+            sSunatOnline="", sUrlXmlSunat="";
         private static ILog Log= LogManager.GetLogger(typeof(FrmVenta));
 
         //Singleton
@@ -82,11 +82,12 @@ namespace AppInguiri
             sDepart = objParamNeg.LeerUnParametro("ID_DIRECCION_DEPA");
             sProvi = objParamNeg.LeerUnParametro("ID_DIRECCION_PROV");
             sDist = objParamNeg.LeerUnParametro("ID_DIRECCION_DIST");
-            sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
             sUserSunat = objParamNeg.LeerUnParametro("ID_USER_SUNAT");
             sPassSunat = objParamNeg.LeerUnParametro("ID_PASS_SUNAT");
             sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
             sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
+            sSunatOnline = objParamNeg.LeerUnParametro("ID_SUNAT_ONLINE");
+            sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
 
             if (sAplicaIgv.Equals("NO")) lblTotalTextoSinIgv.Visible = true;
             
@@ -473,19 +474,26 @@ namespace AppInguiri
 
                 if (nidVentaRespu > 0)
                 {
-                    //Metodo para nofiticar a Sunat
-                    if (NotificacionSunat(nidVentaRespu))
+                    if (sSunatOnline.Equals("SI"))
                     {
-                        MessageBox.Show("La Venta Se Realizó Con Éxito y Notificó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Metodo para nofiticar a Sunat
+                        if (NotificacionSunat(nidVentaRespu))
+                        {
+                            MessageBox.Show("La Venta Se Realizó Con Éxito y Notificó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("La Venta Se Realizó Con Éxito pero hubo problemas en la notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("La Venta Se Realizó Con Éxito pero hubo problemas en la notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("La Venta Se Realizó Con Éxito.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("La Venta No Se Pudo Realizar", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("La Venta No Se Pudo Realizar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 ImprimirComprobante();

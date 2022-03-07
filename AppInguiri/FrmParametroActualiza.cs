@@ -15,7 +15,8 @@ namespace AppInguiri
 {
     public partial class FrmParametroActualiza : Form
     {
-        ParametroNegocio objRepreNeg = new ParametroNegocio();
+        private ParametroNegocio objRepreNeg = new ParametroNegocio();
+        public FrmPrincipal frmPrincipal = null;
         public int tipo=0;
         Parametro Parametro;
 
@@ -126,6 +127,13 @@ namespace AppInguiri
                 if (respuesta == 1)
                 {
                     MessageBox.Show("Se Actualizó Correctamente", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se modificaron configuracion del Sistema, por lo que se Cerrará.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    this.Dispose();
+                    frmPrincipal.Close();
+                    frmPrincipal.Dispose();
+                    frmPrincipal.frmLogin.Close();
+                    frmPrincipal.frmLogin.Dispose();
                     cerrarFormulario = true;
                     this.Close();
                 }

@@ -260,6 +260,7 @@ namespace AppInguiri
             pbLogoInguiri.Visible = false;
             pbLogoInguiri.Visible = false;
             frmParametro = FrmParametro.Instance();
+            frmParametro.frmPrincipal = this;
             frmParametro.MdiParent = this;
             frmParametro.Show();
             VerificarFormulario(frmParametro);
