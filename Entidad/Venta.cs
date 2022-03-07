@@ -49,7 +49,7 @@ namespace Entidad
             this.sMensajeResp = "";
             this.sCodigoInterno = "";
             this.bIgvAplica = false;
-            
+            this.sDocumentoAnulacion = "";
         }
         
         public int nTipo { get; set; }
@@ -97,6 +97,7 @@ namespace Entidad
         public string sHash { get; set; }
         public string sCodigoResp { get; set; }
         public string sMensajeResp { get; set; }
+        public string sDocumentoAnulacion { get; set; }
 
     }
 }

@@ -778,6 +778,7 @@ namespace AppInguiri
                             + item.dFecha.ToShortDateString() + "|"
                             + sTipoDoc + "|" + cliente.sNumeroDoc)));
                         reciboRpt.sRuc = cliente.sNumeroDoc;
+                        reciboRpt.sHash = item.sHash;
                         LisRecibo.Add(reciboRpt);
                     }
                     

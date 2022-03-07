@@ -22,7 +22,7 @@ namespace Negocio
         {
             WsDocumentoFeResponse rqResponse = new WsDocumentoFeResponse();
 
-            string sUrl = _UrlServicioIntermeAnuladocionSunat;
+            string sUrl = _UrlServicioIntermedioSunat;
 
             if (xTipo == 2) sUrl = _UrlServicioIntermeAnuladocionSunat;
 

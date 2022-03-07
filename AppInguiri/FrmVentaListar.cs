@@ -38,7 +38,7 @@ namespace AppInguiri
         private WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
         string sDireccion = "", sRuc = "", sRazonSocial = "",
             sUbigeo = "", sDepart = "", sProvi = "", sDist = "",
-            _sUrlSunat = "", _sUrlAnulacionIntermSunat = "", _sUrlAnulacionSunat="", _RutaArchivosXml = "",
+            _sUrlSunat = "", _sUrlAnulacionIntermSunat = "", _UrlServicioIntermedioSunat = "", _RutaArchivosXml = "",
             sUserSunat = "", sPassSunat = "", sCertClaSunat = "",
             sUrlXmlSunat = "",sNumeroDocAnula="";
 
@@ -77,8 +77,7 @@ namespace AppInguiri
             _sUrlSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlSunat"]);
             _RutaArchivosXml = Convert.ToString(ConfigurationManager.AppSettings["RutaArchivosXml"]);
             _sUrlAnulacionIntermSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioAnuladocionSunat"]);
-            _sUrlAnulacionSunat= Convert.ToString(ConfigurationManager.AppSettings["UrlSunatAnulado"]);
-
+            _UrlServicioIntermedioSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioAnuladocionSunat"]);
             
         }
 
@@ -558,7 +557,7 @@ namespace AppInguiri
                         return;
                     }
                     
-                    if (!_venta.bEstado)
+                    if (_venta.bSunat==10)
                     {
                         if (_venta.bSunat == 2)
                         {
@@ -583,7 +582,7 @@ namespace AppInguiri
 
                         if (MessageBox.Show("¿Desea Notificar a Sunat La Venta Seleccionada?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            if (NotificacionAnulado(_venta.nIdVenta))
+                            if (NotificacionSunat(_venta.nIdVenta))
                             {
                                 MessageBox.Show("La Notificó del Documento se Realizó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ListarVenta();
@@ -637,7 +636,7 @@ namespace AppInguiri
                     data.emisor.clavesol = sPassSunat;
                     data.emisor.clave_certificado = sCertClaSunat;
                     data.emisor.url_xml = sUrlXmlSunat;
-                    data.emisor.url_ws = _sUrlAnulacionSunat;
+                    data.emisor.url_ws =_sUrlSunat;
                     data.emisor.codigo_estab_anexo_sun = "0000";
 
                     data.detalle = new detalle[LisVenRep.Count];
@@ -664,6 +663,8 @@ namespace AppInguiri
                         Venta objVentaFE = new Venta();
                         objVentaFE.nTipo = 2;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
+                        objVentaFE.sCdr = resultado.data.cdr;
+                        objVentaFE.sMensajeResp = data.tipo_doc + "-" + data.nro_serie + "-" + data.nro_correlativo;
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
 
                         int resp = objVentNeg.ActualizarVentaNotficacionSunat(objVentaFE);

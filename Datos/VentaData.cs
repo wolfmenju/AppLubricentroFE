@@ -43,6 +43,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdCajero", objVenta.sIdCajero);
                 cmd.Parameters.AddWithValue("@Codigo", objVenta.nCodigo);
                 cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                cmd.Parameters.AddWithValue("@DocAnulacion", objVenta.sDocumentoAnulacion);
                 cmd.Parameters.AddWithValue("@Estado", objVenta.bEstado);
                 cmd.Parameters.AddWithValue("@IgvAplica", objVenta.bIgvAplica);
 
@@ -83,6 +84,9 @@ namespace Datos
                         objVent.dFechaRegistrado= Convert.ToDateTime(dr[18].ToString());
                         objVent.fDescuento = Convert.ToDecimal(dr[19].ToString());
                         objVent.bIgvAplica = Convert.ToBoolean(dr[20]);
+                        objVent.sDocumentoAnulacion = dr[21].ToString();
+                        objVent.sCdr =dr[22].ToString();
+                        objVent.sHash = dr[23].ToString();
                     }
                     else if (objVenta.nTipo == 9)
                     {
@@ -128,10 +132,11 @@ namespace Datos
                         else objVent.nNumero = Convert.ToInt32(dr[11]);
                         objVent.bSunat = Convert.ToInt32(dr[12]);
                         objVent.sSunat = Convert.ToString(dr[13]);
-                        if (DBNull.Value == dr[14]) objVent.dFechaNotificacionSunat = null;
-                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[14]);
-                        if (DBNull.Value == dr[15]) objVent.FechaAnuladoSunat = null;
-                        else objVent.FechaAnuladoSunat = Convert.ToDateTime(dr[15]);
+                        objVent.sDocumentoAnulacion = dr[14].ToString();
+                        if (DBNull.Value == dr[15]) objVent.dFechaNotificacionSunat = null;
+                        else objVent.dFechaNotificacionSunat = Convert.ToDateTime(dr[15]);
+                        if (DBNull.Value == dr[16]) objVent.FechaAnuladoSunat = null;
+                        else objVent.FechaAnuladoSunat = Convert.ToDateTime(dr[16]);
 
                     }
                     else if (objVenta.nTipo == 3)
@@ -214,6 +219,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@SubTotal", objVenta.fSubTotal);
                 cmd.Parameters.AddWithValue("@Igv", objVenta.fIgv);
                 cmd.Parameters.AddWithValue("@Total", objVenta.fTotal);
+                cmd.Parameters.AddWithValue("@DocAnulacion", objVenta.sDocumentoAnulacion);
                 cmd.Parameters.AddWithValue("@IdVendedor", objVenta.sIdVendedor);
                 cmd.Parameters.AddWithValue("@IdCajero", objVenta.sIdCajero);
                 cmd.Parameters.AddWithValue("@IgvAplica", objVenta.bIgvAplica);
@@ -478,6 +484,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdVendedor", objVenta.sIdVendedor);
                 cmd.Parameters.AddWithValue("@IdCajero", objVenta.sIdCajero);
                 cmd.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                cmd.Parameters.AddWithValue("@DocAnulacion", objVenta.sDocumentoAnulacion);
                 cmd.Parameters.AddWithValue("@Estado", objVenta.bEstado);
                 cmd.Parameters.AddWithValue("@IgvAplica", objVenta.bIgvAplica);
 
