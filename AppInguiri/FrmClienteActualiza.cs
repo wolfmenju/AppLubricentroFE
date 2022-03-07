@@ -102,6 +102,7 @@ namespace AppInguiri
                 sCelular = txtCelular.Text.ToUpper().Trim(),
                 sUsuario = Funciones.UsuarioActual(),
                 bEstado = true,
+                sUbigeo=txtUbigeo.Text,
                 bValidadoSunat = chkValidaExterna.Checked           
             };
 
@@ -153,10 +154,40 @@ namespace AppInguiri
                 //Actualizar
                 LblCodigo.Text = cliente.nIdCliente.ToString();
                 txtRazonSocial.Text = cliente.sNombres.ToUpper();
-                cbxTipoDocumento.SelectedIndex = Convert.ToInt32(cliente.bTipoPersona);
                 txtNumeroDoc.Text = cliente.sNumeroDoc.ToUpper();
                 txtDireccion.Text = cliente.sDireccion.ToUpper();
+                txtDistrito.Text = cliente.sDistrito;
+                txtProvincia.Text = cliente.sProvincia;
+                txtDeparamento.Text = cliente.sDepartamento;
+                txtUbigeo.Text = cliente.sUbigeo;
                 txtCelular.Text = cliente.sCelular.ToUpper();
+                chkValidaExterna.Checked = cliente.bValidadoSunat;
+                cbxTipoDocumento.SelectedIndex = cliente.sTipoDoc.Equals("DNI") ? 0:1;
+               
+                if (cliente.bValidadoSunat)
+                {
+                    chkValidaExterna.Enabled = false;
+                    txtNumeroDoc.Enabled = false;
+                    btnConsultaSunat.Enabled = false;
+                    btnLimpiar.Enabled = false;
+                    cbxTipoDocumento.Enabled = false;
+                }
+                else
+                {
+                    chkValidaExterna.Enabled = true;
+                    txtNumeroDoc.Enabled = true;
+                    btnConsultaSunat.Enabled = true;
+                    btnLimpiar.Enabled = true;
+                    cbxTipoDocumento.Enabled = true;
+                    txtRazonSocial.Enabled = true;
+                    txtNumeroDoc.Enabled = true;
+                    txtDireccion.Enabled =true;
+                    txtDistrito.Enabled = true;
+                    txtProvincia.Enabled = true;
+                    txtDeparamento.Enabled = true;
+                    txtUbigeo.Enabled = true;
+
+                }
             }
         }
 
@@ -209,13 +240,68 @@ namespace AppInguiri
 
                 if (WsConsultaDocResponse != null)
                 {
+                    if (!WsConsultaDocResponse.condicion.Equals("HABIDO"))
+                    {
+                        MessageBox.Show("El número ingresado del " + cbxTipoDocumento.Text + " No se Encuentra Habido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                     txtNumeroDoc.Enabled = false;
                     txtRazonSocial.Text = WsConsultaDocResponse.nombre;
-                    txtDireccion.Text = WsConsultaDocResponse.direccion;
-                    txtDistrito.Text = WsConsultaDocResponse.distrito;
-                    txtProvincia.Text = WsConsultaDocResponse.provincia;
-                    txtDeparamento.Text = WsConsultaDocResponse.departamento;
-                    txtUbigeo.Text = WsConsultaDocResponse.ubigeo;
+
+                    if (WsConsultaDocResponse.direccion.Equals("-") || WsConsultaDocResponse.direccion.Equals(""))
+                    {
+                        txtDireccion.Text = "";
+                        txtDireccion.Enabled = true;
+                    }
+                    else
+                    {
+                        txtDireccion.Text = WsConsultaDocResponse.direccion;
+                        txtDireccion.Enabled = false;
+                    }
+
+                    if (WsConsultaDocResponse.distrito.Equals("-") || WsConsultaDocResponse.distrito.Equals(""))
+                    {
+                        txtDistrito.Text = "";
+                        txtDistrito.Enabled = true;
+                    }
+                    else
+                    {
+                        txtDistrito.Text = WsConsultaDocResponse.distrito;
+                        txtDistrito.Enabled = false;
+                    }
+
+                    if (WsConsultaDocResponse.provincia.Equals("-") || WsConsultaDocResponse.provincia.Equals(""))
+                    {
+                        txtProvincia.Text = "";
+                        txtProvincia.Enabled = true;
+                    }
+                    else
+                    {
+                        txtProvincia.Text = WsConsultaDocResponse.provincia;
+                        txtProvincia.Enabled = false;
+                    }
+
+                    if (WsConsultaDocResponse.departamento.Equals("-") || WsConsultaDocResponse.departamento.Equals(""))
+                    {
+                        txtDeparamento.Text = "";
+                        txtDeparamento.Enabled = true;
+                    }
+                    else
+                    {
+                        txtDeparamento.Text = WsConsultaDocResponse.departamento;
+                        txtDeparamento.Enabled = false;
+                    }
+
+                    if (WsConsultaDocResponse.ubigeo.Equals("-") || WsConsultaDocResponse.ubigeo.Equals(""))
+                    {
+                        txtUbigeo.Text = "";
+                        txtUbigeo.Enabled = true;
+                    }
+                    else
+                    {
+                        txtUbigeo.Text = WsConsultaDocResponse.ubigeo;
+                        txtUbigeo.Enabled = false;
+                    }
                 }
                 else
                 {

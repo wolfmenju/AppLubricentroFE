@@ -56,6 +56,12 @@ namespace Datos
                         objUser.sTipoDoc = dr[2].ToString();
                         objUser.sNumeroDoc = dr[3].ToString();
                         objUser.sDireccion = dr[4].ToString();
+                        objUser.sDistrito = dr[5].ToString();
+                        objUser.sProvincia = dr[6].ToString();
+                        objUser.sDepartamento = dr[7].ToString();
+                        objUser.sUbigeo = dr[8].ToString();
+                        objUser.sCelular = dr[9].ToString();
+                        objUser.bValidadoSunat =Convert.ToBoolean(dr[10]);
                     }
                     else
                     {

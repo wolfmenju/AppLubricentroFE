@@ -109,9 +109,9 @@
             this.chkValidaExterna.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkValidaExterna.Location = new System.Drawing.Point(227, 9);
             this.chkValidaExterna.Name = "chkValidaExterna";
-            this.chkValidaExterna.Size = new System.Drawing.Size(122, 17);
+            this.chkValidaExterna.Size = new System.Drawing.Size(129, 17);
             this.chkValidaExterna.TabIndex = 51;
-            this.chkValidaExterna.Text = "Validación Sunat";
+            this.chkValidaExterna.Text = "Validación Reniec";
             this.chkValidaExterna.UseVisualStyleBackColor = true;
             this.chkValidaExterna.Click += new System.EventHandler(this.chkValidaExterna_Click);
             // 
@@ -147,8 +147,8 @@
             this.cbxTipoDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxTipoDocumento.FormattingEnabled = true;
             this.cbxTipoDocumento.Items.AddRange(new object[] {
-            "RUC",
-            "DNI"});
+            "DNI",
+            "RUC"});
             this.cbxTipoDocumento.Location = new System.Drawing.Point(98, 33);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
             this.cbxTipoDocumento.Size = new System.Drawing.Size(54, 21);
@@ -185,7 +185,7 @@
             this.txtNumeroDoc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNumeroDoc.ForeColor = System.Drawing.Color.Black;
             this.txtNumeroDoc.Location = new System.Drawing.Point(158, 34);
-            this.txtNumeroDoc.MaxLength = 11;
+            this.txtNumeroDoc.MaxLength = 8;
             this.txtNumeroDoc.Name = "txtNumeroDoc";
             this.txtNumeroDoc.Size = new System.Drawing.Size(119, 20);
             this.txtNumeroDoc.TabIndex = 0;

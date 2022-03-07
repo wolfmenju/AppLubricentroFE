@@ -285,7 +285,6 @@
             this.nIdCliente.Name = "nIdCliente";
             this.nIdCliente.ReadOnly = true;
             this.nIdCliente.Visible = false;
-            this.nIdCliente.Width = 56;
             // 
             // sNombres
             // 

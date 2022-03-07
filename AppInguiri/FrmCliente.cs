@@ -125,8 +125,8 @@ namespace AppInguiri
                 Int32 filaselecionada = DgvCliente.CurrentCell.RowIndex;
                 DataGridViewRow row2 = DgvCliente.Rows[filaselecionada];
                 Cliente cliente = (Cliente)row2.DataBoundItem;
-
-                FrmClienteActualiza frmCliente = new FrmClienteActualiza(cliente);
+                Cliente Rescliente = objClienNeg.LeerCliente(cliente.nIdCliente);
+                FrmClienteActualiza frmCliente = new FrmClienteActualiza(Rescliente);
                 frmCliente.tipo = 1;
                 frmCliente.Text = "Actualizar Cliente";
 
