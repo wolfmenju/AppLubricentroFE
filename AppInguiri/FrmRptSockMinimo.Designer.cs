@@ -51,6 +51,7 @@
             this.nIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nIdAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sCodigoInterno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sNombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bSeleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.sLaboratorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -239,6 +240,7 @@
             this.nIdProducto,
             this.nIdAlmacen,
             this.sAlmacen,
+            this.sCodigoInterno,
             this.sNombreProducto,
             this.bSeleccionar,
             this.sLaboratorio,
@@ -292,6 +294,15 @@
             this.sAlmacen.Name = "sAlmacen";
             this.sAlmacen.ReadOnly = true;
             this.sAlmacen.Width = 72;
+            // 
+            // sCodigoInterno
+            // 
+            this.sCodigoInterno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sCodigoInterno.DataPropertyName = "sCodigoInterno";
+            this.sCodigoInterno.HeaderText = "Codigo Interno";
+            this.sCodigoInterno.Name = "sCodigoInterno";
+            this.sCodigoInterno.ReadOnly = true;
+            this.sCodigoInterno.Width = 96;
             // 
             // sNombreProducto
             // 
@@ -392,6 +403,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdAlmacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn sAlmacen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sCodigoInterno;
         private System.Windows.Forms.DataGridViewTextBoxColumn sNombreProducto;
         private System.Windows.Forms.DataGridViewCheckBoxColumn bSeleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn sLaboratorio;

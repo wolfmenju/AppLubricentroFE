@@ -53,6 +53,7 @@
             this.PanTodo = new System.Windows.Forms.Panel();
             this.dgvProducto = new System.Windows.Forms.DataGridView();
             this.nIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sCodigoInterno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bAlternativo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.sLaboratorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -295,6 +296,7 @@
             this.dgvProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nIdProducto,
+            this.sCodigoInterno,
             this.sNombre,
             this.bAlternativo,
             this.sLaboratorio,
@@ -325,6 +327,16 @@
             this.nIdProducto.Name = "nIdProducto";
             this.nIdProducto.ReadOnly = true;
             this.nIdProducto.Visible = false;
+            this.nIdProducto.Width = 66;
+            // 
+            // sCodigoInterno
+            // 
+            this.sCodigoInterno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sCodigoInterno.DataPropertyName = "sCodigoInterno";
+            this.sCodigoInterno.HeaderText = "Codigo Interno";
+            this.sCodigoInterno.Name = "sCodigoInterno";
+            this.sCodigoInterno.ReadOnly = true;
+            this.sCodigoInterno.Width = 96;
             // 
             // sNombre
             // 
@@ -416,6 +428,7 @@
         internal System.Windows.Forms.Panel PanTodo;
         internal System.Windows.Forms.DataGridView dgvProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sCodigoInterno;
         private System.Windows.Forms.DataGridViewTextBoxColumn sNombre;
         private System.Windows.Forms.DataGridViewCheckBoxColumn bAlternativo;
         private System.Windows.Forms.DataGridViewTextBoxColumn sLaboratorio;

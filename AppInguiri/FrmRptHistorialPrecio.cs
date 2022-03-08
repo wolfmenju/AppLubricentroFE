@@ -112,7 +112,7 @@ namespace AppInguiri
             Venta objVenta = new Venta()
             {
                 nTipo = 9,
-                nIdPedido = lblCodigo.Text==""?0: Convert.ToInt32(lblCodigo.Text),
+                nIdPedido = lblCodigo.Text==""?0: Convert.ToInt32(lblCodigo.Tag),
                 dFecha = dtFechaInicio.Value,
                 sIdVendedor = dtFechaFinal.Value.ToString("yyyyMMdd"),
                 nIdAlmacen=(int)cboAlmacen.SelectedValue
@@ -141,7 +141,8 @@ namespace AppInguiri
 
             if (frmProductoListado._producto != null)
             {
-                lblCodigo .Text = frmProductoListado._producto.nIdProducto.ToString();
+                lblCodigo .Text = frmProductoListado._producto.sCodigoInterno.ToString();
+                lblCodigo.Tag = frmProductoListado._producto.nIdProducto;
                 lblDescripcion.Text = frmProductoListado._producto.sDescripcion.ToUpper();
                 lblStock.Text = frmProductoListado._producto.nTotal.ToString();
                 //lblTotal.Text=frmProductoListado._producto.nStock.ToString();

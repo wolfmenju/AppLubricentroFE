@@ -53,24 +53,26 @@ namespace Datos
                         objProdHis.nIdProducto = Convert.ToInt32(dr[0]);
                         objProdHis.nIdAlmacen = Convert.ToInt32(dr[1]);
                         objProdHis.sAlmacen = dr[2].ToString();
-                        objProdHis.sNombreProducto = dr[3].ToString();
-                        objProdHis.bSeleccionar =Convert.ToBoolean(dr[4]);
-                        objProdHis.sLaboratorio = dr[5].ToString();
-                        objProdHis.sLote = dr[6].ToString();
-                        objProdHis.dFechaVencimiento =Convert.ToDateTime(dr[7]);
-                        objProdHis.nStock = Convert.ToInt32(dr[8]); 
+                        objProdHis.sCodigoInterno = dr[3].ToString();
+                        objProdHis.sNombreProducto = dr[4].ToString();
+                        objProdHis.bSeleccionar =Convert.ToBoolean(dr[5]);
+                        objProdHis.sLaboratorio = dr[6].ToString();
+                        objProdHis.sLote = dr[7].ToString();
+                        objProdHis.dFechaVencimiento =Convert.ToDateTime(dr[8]);
+                        objProdHis.nStock = Convert.ToInt32(dr[9]); 
                     }
                     else if (objProductoHist.nTipo == 12 || objProductoHist.nTipo == 11)
                     {
                         objProdHis.nIdProducto = Convert.ToInt32(dr[0]);
                         objProdHis.nIdAlmacen = Convert.ToInt32(dr[1]);
                         objProdHis.sAlmacen = dr[2].ToString();
-                        objProdHis.sNombreProducto = dr[3].ToString();
-                        objProdHis.bSeleccionar = Convert.ToBoolean(dr[4]);
-                        objProdHis.sLaboratorio = dr[5].ToString();
+                        objProdHis.sCodigoInterno = dr[3].ToString();
+                        objProdHis.sNombreProducto = dr[4].ToString();
+                        objProdHis.bSeleccionar = Convert.ToBoolean(dr[5]);
+                        objProdHis.sLaboratorio = dr[6].ToString();
                         //Stock Minimo nIdProductoHistorial
-                        objProdHis.nIdProductoHistorial = Convert.ToInt32(dr[6]);
-                        objProdHis.nStock = Convert.ToInt32(dr[7]);
+                        objProdHis.nIdProductoHistorial = Convert.ToInt32(dr[7]);
+                        objProdHis.nStock = Convert.ToInt32(dr[8]);
                     }
                     else if (objProductoHist.nTipo == 9 || objProductoHist.nTipo == 10)
                     {

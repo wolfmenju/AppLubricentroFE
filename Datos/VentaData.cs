@@ -159,10 +159,11 @@ namespace Datos
                     else
                     {
                         objVent.nIdProducto = int.Parse(dr[0].ToString());
-                        objVent.sNombre = dr[1].ToString();
-                        objVent.bAlternativo = Convert.ToBoolean(dr[2]);
-                        objVent.sLaboratorio = dr[3].ToString();
-                        objVent.fTotal = Convert.ToDecimal(dr[4]);
+                        objVent.sCodigoInterno = dr[1].ToString();
+                        objVent.sNombre = dr[2].ToString();
+                        objVent.bAlternativo = Convert.ToBoolean(dr[3]);
+                        objVent.sLaboratorio = dr[4].ToString();
+                        objVent.fTotal = Convert.ToDecimal(dr[5]);
                     }
                     
                     listVenta.Add(objVent);
