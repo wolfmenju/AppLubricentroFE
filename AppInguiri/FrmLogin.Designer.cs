@@ -53,7 +53,7 @@
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(420, 100);
+            this.btnCancelar.Location = new System.Drawing.Point(364, 100);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(84, 26);
             this.btnCancelar.TabIndex = 6;
@@ -68,7 +68,7 @@
             this.btnIniciarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnIniciarSesion.Image")));
             this.btnIniciarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIniciarSesion.Location = new System.Drawing.Point(330, 100);
+            this.btnIniciarSesion.Location = new System.Drawing.Point(274, 100);
             this.btnIniciarSesion.Name = "btnIniciarSesion";
             this.btnIniciarSesion.Size = new System.Drawing.Size(84, 26);
             this.btnIniciarSesion.TabIndex = 5;
@@ -87,9 +87,9 @@
             this.Panel1.Controls.Add(this.PasswordLabel);
             this.Panel1.Controls.Add(this.UsernameLabel);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel1.Location = new System.Drawing.Point(190, 0);
+            this.Panel1.Location = new System.Drawing.Point(135, 0);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(325, 97);
+            this.Panel1.Size = new System.Drawing.Size(333, 97);
             this.Panel1.TabIndex = 4;
             // 
             // Label1
@@ -161,7 +161,7 @@
             this.PanSuperior.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanSuperior.Location = new System.Drawing.Point(0, 0);
             this.PanSuperior.Name = "PanSuperior";
-            this.PanSuperior.Size = new System.Drawing.Size(190, 127);
+            this.PanSuperior.Size = new System.Drawing.Size(135, 127);
             this.PanSuperior.TabIndex = 7;
             // 
             // LogoPictureBox
@@ -170,8 +170,8 @@
             this.LogoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("LogoPictureBox.Image")));
             this.LogoPictureBox.Location = new System.Drawing.Point(0, 0);
             this.LogoPictureBox.Name = "LogoPictureBox";
-            this.LogoPictureBox.Size = new System.Drawing.Size(188, 125);
-            this.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LogoPictureBox.Size = new System.Drawing.Size(133, 125);
+            this.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.LogoPictureBox.TabIndex = 2;
             this.LogoPictureBox.TabStop = false;
             // 
@@ -179,7 +179,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(199, 98);
+            this.label2.Location = new System.Drawing.Point(143, 98);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 12);
             this.label2.TabIndex = 100;
@@ -190,7 +190,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(199, 110);
+            this.label3.Location = new System.Drawing.Point(143, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 101;
@@ -203,7 +203,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(515, 127);
+            this.ClientSize = new System.Drawing.Size(468, 127);
             this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

@@ -922,6 +922,7 @@
     <Content Include="Imagenes\report.ico" />
     <Content Include="Imagenes\ReporteCompra.png" />
     <Content Include="Imagenes\Sede.fw.png" />
+    <Content Include="Imagenes\sesion.png" />
     <Content Include="Imagenes\shopping cart.ico" />
     <Content Include="Imagenes\Sistema.ico" />
     <None Include="Imagenes\sunat.png" />
