@@ -107,7 +107,7 @@
             this.cboDocumento.Items.AddRange(new object[] {
             "LISTA DE CLIENTES",
             "LISTA DE PROVEEDORES",
-            "LISTA DE LABORATORIOS",
+            "LISTA DE CATEGORIAS",
             "LISTA DE ALMACENES"});
             this.cboDocumento.Location = new System.Drawing.Point(66, 8);
             this.cboDocumento.Name = "cboDocumento";

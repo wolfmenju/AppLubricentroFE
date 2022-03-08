@@ -59,12 +59,13 @@ namespace Datos
                     else if (objProducto.nTipo == 7)
                     {
                         objProd.nIdProducto = Convert.ToInt32(dr[0]);
-                        objProd.sDescripcion = dr[1].ToString();
-                        objProd.sPrincipioActivo = dr[2].ToString();
-                        objProd.sLaboratorio =dr[3].ToString();
-                        objProd.sPresentacion = dr[4].ToString();
-                        objProd.bAlternativo = Convert.ToBoolean(dr[5].ToString());
-                        objProd.nStockMinimo = Convert.ToInt32(dr[6].ToString());
+                        objProd.sCodigoInterno = dr[1].ToString();
+                        objProd.sDescripcion = dr[2].ToString();
+                        objProd.sPrincipioActivo = dr[3].ToString();
+                        objProd.sLaboratorio =dr[4].ToString();
+                        objProd.sPresentacion = dr[5].ToString();
+                        objProd.bAlternativo = Convert.ToBoolean(dr[6].ToString());
+                        objProd.nStockMinimo = Convert.ToInt32(dr[7].ToString());
                     }
                     else if (objProducto.nTipo == 5 || objProducto.nTipo == 9 || objProducto.nTipo == 8 || objProducto.nTipo == 10)
                     {

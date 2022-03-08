@@ -106,7 +106,7 @@
             this.cboDocumento.FormattingEnabled = true;
             this.cboDocumento.Items.AddRange(new object[] {
             "LISTA DE PRODUCTOS",
-            "LISTA DE PRODUCTOS POR LABORATORIO",
+            "LISTA DE PRODUCTOS POR CATEGORIA",
             "LISTA DE PRODUCTOS POR PRESENTACION"});
             this.cboDocumento.Location = new System.Drawing.Point(66, 8);
             this.cboDocumento.Name = "cboDocumento";

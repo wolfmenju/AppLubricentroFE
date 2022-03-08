@@ -382,10 +382,10 @@
             // 
             this.sLaboratorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sLaboratorio.DataPropertyName = "sLaboratorio";
-            this.sLaboratorio.HeaderText = "Laboratorio";
+            this.sLaboratorio.HeaderText = "Categoria";
             this.sLaboratorio.Name = "sLaboratorio";
             this.sLaboratorio.ReadOnly = true;
-            this.sLaboratorio.Width = 87;
+            this.sLaboratorio.Width = 79;
             // 
             // sLote
             // 

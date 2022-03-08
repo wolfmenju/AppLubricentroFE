@@ -9,6 +9,7 @@ namespace AppInguiri.EntidadReporte
     public class ListaVentasRpt
     {
         public int nIdVenta { get; set; }
+        public string sCodigoInterno { get; set; }
         public string sProducto { get; set; }
         public DateTime dFecha { get; set; }
         public string sDocumento { get; set; }
@@ -17,5 +18,6 @@ namespace AppInguiri.EntidadReporte
         public int nCantidad { get; set; }
         public decimal fPrecio { get; set; }
         public decimal fDescuento { get; set; }
+        public decimal fIgv { get; set; }
     }
 }

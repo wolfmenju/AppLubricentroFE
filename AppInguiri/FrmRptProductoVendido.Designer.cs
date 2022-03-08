@@ -366,10 +366,10 @@
             this.sLaboratorio.DataPropertyName = "sLaboratorio";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.sLaboratorio.DefaultCellStyle = dataGridViewCellStyle4;
-            this.sLaboratorio.HeaderText = "Laboratorio";
+            this.sLaboratorio.HeaderText = "Categoria";
             this.sLaboratorio.Name = "sLaboratorio";
             this.sLaboratorio.ReadOnly = true;
-            this.sLaboratorio.Width = 87;
+            this.sLaboratorio.Width = 79;
             // 
             // fTotal
             // 

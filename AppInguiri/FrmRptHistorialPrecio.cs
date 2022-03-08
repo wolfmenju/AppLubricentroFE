@@ -70,7 +70,7 @@ namespace AppInguiri
                 HistorialPrecioRpt objHistorialPrecioRpt = new HistorialPrecioRpt();
 
                 objHistorialPrecioRpt.dFecha = Convert.ToDateTime(item.Cells["dFecha"].Value);
-                objHistorialPrecioRpt.sLote = item.Cells["sIdDocumento"].Value.ToString();
+                objHistorialPrecioRpt.sLote = item.Cells["sIdDocumento"].Value.ToString().Equals("")?"DEFAUL": item.Cells["sIdDocumento"].Value.ToString();
                 objHistorialPrecioRpt.nCantidad = Convert.ToInt32(item.Cells["nNumero"].Value.ToString());
                 objHistorialPrecioRpt.fPrecio = Convert.ToDecimal(item.Cells["fPrecioVenta"].Value.ToString());
                 objHistorialPrecioRpt.fTotal = Convert.ToDecimal(item.Cells["fTotal"].Value.ToString());
@@ -79,7 +79,7 @@ namespace AppInguiri
 
             rpt.SetDataSource(lisHistorialPrecioRpt);
             rpt.SetParameterValue("Usuario", Funciones.UsuarioActual());
-            rpt.SetParameterValue("Producto", lblDescripcion.Text.ToUpper());
+            rpt.SetParameterValue("Producto", lblCodigo.Text+"-"+lblDescripcion.Text.ToUpper());
             rpt.SetParameterValue("NombreEmpresa", objParaNeg.LeerUnParametro("ID_TITULO"));
             rpt.SetParameterValue("Nombres", Funciones.UsuarioActual());
             RptMaestro Reporte = new RptMaestro();

@@ -77,13 +77,13 @@ namespace AppInguiri
                 objKardexRpt.sNumeracion = item.Cells["sLaboratorio"].Value.ToString();
                 objKardexRpt.nEntrada =Convert.ToInt32(item.Cells["nStock"].Value.ToString());
                 objKardexRpt.nSalida = Convert.ToInt32(item.Cells["nIdProductoHistorial"].Value.ToString());
-                objKardexRpt.sLote = item.Cells["sLote"].Value.ToString();
+                objKardexRpt.sLote = item.Cells["sLote"].Value.ToString().Equals("")?"DEFAULT" : item.Cells["sLote"].Value.ToString();
                 listKardexRpt.Add(objKardexRpt);
             }
 
             rpt.SetDataSource(listKardexRpt);
             rpt.SetParameterValue("Usuario", Funciones.UsuarioActual());
-            rpt.SetParameterValue("Producto", lblDescripcion.Text.ToUpper());
+            rpt.SetParameterValue("Producto",lblCodigo.Text+"-"+ lblDescripcion.Text.ToUpper());
             rpt.SetParameterValue("NombreEmpresa", objParaNeg.LeerUnParametro("ID_TITULO"));
             rpt.SetParameterValue("Nombres", Funciones.UsuarioActual());
             RptMaestro Reporte = new RptMaestro();
@@ -121,7 +121,7 @@ namespace AppInguiri
             ProductoHistorial objProdHistorial = new ProductoHistorial()
             {
                 nTipo = chkFecha.Checked==true?8:7,
-                nIdProducto = lblCodigo.Text==""?0:Convert.ToInt32(lblCodigo.Text),
+                nIdProducto = lblCodigo.Text==""?0:Convert.ToInt32(lblCodigo.Tag),
                 sLote  = dtFechaInicio.Value.ToString("yyyyMMdd"),
                 sIdLote = dtFechaFinal.Value.ToString("yyyyMMdd"),
                 nIdAlmacen = (int)cboAlmacen.SelectedValue
@@ -166,7 +166,8 @@ namespace AppInguiri
 
             if (frmProductoListado._producto != null)
             {
-                lblCodigo.Text = frmProductoListado._producto.nIdProducto.ToString();
+                lblCodigo.Text = frmProductoListado._producto.sCodigoInterno.ToString();
+                lblCodigo.Tag = frmProductoListado._producto.nIdProducto;
                 lblDescripcion.Text = frmProductoListado._producto.sDescripcion.ToUpper();
                 lblStock.Text = frmProductoListado._producto.nTotal.ToString();
                 //lblTotal.Text=frmProductoListado._producto.nStock.ToString();

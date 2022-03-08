@@ -308,8 +308,9 @@
             // 
             this.fDescuento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fDescuento.DataPropertyName = "fDescuento";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
             this.fDescuento.DefaultCellStyle = dataGridViewCellStyle5;
             this.fDescuento.HeaderText = "Ganancia";
             this.fDescuento.Name = "fDescuento";

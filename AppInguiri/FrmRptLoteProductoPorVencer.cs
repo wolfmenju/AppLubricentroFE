@@ -74,11 +74,12 @@ namespace AppInguiri
                 ProductoVencidoRpt objProVenRpt = new ProductoVencidoRpt();
 
                 objProVenRpt.nIdAlmacen = Convert.ToInt32(item.Cells["nIdAlmacen"].Value);
+                objProVenRpt.sCodigoInterno = item.Cells["sCodigoInterno"].Value.ToString();
                 objProVenRpt.sProducto = item.Cells["sNombreProducto"].Value.ToString();
                 objProVenRpt.sAlmacen = item.Cells["sAlmacen"].Value.ToString();
                 objProVenRpt.bAlternativo = item.Cells["bSeleccionar"].Value.ToString();
                 objProVenRpt.sLaboratorio= item.Cells["sLaboratorio"].Value.ToString();
-                objProVenRpt.sLote = item.Cells["sLote"].Value.ToString();
+                objProVenRpt.sLote = item.Cells["sLote"].Value.ToString().Equals("")?"DEFAULT" : item.Cells["sLote"].Value.ToString();
                 objProVenRpt.sFeChaVencimiento =Convert.ToDateTime(item.Cells["dFechaVencimiento"].Value).ToString("dd/MM/yyyy");
                 objProVenRpt.sDias = item.Cells["nStock"].Value.ToString();
                 

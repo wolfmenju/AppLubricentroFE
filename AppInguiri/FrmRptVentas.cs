@@ -89,10 +89,12 @@ namespace AppInguiri
                     objProVenRpt.dFecha = item.dFecha;
                     objProVenRpt.sDocumento = item.sIdDocumento;
                     objProVenRpt.sIdCajero = item.sIdCajero;
+                    objProVenRpt.sCodigoInterno = item.sCodigoInterno;
                     objProVenRpt.sProducto = item.sProducto;
                     objProVenRpt.nCantidad = item.nCodigo;
-                    objProVenRpt.fPrecio = item.fPrecioVenta;
+                    objProVenRpt.fPrecio =decimal.Round(item.fPrecioVenta- item.fIgv,2);
                     objProVenRpt.fDescuento = item.fDescuento;
+                    objProVenRpt.fIgv = item.fIgv;
                     listadoVentas.Add(objProVenRpt);
                 }
 

@@ -59,7 +59,7 @@ namespace Datos
                     {
                         objVent.dFecha = Convert.ToDateTime(dr[0].ToString());
                         objVent.fTotal = Convert.ToDecimal(dr[1]);
-                        objVent.fDescuento = Convert.ToInt32(dr[2]);
+                        objVent.fDescuento = Convert.ToDecimal(dr[2]);
                     }
                     else if (objVenta.nTipo == 8)
                     {
@@ -110,10 +110,12 @@ namespace Datos
                         objVent.dFecha = Convert.ToDateTime(dr[2].ToString());
                         objVent.sIdDocumento = dr[3].ToString();
                         objVent.sIdCajero = dr[4].ToString();
-                        objVent.sProducto = dr[5].ToString();
-                        objVent.nCodigo = Convert.ToInt32(dr[6]);
-                        objVent.fPrecioVenta = Convert.ToDecimal(dr[7]);
-                        objVent.fDescuento = Convert.ToDecimal(dr[8].ToString());
+                        objVent.sCodigoInterno = dr[5].ToString();
+                        objVent.sProducto = dr[6].ToString();
+                        objVent.nCodigo = Convert.ToInt32(dr[7]);
+                        objVent.fPrecioVenta = Convert.ToDecimal(dr[8]);
+                        objVent.fDescuento = Convert.ToDecimal(dr[9].ToString());
+                        objVent.fIgv = Convert.ToDecimal(dr[10].ToString());
                     }
                     else if (objVenta.nTipo == 2)
                     {

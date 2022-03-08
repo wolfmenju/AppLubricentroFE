@@ -67,12 +67,12 @@ namespace AppInguiri
             foreach (DataGridViewRow item in dgvProducto.Rows)
             {
                 StockMinimoRpt objProStock = new StockMinimoRpt();
-
+                objProStock.sCodigoInterno= item.Cells["sCodigoInterno"].Value.ToString();
                 objProStock.sProducto = item.Cells["sNombreProducto"].Value.ToString();
                 objProStock.sAlmacen = item.Cells["sAlmacen"].Value.ToString();
                 objProStock.bAlternativo = Convert.ToBoolean(item.Cells["bSeleccionar"].Value);
                 objProStock.sLaboratorio = item.Cells["sLaboratorio"].Value.ToString();
-                objProStock.sLote = item.Cells["sLote"].Value.ToString();
+                objProStock.sLote = item.Cells["sLote"].Value.ToString().Equals("")?"DEFAULT": item.Cells["sLote"].Value.ToString();
                 objProStock.dFechaVencimiento = Convert.ToDateTime(item.Cells["dFechaVencimiento"].Value);
                 objProStock.nTotal = Convert.ToInt32(item.Cells["nStock"].Value);
                 listStockMinimo.Add(objProStock);

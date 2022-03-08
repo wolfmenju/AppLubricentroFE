@@ -9,6 +9,7 @@ namespace AppInguiri.EntidadReporte
     public class ProductoRpt
     {
         public int nIdProducto { get; set; }
+        public string sCodigoInterno { get; set; }
         public string sProducto { get; set; }
         public string sPrincipioActivo { get; set; }
         public string sLaboratorio { get; set; }

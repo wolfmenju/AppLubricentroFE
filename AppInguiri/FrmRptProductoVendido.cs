@@ -79,6 +79,7 @@ namespace AppInguiri
                 ProductoVendidoRpt objProVenRpt = new ProductoVendidoRpt();
 
                 objProVenRpt.nIdProducto = Convert.ToInt32(item.Cells["nIdProducto"].Value);
+                objProVenRpt.sCodigoInterno = item.Cells["sCodigoInterno"].Value.ToString();
                 objProVenRpt.sDescrípcion = item.Cells["sNombre"].Value.ToString();
                 objProVenRpt.bAlternativo = Convert.ToString(item.Cells["bAlternativo"].Value);
                 objProVenRpt.sLaboratorio = item.Cells["sLaboratorio"].Value.ToString();

@@ -70,6 +70,7 @@ namespace AppInguiri
             foreach (Producto item in listProd)
             {
                 ProductoRpt objProdRpt = new ProductoRpt();
+                objProdRpt.sCodigoInterno = item.sCodigoInterno;
                 objProdRpt.sProducto = item.sDescripcion;
                 objProdRpt.sPrincipioActivo = item.sPrincipioActivo;
                 objProdRpt.sLaboratorio = item.sLaboratorio;

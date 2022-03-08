@@ -74,6 +74,7 @@ namespace AppInguiri
                 StockMinimoRpt objProStockMinimo = new StockMinimoRpt();
 
                 objProStockMinimo.nIdAlmacen = Convert.ToInt32(item.Cells["nIdAlmacen"].Value);
+                objProStockMinimo.sCodigoInterno = item.Cells["sCodigoInterno"].Value.ToString();
                 objProStockMinimo.sProducto = item.Cells["sNombreProducto"].Value.ToString();
                 objProStockMinimo.sAlmacen = item.Cells["sAlmacen"].Value.ToString();
                 objProStockMinimo.bAlternativo =Convert.ToBoolean(item.Cells["bSeleccionar"].Value);
