@@ -299,21 +299,22 @@
             dataGridViewCellStyle4.Format = "C2";
             dataGridViewCellStyle4.NullValue = null;
             this.fTotal.DefaultCellStyle = dataGridViewCellStyle4;
-            this.fTotal.HeaderText = "Total";
+            this.fTotal.HeaderText = "Total Vendido";
             this.fTotal.Name = "fTotal";
             this.fTotal.ReadOnly = true;
-            this.fTotal.Width = 56;
+            this.fTotal.Width = 97;
             // 
             // fDescuento
             // 
             this.fDescuento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fDescuento.DataPropertyName = "fDescuento";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "C2";
             this.fDescuento.DefaultCellStyle = dataGridViewCellStyle5;
-            this.fDescuento.HeaderText = "Cantidad";
+            this.fDescuento.HeaderText = "Ganancia";
             this.fDescuento.Name = "fDescuento";
             this.fDescuento.ReadOnly = true;
-            this.fDescuento.Width = 75;
+            this.fDescuento.Width = 76;
             // 
             // FrmRptUtilidades
             // 

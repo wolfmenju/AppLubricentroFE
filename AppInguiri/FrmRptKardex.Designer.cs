@@ -396,6 +396,7 @@
             this.sLote.HeaderText = "Lote";
             this.sLote.Name = "sLote";
             this.sLote.ReadOnly = true;
+            this.sLote.Visible = false;
             this.sLote.Width = 53;
             // 
             // nStock

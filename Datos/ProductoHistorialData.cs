@@ -76,13 +76,14 @@ namespace Datos
                     {
                         objProdHis.nIdProducto = Convert.ToInt32(dr[0]);
                         objProdHis.sAlmacen = dr[1].ToString();
-                        objProdHis.sNombreProducto = dr[2].ToString();
-                        objProdHis.bSeleccionar = Convert.ToBoolean(dr[3]);
-                        objProdHis.sLaboratorio = dr[4].ToString();
-                        objProdHis.sLote = dr[5].ToString();
-                        if (dr[6] == DBNull.Value) objProdHis.dFechaVencimiento = null;
-                        else objProdHis.dFechaVencimiento = Convert.ToDateTime(dr[6].ToString());
-                        objProdHis.nStock = Convert.ToInt32(dr[7]);
+                        objProdHis.sCodigoInterno = dr[2].ToString();
+                        objProdHis.sNombreProducto = dr[3].ToString();
+                        objProdHis.bSeleccionar = Convert.ToBoolean(dr[4]);
+                        objProdHis.sLaboratorio = dr[5].ToString();
+                        objProdHis.sLote = dr[6].ToString();
+                        if (dr[7] == DBNull.Value) objProdHis.dFechaVencimiento = null;
+                        else objProdHis.dFechaVencimiento = Convert.ToDateTime(dr[7].ToString());
+                        objProdHis.nStock = Convert.ToInt32(dr[8]);
                     }
                     else if (objProductoHist.nTipo == 8 || objProductoHist.nTipo == 7)
                     {
