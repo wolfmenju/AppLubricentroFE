@@ -117,6 +117,19 @@ namespace Datos
                         objVent.fDescuento = Convert.ToDecimal(dr[9].ToString());
                         objVent.fIgv = Convert.ToDecimal(dr[10].ToString());
                     }
+                    else if (objVenta.nTipo == 11)
+                    {
+                        objVent.nCodigo = Convert.ToInt32(dr[0].ToString());
+                        objVent.fTotal= Convert.ToDecimal(dr[1].ToString());
+
+                    }
+                    else if (objVenta.nTipo == 12)
+                    {
+                        objVent.nCodigo = Convert.ToInt32(dr[0].ToString());
+                        objVent.nTipo = Convert.ToInt32(dr[1].ToString());
+                        objVent.fTotal = Convert.ToDecimal(dr[2].ToString());
+
+                    }
                     else if (objVenta.nTipo == 2)
                     {
                         objVent.nIdVenta = int.Parse(dr[0].ToString());

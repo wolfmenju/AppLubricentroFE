@@ -104,6 +104,7 @@
             this.barButtonItem30 = new DevExpress.XtraBars.BarButtonItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pbLogoInguiri = new System.Windows.Forms.PictureBox();
+            this.barBtnDashboardVentas = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoInguiri)).BeginInit();
@@ -165,9 +166,10 @@
             this.CodFecha,
             this.barBtnReporteCompra,
             this.barBtnDevuelveProducto,
-            this.barBtnActualizaStock});
+            this.barBtnActualizaStock,
+            this.barBtnDashboardVentas});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.RibbonControl.MaxItemId = 72;
+            this.RibbonControl.MaxItemId = 74;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -743,6 +745,7 @@
             this.ribbonPageGroup10.ItemLinks.Add(this.barBtnRptCajaChica);
             this.ribbonPageGroup10.ItemLinks.Add(this.barBtnReporteVenta);
             this.ribbonPageGroup10.ItemLinks.Add(this.barBtnReporteCompra);
+            this.ribbonPageGroup10.ItemLinks.Add(this.barBtnDashboardVentas);
             this.ribbonPageGroup10.Name = "ribbonPageGroup10";
             this.ribbonPageGroup10.Text = "Movimientos";
             // 
@@ -796,6 +799,14 @@
             this.pbLogoInguiri.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogoInguiri.TabIndex = 3;
             this.pbLogoInguiri.TabStop = false;
+            // 
+            // barBtnDashboardVentas
+            // 
+            this.barBtnDashboardVentas.Caption = "Dashboard Ventas";
+            this.barBtnDashboardVentas.Id = 73;
+            this.barBtnDashboardVentas.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnDashboardVentas.LargeGlyph")));
+            this.barBtnDashboardVentas.Name = "barBtnDashboardVentas";
+            this.barBtnDashboardVentas.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnDashboardVentas_ItemClick);
             // 
             // FrmPrincipal
             // 
@@ -897,5 +908,6 @@
         private DevExpress.XtraBars.BarButtonItem barBtnActualizaStock;
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.PictureBox pbLogoInguiri;
+        private DevExpress.XtraBars.BarButtonItem barBtnDashboardVentas;
     }
 }

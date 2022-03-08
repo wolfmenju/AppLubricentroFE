@@ -271,11 +271,11 @@
     <Compile Include="FrmAjusteStock.Designer.cs">
       <DependentUpon>FrmAjusteStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frmtest.cs">
+    <Compile Include="FrmVentaEstadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frmtest.Designer.cs">
-      <DependentUpon>Frmtest.cs</DependentUpon>
+    <Compile Include="FrmVentaEstadisticas.Designer.cs">
+      <DependentUpon>FrmVentaEstadisticas.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmVentaListar.cs">
       <SubType>Form</SubType>
@@ -687,8 +687,8 @@
     <EmbeddedResource Include="FrmAjusteStock.resx">
       <DependentUpon>FrmAjusteStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frmtest.resx">
-      <DependentUpon>Frmtest.cs</DependentUpon>
+    <EmbeddedResource Include="FrmVentaEstadisticas.resx">
+      <DependentUpon>FrmVentaEstadisticas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVentaListar.resx">
       <DependentUpon>FrmVentaListar.cs</DependentUpon>
@@ -908,6 +908,7 @@
     <Content Include="Imagenes\ActualizacionStock.png" />
     <None Include="Imagenes\cancelar.png" />
     <Content Include="Imagenes\buscar.png" />
+    <Content Include="Imagenes\dashboard.png" />
     <Content Include="Imagenes\Derecha.ico" />
     <Content Include="Imagenes\devolucionProducto.png" />
     <Content Include="Imagenes\doctor.ico" />

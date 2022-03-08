@@ -82,7 +82,7 @@ namespace AppInguiri
             if (tipo == 2)
             {
                 claveParameSele = txtClave.Text.ToUpper();
-                valorParameSele = txtValor.Text.ToUpper();
+                valorParameSele = txtValor.Text;
                 descripParameSele = txtDescripcion.Text.ToUpper();
 
                 Parametro objPara = new Parametro()

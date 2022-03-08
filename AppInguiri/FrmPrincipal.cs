@@ -49,6 +49,7 @@ namespace AppInguiri
         FrmRptDeudaPorVencer frmRptDeudaPorVencer = null;
         FrmRptReporteGenerales frmRptReporteGenerales = null;
         FrmRptProductos frmRptProductos = null;
+        FrmVentaEstadisticas frmVentaEstadisticas = null;
         List<Form> ListaFormu = new List<Form>();
         
         #endregion
@@ -470,6 +471,12 @@ namespace AppInguiri
             frmRptProductos.ShowDialog();
         }
 
+        private void barBtnDashboardVentas_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frmVentaEstadisticas = FrmVentaEstadisticas.Instance();
+            frmVentaEstadisticas.ShowDialog();
+        }
+
         private void FrmPrincipal_SizeChanged(object sender, EventArgs e)
         {
             pbLogoInguiri.Location = new System.Drawing.Point(this.Width-240, this.Height-130);
@@ -507,7 +514,6 @@ namespace AppInguiri
 
             ValidarFormularioActivos();
         }
-        
     }
 }
 
