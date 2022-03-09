@@ -18,7 +18,7 @@ namespace AppInguiri
     {
         private static FrmVentaEstadisticas frmInstance = null;
         private VentaNegocio obj = new VentaNegocio();
-        private List<Venta> list = new List<Venta>();
+        private List<Venta> list = null;
 
         public FrmVentaEstadisticas()
         {
@@ -36,28 +36,34 @@ namespace AppInguiri
             return frmInstance;
         }
                 
-        private void GenerarGrafico()
+        private void GenerarGrafico( int xtipo)
         {
-            list = obj.ListarVentas(new Venta { nTipo = 11 });
+            lblTotal.Text = "S/. 0.00";
+            chGrafico.Series["Venta"].Points.Clear();
+            list = new List<Venta>();
+            list = obj.ListarVentas(new Venta { nTipo = xtipo });
 
             decimal suma = 0M;
 
             for (int i = 0; i < list.Count; i++)
             {
-                chart1.Series["Fecha"].Points.AddXY(list[i].fTotal, list[i].nCodigo);
-
+                if(xtipo==12) chGrafico.Series["Venta"].Points.AddXY(list[i].sProducto, list[i].fTotal);
+                else chGrafico.Series["Venta"].Points.AddXY(list[i].nCodigo, list[i].fTotal);
+                suma = suma + list[i].fTotal;
             }
 
-            //for (int i = 0; i < list.Count; i++)
-            //{
-            //    chart1.Series["Fecha"].Points.AddXY(list[i].nCodigo, list[i].fTotal);
-
-            //}
+            lblTotal.Text = suma.ToString("C");
         }
 
         private void FrmVentaEstadisticas_Load(object sender, EventArgs e)
         {
-            GenerarGrafico();
+            cbxTipoGrafico.SelectedIndex = 0;
+            GenerarGrafico(12);
+        }
+
+        private void cbxTipoGrafico_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            GenerarGrafico(cbxTipoGrafico.SelectedIndex == 0 ? 12 : 11);
         }
     }
 }

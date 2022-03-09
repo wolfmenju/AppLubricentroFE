@@ -125,8 +125,7 @@ namespace Datos
                     }
                     else if (objVenta.nTipo == 12)
                     {
-                        objVent.nCodigo = Convert.ToInt32(dr[0].ToString());
-                        objVent.nTipo = Convert.ToInt32(dr[1].ToString());
+                        objVent.sProducto =dr[0].ToString()+"-"+ dr[1].ToString();
                         objVent.fTotal = Convert.ToDecimal(dr[2].ToString());
 
                     }

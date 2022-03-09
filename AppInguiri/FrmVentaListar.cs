@@ -744,7 +744,7 @@ namespace AppInguiri
                     data.emisor.tipo_doc = "6";
                     data.emisor.nom_comercial = "null";
                     data.emisor.razon_social = sRazonSocial;
-                    data.emisor.sede= "ILOVE";
+                    data.emisor.sede= "PRINCIPAL";
                     data.emisor.codigo_ubigeo = sUbigeo;
                     data.emisor.direccion = sDireccion;
                     data.emisor.direccion_departamento = sDepart;
@@ -866,7 +866,7 @@ namespace AppInguiri
                     }
                     else
                     {
-                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
+                        if (cliente.sNumeroDoc.Equals("00000000"))
                         {
                             data.cliente_tipo_doc = "0";
                         }
