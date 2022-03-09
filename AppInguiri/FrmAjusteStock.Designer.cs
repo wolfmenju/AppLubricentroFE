@@ -584,6 +584,7 @@
             this.nIdMovimiento.Name = "nIdMovimiento";
             this.nIdMovimiento.ReadOnly = true;
             this.nIdMovimiento.Visible = false;
+            this.nIdMovimiento.Width = 77;
             // 
             // nIdProducto
             // 
@@ -593,6 +594,7 @@
             this.nIdProducto.Name = "nIdProducto";
             this.nIdProducto.ReadOnly = true;
             this.nIdProducto.Visible = false;
+            this.nIdProducto.Width = 66;
             // 
             // sDescripcion
             // 
@@ -612,6 +614,7 @@
             this.sLote.HeaderText = "Lote";
             this.sLote.Name = "sLote";
             this.sLote.ReadOnly = true;
+            this.sLote.Visible = false;
             this.sLote.Width = 53;
             // 
             // Vencimiento
@@ -665,6 +668,7 @@
             this.fGanancia.Name = "fGanancia";
             this.fGanancia.ReadOnly = true;
             this.fGanancia.Visible = false;
+            this.fGanancia.Width = 76;
             // 
             // fPrecioVenta
             // 
@@ -703,6 +707,7 @@
             this.bServicio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.bServicio.TrueValue = "";
             this.bServicio.Visible = false;
+            this.bServicio.Width = 69;
             // 
             // fDescuento
             // 
@@ -716,6 +721,7 @@
             this.fDescuento.Name = "fDescuento";
             this.fDescuento.ReadOnly = true;
             this.fDescuento.Visible = false;
+            this.fDescuento.Width = 83;
             // 
             // FrmAjusteStock
             // 
