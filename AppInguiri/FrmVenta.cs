@@ -551,7 +551,7 @@ namespace AppInguiri
                     }
                     else
                     {
-                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
+                        if (cliente.sNumeroDoc.Equals("00000000"))
                         {
                             data.cliente_tipo_doc = "0";
                         }
@@ -633,10 +633,9 @@ namespace AppInguiri
                         objVentaFE.nTipo = 1;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
                         objVentaFE.sCdr = resultado.data.cdr;
-                        objVentaFE.sHash = resultado.data.hash_cpe;
+                        objVentaFE.sHash = resultado.data.hash_cdr;
                         objVentaFE.sCodigoResp = resultado.data.status_code;
                         objVentaFE.sMensajeResp = resultado.data.respuesta;
-
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
 
                         int resp = objVentNeg.ActualizarVentaNotficacionSunat(objVentaFE);

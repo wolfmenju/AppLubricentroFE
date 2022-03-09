@@ -33,6 +33,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,10 +46,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanOpciones = new System.Windows.Forms.Panel();
             this.btnDetalle = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -59,6 +59,12 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.TabMedicamento = new System.Windows.Forms.TabPage();
             this.dgvProducto = new System.Windows.Forms.DataGridView();
+            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bAlternativo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.sPresentacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sLaboratorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sPrincipioActivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabDetalle = new System.Windows.Forms.TabPage();
             this.dgvLotes = new System.Windows.Forms.DataGridView();
             this.nIdProductoHistorial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,12 +76,6 @@
             this.bSeleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.PanProducto = new System.Windows.Forms.Panel();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bAlternativo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.sPresentacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sLaboratorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sPrincipioActivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanOpciones.SuspendLayout();
             this.PanSuperior.SuspendLayout();
             this.PanInferior.SuspendLayout();
@@ -315,6 +315,73 @@
             this.dgvProducto.TabIndex = 1;
             this.dgvProducto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProducto_KeyDown);
             // 
+            // sDescripcion
+            // 
+            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sDescripcion.DataPropertyName = "sDescripcion";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sDescripcion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sDescripcion.Frozen = true;
+            this.sDescripcion.HeaderText = "Producto";
+            this.sDescripcion.Name = "sDescripcion";
+            this.sDescripcion.ReadOnly = true;
+            this.sDescripcion.Width = 89;
+            // 
+            // bAlternativo
+            // 
+            this.bAlternativo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.bAlternativo.DataPropertyName = "bAlternativo";
+            this.bAlternativo.HeaderText = "Alternativo";
+            this.bAlternativo.Name = "bAlternativo";
+            this.bAlternativo.ReadOnly = true;
+            this.bAlternativo.Visible = false;
+            // 
+            // sPresentacion
+            // 
+            this.sPresentacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sPresentacion.DataPropertyName = "sPresentacion";
+            this.sPresentacion.HeaderText = "Presentación";
+            this.sPresentacion.Name = "sPresentacion";
+            this.sPresentacion.ReadOnly = true;
+            this.sPresentacion.Width = 116;
+            // 
+            // sLaboratorio
+            // 
+            this.sLaboratorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sLaboratorio.DataPropertyName = "sLaboratorio";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sLaboratorio.DefaultCellStyle = dataGridViewCellStyle4;
+            this.sLaboratorio.HeaderText = "Categoria";
+            this.sLaboratorio.Name = "sLaboratorio";
+            this.sLaboratorio.ReadOnly = true;
+            this.sLaboratorio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sLaboratorio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sLaboratorio.Width = 75;
+            // 
+            // nTotal
+            // 
+            this.nTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nTotal.DataPropertyName = "nTotal";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.nTotal.DefaultCellStyle = dataGridViewCellStyle5;
+            this.nTotal.HeaderText = "Total";
+            this.nTotal.Name = "nTotal";
+            this.nTotal.ReadOnly = true;
+            this.nTotal.Width = 64;
+            // 
+            // sPrincipioActivo
+            // 
+            this.sPrincipioActivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sPrincipioActivo.DataPropertyName = "sPrincipioActivo";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sPrincipioActivo.DefaultCellStyle = dataGridViewCellStyle6;
+            this.sPrincipioActivo.HeaderText = "Principio Activo";
+            this.sPrincipioActivo.Name = "sPrincipioActivo";
+            this.sPrincipioActivo.ReadOnly = true;
+            this.sPrincipioActivo.Width = 119;
+            // 
             // TabDetalle
             // 
             this.TabDetalle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
@@ -485,74 +552,6 @@
             this.lblNombre.Size = new System.Drawing.Size(909, 20);
             this.lblNombre.TabIndex = 34;
             this.lblNombre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // sDescripcion
-            // 
-            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sDescripcion.DataPropertyName = "sDescripcion";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sDescripcion.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sDescripcion.Frozen = true;
-            this.sDescripcion.HeaderText = "Producto";
-            this.sDescripcion.Name = "sDescripcion";
-            this.sDescripcion.ReadOnly = true;
-            this.sDescripcion.Width = 89;
-            // 
-            // bAlternativo
-            // 
-            this.bAlternativo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.bAlternativo.DataPropertyName = "bAlternativo";
-            this.bAlternativo.HeaderText = "Alternativo";
-            this.bAlternativo.Name = "bAlternativo";
-            this.bAlternativo.ReadOnly = true;
-            this.bAlternativo.Visible = false;
-            this.bAlternativo.Width = 80;
-            // 
-            // sPresentacion
-            // 
-            this.sPresentacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sPresentacion.DataPropertyName = "sPresentacion";
-            this.sPresentacion.HeaderText = "Presentación";
-            this.sPresentacion.Name = "sPresentacion";
-            this.sPresentacion.ReadOnly = true;
-            this.sPresentacion.Width = 116;
-            // 
-            // sLaboratorio
-            // 
-            this.sLaboratorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sLaboratorio.DataPropertyName = "sLaboratorio";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sLaboratorio.DefaultCellStyle = dataGridViewCellStyle4;
-            this.sLaboratorio.HeaderText = "Categoria";
-            this.sLaboratorio.Name = "sLaboratorio";
-            this.sLaboratorio.ReadOnly = true;
-            this.sLaboratorio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sLaboratorio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sLaboratorio.Width = 75;
-            // 
-            // nTotal
-            // 
-            this.nTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nTotal.DataPropertyName = "nTotal";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            this.nTotal.DefaultCellStyle = dataGridViewCellStyle5;
-            this.nTotal.HeaderText = "Total";
-            this.nTotal.Name = "nTotal";
-            this.nTotal.ReadOnly = true;
-            this.nTotal.Width = 64;
-            // 
-            // sPrincipioActivo
-            // 
-            this.sPrincipioActivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sPrincipioActivo.DataPropertyName = "sPrincipioActivo";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sPrincipioActivo.DefaultCellStyle = dataGridViewCellStyle6;
-            this.sPrincipioActivo.HeaderText = "Principio Activo";
-            this.sPrincipioActivo.Name = "sPrincipioActivo";
-            this.sPrincipioActivo.ReadOnly = true;
-            this.sPrincipioActivo.Width = 119;
             // 
             // FrmActualizarPrecio
             // 

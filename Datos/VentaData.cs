@@ -660,7 +660,6 @@ namespace Datos
         {
             int respuesta = 0;
             
-
             SqlCommand cmd = null;
             SqlCommand cmdDocumento = null;
 
@@ -684,24 +683,27 @@ namespace Datos
                 cmd.Transaction = xTrans;
                 respuesta = cmd.ExecuteNonQuery();
 
-                if (respuesta <= 0)
+                if (objVenta.nTipo == 2)
                 {
-                    xTrans.Rollback();
-                }
-                else
-                {
-                    respuesta = 0;
-                    cmdDocumento = new SqlCommand("IAE_DocumentoSerie", cnx);
-                    cmdDocumento.Parameters.AddWithValue("@Tipo", 6);
-                    cmdDocumento.Parameters.AddWithValue("@IdDocumentoSerie", 0);
-                    cmdDocumento.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
-                    cmdDocumento.Parameters.AddWithValue("@Serie", objVenta.sSerie);
-                    cmdDocumento.Parameters.AddWithValue("@Ultimo", 0);
-                    cmdDocumento.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
-                    cmdDocumento.Parameters.AddWithValue("@Estado", objVenta.bEstado);
-                    cmdDocumento.CommandType = CommandType.StoredProcedure;
-                    cmdDocumento.Transaction = xTrans;
-                    respuesta = cmdDocumento.ExecuteNonQuery();
+                    if (respuesta <= 0)
+                    {
+                        xTrans.Rollback();
+                    }
+                    else
+                    {
+                        respuesta = 0;
+                        cmdDocumento = new SqlCommand("IAE_DocumentoSerie", cnx);
+                        cmdDocumento.Parameters.AddWithValue("@Tipo", 6);
+                        cmdDocumento.Parameters.AddWithValue("@IdDocumentoSerie", 0);
+                        cmdDocumento.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
+                        cmdDocumento.Parameters.AddWithValue("@Serie", objVenta.sSerie);
+                        cmdDocumento.Parameters.AddWithValue("@Ultimo", 0);
+                        cmdDocumento.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                        cmdDocumento.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+                        cmdDocumento.CommandType = CommandType.StoredProcedure;
+                        cmdDocumento.Transaction = xTrans;
+                        respuesta = cmdDocumento.ExecuteNonQuery();
+                    }
                 }
 
                 if (respuesta > 0)

@@ -784,6 +784,7 @@ namespace AppInguiri
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
                         objVentaFE.sIdDocumento = "14";
                         objVentaFE.sCdr = resultado.data.cdr;
+                        objVentaFE.sHash = resultado.data.hash_cdr;
                         objVentaFE.sSerie = "001";
                         objVentaFE.sMensajeResp = data.tipo_doc + "-" + data.nro_serie + "-" + data.nro_correlativo;
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
@@ -940,7 +941,7 @@ namespace AppInguiri
 
                     var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput,1);
 
-                    if (resultado.code.Equals("200") && resultado.data.respuesta.Equals("ok"))
+                    if (!resultado.data.cdr.Equals("") && resultado.data.respuesta.Equals("ok"))
                     {
                         Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante + "->" + resultado.mensaje);
 
@@ -948,6 +949,9 @@ namespace AppInguiri
                         objVentaFE.nTipo = 1;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
                         objVentaFE.sCdr = resultado.data.cdr;
+                        objVentaFE.sHash = resultado.data.hash_cdr;
+                        objVentaFE.sCodigoResp = resultado.data.status_code;
+                        objVentaFE.sMensajeResp = resultado.data.respuesta;
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
 
                         int resp = objVentNeg.ActualizarVentaNotficacionSunat(objVentaFE);
