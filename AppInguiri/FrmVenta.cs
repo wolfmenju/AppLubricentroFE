@@ -917,6 +917,18 @@ namespace AppInguiri
                 MessageBox.Show("No agrego ningun Producto., por favor agregue un Producto.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 resp = false;
             }
+            else if (cboDocumento.SelectedValue.ToString().Equals("01"))
+            {
+                if (txtRuc.Text.Length != 11)
+                {
+                    MessageBox.Show("No se puede Emitir una Factura con Un Documento diferente al Ruc.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    resp = false;
+                }
+                else
+                {
+                    resp = true;
+                }
+            }
 
             return resp;
         }

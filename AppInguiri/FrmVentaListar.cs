@@ -56,7 +56,7 @@ namespace AppInguiri
         private string CargarCorrelativo( string sIdDocum)
         {
 
-            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5,sIdDocumento= sIdDocum.Equals("RA") ? "14" : "15" , bEstado = true };
+            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5,sIdDocumento= sIdDocum, bEstado = true };
 
             listDocumentoSerie = objDocumentSerieNeg.ListarDocumentoSerie(objDocSerie);
 
@@ -740,7 +740,7 @@ namespace AppInguiri
                     {
                         data.tipo_doc = "RA";
                         data.nro_serie = Globales.FechaActual().ToString("yyyyMMdd");
-                        data.nro_correlativo = CargarCorrelativo(LisVenRep[0].sIdDocumento);
+                        data.nro_correlativo = CargarCorrelativo("14");
                         data.fecha_emision = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
                         data.fecha_envio = Globales.FechaActual().ToString("yyyy-MM-dd");
                     }
@@ -769,7 +769,7 @@ namespace AppInguiri
 
                         data.codigo = "RC";
                         data.serie = Globales.FechaActual().ToString("yyyyMMdd");
-                        data.secuencia= CargarCorrelativo(LisVenRep[0].sIdDocumento); 
+                        data.secuencia= CargarCorrelativo("15"); 
                         data.fecha_referencia = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
                         data.fecha_documento = Globales.FechaActual().ToString("yyyy-MM-dd"); 
                     }
