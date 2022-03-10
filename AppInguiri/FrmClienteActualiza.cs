@@ -240,7 +240,7 @@ namespace AppInguiri
 
                 if (WsConsultaDocResponse != null)
                 {
-                    if (!WsConsultaDocResponse.condicion.Equals("HABIDO"))
+                    if (!WsConsultaDocResponse.condicion.Equals("HABIDO") && !WsConsultaDocResponse.tipoDocumento.Equals("1"))
                     {
                         MessageBox.Show("El número ingresado del " + cbxTipoDocumento.Text + " No se Encuentra Habido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
