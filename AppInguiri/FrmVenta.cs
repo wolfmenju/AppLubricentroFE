@@ -87,6 +87,13 @@ namespace AppInguiri
             sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
             sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
             sSunatOnline = objParamNeg.LeerUnParametro("ID_SUNAT_ONLINE");
+            if (sSunatOnline.Equals("SI"))
+            {
+                lblEstadoSunat.Text = "Conectado a Sunat";
+                lblEstadoSunat.TextAlign = ContentAlignment.MiddleCenter;
+                lblEstadoSunat.Image = Properties.Resources.Online;
+            }
+            
             sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
 
             if (sAplicaIgv.Equals("NO")) lblTotalTextoSinIgv.Visible = true;

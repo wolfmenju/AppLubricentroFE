@@ -920,6 +920,8 @@
     <Content Include="Imagenes\Izquierda.ico" />
     <None Include="Imagenes\Logo Inguiri Soft png.png" />
     <None Include="Imagenes\limpiar.png" />
+    <Content Include="Imagenes\Ofline.png" />
+    <Content Include="Imagenes\Online.png" />
     <Content Include="Imagenes\pills_2.ico" />
     <Content Include="Imagenes\report.ico" />
     <Content Include="Imagenes\ReporteCompra.png" />
