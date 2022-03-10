@@ -751,9 +751,22 @@ namespace AppInguiri
                         cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
                         sNumeroDoc = cliente.sNumeroDoc;
 
-                        if (cliente.sNumeroDoc.Equals("00000000")) sCodTipoDoc = "0";
-                        else sCodTipoDoc = "1";
-                    
+                        if (cliente.sNumeroDoc.Length > 8)
+                        {
+                            sCodTipoDoc = "6";
+                        }
+                        else
+                        {
+                            if (cliente.sNumeroDoc.Equals("00000000"))
+                            {
+                                sCodTipoDoc = "0";
+                            }
+                            else
+                            {
+                                sCodTipoDoc = "1";
+                            }
+                        }
+
                         data.codigo = "RC";
                         data.serie = Globales.FechaActual().ToString("yyyyMMdd");
                         data.secuencia= CargarCorrelativo(LisVenRep[0].sIdDocumento); 
