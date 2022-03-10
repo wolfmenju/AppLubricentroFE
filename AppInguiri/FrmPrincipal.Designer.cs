@@ -83,6 +83,7 @@
             this.barBtnReporteCompra = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnDevuelveProducto = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnActualizaStock = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnDashboardVentas = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -104,7 +105,6 @@
             this.barButtonItem30 = new DevExpress.XtraBars.BarButtonItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pbLogoInguiri = new System.Windows.Forms.PictureBox();
-            this.barBtnDashboardVentas = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoInguiri)).BeginInit();
@@ -217,8 +217,6 @@
             // 
             // barBtnPresentacion
             // 
-            this.barBtnPresentacion.ActAsDropDown = true;
-            this.barBtnPresentacion.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
             this.barBtnPresentacion.Caption = "Presentación";
             this.barBtnPresentacion.Id = 5;
             this.barBtnPresentacion.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnPresentacion.LargeGlyph")));
@@ -628,6 +626,14 @@
             this.barBtnActualizaStock.Name = "barBtnActualizaStock";
             this.barBtnActualizaStock.Tag = "38";
             // 
+            // barBtnDashboardVentas
+            // 
+            this.barBtnDashboardVentas.Caption = "Dashboard Ventas";
+            this.barBtnDashboardVentas.Id = 73;
+            this.barBtnDashboardVentas.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnDashboardVentas.LargeGlyph")));
+            this.barBtnDashboardVentas.Name = "barBtnDashboardVentas";
+            this.barBtnDashboardVentas.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnDashboardVentas_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -799,14 +805,6 @@
             this.pbLogoInguiri.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogoInguiri.TabIndex = 3;
             this.pbLogoInguiri.TabStop = false;
-            // 
-            // barBtnDashboardVentas
-            // 
-            this.barBtnDashboardVentas.Caption = "Dashboard Ventas";
-            this.barBtnDashboardVentas.Id = 73;
-            this.barBtnDashboardVentas.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnDashboardVentas.LargeGlyph")));
-            this.barBtnDashboardVentas.Name = "barBtnDashboardVentas";
-            this.barBtnDashboardVentas.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnDashboardVentas_ItemClick);
             // 
             // FrmPrincipal
             // 

@@ -17,6 +17,7 @@ namespace Negocio
         private static ILog Log = LogManager.GetLogger(typeof(WsRestServiceDocumentoFeNegocio));
         private string _UrlServicioIntermedioSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermedioSunat"]);
         private string _UrlServicioIntermeAnuladocionSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermeAnuladocionSunat"]);
+        private string _UrlServicioIntermeAnuladocionBoletaSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermeAnuladocionBoletaSunat"]);
 
         public WsDocumentoFeResponse RegistroDocumentoFe(string SerializeRequestPerOutput, int xTipo)
         {
@@ -25,8 +26,8 @@ namespace Negocio
             string sUrl = _UrlServicioIntermedioSunat;
 
             if (xTipo == 2) sUrl = _UrlServicioIntermeAnuladocionSunat;
-
-
+            else if (xTipo == 3) sUrl = _UrlServicioIntermeAnuladocionBoletaSunat;
+            
             rqResponse = DoRequest<WsDocumentoFeResponse>(sUrl, SerializeRequestPerOutput);
 
             return rqResponse;

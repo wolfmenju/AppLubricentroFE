@@ -40,7 +40,7 @@ namespace AppInguiri
         private int nNumeroEnvioMasivo =0;
         string sDireccion = "", sRuc = "", sRazonSocial = "",
             sUbigeo = "", sDepart = "", sProvi = "", sDist = "",
-            _sUrlSunat = "", _sUrlAnulacionIntermSunat = "", _UrlServicioIntermedioSunat = "", _RutaArchivosXml = "",
+            _sUrlSunat = "", _sUrlAnulacionIntermSunat = "", _UrlServicioIntermedioSunat = "", _UrlServicioIntermeAnuladocionBoletaSunat, _RutaArchivosXml = "",
             sUserSunat = "", sPassSunat = "", sCertClaSunat = "",
             sUrlXmlSunat = "",sNumeroDocAnula="";
 
@@ -53,9 +53,10 @@ namespace AppInguiri
             CargarDatosConfiguracion();
         }
 
-        private string CargarCorrelativo()
+        private string CargarCorrelativo( string sIdDocum)
         {
-            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5, sIdDocumento ="14", bEstado = true };
+
+            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5,sIdDocumento= sIdDocum.Equals("RA") ? "14" : "15" , bEstado = true };
 
             listDocumentoSerie = objDocumentSerieNeg.ListarDocumentoSerie(objDocSerie);
 
@@ -82,7 +83,7 @@ namespace AppInguiri
             _RutaArchivosXml = Convert.ToString(ConfigurationManager.AppSettings["RutaArchivosXml"]);
             _sUrlAnulacionIntermSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioAnuladocionSunat"]);
             _UrlServicioIntermedioSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioAnuladocionSunat"]);
-            
+            _UrlServicioIntermeAnuladocionBoletaSunat = Convert.ToString(ConfigurationManager.AppSettings["UrlServicioIntermeAnuladocionBoletaSunat"]);
         }
 
         private void CargarDatosEmpresa()
@@ -726,18 +727,39 @@ namespace AppInguiri
 
             List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
             WsDocumentoFeResponseData data = null;
+            int xTipo = 2;
 
             if (LisVenRep.Count > 0)
             {
                 try
                 {
                     data = new WsDocumentoFeResponseData();
-                    data.tipo_doc = "RA";
-                    data.nro_serie = Globales.FechaActual().ToString("yyyyMMdd");
-                    data.nro_correlativo = CargarCorrelativo();
-                    if (data.nro_correlativo.Equals("")) return false;
-                    data.fecha_emision = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
-                    data.fecha_envio = Globales.FechaActual().ToString("yyyy-MM-dd"); ; 
+                    string sNumeroDoc = "", sCodTipoDoc = "";
+
+                    if (LisVenRep[0].sIdDocumento.Equals("01"))
+                    {
+                        data.tipo_doc = "RA";
+                        data.nro_serie = Globales.FechaActual().ToString("yyyyMMdd");
+                        data.nro_correlativo = CargarCorrelativo(LisVenRep[0].sIdDocumento);
+                        data.fecha_emision = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
+                        data.fecha_envio = Globales.FechaActual().ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        xTipo = 3;
+                        Cliente cliente = new Cliente(); 
+                        cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
+                        sNumeroDoc = cliente.sNumeroDoc;
+
+                        if (cliente.sNumeroDoc.Equals("00000000")) sCodTipoDoc = "0";
+                        else sCodTipoDoc = "1";
+                    
+                        data.codigo = "RC";
+                        data.serie = Globales.FechaActual().ToString("yyyyMMdd");
+                        data.secuencia= CargarCorrelativo(LisVenRep[0].sIdDocumento); 
+                        data.fecha_referencia = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
+                        data.fecha_documento = Globales.FechaActual().ToString("yyyy-MM-dd"); 
+                    }
 
                     data.emisor = new emisor();
                     data.emisor.ruc = sRuc;
@@ -762,31 +784,74 @@ namespace AppInguiri
 
                     for (int i = 0; i < LisVenRep.Count; i++)
                     {
-                        data.detalle[i] = new detalle();
-                        data.detalle[i].item = (i + 1).ToString();
-                        data.detalle[i].tipo_comprobante_cod = LisVenRep[0].sIdDocumento;
-                        data.detalle[i].nro_serie = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie;
-                        data.detalle[i].nro_comprobante = string.Format("{0:00000000}", LisVenRep[0].nNumero);
-                        data.detalle[i].motivo = "ERROR DE OPERACIOÓN";
+                        if (LisVenRep[0].sIdDocumento.Equals("01"))
+                        {
+                            data.detalle[i] = new detalle();
+                            data.detalle[i].item = (i + 1).ToString();
+                            data.detalle[i].tipo_comprobante_cod = LisVenRep[0].sIdDocumento;
+                            data.detalle[i].nro_serie = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie;
+                            data.detalle[i].nro_comprobante = string.Format("{0:00000000}", LisVenRep[0].nNumero);
+                            data.detalle[i].motivo = "ERROR DE OPERACIÓN";
+                        }
+                        else
+                        {
+                            data.detalle[i] = new detalle();
+                            data.detalle[i].ITEM = (i + 1).ToString();
+                            data.detalle[i].TIPO_COMPROBANTE = LisVenRep[0].sIdDocumento;
+                            data.detalle[i].NRO_COMPROBANTE = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie+"-" + string.Format("{0:00000000}", LisVenRep[0].nNumero);
+                            data.detalle[i].NRO_DOCUMENTO = sNumeroDoc;
+                            data.detalle[i].TIPO_DOCUMENTO = sCodTipoDoc;
+                            data.detalle[i].NRO_COMPROBANTE_REF = "0";
+                            data.detalle[i].TIPO_COMPROBANTE_REF ="0";
+                            data.detalle[i].STATUS = "3";
+                            data.detalle[i].MONEDA_COD = "PEN";
+                            data.detalle[i].TOTAL = LisVenRep[0].fTotal.ToString();
+                            data.detalle[i].GRAVADA = LisVenRep[0].bIgvAplica ? (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString() : "0.00";
+                            data.detalle[i].EXONERADO = LisVenRep[0].bIgvAplica ? "0.00" : LisVenRep[0].fTotal.ToString();
+                            data.detalle[i].INAFECTO = "0.00";
+                            data.detalle[i].EXPORTACION = "0.00";
+                            data.detalle[i].GRATUITAS = "0.00";
+                            data.detalle[i].MONTO_CARGO_X_ASIG = "0.00";
+                            data.detalle[i].CARGO_X_ASIGNACION = "0.00";
+                            data.detalle[i].ISC = "0.00";
+                            data.detalle[i].IGV = LisVenRep[i].fIgvDetalle.ToString();
+                            data.detalle[i].OTROS = "0.00";
+
+                        }
                     }
                     
                     string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
-                    Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante);
 
-                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput,2);
+                    if (LisVenRep[0].sIdDocumento.Equals("01"))
+                        Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + "RA" + data.nro_serie + "-" + data.nro_correlativo);
+                    else
+                        Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + "RC"+data.serie + "-" + data.secuencia);
+                    
+                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput, xTipo);
 
                     if (!resultado.data.cdr.Equals("") && resultado.data.respuesta.Equals("ok"))
                     {
-                        Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante + "->" + resultado.mensaje);
+                        if (LisVenRep[0].sIdDocumento.Equals("01"))
+                            Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + "RA" + data.nro_serie + "-" + data.nro_correlativo + "->" + resultado.mensaje);
+                        else
+                            Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + "RC" + data.serie_comprobante + "-" + data.secuencia + "->" + resultado.mensaje);
 
                         Venta objVentaFE = new Venta();
                         objVentaFE.nTipo = 2;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
-                        objVentaFE.sIdDocumento = "14";
+                        objVentaFE.sIdDocumento = LisVenRep[0].sIdDocumento.Equals("01")?"14":"15";
                         objVentaFE.sCdr = resultado.data.cdr;
                         objVentaFE.sHash = resultado.data.hash_cdr;
+                        objVentaFE.sCodigoResp = resultado.data.cod_sunat;
+                        objVentaFE.sMensajeResp = resultado.data.mensaje;
                         objVentaFE.sSerie = "001";
-                        objVentaFE.sMensajeResp = data.tipo_doc + "-" + data.nro_serie + "-" + data.nro_correlativo;
+
+                        //Documento de Anulacion
+                        if (LisVenRep[0].sIdDocumento.Equals("01"))
+                            objVentaFE.sIdVendedor = data.tipo_doc + "-" + data.nro_serie + "-" + data.nro_correlativo;
+                        else
+                            objVentaFE.sIdVendedor = data.codigo + "-" + data.serie + "-" + data.secuencia;
+
                         objVentaFE.sUsuario = Funciones.UsuarioActual();
 
                         int resp = objVentNeg.ActualizarVentaNotficacionSunat(objVentaFE);

@@ -680,6 +680,8 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@Hash", objVenta.sHash);
                 cmd.Parameters.AddWithValue("@CodigoResp", objVenta.sCodigoResp);
                 cmd.Parameters.AddWithValue("@Mensaje", objVenta.sMensajeResp);
+                cmd.Parameters.AddWithValue("@DocumentoAnula", objVenta.sIdVendedor);
+                
                 cmd.Transaction = xTrans;
                 respuesta = cmd.ExecuteNonQuery();
 

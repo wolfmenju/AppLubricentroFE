@@ -34,13 +34,21 @@ namespace Entidad
         public string moneda_cod { get; set; }
         public string tipo_tributo { get; set; }
         public string tipo_igv { get; set; }
-        
+
+        //Documento de Baja
         public string tipo_doc { get; set; }
         public string nro_serie { get; set; }
         public string nro_correlativo { get; set; }
         public string fecha_emision { get; set; }
         public string fecha_envio { get; set; }
 
+        //Resumen Diario
+        public string codigo { get; set; }
+        public string serie { get; set; }
+        public string secuencia { get; set; }
+        public string fecha_referencia { get; set; }
+        public string fecha_documento { get; set; }
+        
         public string cliente_nro_doc { get; set; }
         public string cliente_nombre { get; set; }
         public string cliente_tipo_doc { get; set; }
@@ -76,10 +84,33 @@ namespace Entidad
         public string txtAFECTACION_TIPO { get; set; }
         public string tipo_comprobante_cod { get; set; }
         
+        //Documento de Baja
         public string item { get; set; }
         public string nro_serie { get; set; }
         public string nro_comprobante { get; set; }
         public string motivo { get; set; }
+
+        //Resumen Diario
+        public string ITEM { get; set; }
+        public string TIPO_COMPROBANTE { get; set; }
+        public string NRO_COMPROBANTE { get; set; }
+        public string NRO_DOCUMENTO { get; set; }
+        public string TIPO_DOCUMENTO { get; set; }
+        public string NRO_COMPROBANTE_REF { get; set; }
+        public string TIPO_COMPROBANTE_REF { get; set; }
+        public string STATUS { get; set; }
+        public string MONEDA_COD { get; set; }
+        public string TOTAL { get; set; }
+        public string GRAVADA { get; set; }
+        public string EXONERADO { get; set; }
+        public string INAFECTO { get; set; }
+        public string EXPORTACION { get; set; }
+        public string GRATUITAS { get; set; }
+        public string MONTO_CARGO_X_ASIG { get; set; }
+        public string CARGO_X_ASIGNACION { get; set; }
+        public string ISC { get; set; }
+        public string IGV { get; set; }
+        public string OTROS { get; set; }
 
     }
 
