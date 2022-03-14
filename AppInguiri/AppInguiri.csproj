@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icono-InguiriSoft.ico</ApplicationIcon>
+    <ApplicationIcon>Logo_InguiriSoft.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>AppInguiri.Program</StartupObject>
@@ -901,9 +901,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icono-InguiriSoft.ico" />
     <Content Include="Imagenes\1405979407_96395.ico" />
     <Content Include="Imagenes\1405981010_43663.ico" />
+    <Content Include="Imagenes\Logo_InguiriSoft.ico" />
+    <Content Include="Logo_InguiriSoft.ico" />
     <None Include="Imagenes\Aceite.png" />
     <Content Include="Imagenes\ActualizacionStock.png" />
     <None Include="Imagenes\cancelar.png" />

@@ -98,6 +98,7 @@
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup12 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
@@ -716,7 +717,8 @@
             this.ribbonPageGroup7,
             this.ribbonPageGroup8,
             this.ribbonPageGroup9,
-            this.ribbonPageGroup10});
+            this.ribbonPageGroup10,
+            this.ribbonPageGroup12});
             this.ribbonPage3.Name = "ribbonPage3";
             this.ribbonPage3.Text = "Consulta y Reporte";
             // 
@@ -751,9 +753,15 @@
             this.ribbonPageGroup10.ItemLinks.Add(this.barBtnRptCajaChica);
             this.ribbonPageGroup10.ItemLinks.Add(this.barBtnReporteVenta);
             this.ribbonPageGroup10.ItemLinks.Add(this.barBtnReporteCompra);
-            this.ribbonPageGroup10.ItemLinks.Add(this.barBtnDashboardVentas);
             this.ribbonPageGroup10.Name = "ribbonPageGroup10";
             this.ribbonPageGroup10.Text = "Movimientos";
+            // 
+            // ribbonPageGroup12
+            // 
+            this.ribbonPageGroup12.AllowTextClipping = false;
+            this.ribbonPageGroup12.ItemLinks.Add(this.barBtnDashboardVentas);
+            this.ribbonPageGroup12.Name = "ribbonPageGroup12";
+            this.ribbonPageGroup12.Text = "Dashboard";
             // 
             // ribbonStatusBar
             // 
@@ -907,5 +915,6 @@
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.PictureBox pbLogoInguiri;
         private DevExpress.XtraBars.BarButtonItem barBtnDashboardVentas;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
     }
 }
