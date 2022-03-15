@@ -49,6 +49,7 @@ namespace Entidad
             this.sMensajeResp = "";
             this.sCodigoInterno = "";
             this.bIgvAplica = false;
+            this.bServicio = false;
             this.sDocumentoAnulacion = "";
         }
         
@@ -89,6 +90,7 @@ namespace Entidad
         public DateTime? dFechaNotificacionSunat { get; set; }
         public DateTime? FechaAnuladoSunat { get; set; }
         public bool bIgvAplica { get; set; }
+        public bool bServicio { get; set; }
 
         public List<VentaDetalle> listVentaDetalle { get; set; }
 

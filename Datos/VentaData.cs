@@ -87,6 +87,7 @@ namespace Datos
                         objVent.sDocumentoAnulacion = dr[21].ToString();
                         objVent.sCdr =dr[22].ToString();
                         objVent.sHash = dr[23].ToString();
+                        objVent.bServicio =Convert.ToBoolean(dr[24]);
                     }
                     else if (objVenta.nTipo == 9)
                     {
@@ -425,6 +426,7 @@ namespace Datos
                     cmdDetalle.Parameters.AddWithValue("@IgvDetalle", item.fIgvDetalle);
                     cmdDetalle.Parameters.AddWithValue("@Descuento", item.fDescuento);
                     cmdDetalle.Parameters.AddWithValue("@Total", objVenta.fTotal);
+                    cmdDetalle.Parameters.AddWithValue("@Servicio", item.bServicio);
                     cmdDetalle.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
                     cmdDetalle.Parameters.AddWithValue("@Estado", objVenta.bEstado);
 
@@ -627,6 +629,7 @@ namespace Datos
                     cmdDetalle.Parameters.AddWithValue("@Lote", item.sLote);
                     cmdDetalle.Parameters.AddWithValue("@Descuento", item.fDescuento);
                     cmdDetalle.Parameters.AddWithValue("@Total", objVenta.fTotal);
+                    cmdDetalle.Parameters.AddWithValue("@Servicio", item.bServicio);
                     cmdDetalle.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
                     cmdDetalle.Parameters.AddWithValue("@Estado", objVenta.bEstado);
 

@@ -627,7 +627,7 @@ namespace AppInguiri
                     {
                         data.detalle[i] = new detalle();
                         data.detalle[i].txtITEM = (i + 1).ToString();
-                        data.detalle[i].txtUNIDAD_MEDIDA_DET = "NI";
+                        data.detalle[i].txtUNIDAD_MEDIDA_DET = LisVenRep[i].bServicio? "ZZ":"NI";
                         data.detalle[i].txtCANTIDAD_DET = LisVenRep[i].nCodigo.ToString();
                         data.detalle[i].txtPRECIO_UNIT = (LisVenRep[i].fPrecioVenta / LisVenRep[i].nCodigo).ToString();
                         data.detalle[i].txtPRECIO_UNIT_SIN_IGV = ((LisVenRep[i].fPrecioVenta - LisVenRep[i].fIgvDetalle) / LisVenRep[i].nCodigo).ToString();
