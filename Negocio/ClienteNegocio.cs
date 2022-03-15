@@ -21,8 +21,9 @@ namespace Negocio
         public Cliente LeerCliente(int IdCliente)
         {
             List<Cliente> ListaCliente = new List<Cliente>();
-            Cliente objClienteRes = new Cliente() { nTipo = 5, bEstado = true};
-            ListaCliente =ClienteData.ListarCliente(objClienteRes);
+            Cliente objClienteRes = new Cliente();
+
+            ListaCliente =ClienteData.ListarCliente(new Cliente() { nTipo = 5, bEstado = true });
 
             foreach (var item in ListaCliente)
             {

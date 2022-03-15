@@ -405,6 +405,7 @@ namespace AppInguiri
                 chkCliente.Checked = false;
                 lblDescuento.Text = "";
                 txtRuc.Clear();
+                MessageBox.Show("El documento al Paso no se Encuentra. Revisar el Administrador de Clientes.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
