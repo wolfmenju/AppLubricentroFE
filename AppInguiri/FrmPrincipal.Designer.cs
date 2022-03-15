@@ -84,6 +84,7 @@
             this.barBtnDevuelveProducto = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnActualizaStock = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnDashboardVentas = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnServicio = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -168,9 +169,10 @@
             this.barBtnReporteCompra,
             this.barBtnDevuelveProducto,
             this.barBtnActualizaStock,
-            this.barBtnDashboardVentas});
+            this.barBtnDashboardVentas,
+            this.barBtnServicio});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.RibbonControl.MaxItemId = 74;
+            this.RibbonControl.MaxItemId = 75;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -635,6 +637,15 @@
             this.barBtnDashboardVentas.Name = "barBtnDashboardVentas";
             this.barBtnDashboardVentas.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnDashboardVentas_ItemClick);
             // 
+            // barBtnServicio
+            // 
+            this.barBtnServicio.Caption = "Servicios";
+            this.barBtnServicio.Id = 74;
+            this.barBtnServicio.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnServicio.LargeGlyph")));
+            this.barBtnServicio.Name = "barBtnServicio";
+            this.barBtnServicio.Tag = "3";
+            this.barBtnServicio.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnServicio_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -650,6 +661,7 @@
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.barBtnCategoria, true);
             this.ribbonPageGroup2.ItemLinks.Add(this.barBtnPresentacion);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barBtnServicio);
             this.ribbonPageGroup2.ItemLinks.Add(this.barBtnProducto);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Productos";
@@ -916,5 +928,6 @@
         public System.Windows.Forms.PictureBox pbLogoInguiri;
         private DevExpress.XtraBars.BarButtonItem barBtnDashboardVentas;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
+        private DevExpress.XtraBars.BarButtonItem barBtnServicio;
     }
 }

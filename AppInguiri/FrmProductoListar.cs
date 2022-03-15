@@ -640,12 +640,7 @@ namespace AppInguiri
         private void Calculo()
         {
             decimal fVuelto = 0.0M;
-
-            //ProductoHistorial obj = null;
-
-            //Int32 filaselecionada = DgvDetalles.CurrentCell.RowIndex;
-            //obj = (ProductoHistorial)DgvDetalles.Rows[filaselecionada].DataBoundItem;
-
+            
             foreach (DataGridViewRow item in DgvDetalles.Rows)
             {
                 if ((bool)item.Cells["bSeleccionar"].Value == true)

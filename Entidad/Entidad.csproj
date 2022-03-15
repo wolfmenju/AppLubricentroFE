@@ -45,6 +45,7 @@
     <Compile Include="Deuda.cs" />
     <Compile Include="InventarioDetalle.cs" />
     <Compile Include="Inventario.cs" />
+    <Compile Include="Servicio.cs" />
     <Compile Include="Salida.cs" />
     <Compile Include="SalidaDetalle.cs" />
     <Compile Include="VentaDetalle.cs" />

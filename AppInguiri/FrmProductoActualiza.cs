@@ -186,13 +186,10 @@ namespace AppInguiri
         private string GeneradaCodigo()
         {
             List<Producto> listProducto = new List<Producto>();
-            List<Producto> listProducto2 = new List<Producto>();
-            Producto objProducto = new Producto() { bEstado = true, nTipo=1 };
+            Producto objProducto = new Producto() { bEstado = true, nTipo=11 };
             listProducto = objProducNeg.ListarProducto(objProducto);
-            objProducto.bEstado = false;
-            listProducto2 = objProducNeg.ListarProducto(objProducto);
             int total = 0;
-            total = listProducto.Count + listProducto2.Count;
+            total = listProducto[0].nIdProducto;
             
             if (total < 1)
                 return "P0001";

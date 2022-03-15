@@ -16,14 +16,14 @@ namespace AppInguiri.Reporte {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RptFactura : ReportClass {
+    public class RptDocumentoFE : ReportClass {
         
-        public RptFactura() {
+        public RptDocumentoFE() {
         }
         
         public override string ResourceName {
             get {
-                return "RptFactura.rpt";
+                return "RptDocumentoFE.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace AppInguiri.Reporte {
         
         public override string FullResourceName {
             get {
-                return "AppInguiri.Reporte.RptFactura.rpt";
+                return "AppInguiri.Reporte.RptDocumentoFE.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace AppInguiri.Reporte {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRptFactura : Component, ICachedReport {
+    public class CachedRptDocumentoFE : Component, ICachedReport {
         
-        public CachedRptFactura() {
+        public CachedRptDocumentoFE() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace AppInguiri.Reporte {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RptFactura rpt = new RptFactura();
+            RptDocumentoFE rpt = new RptDocumentoFE();
             rpt.Site = this.Site;
             return rpt;
         }

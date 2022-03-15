@@ -257,13 +257,12 @@
             this.rdServicios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdServicios.AutoSize = true;
             this.rdServicios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdServicios.Location = new System.Drawing.Point(841, 49);
+            this.rdServicios.Location = new System.Drawing.Point(865, 49);
             this.rdServicios.Name = "rdServicios";
-            this.rdServicios.Size = new System.Drawing.Size(131, 17);
+            this.rdServicios.Size = new System.Drawing.Size(107, 17);
             this.rdServicios.TabIndex = 38;
-            this.rdServicios.Text = "Servicios        [F4]";
+            this.rdServicios.Text = "Servicios  [F4]";
             this.rdServicios.UseVisualStyleBackColor = true;
-            this.rdServicios.Visible = false;
             // 
             // rdMedicamento
             // 

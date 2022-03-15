@@ -525,7 +525,6 @@
             this.IdDetalleCompra.Name = "IdDetalleCompra";
             this.IdDetalleCompra.ReadOnly = true;
             this.IdDetalleCompra.Visible = false;
-            this.IdDetalleCompra.Width = 106;
             // 
             // IdCompras
             // 
@@ -535,7 +534,6 @@
             this.IdCompras.Name = "IdCompras";
             this.IdCompras.ReadOnly = true;
             this.IdCompras.Visible = false;
-            this.IdCompras.Width = 66;
             // 
             // IdTarjeta
             // 
@@ -545,7 +543,6 @@
             this.IdTarjeta.Name = "IdTarjeta";
             this.IdTarjeta.ReadOnly = true;
             this.IdTarjeta.Visible = false;
-            this.IdTarjeta.Width = 64;
             // 
             // IdProducto
             // 
@@ -555,7 +552,6 @@
             this.IdProducto.Name = "IdProducto";
             this.IdProducto.ReadOnly = true;
             this.IdProducto.Visible = false;
-            this.IdProducto.Width = 75;
             // 
             // Descripcion
             // 
@@ -578,7 +574,6 @@
             this.Lote.Name = "Lote";
             this.Lote.ReadOnly = true;
             this.Lote.Visible = false;
-            this.Lote.Width = 57;
             // 
             // Cantidad
             // 

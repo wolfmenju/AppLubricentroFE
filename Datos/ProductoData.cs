@@ -62,7 +62,7 @@ namespace Datos
                         objProd.sCodigoInterno = dr[1].ToString();
                         objProd.sDescripcion = dr[2].ToString();
                         objProd.sPrincipioActivo = dr[3].ToString();
-                        objProd.sLaboratorio =dr[4].ToString();
+                        objProd.sLaboratorio = dr[4].ToString();
                         objProd.sPresentacion = dr[5].ToString();
                         objProd.bAlternativo = Convert.ToBoolean(dr[6].ToString());
                         objProd.nStockMinimo = Convert.ToInt32(dr[7].ToString());
@@ -87,12 +87,16 @@ namespace Datos
                             objProd.nTotal = Convert.ToInt32(dr[7].ToString());
                         }
                     }
+                    else if (objProducto.nTipo == 11)
+                    {
+                        objProd.nIdProducto = Convert.ToInt32(dr[0].ToString());
+                    }
                     else if (objProducto.nTipo == 4)
                     {
                         objProd.nIdProducto = Convert.ToInt32(dr[0]);
                         objProd.sCodigoInterno = dr[1].ToString();
                         objProd.sDescripcion = dr[2].ToString();
-                        objProd.bAlternativo =Convert.ToBoolean(dr[3]);
+                        objProd.bAlternativo = Convert.ToBoolean(dr[3]);
                         if (dr[4] != DBNull.Value) objProd.dFechaVencimiento = DateTime.Parse(dr[4].ToString());
                         else objProd.dFechaVencimiento = null;
                         if (dr[5] != DBNull.Value) objProd.nStock = int.Parse(dr[5].ToString());

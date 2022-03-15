@@ -127,6 +127,24 @@
     <Compile Include="FrmBloqueo.Designer.cs">
       <DependentUpon>FrmBloqueo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmServicioListar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmServicioListar.Designer.cs">
+      <DependentUpon>FrmServicioListar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmServicioActualiza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmServicioActualiza.Designer.cs">
+      <DependentUpon>FrmServicioActualiza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmServicio.Designer.cs">
+      <DependentUpon>FrmServicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmProductoListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -572,6 +590,7 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reporte\RptStockMinimo.cs">
       <DependentUpon>RptStockMinimo.rpt</DependentUpon>
@@ -602,6 +621,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RptRecibo.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reporte\RptDeudasVencer.cs">
       <AutoGen>True</AutoGen>
@@ -614,6 +634,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBloqueo.resx">
       <DependentUpon>FrmBloqueo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmServicioListar.resx">
+      <DependentUpon>FrmServicioListar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmServicioActualiza.resx">
+      <DependentUpon>FrmServicioActualiza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmServicio.resx">
+      <DependentUpon>FrmServicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProductoListado.resx">
       <DependentUpon>FrmProductoListado.cs</DependentUpon>
@@ -855,6 +884,7 @@
     <EmbeddedResource Include="Reporte\RptDocumentoFE.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptDocumentoFE.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\RptStockMinimo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -875,6 +905,7 @@
     <EmbeddedResource Include="Reporte\RptRecibo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptRecibo.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\RptDeudasVencer.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -904,7 +935,9 @@
     <Content Include="Imagenes\1405979407_96395.ico" />
     <Content Include="Imagenes\1405981010_43663.ico" />
     <Content Include="Imagenes\Logo_InguiriSoft.ico" />
-    <Content Include="Logo_InguiriSoft.ico" />
+    <Content Include="Logo_InguiriSoft.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Imagenes\Aceite.png" />
     <Content Include="Imagenes\ActualizacionStock.png" />
     <None Include="Imagenes\cancelar.png" />

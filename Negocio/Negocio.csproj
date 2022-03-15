@@ -55,6 +55,7 @@
     <Compile Include="DeudaNegocio.cs" />
     <Compile Include="InventarioDetalleNegocio.cs" />
     <Compile Include="InventarioNegocio.cs" />
+    <Compile Include="ServicioNegocio.cs" />
     <Compile Include="SalidaNegocio.cs" />
     <Compile Include="VentaNegocio.cs" />
     <Compile Include="ProductoHistorialNegocio.cs" />

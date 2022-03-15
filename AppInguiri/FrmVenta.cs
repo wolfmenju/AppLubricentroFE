@@ -161,9 +161,10 @@ namespace AppInguiri
                     ListarCliente();
                     break;
                 case Keys.F3:
-                  
+                    rdMedicamento.Checked = true;
                     break;
                 case Keys.F4:
+                    rdServicios.Checked = true;
                     break;
                 case Keys.F5:
                     btnGuardar_Click(sender, e);
@@ -200,11 +201,22 @@ namespace AppInguiri
         
         private void ListarProducto()
         {
-            FrmProductoListar frmProductoListar = new FrmProductoListar();
-            frmProductoListar.frmVenta = frmInstance;
-            frmProductoListar.ShowDialog();
+            if (rdMedicamento.Checked)
+            {
+                FrmProductoListar frmProductoListar = new FrmProductoListar();
+                frmProductoListar.frmVenta = frmInstance;
+                frmProductoListar.ShowDialog();
+                dgvProducto.DataSource = frmProductoListar.frmVenta.dgvProducto.DataSource;
 
-            dgvProducto.DataSource = frmProductoListar.frmVenta.dgvProducto.DataSource;
+            }
+            else
+            {
+                FrmServicioListar frmServicioListar = new FrmServicioListar();
+                frmServicioListar.frmVenta = frmInstance;
+                frmServicioListar.ShowDialog();
+                dgvProducto.DataSource = frmServicioListar.frmVenta.dgvProducto.DataSource;
+            }
+
             CalcularTotal();
             this.ActiveControl = null;
             txtDescripcion.Focus();
@@ -481,16 +493,23 @@ namespace AppInguiri
 
                 if (nidVentaRespu > 0)
                 {
-                    if (sSunatOnline.Equals("SI"))
+                    if (!cboDocumento.Text.Equals("TICKET"))
                     {
-                        //Metodo para nofiticar a Sunat
-                        if (NotificacionSunat(nidVentaRespu))
+                        if (sSunatOnline.Equals("SI"))
                         {
-                            MessageBox.Show("La Venta Se Realizó Con Éxito y Notificó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //Metodo para nofiticar a Sunat
+                            if (NotificacionSunat(nidVentaRespu))
+                            {
+                                MessageBox.Show("La Venta Se Realizó Con Éxito y Notificó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("La Venta Se Realizó Con Éxito pero hubo problemas en la notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("La Venta Se Realizó Con Éxito pero hubo problemas en la notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("La Venta Se Realizó Con Éxito.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -524,8 +543,7 @@ namespace AppInguiri
             
             List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
             WsDocumentoFeResponseData data = null;
-            if (LisVenRep[0].sDescripDocumento.Equals("TICKET")) return true;
-
+            
             if (LisVenRep.Count > 0)
             {
                 try
@@ -712,8 +730,7 @@ namespace AppInguiri
                         LisRecibo.Add(reciboRpt);
                     }
                     
-                    Rep.Load(Application.StartupPath + "\\RptRecibo.rpt");
-                    //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
+                    Rep.Load(Application.StartupPath + "\\Reporte\\RptRecibo.rpt");
 
                     Rep.SetDataSource(LisRecibo);
                  
@@ -796,8 +813,7 @@ namespace AppInguiri
                         LisRecibo.Add(reciboRpt);
                     }
                     
-                    Rep.Load(Application.StartupPath + "\\RptDocumentoFE.rpt");
-                    //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
+                    Rep.Load(Application.StartupPath + "\\Reporte\\RptDocumentoFE.rpt");
 
                     Rep.SetDataSource(LisRecibo);
 
