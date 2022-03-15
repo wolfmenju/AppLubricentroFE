@@ -862,11 +862,25 @@ namespace AppInguiri
 
             if (dgvProducto.CurrentCell != null || dgvProducto.CurrentCell.RowIndex != 0)
             {
-                FrmProductoListar frmProductoListar = new FrmProductoListar();
-                frmProductoListar.xTipo = 1;
-                frmProductoListar.frmVenta = frmInstance;
-                frmProductoListar.ShowDialog();
-                
+                Int32 filaselecionada = dgvProducto.CurrentCell.RowIndex;
+                bool servicio = false;
+                servicio =(bool)dgvProducto.Rows[filaselecionada].Cells["bServicio"].Value;
+
+                if (!servicio)
+                {
+                    FrmProductoListar frmProductoListar = new FrmProductoListar();
+                    frmProductoListar.xTipo = 1;
+                    frmProductoListar.frmVenta = frmInstance;
+                    frmProductoListar.ShowDialog();
+                }
+                else
+                {
+                    FrmServicioListar frmServicioListar = new FrmServicioListar();
+                    frmServicioListar.xTipo = 1;
+                    frmServicioListar.frmVenta = frmInstance;
+                    frmServicioListar.ShowDialog();
+                }
+
                 CalcularTotal();
             }
 

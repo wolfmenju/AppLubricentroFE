@@ -103,7 +103,7 @@ namespace AppInguiri
                 }
                 else
                 {
-                    DgvProducto.DataSource = listProducto;
+                    DgvProducto.DataSource = null;
                 }
             }
 

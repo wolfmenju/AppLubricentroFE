@@ -19,9 +19,10 @@ namespace AppInguiri
     {
         public Servicio _servicio;
         public FrmVenta frmVenta = null;
+        public int xTipo = 0;
 
-        ServicioNegocio objServicNeg = new ServicioNegocio();
-        List<Servicio> ListServicio = null;
+        private ServicioNegocio objServicNeg = new ServicioNegocio();
+        private List<Servicio> ListServicio = null;
 
         public FrmServicioListar()
         {
@@ -43,24 +44,46 @@ namespace AppInguiri
         private void CargarServicios()
         {
             ListServicio = new List<Servicio>();
-            
-            Servicio objServic = new Servicio()
-            {
-                nTipo = 5,
-                sUsuario = txtDescripcion.Text.Trim(),
-                bEstado = true
-            };
 
-            ListServicio = objServicNeg.ListarServicio(objServic);
-
-            if (ListServicio.Count > 0)
+            if (xTipo == 0)
             {
-                dgvServicio.AutoGenerateColumns = false;
-                dgvServicio.DataSource = ListServicio;
+                Servicio objServic = new Servicio()
+                {
+                    nTipo = 5,
+                    sUsuario = txtDescripcion.Text.Trim(),
+                    bEstado = true
+                };
+
+                ListServicio = objServicNeg.ListarServicio(objServic);
+
+                if (ListServicio.Count > 0)
+                {
+                    dgvServicio.AutoGenerateColumns = false;
+                    dgvServicio.DataSource = ListServicio;
+                }
+                else
+                {
+                    dgvServicio.DataSource = null;
+                }
             }
             else
             {
-                dgvServicio.DataSource = null;
+                Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
+                Servicio objServic = new Servicio()  { nTipo = 6};
+                objServic.nIdServicio = Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
+
+                ListServicio = objServicNeg.ListarServicio(objServic);
+
+                if (ListServicio.Count() > 0)
+                {
+                    dgvServicio.AutoGenerateColumns = false;
+                    dgvServicio.DataSource = ListServicio;
+                    NdCantidad.Text = Convert.ToString(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                }
+                else
+                {
+                    dgvServicio.DataSource = null;
+                }
             }
             
             lblTotal.Text = "Se Encontraron " + dgvServicio.Rows.Count + " Registros";
@@ -155,7 +178,6 @@ namespace AppInguiri
 
         private void AgregarProducto()
         {
-
             if (dgvServicio.Rows.Count == 0) return;
 
             if (dgvServicio.CurrentCell != null || dgvServicio.CurrentCell.RowIndex != 0)
@@ -163,22 +185,63 @@ namespace AppInguiri
                 Int32 filaselecionada = dgvServicio.CurrentCell.RowIndex;
                 DataGridViewRow row2 = dgvServicio.Rows[filaselecionada];
                 Servicio servicio = (Servicio)row2.DataBoundItem;
-                
-                if (frmVenta != null)
+
+                if (xTipo == 1)
                 {
-                    frmVenta.dgvProducto.Rows.Add(0, 0, servicio.nIdServicio, servicio.sDescripcion,
-                      "", "", Convert.ToInt32(NdCantidad.Text), servicio.fPrecio, servicio.fPrecio - servicio.fPrecio, servicio.fPrecio,
-                      Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(servicio.fPrecio), true, 0);
+                    if (frmVenta != null)
+                    {
+                        Int32 filaselecionada3 = frmVenta.dgvProducto.CurrentCell.RowIndex;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nCorrelativo"].Value = 0;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nIdMovimiento"].Value = 0;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["sLote"].Value = "";
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["Vencimiento"].Value = Globales.FechaActual();
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nCantidad"].Value = NdCantidad.Text;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fPrecioVenta"].Value = servicio.fPrecio;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fPrecioCompra"].Value = servicio.fPrecio;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fGanancia"].Value = servicio.fPrecio - servicio.fPrecio;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fSubTotal"].Value = Convert.ToInt32(NdCantidad.Text) * servicio.fPrecio;
+                        frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fDescuento"].Value = 0.00;
+                        frmVenta.dgvProducto.Refresh();
+                    }
+
+                }
+                else
+                {
+                    if (frmVenta != null)
+                    {
+                        frmVenta.dgvProducto.Rows.Add(0, 0, servicio.nIdServicio, servicio.sDescripcion,
+                          "", Globales.FechaActual(), Convert.ToInt32(NdCantidad.Text), servicio.fPrecio, servicio.fPrecio - servicio.fPrecio, servicio.fPrecio,
+                          Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(servicio.fPrecio), true, 0);
+                    }
                 }
 
                 this.Close();
             }
-            
         }
 
         private void dgvServicio_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvServicio.RowCount > 0) SeleccionarServicio();
+        }
+
+        private void dgvServicio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                if (dgvServicio.RowCount > 0)
+                {
+                    NdCantidad.Focus();
+                }
+            }
+        }
+
+        private void FrmServicioListar_Load(object sender, EventArgs e)
+        {
+            if (xTipo == 1)
+            {
+                txtDescripcion.Enabled = false;
+                CargarServicios();
+            }
         }
     }
 }

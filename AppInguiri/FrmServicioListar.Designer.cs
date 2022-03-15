@@ -43,11 +43,11 @@
             this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanOpciones = new System.Windows.Forms.Panel();
+            this.NdCantidad = new System.Windows.Forms.TextBox();
             this.LblCompra = new System.Windows.Forms.Label();
             this.LblMonto = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.Label10 = new System.Windows.Forms.Label();
-            this.NdCantidad = new System.Windows.Forms.TextBox();
             this.PanSuperior.SuspendLayout();
             this.PanInferior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicio)).BeginInit();
@@ -161,6 +161,7 @@
             this.dgvServicio.Size = new System.Drawing.Size(876, 424);
             this.dgvServicio.TabIndex = 6;
             this.dgvServicio.SelectionChanged += new System.EventHandler(this.dgvServicio_SelectionChanged);
+            this.dgvServicio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvServicio_KeyDown);
             // 
             // nIdServicio
             // 
@@ -199,6 +200,7 @@
             // 
             // PanOpciones
             // 
+            this.PanOpciones.BackColor = System.Drawing.Color.White;
             this.PanOpciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanOpciones.Controls.Add(this.NdCantidad);
             this.PanOpciones.Controls.Add(this.LblCompra);
@@ -210,6 +212,24 @@
             this.PanOpciones.Name = "PanOpciones";
             this.PanOpciones.Size = new System.Drawing.Size(876, 40);
             this.PanOpciones.TabIndex = 7;
+            // 
+            // NdCantidad
+            // 
+            this.NdCantidad.BackColor = System.Drawing.Color.Green;
+            this.NdCantidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.NdCantidad.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NdCantidad.ForeColor = System.Drawing.Color.White;
+            this.NdCantidad.Location = new System.Drawing.Point(73, 8);
+            this.NdCantidad.MaxLength = 20;
+            this.NdCantidad.Name = "NdCantidad";
+            this.NdCantidad.Size = new System.Drawing.Size(78, 22);
+            this.NdCantidad.TabIndex = 34;
+            this.NdCantidad.Tag = "2";
+            this.NdCantidad.Text = "0";
+            this.NdCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NdCantidad.TextChanged += new System.EventHandler(this.NdCantidad_TextChanged);
+            this.NdCantidad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NdCantidad_KeyDown);
+            this.NdCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NdCantidad_KeyPress);
             // 
             // LblCompra
             // 
@@ -256,24 +276,6 @@
             this.Label10.TabIndex = 24;
             this.Label10.Text = "Cantidad";
             // 
-            // NdCantidad
-            // 
-            this.NdCantidad.BackColor = System.Drawing.Color.Green;
-            this.NdCantidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.NdCantidad.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NdCantidad.ForeColor = System.Drawing.Color.White;
-            this.NdCantidad.Location = new System.Drawing.Point(73, 8);
-            this.NdCantidad.MaxLength = 20;
-            this.NdCantidad.Name = "NdCantidad";
-            this.NdCantidad.Size = new System.Drawing.Size(78, 22);
-            this.NdCantidad.TabIndex = 34;
-            this.NdCantidad.Tag = "2";
-            this.NdCantidad.Text = "0";
-            this.NdCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.NdCantidad.TextChanged += new System.EventHandler(this.NdCantidad_TextChanged);
-            this.NdCantidad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NdCantidad_KeyDown);
-            this.NdCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NdCantidad_KeyPress);
-            // 
             // FrmServicioListar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,6 +290,7 @@
             this.Name = "FrmServicioListar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Servicios";
+            this.Load += new System.EventHandler(this.FrmServicioListar_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmServicioListar_KeyDown);
             this.PanSuperior.ResumeLayout(false);
             this.PanSuperior.PerformLayout();

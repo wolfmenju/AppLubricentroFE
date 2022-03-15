@@ -328,83 +328,86 @@ namespace Datos
                 foreach (VentaDetalle item in objVenta.listVentaDetalle)
                 {
                     respuesta = 0;
-                    
-                    cmdHistorial = new SqlCommand("IAE_HistorialProducto", cnx);
-                    cmdHistorial.Parameters.AddWithValue("@Tipo", 4);
-                    cmdHistorial.Parameters.AddWithValue("@IdHistorial", item.nIdMovimiento);
-                    cmdHistorial.Parameters.AddWithValue("@IdProducto", item.nIdProducto);
-                    cmdHistorial.Parameters.AddWithValue("@IdAlmacen", objVenta.nIdAlmacen);
-                    cmdHistorial.Parameters.AddWithValue("@Lote", item.sLote);
-                    cmdHistorial.Parameters.AddWithValue("@IdLote", item.sLote);
-                    cmdHistorial.Parameters.AddWithValue("@PrecioCompra", item.fPrecioCompra);
-                    cmdHistorial.Parameters.AddWithValue("@Ganancia", item.fGanancia);
-                    cmdHistorial.Parameters.AddWithValue("@PrecioVenta", item.fPrecioVenta);
-                    cmdHistorial.Parameters.AddWithValue("@Stock", item.nCantidad);
-                    cmdHistorial.Parameters.AddWithValue("@Vencimiento", item.dFechaVencimiento);
 
-                    SqlParameter paramResultado1 = new SqlParameter("@Codigo", SqlDbType.Int);
-                    paramResultado1.Direction = ParameterDirection.Output;
-                    cmdHistorial.Parameters.Add(paramResultado1);
-
-                    cmdHistorial.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
-                    cmdHistorial.Parameters.AddWithValue("@Estado", objVenta.bEstado);
-
-                    cmdHistorial.CommandType = CommandType.StoredProcedure;
-                    cmdHistorial.Transaction = xTrans;
-                    respuesta = cmdHistorial.ExecuteNonQuery();
-                    objVenta.nIdHistorial = (int)paramResultado1.Value;
-
-                    if (respuesta <= 0)
+                    if (item.nIdMovimiento > 0)
                     {
-                        xTrans.Rollback();
-                        break;
-                    }
+                        cmdHistorial = new SqlCommand("IAE_HistorialProducto", cnx);
+                        cmdHistorial.Parameters.AddWithValue("@Tipo", 4);
+                        cmdHistorial.Parameters.AddWithValue("@IdHistorial", item.nIdMovimiento);
+                        cmdHistorial.Parameters.AddWithValue("@IdProducto", item.nIdProducto);
+                        cmdHistorial.Parameters.AddWithValue("@IdAlmacen", objVenta.nIdAlmacen);
+                        cmdHistorial.Parameters.AddWithValue("@Lote", item.sLote);
+                        cmdHistorial.Parameters.AddWithValue("@IdLote", item.sLote);
+                        cmdHistorial.Parameters.AddWithValue("@PrecioCompra", item.fPrecioCompra);
+                        cmdHistorial.Parameters.AddWithValue("@Ganancia", item.fGanancia);
+                        cmdHistorial.Parameters.AddWithValue("@PrecioVenta", item.fPrecioVenta);
+                        cmdHistorial.Parameters.AddWithValue("@Stock", item.nCantidad);
+                        cmdHistorial.Parameters.AddWithValue("@Vencimiento", item.dFechaVencimiento);
 
-                    respuesta = 0;
-                    cmdTarjeta = new SqlCommand("IAE_Tarjeta", cnx);
-                    cmdTarjeta.Parameters.AddWithValue("@Tipo", 3);
-                    cmdTarjeta.Parameters.AddWithValue("@IdTarjeta", 0);
-                    cmdTarjeta.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
-                    cmdTarjeta.Parameters.AddWithValue("@IdAlmacen", objVenta.nIdAlmacen);
-                    cmdTarjeta.Parameters.AddWithValue("@IdHistorial", objVenta.nIdHistorial);
-                    cmdTarjeta.Parameters.AddWithValue("@TipoMovimiento", 2);
-                    cmdTarjeta.Parameters.AddWithValue("@IdReferencia", objVenta.nCodigo);
-                    cmdTarjeta.Parameters.AddWithValue("@Lote", item.sLote);
+                        SqlParameter paramResultado1 = new SqlParameter("@Codigo", SqlDbType.Int);
+                        paramResultado1.Direction = ParameterDirection.Output;
+                        cmdHistorial.Parameters.Add(paramResultado1);
 
-                    cmdTarjeta.Parameters.AddWithValue("@Vencimiento", item.dFechaVencimiento);
-                    cmdTarjeta.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
-                    cmdTarjeta.Parameters.AddWithValue("@Serie", objVenta.sSerie);
+                        cmdHistorial.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                        cmdHistorial.Parameters.AddWithValue("@Estado", objVenta.bEstado);
 
-                    cmdTarjeta.Parameters.AddWithValue("@Numero", objVenta.nNumero);
-                    cmdTarjeta.Parameters.AddWithValue("@IdProducto", item.nIdProducto);
-                    cmdTarjeta.Parameters.AddWithValue("@Entrada", 0);
+                        cmdHistorial.CommandType = CommandType.StoredProcedure;
+                        cmdHistorial.Transaction = xTrans;
+                        respuesta = cmdHistorial.ExecuteNonQuery();
+                        objVenta.nIdHistorial = (int)paramResultado1.Value;
 
-                    cmdTarjeta.Parameters.AddWithValue("@Salida", item.nCantidad);
-                    cmdTarjeta.Parameters.AddWithValue("@Existencia", 0);
-                    cmdTarjeta.Parameters.AddWithValue("@PrecioCompra", item.fPrecioCompra);
+                        if (respuesta <= 0)
+                        {
+                            xTrans.Rollback();
+                            break;
+                        }
 
-                    cmdTarjeta.Parameters.AddWithValue("@PrecioVenta", item.fPrecioVenta);
-                    cmdTarjeta.Parameters.AddWithValue("@Debe", 0);
-                    cmdTarjeta.Parameters.AddWithValue("@Haber", item.fSubTotal);
+                        respuesta = 0;
+                        cmdTarjeta = new SqlCommand("IAE_Tarjeta", cnx);
+                        cmdTarjeta.Parameters.AddWithValue("@Tipo", 3);
+                        cmdTarjeta.Parameters.AddWithValue("@IdTarjeta", 0);
+                        cmdTarjeta.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
+                        cmdTarjeta.Parameters.AddWithValue("@IdAlmacen", objVenta.nIdAlmacen);
+                        cmdTarjeta.Parameters.AddWithValue("@IdHistorial", objVenta.nIdHistorial);
+                        cmdTarjeta.Parameters.AddWithValue("@TipoMovimiento", 2);
+                        cmdTarjeta.Parameters.AddWithValue("@IdReferencia", objVenta.nCodigo);
+                        cmdTarjeta.Parameters.AddWithValue("@Lote", item.sLote);
 
-                    cmdTarjeta.Parameters.AddWithValue("@Saldo", 0);
+                        cmdTarjeta.Parameters.AddWithValue("@Vencimiento", item.dFechaVencimiento);
+                        cmdTarjeta.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
+                        cmdTarjeta.Parameters.AddWithValue("@Serie", objVenta.sSerie);
 
-                    SqlParameter paramResultado2 = new SqlParameter("@Codigo", SqlDbType.Int);
-                    paramResultado2.Direction = ParameterDirection.Output;
-                    cmdTarjeta.Parameters.Add(paramResultado2);
+                        cmdTarjeta.Parameters.AddWithValue("@Numero", objVenta.nNumero);
+                        cmdTarjeta.Parameters.AddWithValue("@IdProducto", item.nIdProducto);
+                        cmdTarjeta.Parameters.AddWithValue("@Entrada", 0);
 
-                    cmdTarjeta.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
-                    cmdTarjeta.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+                        cmdTarjeta.Parameters.AddWithValue("@Salida", item.nCantidad);
+                        cmdTarjeta.Parameters.AddWithValue("@Existencia", 0);
+                        cmdTarjeta.Parameters.AddWithValue("@PrecioCompra", item.fPrecioCompra);
 
-                    cmdTarjeta.CommandType = CommandType.StoredProcedure;
-                    cmdTarjeta.Transaction = xTrans;
-                    respuesta = cmdTarjeta.ExecuteNonQuery();
-                    objVenta.nIdTarjeta = (int)paramResultado2.Value;
+                        cmdTarjeta.Parameters.AddWithValue("@PrecioVenta", item.fPrecioVenta);
+                        cmdTarjeta.Parameters.AddWithValue("@Debe", 0);
+                        cmdTarjeta.Parameters.AddWithValue("@Haber", item.fSubTotal);
 
-                    if (respuesta <= 0)
-                    {
-                        xTrans.Rollback();
-                        break;
+                        cmdTarjeta.Parameters.AddWithValue("@Saldo", 0);
+
+                        SqlParameter paramResultado2 = new SqlParameter("@Codigo", SqlDbType.Int);
+                        paramResultado2.Direction = ParameterDirection.Output;
+                        cmdTarjeta.Parameters.Add(paramResultado2);
+
+                        cmdTarjeta.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                        cmdTarjeta.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+
+                        cmdTarjeta.CommandType = CommandType.StoredProcedure;
+                        cmdTarjeta.Transaction = xTrans;
+                        respuesta = cmdTarjeta.ExecuteNonQuery();
+                        objVenta.nIdTarjeta = (int)paramResultado2.Value;
+
+                        if (respuesta <= 0)
+                        {
+                            xTrans.Rollback();
+                            break;
+                        }
                     }
 
                     respuesta = 0;
@@ -412,7 +415,8 @@ namespace Datos
                     cmdDetalle.Parameters.AddWithValue("@Tipo", objVenta.nTipo);
                     cmdDetalle.Parameters.AddWithValue("@IdDetalleVenta", 0);
                     cmdDetalle.Parameters.AddWithValue("@IdVenta", objVenta.nCodigo);
-                    cmdDetalle.Parameters.AddWithValue("@IdTarjeta", objVenta.nIdTarjeta);
+                    if(item.nIdMovimiento > 0) cmdDetalle.Parameters.AddWithValue("@IdTarjeta", objVenta.nIdTarjeta);
+                    else cmdDetalle.Parameters.AddWithValue("@IdTarjeta",DBNull.Value);
                     cmdDetalle.Parameters.AddWithValue("@IdProducto", item.nIdProducto);
                     cmdDetalle.Parameters.AddWithValue("@Cantidad", item.nCantidad);
                     cmdDetalle.Parameters.AddWithValue("@Precio", item.fPrecioVenta);

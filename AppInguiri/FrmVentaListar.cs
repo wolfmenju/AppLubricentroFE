@@ -206,6 +206,7 @@ namespace AppInguiri
             if (TabConsulta.SelectedIndex == 0)
             {
                 xBandero = true;
+                chkVentasParaEnvioSunat.Visible = true;
                 TabConsulta.SelectedTab = TabCompras;
                 LblTotal.Text = "Se Encontraron " + dgvDetalle.Rows.Count + " Registros";
                 xBandero = false;
@@ -228,6 +229,8 @@ namespace AppInguiri
                 if (dgvVenta.RowCount > 0)
                 {
                     xBandero = true;
+                    chkVentasParaEnvioSunat.Visible = false;
+                    chkVentasParaEnvioSunat.Checked = false;
                     TabConsulta.SelectedTab = TabDetalle;
                     xBandero = false;
                     Venta _vent = (Venta)dgvVenta.CurrentRow.DataBoundItem;
