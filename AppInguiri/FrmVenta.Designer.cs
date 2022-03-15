@@ -28,20 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVenta));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanTotales = new System.Windows.Forms.Panel();
+            this.btnDescuento = new System.Windows.Forms.Button();
+            this.btnHistorial = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.PanSuperior = new System.Windows.Forms.Panel();
             this.lblVendedor = new System.Windows.Forms.Label();
             this.lblNumero = new System.Windows.Forms.Label();
@@ -68,6 +74,7 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.LblCodigoCliente = new System.Windows.Forms.Label();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.lblEstadoSunat = new System.Windows.Forms.Label();
             this.lblTotalTextoSinIgv = new System.Windows.Forms.Label();
             this.lblPedido = new System.Windows.Forms.Label();
             this.lblFinal = new System.Windows.Forms.Label();
@@ -94,13 +101,6 @@
             this.fSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bServicio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.fDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblEstadoSunat = new System.Windows.Forms.Label();
-            this.btnDescuento = new System.Windows.Forms.Button();
-            this.btnHistorial = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.PanTotales.SuspendLayout();
             this.PanSuperior.SuspendLayout();
             this.Panel1.SuspendLayout();
@@ -123,6 +123,110 @@
             this.PanTotales.Name = "PanTotales";
             this.PanTotales.Size = new System.Drawing.Size(111, 434);
             this.PanTotales.TabIndex = 3;
+            // 
+            // btnDescuento
+            // 
+            this.btnDescuento.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDescuento.ForeColor = System.Drawing.Color.Black;
+            this.btnDescuento.Image = global::AppInguiri.Properties.Resources.xDescuento;
+            this.btnDescuento.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDescuento.Location = new System.Drawing.Point(7, 182);
+            this.btnDescuento.Name = "btnDescuento";
+            this.btnDescuento.Size = new System.Drawing.Size(94, 52);
+            this.btnDescuento.TabIndex = 5;
+            this.btnDescuento.TabStop = false;
+            this.btnDescuento.Text = "&Dscto     [F6]";
+            this.btnDescuento.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDescuento.UseVisualStyleBackColor = true;
+            this.btnDescuento.Visible = false;
+            this.btnDescuento.Click += new System.EventHandler(this.btnDescuento_Click);
+            // 
+            // btnHistorial
+            // 
+            this.btnHistorial.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHistorial.ForeColor = System.Drawing.Color.Black;
+            this.btnHistorial.Image = global::AppInguiri.Properties.Resources.xPedido;
+            this.btnHistorial.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnHistorial.Location = new System.Drawing.Point(7, 317);
+            this.btnHistorial.Name = "btnHistorial";
+            this.btnHistorial.Size = new System.Drawing.Size(94, 52);
+            this.btnHistorial.TabIndex = 1;
+            this.btnHistorial.TabStop = false;
+            this.btnHistorial.Text = "&Pedidos  [F6]";
+            this.btnHistorial.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnHistorial.UseVisualStyleBackColor = true;
+            this.btnHistorial.Visible = false;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.ForeColor = System.Drawing.Color.Black;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnGuardar.Location = new System.Drawing.Point(7, 7);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(94, 52);
+            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.TabStop = false;
+            this.btnGuardar.Text = "&Guardar  [F5]";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.Black;
+            this.btnEliminar.Image = global::AppInguiri.Properties.Resources.X1;
+            this.btnEliminar.Location = new System.Drawing.Point(7, 66);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(94, 52);
+            this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.TabStop = false;
+            this.btnEliminar.Text = "&Eliminar  [F7]";
+            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
+            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.Location = new System.Drawing.Point(7, 124);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(94, 52);
+            this.btnBuscar.TabIndex = 3;
+            this.btnBuscar.TabStop = false;
+            this.btnBuscar.Text = "&Buscar    [F8]";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalir.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.Black;
+            this.btnSalir.Image = global::AppInguiri.Properties.Resources.xSalir;
+            this.btnSalir.Location = new System.Drawing.Point(7, 369);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(94, 52);
+            this.btnSalir.TabIndex = 4;
+            this.btnSalir.TabStop = false;
+            this.btnSalir.Text = "&Salir      [Esc]";
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // PanSuperior
             // 
@@ -195,8 +299,6 @@
             // chkCliente
             // 
             this.chkCliente.AutoSize = true;
-            this.chkCliente.Checked = true;
-            this.chkCliente.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCliente.Location = new System.Drawing.Point(641, 34);
             this.chkCliente.Name = "chkCliente";
@@ -467,6 +569,20 @@
             this.Panel1.Size = new System.Drawing.Size(980, 38);
             this.Panel1.TabIndex = 5;
             // 
+            // lblEstadoSunat
+            // 
+            this.lblEstadoSunat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEstadoSunat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstadoSunat.ForeColor = System.Drawing.Color.Black;
+            this.lblEstadoSunat.Image = global::AppInguiri.Properties.Resources.Ofline;
+            this.lblEstadoSunat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEstadoSunat.Location = new System.Drawing.Point(812, 2);
+            this.lblEstadoSunat.Name = "lblEstadoSunat";
+            this.lblEstadoSunat.Size = new System.Drawing.Size(160, 30);
+            this.lblEstadoSunat.TabIndex = 51;
+            this.lblEstadoSunat.Text = " Desconectado a Sunat";
+            this.lblEstadoSunat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // lblTotalTextoSinIgv
             // 
             this.lblTotalTextoSinIgv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -621,20 +737,20 @@
             this.dgvProducto.AllowUserToDeleteRows = false;
             this.dgvProducto.AllowUserToResizeColumns = false;
             this.dgvProducto.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvProducto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvProducto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProducto.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvProducto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.LightCyan;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProducto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightCyan;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProducto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nCorrelativo,
@@ -655,14 +771,14 @@
             this.dgvProducto.MultiSelect = false;
             this.dgvProducto.Name = "dgvProducto";
             this.dgvProducto.ReadOnly = true;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.Aquamarine;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProducto.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Aquamarine;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProducto.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvProducto.RowHeadersVisible = false;
             this.dgvProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducto.Size = new System.Drawing.Size(978, 304);
@@ -681,13 +797,12 @@
             // 
             this.nIdMovimiento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nIdMovimiento.DataPropertyName = "nIdMovimiento";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.nIdMovimiento.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.nIdMovimiento.DefaultCellStyle = dataGridViewCellStyle3;
             this.nIdMovimiento.HeaderText = "IdMovimiento";
             this.nIdMovimiento.Name = "nIdMovimiento";
             this.nIdMovimiento.ReadOnly = true;
             this.nIdMovimiento.Visible = false;
-            this.nIdMovimiento.Width = 77;
             // 
             // nIdProducto
             // 
@@ -697,7 +812,6 @@
             this.nIdProducto.Name = "nIdProducto";
             this.nIdProducto.ReadOnly = true;
             this.nIdProducto.Visible = false;
-            this.nIdProducto.Width = 66;
             // 
             // sDescripcion
             // 
@@ -712,36 +826,34 @@
             // 
             this.sLote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sLote.DataPropertyName = "sLote";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sLote.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sLote.DefaultCellStyle = dataGridViewCellStyle4;
             this.sLote.HeaderText = "Lote";
             this.sLote.Name = "sLote";
             this.sLote.ReadOnly = true;
             this.sLote.Visible = false;
-            this.sLote.Width = 53;
             // 
             // Vencimiento
             // 
             this.Vencimiento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Vencimiento.DataPropertyName = "Vencimiento";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.Format = "d";
-            dataGridViewCellStyle17.NullValue = null;
-            this.Vencimiento.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.Vencimiento.DefaultCellStyle = dataGridViewCellStyle5;
             this.Vencimiento.HeaderText = "Fecha  Vencimiento";
             this.Vencimiento.Name = "Vencimiento";
             this.Vencimiento.ReadOnly = true;
             this.Vencimiento.Visible = false;
-            this.Vencimiento.Width = 124;
             // 
             // nCantidad
             // 
             this.nCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nCantidad.DataPropertyName = "nCantidad";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.Format = "N0";
-            dataGridViewCellStyle18.NullValue = "0";
-            this.nCantidad.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = "0";
+            this.nCantidad.DefaultCellStyle = dataGridViewCellStyle6;
             this.nCantidad.HeaderText = "Cantidad";
             this.nCantidad.Name = "nCantidad";
             this.nCantidad.ReadOnly = true;
@@ -751,10 +863,10 @@
             // 
             this.fPrecioCompra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fPrecioCompra.DataPropertyName = "fPrecioCompra";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "C2";
-            dataGridViewCellStyle19.NullValue = null;
-            this.fPrecioCompra.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.fPrecioCompra.DefaultCellStyle = dataGridViewCellStyle7;
             this.fPrecioCompra.HeaderText = "Precio Compra";
             this.fPrecioCompra.Name = "fPrecioCompra";
             this.fPrecioCompra.ReadOnly = true;
@@ -764,10 +876,10 @@
             // 
             this.fGanancia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fGanancia.DataPropertyName = "fGanancia";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.Format = "C2";
-            dataGridViewCellStyle20.NullValue = null;
-            this.fGanancia.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.fGanancia.DefaultCellStyle = dataGridViewCellStyle8;
             this.fGanancia.HeaderText = "Ganancia";
             this.fGanancia.Name = "fGanancia";
             this.fGanancia.ReadOnly = true;
@@ -777,10 +889,10 @@
             // 
             this.fPrecioVenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fPrecioVenta.DataPropertyName = "fPrecioVenta";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "C2";
-            dataGridViewCellStyle21.NullValue = null;
-            this.fPrecioVenta.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.fPrecioVenta.DefaultCellStyle = dataGridViewCellStyle9;
             this.fPrecioVenta.HeaderText = "Precio Venta";
             this.fPrecioVenta.Name = "fPrecioVenta";
             this.fPrecioVenta.ReadOnly = true;
@@ -790,10 +902,10 @@
             // 
             this.fSubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fSubTotal.DataPropertyName = "fSubTotal";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle22.Format = "C2";
-            dataGridViewCellStyle22.NullValue = null;
-            this.fSubTotal.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "C2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.fSubTotal.DefaultCellStyle = dataGridViewCellStyle10;
             this.fSubTotal.HeaderText = "SubTotal";
             this.fSubTotal.Name = "fSubTotal";
             this.fSubTotal.ReadOnly = true;
@@ -815,132 +927,14 @@
             // 
             this.fDescuento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fDescuento.DataPropertyName = "fDescuento";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Format = "C2";
-            dataGridViewCellStyle23.NullValue = null;
-            this.fDescuento.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.fDescuento.DefaultCellStyle = dataGridViewCellStyle11;
             this.fDescuento.HeaderText = "Descuento";
             this.fDescuento.Name = "fDescuento";
             this.fDescuento.ReadOnly = true;
             this.fDescuento.Width = 83;
-            // 
-            // lblEstadoSunat
-            // 
-            this.lblEstadoSunat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEstadoSunat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstadoSunat.ForeColor = System.Drawing.Color.Black;
-            this.lblEstadoSunat.Image = global::AppInguiri.Properties.Resources.Ofline;
-            this.lblEstadoSunat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblEstadoSunat.Location = new System.Drawing.Point(812, 2);
-            this.lblEstadoSunat.Name = "lblEstadoSunat";
-            this.lblEstadoSunat.Size = new System.Drawing.Size(160, 30);
-            this.lblEstadoSunat.TabIndex = 51;
-            this.lblEstadoSunat.Text = " Desconectado a Sunat";
-            this.lblEstadoSunat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnDescuento
-            // 
-            this.btnDescuento.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDescuento.ForeColor = System.Drawing.Color.Black;
-            this.btnDescuento.Image = global::AppInguiri.Properties.Resources.xDescuento;
-            this.btnDescuento.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDescuento.Location = new System.Drawing.Point(7, 182);
-            this.btnDescuento.Name = "btnDescuento";
-            this.btnDescuento.Size = new System.Drawing.Size(94, 52);
-            this.btnDescuento.TabIndex = 5;
-            this.btnDescuento.TabStop = false;
-            this.btnDescuento.Text = "&Dscto     [F6]";
-            this.btnDescuento.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDescuento.UseVisualStyleBackColor = true;
-            this.btnDescuento.Visible = false;
-            this.btnDescuento.Click += new System.EventHandler(this.btnDescuento_Click);
-            // 
-            // btnHistorial
-            // 
-            this.btnHistorial.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHistorial.ForeColor = System.Drawing.Color.Black;
-            this.btnHistorial.Image = global::AppInguiri.Properties.Resources.xPedido;
-            this.btnHistorial.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnHistorial.Location = new System.Drawing.Point(7, 317);
-            this.btnHistorial.Name = "btnHistorial";
-            this.btnHistorial.Size = new System.Drawing.Size(94, 52);
-            this.btnHistorial.TabIndex = 1;
-            this.btnHistorial.TabStop = false;
-            this.btnHistorial.Text = "&Pedidos  [F6]";
-            this.btnHistorial.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHistorial.UseVisualStyleBackColor = true;
-            this.btnHistorial.Visible = false;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGuardar.Location = new System.Drawing.Point(7, 7);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(94, 52);
-            this.btnGuardar.TabIndex = 0;
-            this.btnGuardar.TabStop = false;
-            this.btnGuardar.Text = "&Guardar  [F5]";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.ForeColor = System.Drawing.Color.Black;
-            this.btnEliminar.Image = global::AppInguiri.Properties.Resources.X1;
-            this.btnEliminar.Location = new System.Drawing.Point(7, 66);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(94, 52);
-            this.btnEliminar.TabIndex = 2;
-            this.btnEliminar.TabStop = false;
-            this.btnEliminar.Text = "&Eliminar  [F7]";
-            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.Location = new System.Drawing.Point(7, 124);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(94, 52);
-            this.btnBuscar.TabIndex = 3;
-            this.btnBuscar.TabStop = false;
-            this.btnBuscar.Text = "&Buscar    [F8]";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSalir.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
-            this.btnSalir.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.ForeColor = System.Drawing.Color.Black;
-            this.btnSalir.Image = global::AppInguiri.Properties.Resources.xSalir;
-            this.btnSalir.Location = new System.Drawing.Point(7, 369);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(94, 52);
-            this.btnSalir.TabIndex = 4;
-            this.btnSalir.TabStop = false;
-            this.btnSalir.Text = "&Salir      [Esc]";
-            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // FrmVenta
             // 

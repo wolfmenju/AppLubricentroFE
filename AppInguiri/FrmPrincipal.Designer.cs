@@ -639,7 +639,7 @@
             // 
             // barBtnServicio
             // 
-            this.barBtnServicio.Caption = "Servicios";
+            this.barBtnServicio.Caption = "Servicio";
             this.barBtnServicio.Id = 74;
             this.barBtnServicio.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnServicio.LargeGlyph")));
             this.barBtnServicio.Name = "barBtnServicio";

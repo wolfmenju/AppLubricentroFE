@@ -179,6 +179,7 @@ namespace AppInguiri
                     btnBuscar_Click(sender, e);
                     break;
                 case Keys.F9:
+                    Contado();
                     break;
                 case Keys.Escape:
                     this.Close();
@@ -366,7 +367,17 @@ namespace AppInguiri
         {
             if (txtPedido.Enabled)
             {
-                if (chkCliente.CheckState == CheckState.Checked) ClienteContado();
+                if (chkCliente.CheckState == CheckState.Checked)
+                {
+                    ClienteContado();
+                }
+                else
+                {
+                    LblCodigoCliente.Text = "";
+                    txtNombre.Clear();
+                    txtRuc.Clear();
+                    txtRuc.Focus();
+                }
             }
             else
             {
