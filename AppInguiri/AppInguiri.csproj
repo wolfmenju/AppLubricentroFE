@@ -139,6 +139,12 @@
     <Compile Include="FrmMedioPago.Designer.cs">
       <DependentUpon>FrmMedioPago.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPagoDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPagoDetalle.Designer.cs">
+      <DependentUpon>FrmPagoDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmServicioListar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -659,6 +665,9 @@
     <EmbeddedResource Include="FrmMedioPago.resx">
       <DependentUpon>FrmMedioPago.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmPagoDetalle.resx">
+      <DependentUpon>FrmPagoDetalle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmServicioListar.resx">
       <DependentUpon>FrmServicioListar.cs</DependentUpon>
     </EmbeddedResource>
@@ -961,8 +970,13 @@
   <ItemGroup>
     <Content Include="Imagenes\1405979407_96395.ico" />
     <Content Include="Imagenes\1405981010_43663.ico" />
+    <Content Include="Imagenes\anadir.png" />
+    <Content Include="Imagenes\cobrar.png" />
+    <Content Include="Imagenes\cobrar2.png" />
+    <Content Include="Imagenes\eliminar.png" />
     <Content Include="Imagenes\Logo_InguiriSoft.ico" />
     <Content Include="Imagenes\medioPagos.png" />
+    <Content Include="Imagenes\Serivicio.png" />
     <Content Include="Logo_InguiriSoft.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

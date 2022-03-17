@@ -430,12 +430,13 @@ namespace AppInguiri
         {
             if (dgvProducto.Rows.Count < 1) return;
             if (!VerificacionDatos()) return;
-
-            FrmPago frmPago = new FrmPago();
+            
+            //FrmPago frmPago = new FrmPago();
+            FrmPagoDetalle frmPago = new FrmPagoDetalle();
             frmPago.frmVenta = frmInstance;
-            frmPago.lblTotal.Text = fTotal.ToString("#0.00");
+            frmPago.lblTotal.Text = fTotal.ToString("C");
             frmPago.lblVuelto.Text = "0.00";
-            frmPago.txtPago.Text=fTotal.ToString("#0.00");
+            frmPago.txtMonto.Text=fTotal.ToString("#0.00");
             frmPago.ShowDialog();
         }
 
@@ -443,85 +444,78 @@ namespace AppInguiri
         {
             if (dgvProducto.Rows.Count == 0) return;
 
-            if (MessageBox.Show("¿Desea Generar La Venta?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!VerificacionDatos()) return;
+
+            List<VentaDetalle> listVentDeta = new List<VentaDetalle>();
+            VentaDetalle objVentDeta = null;
+
+            Venta objVenta = new Venta();
+            objVenta.nTipo = 1;
+            objVenta.nIdCliente = Convert.ToInt32(LblCodigoCliente.Text);
+            objVenta.nIdPedido = lblPedido.Text.Length > 0 ? Convert.ToInt32(lblPedido.Text) : 0;
+            objVenta.nIdAlmacen = Funciones.CodAlmacenActual();
+            objVenta.sNombre = txtNombre.Text;
+            objVenta.dFecha = dtFecha.Value;
+            objVenta.sIdDocumento = cboDocumento.SelectedValue.ToString();
+            objVenta.sSerie = lblSerie.Text;
+            objVenta.nNumero = Convert.ToInt32(lblNumero.Text);
+            objVenta.fTotal = fTotal;
+            objVenta.sUsuario = Funciones.UsuarioActual();
+            objVenta.sIdCajero = Funciones.UsuarioActual();
+            objVenta.sIdVendedor = txtPedido.Text.Length > 0 ? lblVendedor.Text : Funciones.UsuarioActual();
+            objVenta.bIgvAplica = sAplicaIgv.Equals("SI") ? true : false;
+
+            if (sAplicaIgv.Equals("SI"))
             {
-                if (!VerificacionDatos()) return;
+                objVenta.fIgv = fIgvResto;
+                objVenta.fPorcentajeIgv = (decimal)fIgv;
+                objVenta.fSubTotal = fSubTotal2;
+            }
 
-                List<VentaDetalle> listVentDeta = new List<VentaDetalle>();
-                VentaDetalle objVentDeta = null;
-
-                Venta objVenta = new Venta();
-                objVenta.nTipo = 1;
-                objVenta.nIdCliente = Convert.ToInt32(LblCodigoCliente.Text);
-                objVenta.nIdPedido = lblPedido.Text.Length > 0 ? Convert.ToInt32(lblPedido.Text) : 0;
-                objVenta.nIdAlmacen = Funciones.CodAlmacenActual();
-                objVenta.sNombre = txtNombre.Text;
-                objVenta.dFecha = dtFecha.Value;
-                objVenta.sIdDocumento = cboDocumento.SelectedValue.ToString();
-                objVenta.sSerie = lblSerie.Text;
-                objVenta.nNumero = Convert.ToInt32(lblNumero.Text);
-                objVenta.fTotal = fTotal;
-                objVenta.sUsuario = Funciones.UsuarioActual();
-                objVenta.sIdCajero = Funciones.UsuarioActual();
-                objVenta.sIdVendedor = txtPedido.Text.Length > 0 ? lblVendedor.Text : Funciones.UsuarioActual();
-                objVenta.bIgvAplica = sAplicaIgv.Equals("SI") ? true : false;
+            foreach (DataGridViewRow item in dgvProducto.Rows)
+            {
+                objVentDeta = new VentaDetalle();
+                objVentDeta.nIdMovimiento = Convert.ToInt32(item.Cells["nIdMovimiento"].Value);
+                objVentDeta.nIdProducto = Convert.ToInt32(item.Cells["nIdProducto"].Value);
+                objVentDeta.dFechaVencimiento = Convert.ToDateTime(item.Cells["Vencimiento"].Value);
+                objVentDeta.nCantidad = Convert.ToInt32(item.Cells["nCantidad"].Value);
+                objVentDeta.fPrecioCompra = Convert.ToDecimal(item.Cells["fPrecioCompra"].Value);
+                objVentDeta.sLote = item.Cells["sLote"].Value.ToString();
 
                 if (sAplicaIgv.Equals("SI"))
                 {
-                    objVenta.fIgv = fIgvResto;
-                    objVenta.fPorcentajeIgv = (decimal)fIgv;
-                    objVenta.fSubTotal = fSubTotal2;
+                    objVentDeta.fIgvDetalle = decimal.Round(((objVentDeta.nCantidad *
+                    Convert.ToDecimal(item.Cells["fPrecioVenta"].Value) - ((objVentDeta.nCantidad
+                    * Convert.ToDecimal(item.Cells["fPrecioVenta"].Value)) * (fIgv / 100))) * (fIgv / 100)), 2);
+                    objVentDeta.fSubTotal = Convert.ToDecimal(item.Cells["fSubTotal"].Value);
                 }
 
-                foreach (DataGridViewRow item in dgvProducto.Rows)
+                objVentDeta.fGanancia = Convert.ToDecimal(item.Cells["fGanancia"].Value);
+                objVentDeta.fPrecioVenta = Convert.ToDecimal(item.Cells["fPrecioVenta"].Value);
+                objVentDeta.bServicio = Convert.ToBoolean(item.Cells["bServicio"].Value);
+                objVentDeta.fDescuento = Convert.ToDecimal(item.Cells["fDescuento"].Value.ToString().Replace("S/", ""));
+
+                listVentDeta.Add(objVentDeta);
+            }
+
+            objVenta.listVentaDetalle = listVentDeta;
+
+            nidVentaRespu = objVentNeg.RegistrarVenta(objVenta);
+
+            if (nidVentaRespu > 0)
+            {
+                if (!cboDocumento.Text.Equals("TICKET"))
                 {
-                    objVentDeta = new VentaDetalle();
-                    objVentDeta.nIdMovimiento = Convert.ToInt32(item.Cells["nIdMovimiento"].Value);
-                    objVentDeta.nIdProducto = Convert.ToInt32(item.Cells["nIdProducto"].Value);
-                    objVentDeta.dFechaVencimiento = Convert.ToDateTime(item.Cells["Vencimiento"].Value);
-                    objVentDeta.nCantidad = Convert.ToInt32(item.Cells["nCantidad"].Value);
-                    objVentDeta.fPrecioCompra = Convert.ToDecimal(item.Cells["fPrecioCompra"].Value);
-                    objVentDeta.sLote = item.Cells["sLote"].Value.ToString();
-
-                    if (sAplicaIgv.Equals("SI"))
+                    if (sSunatOnline.Equals("SI"))
                     {
-                        objVentDeta.fIgvDetalle = decimal.Round(((objVentDeta.nCantidad *
-                        Convert.ToDecimal(item.Cells["fPrecioVenta"].Value) - ((objVentDeta.nCantidad
-                        * Convert.ToDecimal(item.Cells["fPrecioVenta"].Value)) * (fIgv / 100))) * (fIgv / 100)), 2);
-                        objVentDeta.fSubTotal = Convert.ToDecimal(item.Cells["fSubTotal"].Value);
-                    }
-
-                    objVentDeta.fGanancia = Convert.ToDecimal(item.Cells["fGanancia"].Value);
-                    objVentDeta.fPrecioVenta = Convert.ToDecimal(item.Cells["fPrecioVenta"].Value);
-                    objVentDeta.bServicio = Convert.ToBoolean(item.Cells["bServicio"].Value);
-                    objVentDeta.fDescuento = Convert.ToDecimal(item.Cells["fDescuento"].Value.ToString().Replace("S/", ""));
-
-                    listVentDeta.Add(objVentDeta);
-                }
-
-                objVenta.listVentaDetalle = listVentDeta;
-
-                nidVentaRespu = objVentNeg.RegistrarVenta(objVenta);
-
-                if (nidVentaRespu > 0)
-                {
-                    if (!cboDocumento.Text.Equals("TICKET"))
-                    {
-                        if (sSunatOnline.Equals("SI"))
+                        //Metodo para nofiticar a Sunat
+                        if (NotificacionSunat(nidVentaRespu))
                         {
-                            //Metodo para nofiticar a Sunat
-                            if (NotificacionSunat(nidVentaRespu))
-                            {
-                                MessageBox.Show("La Venta Se Realizó Con Éxito y Notificó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("La Venta Se Realizó Con Éxito pero hubo problemas en la notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
+                            MessageBox.Show("La Venta Se Realizó Con Éxito y Notificó Correctamente a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("La Venta Se Realizó Con Éxito.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("La Venta Se Realizó Con Éxito pero hubo problemas en la notificación a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
@@ -531,16 +525,19 @@ namespace AppInguiri
                 }
                 else
                 {
-                    MessageBox.Show("La Venta No Se Pudo Realizar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("La Venta Se Realizó Con Éxito.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                ImprimirComprobante();
-                LimpiarValores();
-                CargaSerieDocumento();
-                Contado();
-
-                nidVentaRespu = 0;
             }
+            else
+            {
+                MessageBox.Show("La Venta No Se Pudo Realizar.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            ImprimirComprobante();
+            LimpiarValores();
+            CargaSerieDocumento();
+            Contado();
+            nidVentaRespu = 0;
         }
 
 

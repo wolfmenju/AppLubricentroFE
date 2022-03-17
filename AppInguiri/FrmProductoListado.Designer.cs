@@ -177,6 +177,7 @@
             this.bAlternativo.HeaderText = "Alternativo";
             this.bAlternativo.Name = "bAlternativo";
             this.bAlternativo.ReadOnly = true;
+            this.bAlternativo.Visible = false;
             this.bAlternativo.Width = 66;
             // 
             // sLaboratorio
@@ -185,12 +186,12 @@
             this.sLaboratorio.DataPropertyName = "sLaboratorio";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.sLaboratorio.DefaultCellStyle = dataGridViewCellStyle4;
-            this.sLaboratorio.HeaderText = "Laboratorio";
+            this.sLaboratorio.HeaderText = "Categoria";
             this.sLaboratorio.Name = "sLaboratorio";
             this.sLaboratorio.ReadOnly = true;
             this.sLaboratorio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.sLaboratorio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sLaboratorio.Width = 68;
+            this.sLaboratorio.Width = 60;
             // 
             // nTotal
             // 

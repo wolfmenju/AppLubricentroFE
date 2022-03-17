@@ -193,7 +193,6 @@ namespace AppInguiri
 
         private void CmdCancelar_Click(object sender, EventArgs e)
         {
-            cerrarFormulario = true;
             this.Close();
         }
 
@@ -201,6 +200,8 @@ namespace AppInguiri
         {
             if (cerrarFormulario) e.Cancel = false;
             else e.Cancel = true;
+
+            cerrarFormulario = true;
         }
 
         private void btnConsultaSunat_Click(object sender, EventArgs e)

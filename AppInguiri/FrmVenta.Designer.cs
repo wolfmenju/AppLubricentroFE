@@ -169,7 +169,7 @@
             this.btnGuardar.Size = new System.Drawing.Size(94, 52);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.TabStop = false;
-            this.btnGuardar.Text = "&Guardar  [F5]";
+            this.btnGuardar.Text = "&Cobrar  [F5]";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
