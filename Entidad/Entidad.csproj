@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Almacen.cs" />
     <Compile Include="Caja.cs" />
+    <Compile Include="MedioPago.cs" />
     <Compile Include="Deuda.cs" />
     <Compile Include="InventarioDetalle.cs" />
     <Compile Include="Inventario.cs" />

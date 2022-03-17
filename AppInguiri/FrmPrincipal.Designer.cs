@@ -85,6 +85,7 @@
             this.barBtnActualizaStock = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnDashboardVentas = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnServicio = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnMedioPago = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -170,9 +171,10 @@
             this.barBtnDevuelveProducto,
             this.barBtnActualizaStock,
             this.barBtnDashboardVentas,
-            this.barBtnServicio});
+            this.barBtnServicio,
+            this.barBtnMedioPago});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.RibbonControl.MaxItemId = 75;
+            this.RibbonControl.MaxItemId = 76;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -647,6 +649,15 @@
             this.barBtnServicio.Tag = "3";
             this.barBtnServicio.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnServicio_ItemClick);
             // 
+            // barBtnMedioPago
+            // 
+            this.barBtnMedioPago.Caption = "Medio de Pago";
+            this.barBtnMedioPago.Id = 75;
+            this.barBtnMedioPago.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnMedioPago.LargeGlyph")));
+            this.barBtnMedioPago.Name = "barBtnMedioPago";
+            this.barBtnMedioPago.Tag = "38";
+            this.barBtnMedioPago.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnMedioPago_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -664,6 +675,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barBtnPresentacion);
             this.ribbonPageGroup2.ItemLinks.Add(this.barBtnServicio);
             this.ribbonPageGroup2.ItemLinks.Add(this.barBtnProducto);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barBtnMedioPago);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Productos";
             // 
@@ -930,5 +942,6 @@
         private DevExpress.XtraBars.BarButtonItem barBtnDashboardVentas;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
         private DevExpress.XtraBars.BarButtonItem barBtnServicio;
+        private DevExpress.XtraBars.BarButtonItem barBtnMedioPago;
     }
 }

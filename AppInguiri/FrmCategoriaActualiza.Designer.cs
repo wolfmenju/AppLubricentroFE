@@ -142,7 +142,7 @@
             this.MinimizeBox = false;
             this.Name = "FrmCategoriaActualiza";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Actualizar Presentación De Productos";
+            this.Text = "Actualizar Categoria De Productos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPresentacionActualiza_FormClosing);
             this.Load += new System.EventHandler(this.FrmPresentacionNuevo_Load);
             this.PanSuperior.ResumeLayout(false);
