@@ -133,7 +133,7 @@ namespace AppInguiri
 
             if (cboDocumento.Items.Count > 0) CargaSerieDocumento();
 
-            dtFecha.Value = Funciones.CodFechaActual();
+            dtFecha.Value = Globales.FechaActual();
             dtFecha.Enabled = false;
 
             fIgv = Convert.ToDecimal(objParamNeg.LeerUnParametro("ID_IGV"));

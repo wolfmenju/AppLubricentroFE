@@ -137,10 +137,10 @@ namespace AppInguiri
         {
             FrmProductoListar frmProductoListar = new FrmProductoListar();
             frmProductoListar.xTipo = xTipo;
-            frmProductoListar.FrmDevuelve = frmInstance;
+            frmProductoListar.frmDevuelve = frmInstance;
             frmProductoListar.ShowDialog();
 
-            dgvProducto.DataSource = frmProductoListar.FrmDevuelve.dgvProducto.DataSource;
+            dgvProducto.DataSource = frmProductoListar.frmDevuelve.dgvProducto.DataSource;
             CalcularTotal();
             this.ActiveControl = null;
             txtDescripcion.Focus();

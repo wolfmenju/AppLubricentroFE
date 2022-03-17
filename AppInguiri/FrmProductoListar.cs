@@ -19,7 +19,9 @@ namespace AppInguiri
     {
         public FrmCompra frmCompra = null;
         public FrmVenta frmVenta = null;
-        public FrmAjusteStock FrmDevuelve = null;
+        public FrmPedido frmPedido = null;
+
+        public FrmAjusteStock frmDevuelve = null;
         public int xTipo = 0;
         ProductoNegocio objProducNeg = new ProductoNegocio();
         ProductoHistorialNegocio objProducHistNeg = new ProductoHistorialNegocio();
@@ -87,23 +89,48 @@ namespace AppInguiri
             else
             {
                 listProducto.Clear();
-                Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
 
-                Producto objProducto = new Producto();
-                objProducto.nTipo = 10;
-                objProducto.nIdProducto = Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
-
-                listProducto = objProducNeg.ListarProducto(objProducto);
-
-                if (listProducto.Count() > 0)
+                if (frmVenta != null)
                 {
-                    DgvProducto.AutoGenerateColumns = false;
-                    DgvProducto.DataSource = listProducto;
-                    NdCantidad.Text = Convert.ToString(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                    Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
+
+                    Producto objProducto = new Producto();
+                    objProducto.nTipo = 10;
+                    objProducto.nIdProducto = Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
+
+                    listProducto = objProducNeg.ListarProducto(objProducto);
+
+                    if (listProducto.Count() > 0)
+                    {
+                        DgvProducto.AutoGenerateColumns = false;
+                        DgvProducto.DataSource = listProducto;
+                        NdCantidad.Text = Convert.ToString(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                    }
+                    else
+                    {
+                        DgvProducto.DataSource = null;
+                    }
                 }
-                else
+                else if (frmPedido != null)
                 {
-                    DgvProducto.DataSource = null;
+                    Int32 filaselecionada = frmPedido.dgvProducto.CurrentCell.RowIndex;
+
+                    Producto objProducto = new Producto();
+                    objProducto.nTipo = 10;
+                    objProducto.nIdProducto = Convert.ToInt32(frmPedido.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
+
+                    listProducto = objProducNeg.ListarProducto(objProducto);
+
+                    if (listProducto.Count() > 0)
+                    {
+                        DgvProducto.AutoGenerateColumns = false;
+                        DgvProducto.DataSource = listProducto;
+                        NdCantidad.Text = Convert.ToString(frmPedido.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                    }
+                    else
+                    {
+                        DgvProducto.DataSource = null;
+                    }
                 }
             }
 
@@ -183,9 +210,19 @@ namespace AppInguiri
 
                 if (xTipo == 1)
                 {
-                    Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
-                    DgvDetalles.Rows[Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCorrelativo"].Value)].Cells["bSeleccionar"].Value = true;
-                    CargaTotal(Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCorrelativo"].Value));
+                    if (frmVenta != null)
+                    {
+                        Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
+                        DgvDetalles.Rows[Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCorrelativo"].Value)].Cells["bSeleccionar"].Value = true;
+                        CargaTotal(Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCorrelativo"].Value));
+                    }
+                    else if (frmPedido != null)
+                    {
+                        Int32 filaselecionada = frmPedido.dgvProducto.CurrentCell.RowIndex;
+                        DgvDetalles.Rows[Convert.ToInt32(frmPedido.dgvProducto.Rows[filaselecionada].Cells["nCorrelativo"].Value)].Cells["bSeleccionar"].Value = true;
+                        CargaTotal(Convert.ToInt32(frmPedido.dgvProducto.Rows[filaselecionada].Cells["nCorrelativo"].Value));
+                    }
+
                     return;
                 }
             }
@@ -473,19 +510,39 @@ namespace AppInguiri
                             Int32 filaselecionada1 = DgvDetalles.CurrentCell.RowIndex;
                             DataGridViewRow row3 = DgvDetalles.Rows[filaselecionada1];
                             ProductoHistorial productoHistorial = (ProductoHistorial)row3.DataBoundItem;
-                            Int32 filaselecionada3 = frmVenta.dgvProducto.CurrentCell.RowIndex;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nCorrelativo"].Value = productoHistorial.nIdAlmacen;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nIdMovimiento"].Value = productoHistorial.nIdProductoHistorial;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["sLote"].Value = productoHistorial.sLote;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["Vencimiento"].Value = productoHistorial.dFechaVencimiento;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nCantidad"].Value = NdCantidad.Text;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fPrecioVenta"].Value = productoHistorial.fPrecioVenta;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fPrecioCompra"].Value = productoHistorial.fPrecioCompra;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fGanancia"].Value = productoHistorial.fPrecioVenta-productoHistorial.fPrecioCompra;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fSubTotal"].Value = Convert.ToInt32(NdCantidad.Text) * productoHistorial.fPrecioVenta;
-                            frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fDescuento"].Value = 0.00;
-                            frmVenta.dgvProducto.Refresh();
-                            this.Close();                            
+
+                            if (frmVenta != null)
+                            {
+                                Int32 filaselecionada3 = frmVenta.dgvProducto.CurrentCell.RowIndex;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nCorrelativo"].Value = productoHistorial.nIdAlmacen;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nIdMovimiento"].Value = productoHistorial.nIdProductoHistorial;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["sLote"].Value = productoHistorial.sLote;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["Vencimiento"].Value = productoHistorial.dFechaVencimiento;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["nCantidad"].Value = NdCantidad.Text;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fPrecioVenta"].Value = productoHistorial.fPrecioVenta;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fPrecioCompra"].Value = productoHistorial.fPrecioCompra;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fGanancia"].Value = productoHistorial.fPrecioVenta - productoHistorial.fPrecioCompra;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fSubTotal"].Value = Convert.ToInt32(NdCantidad.Text) * productoHistorial.fPrecioVenta;
+                                frmVenta.dgvProducto.Rows[filaselecionada3].Cells["fDescuento"].Value = 0.00;
+                                frmVenta.dgvProducto.Refresh();
+                                this.Close();
+                            }
+                            else if (frmPedido != null)
+                            {
+                                Int32 filaselecionada3 = frmPedido.dgvProducto.CurrentCell.RowIndex;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["nCorrelativo"].Value = productoHistorial.nIdAlmacen;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["nIdMovimiento"].Value = productoHistorial.nIdProductoHistorial;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["sLote"].Value = productoHistorial.sLote;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["Vencimiento"].Value = productoHistorial.dFechaVencimiento;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["nCantidad"].Value = NdCantidad.Text;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fPrecioVenta"].Value = productoHistorial.fPrecioVenta;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fPrecioCompra"].Value = productoHistorial.fPrecioCompra;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fGanancia"].Value = productoHistorial.fPrecioVenta - productoHistorial.fPrecioCompra;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fSubTotal"].Value = Convert.ToInt32(NdCantidad.Text) * productoHistorial.fPrecioVenta;
+                                frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fDescuento"].Value = 0.00;
+                                frmPedido.dgvProducto.Refresh();
+                                this.Close();
+                            }
                         }
                     }
                 }
@@ -577,12 +634,19 @@ namespace AppInguiri
                            _productoHistorial.fPrecioCompra, _productoHistorial.fPrecioVenta - _productoHistorial.fPrecioCompra, _productoHistorial.fPrecioVenta,
                           Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(_productoHistorial.fPrecioVenta), false, 0);
                     }
-                    else if (FrmDevuelve != null)
+                    else if (frmDevuelve != null)
                     {
-                        FrmDevuelve.dgvProducto.Rows.Add(_productoHistorial.nIdAlmacen, _productoHistorial.nIdProductoHistorial, producto.nIdProducto, producto.sDescripcion,
+                        frmDevuelve.dgvProducto.Rows.Add(_productoHistorial.nIdAlmacen, _productoHistorial.nIdProductoHistorial, producto.nIdProducto, producto.sDescripcion,
                            _productoHistorial.sLote, _productoHistorial.dFechaVencimiento, Convert.ToInt32(NdCantidad.Text),
                            _productoHistorial.fPrecioCompra, _productoHistorial.fPrecioVenta - _productoHistorial.fPrecioCompra, _productoHistorial.fPrecioVenta,
                           Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(_productoHistorial.fPrecioVenta), false, 0);
+                    }
+                    else if (frmPedido != null)
+                    {
+                        frmPedido.dgvProducto.Rows.Add(_productoHistorial.nIdAlmacen, _productoHistorial.nIdProductoHistorial, producto.nIdProducto, producto.sDescripcion,
+                           _productoHistorial.sLote, _productoHistorial.dFechaVencimiento, Convert.ToInt32(NdCantidad.Text),
+                           _productoHistorial.fPrecioCompra, _productoHistorial.fPrecioVenta - _productoHistorial.fPrecioCompra, _productoHistorial.fPrecioVenta,
+                          Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(_productoHistorial.fPrecioVenta), false);
                     }
                 }
 
@@ -613,6 +677,38 @@ namespace AppInguiri
                 if (frmVenta.dgvProducto.RowCount > 0)
                 {
                     foreach (DataGridViewRow item in frmVenta.dgvProducto.Rows)
+                    {
+                        if ((int)item.Cells["nIdProducto"].Value == _producto.nIdProducto)
+                        {
+                            MessageBox.Show("El producto " + item.Cells["sDescripcion"].Value + " ya ha sido Agregado.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            resp = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            else if (frmDevuelve != null)
+            {
+                if (frmDevuelve.dgvProducto.RowCount > 0)
+                {
+                    foreach (DataGridViewRow item in frmDevuelve.dgvProducto.Rows)
+                    {
+                        if ((int)item.Cells["nIdProducto"].Value == _producto.nIdProducto)
+                        {
+                            MessageBox.Show("El producto " + item.Cells["sDescripcion"].Value + " ya ha sido Agregado.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            resp = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            else if (frmPedido != null)
+            {
+                if (frmPedido.dgvProducto.RowCount > 0)
+                {
+                    foreach (DataGridViewRow item in frmPedido.dgvProducto.Rows)
                     {
                         if ((int)item.Cells["nIdProducto"].Value == _producto.nIdProducto)
                         {

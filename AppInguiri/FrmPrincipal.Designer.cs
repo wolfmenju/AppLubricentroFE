@@ -47,7 +47,7 @@
             this.barBtnCambiarClave = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnIventario = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnPedido = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnVenta = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnCompra = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnCuentasPorPagar = new DevExpress.XtraBars.BarButtonItem();
@@ -133,7 +133,7 @@
             this.barBtnCambiarClave,
             this.barBtnIventario,
             this.barButtonItem13,
-            this.barButtonItem14,
+            this.barBtnPedido,
             this.barBtnVenta,
             this.barBtnCompra,
             this.barBtnCuentasPorPagar,
@@ -318,13 +318,14 @@
             this.barButtonItem13.Name = "barButtonItem13";
             this.barButtonItem13.Tag = "151";
             // 
-            // barButtonItem14
+            // barBtnPedido
             // 
-            this.barButtonItem14.Caption = "Pedidos";
-            this.barButtonItem14.Id = 18;
-            this.barButtonItem14.LargeGlyph = global::AppInguiri.Properties.Resources.xPedido;
-            this.barButtonItem14.Name = "barButtonItem14";
-            this.barButtonItem14.Tag = "161";
+            this.barBtnPedido.Caption = "Pedidos";
+            this.barBtnPedido.Id = 18;
+            this.barBtnPedido.LargeGlyph = global::AppInguiri.Properties.Resources.xPedido;
+            this.barBtnPedido.Name = "barBtnPedido";
+            this.barBtnPedido.Tag = "16";
+            this.barBtnPedido.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnPedido_ItemClick);
             // 
             // barBtnVenta
             // 
@@ -714,7 +715,7 @@
             // 
             // ribbonPageGroup6
             // 
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem14);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barBtnPedido);
             this.ribbonPageGroup6.ItemLinks.Add(this.barBtnVenta);
             this.ribbonPageGroup6.ItemLinks.Add(this.barBtnCompra);
             this.ribbonPageGroup6.ItemLinks.Add(this.barBtnCuentasPorPagar);
@@ -878,7 +879,7 @@
         private DevExpress.XtraBars.BarButtonItem barBtnIventario;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem13;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem14;
+        private DevExpress.XtraBars.BarButtonItem barBtnPedido;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraBars.BarButtonItem barBtnVenta;
         private DevExpress.XtraBars.BarButtonItem barBtnCompra;

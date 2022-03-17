@@ -48,6 +48,8 @@
     <Compile Include="Servicio.cs" />
     <Compile Include="Salida.cs" />
     <Compile Include="SalidaDetalle.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="PedidoDetalle.cs" />
     <Compile Include="VentaDetalle.cs" />
     <Compile Include="Venta.cs" />
     <Compile Include="Compra.cs" />

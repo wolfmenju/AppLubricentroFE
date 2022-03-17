@@ -60,6 +60,7 @@
     <Compile Include="CajaData.cs" />
     <Compile Include="InventarioData.cs" />
     <Compile Include="SalidaData.cs" />
+    <Compile Include="PedidoData.cs" />
     <Compile Include="VentaData.cs" />
     <Compile Include="SedeData.cs" />
     <Compile Include="ProveedorData.cs" />

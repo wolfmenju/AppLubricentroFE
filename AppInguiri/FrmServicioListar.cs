@@ -19,6 +19,8 @@ namespace AppInguiri
     {
         public Servicio _servicio;
         public FrmVenta frmVenta = null;
+        public FrmPedido frmPedido = null;
+
         public int xTipo = 0;
 
         private ServicioNegocio objServicNeg = new ServicioNegocio();
@@ -68,21 +70,43 @@ namespace AppInguiri
             }
             else
             {
-                Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
-                Servicio objServic = new Servicio()  { nTipo = 6};
-                objServic.nIdServicio = Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
-
-                ListServicio = objServicNeg.ListarServicio(objServic);
-
-                if (ListServicio.Count() > 0)
+                if (frmVenta != null)
                 {
-                    dgvServicio.AutoGenerateColumns = false;
-                    dgvServicio.DataSource = ListServicio;
-                    NdCantidad.Text = Convert.ToString(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                    Int32 filaselecionada = frmVenta.dgvProducto.CurrentCell.RowIndex;
+                    Servicio objServic = new Servicio() { nTipo = 6 };
+                    objServic.nIdServicio = Convert.ToInt32(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
+
+                    ListServicio = objServicNeg.ListarServicio(objServic);
+
+                    if (ListServicio.Count() > 0)
+                    {
+                        dgvServicio.AutoGenerateColumns = false;
+                        dgvServicio.DataSource = ListServicio;
+                        NdCantidad.Text = Convert.ToString(frmVenta.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                    }
+                    else
+                    {
+                        dgvServicio.DataSource = null;
+                    }
                 }
-                else
+                else if (frmPedido != null)
                 {
-                    dgvServicio.DataSource = null;
+                    Int32 filaselecionada = frmPedido.dgvProducto.CurrentCell.RowIndex;
+                    Servicio objServic = new Servicio() { nTipo = 6 };
+                    objServic.nIdServicio = Convert.ToInt32(frmPedido.dgvProducto.Rows[filaselecionada].Cells["nIdProducto"].Value);
+
+                    ListServicio = objServicNeg.ListarServicio(objServic);
+
+                    if (ListServicio.Count() > 0)
+                    {
+                        dgvServicio.AutoGenerateColumns = false;
+                        dgvServicio.DataSource = ListServicio;
+                        NdCantidad.Text = Convert.ToString(frmPedido.dgvProducto.Rows[filaselecionada].Cells["nCantidad"].Value);
+                    }
+                    else
+                    {
+                        dgvServicio.DataSource = null;
+                    }
                 }
             }
             
@@ -204,6 +228,22 @@ namespace AppInguiri
                         frmVenta.dgvProducto.Refresh();
                     }
 
+                    if (frmPedido != null)
+                    {
+                        Int32 filaselecionada3 = frmPedido.dgvProducto.CurrentCell.RowIndex;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["nCorrelativo"].Value = 0;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["nIdMovimiento"].Value = 0;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["sLote"].Value = "";
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["Vencimiento"].Value = Globales.FechaActual();
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["nCantidad"].Value = NdCantidad.Text;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fPrecioVenta"].Value = servicio.fPrecio;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fPrecioCompra"].Value = servicio.fPrecio;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fGanancia"].Value = servicio.fPrecio - servicio.fPrecio;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fSubTotal"].Value = Convert.ToInt32(NdCantidad.Text) * servicio.fPrecio;
+                        frmPedido.dgvProducto.Rows[filaselecionada3].Cells["fDescuento"].Value = 0.00;
+                        frmPedido.dgvProducto.Refresh();
+                    }
+
                 }
                 else
                 {
@@ -212,6 +252,13 @@ namespace AppInguiri
                         frmVenta.dgvProducto.Rows.Add(0, 0, servicio.nIdServicio, servicio.sDescripcion,
                           "", Globales.FechaActual(), Convert.ToInt32(NdCantidad.Text), servicio.fPrecio, servicio.fPrecio - servicio.fPrecio, servicio.fPrecio,
                           Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(servicio.fPrecio), true, 0);
+                    }
+                    if (frmPedido != null)
+                    {
+                        frmPedido.dgvProducto.Rows.Add(0, 0, servicio.nIdServicio, servicio.sDescripcion,
+                         "", Globales.FechaActual(), Convert.ToInt32(NdCantidad.Text), servicio.fPrecio, servicio.fPrecio - servicio.fPrecio, servicio.fPrecio,
+                         Convert.ToInt32(NdCantidad.Text) * Convert.ToDecimal(servicio.fPrecio), true, 0);
+
                     }
                 }
 

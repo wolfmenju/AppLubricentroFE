@@ -51,6 +51,7 @@ namespace AppInguiri
         FrmRptProductos frmRptProductos = null;
         FrmVentaEstadisticas frmVentaEstadisticas = null;
         FrmServicio frmServicio = null;
+        FrmPedido frmPedido = null;
         List<Form> ListaFormu = new List<Form>();
         
         #endregion
@@ -479,6 +480,15 @@ namespace AppInguiri
             frmServicio.MdiParent = this;
             frmServicio.Show();
             VerificarFormulario(frmServicio);
+        }
+
+        private void barBtnPedido_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            pbLogoInguiri.Visible = false;
+            frmPedido = FrmPedido.Instance();
+            frmPedido.MdiParent = this;
+            frmPedido.Show();
+            VerificarFormulario(frmPedido);
         }
 
         private void barBtnDashboardVentas_ItemClick(object sender, ItemClickEventArgs e)

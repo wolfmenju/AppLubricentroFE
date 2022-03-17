@@ -57,6 +57,7 @@
     <Compile Include="InventarioNegocio.cs" />
     <Compile Include="ServicioNegocio.cs" />
     <Compile Include="SalidaNegocio.cs" />
+    <Compile Include="PedidoNegocio.cs" />
     <Compile Include="VentaNegocio.cs" />
     <Compile Include="ProductoHistorialNegocio.cs" />
     <Compile Include="CompraNegocio.cs" />
