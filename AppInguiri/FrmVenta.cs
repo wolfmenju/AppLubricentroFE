@@ -35,6 +35,7 @@ namespace AppInguiri
         decimal fTotal = 0M, fIgv = 0M, fIgvResto = 0M, fSubTotal2 = 0M;
         private DocumentoSerieNegocio objDocumentSerieNeg = new DocumentoSerieNegocio();
         private List<DocumentoSerie> listDocumentoSerie = new List<DocumentoSerie>();
+        public List<VentaMedioPago> listRespVentaMedioPago = new List<VentaMedioPago>();
         private ClienteNegocio objCliNeg = new ClienteNegocio();
         private Cliente cliente= new Cliente();
         
@@ -464,6 +465,7 @@ namespace AppInguiri
             objVenta.sIdCajero = Funciones.UsuarioActual();
             objVenta.sIdVendedor = txtPedido.Text.Length > 0 ? lblVendedor.Text : Funciones.UsuarioActual();
             objVenta.bIgvAplica = sAplicaIgv.Equals("SI") ? true : false;
+            objVenta.listVentaMedioPago = listRespVentaMedioPago;
 
             if (sAplicaIgv.Equals("SI"))
             {

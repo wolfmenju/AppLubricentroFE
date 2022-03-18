@@ -209,6 +209,7 @@ namespace Datos
             SqlCommand cmdHistorial = null;
             SqlCommand cmdTarjeta = null;
             SqlCommand cmdDetalle = null;
+            SqlCommand cmdMedioPago = null;
 
             Conexion cn = new Conexion();
             SqlTransaction xTrans;
@@ -276,19 +277,40 @@ namespace Datos
                 }
 
                 respuesta = 0;
+
                 cmdCaja = new SqlCommand("IAE_Caja", cnx);
-                cmdCaja.Parameters.AddWithValue("@Tipo", 4);
-                cmdCaja.Parameters.AddWithValue("@IdTurno", 0);
-                cmdCaja.Parameters.AddWithValue("@IdCaja", 0);
-                cmdCaja.Parameters.AddWithValue("@FechaInicio", objVenta.dFecha);
-                cmdCaja.Parameters.AddWithValue("@MontoInicio", 0.0);
-                cmdCaja.Parameters.AddWithValue("@FechaFinal", DateTime.Now);
-                cmdCaja.Parameters.AddWithValue("@MontoFinal", objVenta.fTotal);
-                cmdCaja.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
-                cmdCaja.Parameters.AddWithValue("@Estado", objVenta.bEstado);
-                cmdCaja.CommandType = CommandType.StoredProcedure;
-                cmdCaja.Transaction = xTrans;
-                respuesta = cmdCaja.ExecuteNonQuery();
+                    cmdCaja.Parameters.AddWithValue("@Tipo", 4);
+                    cmdCaja.Parameters.AddWithValue("@IdTurno", 0);
+                    cmdCaja.Parameters.AddWithValue("@IdCaja", 0);
+                    cmdCaja.Parameters.AddWithValue("@FechaInicio", objVenta.dFecha);
+                    cmdCaja.Parameters.AddWithValue("@MontoInicio", 0.0);
+                    cmdCaja.Parameters.AddWithValue("@FechaFinal", DateTime.Now);
+                    cmdCaja.Parameters.AddWithValue("@MontoFinal", objVenta.fTotal);
+                    cmdCaja.Parameters.AddWithValue("@Usuario", objVenta.sUsuario);
+                    cmdCaja.Parameters.AddWithValue("@Estado", objVenta.bEstado);
+                    cmdCaja.CommandType = CommandType.StoredProcedure;
+                    cmdCaja.Transaction = xTrans;
+                    respuesta = cmdCaja.ExecuteNonQuery();
+                
+                if (respuesta <= 0)
+                {
+                    xTrans.Rollback();
+                    return respuesta;
+                }
+                
+                respuesta = 0;
+                foreach (var item in objVenta.listVentaMedioPago)
+                {
+                    cmdMedioPago = new SqlCommand("IAE_VentaMedioPago", cnx);
+                    cmdMedioPago.Parameters.AddWithValue("@Tipo", 1);
+                    cmdMedioPago.Parameters.AddWithValue("@IdVentaMedioPago", 0);
+                    cmdMedioPago.Parameters.AddWithValue("@IdVenta", objVenta.nCodigo);
+                    cmdMedioPago.Parameters.AddWithValue("@IdMedioPago", item.nIdMedioPago);
+                    cmdMedioPago.Parameters.AddWithValue("@Monto", item.fMonto);
+                    cmdMedioPago.CommandType = CommandType.StoredProcedure;
+                    cmdMedioPago.Transaction = xTrans;
+                    respuesta = cmdMedioPago.ExecuteNonQuery();
+                }
 
                 if (respuesta <= 0)
                 {

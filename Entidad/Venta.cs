@@ -37,6 +37,7 @@ namespace Entidad
             this.bEstado = true;
             this.sEstado = "";
             this.listVentaDetalle = new List<VentaDetalle>();
+            this.listVentaMedioPago = new List<VentaMedioPago>();
             this.nIdHistorial = 0;
             this.nIdTarjeta = 0;
             this.bSunat = 0;
@@ -93,6 +94,7 @@ namespace Entidad
         public bool bServicio { get; set; }
 
         public List<VentaDetalle> listVentaDetalle { get; set; }
+        public List<VentaMedioPago> listVentaMedioPago { get; set; }
 
         //Complemento
         public string sCdr { get; set; }

@@ -65,6 +65,7 @@ namespace AppInguiri
                 {
                     this.Close();
                     this.Dispose();
+                    frmVenta.listRespVentaMedioPago = LisVentaMedioPago;
                     frmVenta.GuardarVentaTodo();
                 }
                 else
@@ -278,10 +279,35 @@ namespace AppInguiri
             GenerarVenta();
         }
 
+        private List<VentaMedioPago> LisVentaMedioPago = null;
+        private VentaMedioPago objVentaMedioPago = null;
+
         private void GenerarVenta()
         {
-            if (dgvMedioPagos.RowCount > 0)
+            LisVentaMedioPago = new List<VentaMedioPago>();
+
+            if (dgvMedioPagos.RowCount == 1)
             {
+                foreach (DataGridViewRow item in dgvMedioPagos.Rows)
+                {
+                    objVentaMedioPago = new VentaMedioPago();
+                    objVentaMedioPago.nIdMedioPago = Convert.ToInt32(item.Cells["IdMedioPago"].Value);
+                    objVentaMedioPago.fMonto =decimal.Round(Convert.ToDecimal(lblTotal.Text.Replace("S/", "")),2);
+                    LisVentaMedioPago.Add(objVentaMedioPago);
+                    break;
+                }
+                Verifica();
+            }
+            else if (dgvMedioPagos.RowCount > 1)
+            {
+                foreach (DataGridViewRow item in dgvMedioPagos.Rows)
+                {
+                    objVentaMedioPago = new VentaMedioPago();
+                    objVentaMedioPago.nIdMedioPago = Convert.ToInt32(item.Cells["IdMedioPago"].Value);           
+                    objVentaMedioPago.fMonto = decimal.Round(Convert.ToDecimal(item.Cells["fMonto"].Value), 2);
+                    LisVentaMedioPago.Add(objVentaMedioPago);
+                }
+
                 Verifica();
             }
             else
