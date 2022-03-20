@@ -66,50 +66,61 @@ namespace AppInguiri
                 return;
             }
 
-            List<ListaVentasRpt> listadoVentas = new List<ListaVentasRpt>();
-            RptListaVenta rpt = new RptListaVenta();
-
-            Venta objVenta = new Venta()
+            if (nOpcion == 0)
             {
-                nTipo = 10,
-                dFecha = dtFechaInicio.Value,
-                sIdVendedor = dtFechaFin.Value.ToString("yyyyMMdd"),
-                bEstado=true
-            };
 
-            List<Venta> ListVentas = objVentaNeg.ListarVentas(objVenta);
-
-            if (ListVentas.Count > 0)
-            {
-                foreach (var item in ListVentas)
-                {
-                    ListaVentasRpt objProVenRpt = new ListaVentasRpt();
-                    objProVenRpt.nIdVenta = item.nIdVenta;
-                    objProVenRpt.sNombreCliente = item.sNombre;
-                    objProVenRpt.dFecha = item.dFecha;
-                    objProVenRpt.sDocumento = item.sIdDocumento;
-                    objProVenRpt.sIdCajero = item.sIdCajero;
-                    objProVenRpt.sCodigoInterno = item.sCodigoInterno;
-                    objProVenRpt.sProducto = item.sProducto;
-                    objProVenRpt.nCantidad = item.nCodigo;
-                    objProVenRpt.fPrecio =decimal.Round(item.fPrecioVenta- item.fIgv,2);
-                    objProVenRpt.fDescuento = item.fDescuento;
-                    objProVenRpt.fIgv = item.fIgv;
-                    listadoVentas.Add(objProVenRpt);
-                }
-
-                rpt.SetDataSource(listadoVentas);
-                rpt.SetParameterValue("Usuario", Funciones.UsuarioActual());
-                rpt.SetParameterValue("Empresa", objParaNeg.LeerUnParametro("ID_TITULO"));
-                rpt.SetParameterValue("Nombres", Funciones.UsuarioActual());
-                RptMaestro Reporte = new RptMaestro();
-                Reporte.Show();
-                Reporte.Focus();
-                Reporte.cReporte.ReportSource = rpt;
             }
-            else
+            else if (nOpcion == 4)
             {
-                MessageBox.Show("No se encontraron registros.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                List<ListaVentasRpt> listadoVentas = new List<ListaVentasRpt>();
+                RptListaVenta rpt = new RptListaVenta();
+
+                Venta objVenta = new Venta()
+                {
+                    nTipo = 10,
+                    dFecha = dtFechaInicio.Value,
+                    sIdVendedor = dtFechaFin.Value.ToString("yyyyMMdd"),
+                    bEstado = true
+                };
+
+                List<Venta> ListVentas = objVentaNeg.ListarVentas(objVenta);
+
+                if (ListVentas.Count > 0)
+                {
+                    foreach (var item in ListVentas)
+                    {
+                        ListaVentasRpt objProVenRpt = new ListaVentasRpt();
+                        objProVenRpt.nIdVenta = item.nIdVenta;
+                        objProVenRpt.sNombreCliente = item.sNombre;
+                        objProVenRpt.dFecha = item.dFecha;
+                        objProVenRpt.sDocumento = item.sIdDocumento;
+                        objProVenRpt.sIdCajero = item.sIdCajero;
+                        objProVenRpt.sCodigoInterno = item.sCodigoInterno;
+                        objProVenRpt.sProducto = item.sProducto;
+                        objProVenRpt.nCantidad = item.nCodigo;
+                        objProVenRpt.fPrecio = decimal.Round(item.fPrecioVenta - item.fIgv, 2);
+                        objProVenRpt.fDescuento = item.fDescuento;
+                        objProVenRpt.fIgv = item.fIgv;
+                        listadoVentas.Add(objProVenRpt);
+                    }
+
+                    rpt.SetDataSource(listadoVentas);
+                    rpt.SetParameterValue("Usuario", Funciones.UsuarioActual());
+                    rpt.SetParameterValue("Empresa", objParaNeg.LeerUnParametro("ID_TITULO"));
+                    rpt.SetParameterValue("Nombres", Funciones.UsuarioActual());
+                    RptMaestro Reporte = new RptMaestro();
+                    Reporte.Show();
+                    Reporte.Focus();
+                    Reporte.cReporte.ReportSource = rpt;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron registros.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+            }
+            else if (nOpcion == 1)
+            {
+
             }
 
             cerrarFormulario = false;
@@ -136,6 +147,13 @@ namespace AppInguiri
             else e.Cancel = true;
 
             cerrarFormulario = true;
+        }
+
+        int nOpcion = 0;
+
+        private void cbxOpcionPrincipal_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            nOpcion=cbxOpcionPrincipal.SelectedIndex;
         }
     }
 }

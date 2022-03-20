@@ -36,6 +36,7 @@ namespace AppInguiri
         FrmRptProductoVendido frmRptProductoVendido = null;
         FrmRptCompras frmRptCompras = null;
         FrmRptVentas frmRptVentas = null;
+        FrmRptVent frmRptVent = null;
         FrmCerrarCaja frmCerrarCaja = null;
         FrmRptSockMinimo frmRptSockMinimo = null;
         FrmDeudasPorPagar frmDeudasPorPagar = null;
@@ -368,8 +369,14 @@ namespace AppInguiri
 
         private void barBtnReporteVenta_ItemClick(object sender, ItemClickEventArgs e)
         {
-            frmRptVentas = FrmRptVentas.Instance();
-            frmRptVentas.ShowDialog();
+            pbLogoInguiri.Visible = false;
+            frmRptVent = FrmRptVent.Instance();
+            frmRptVent.MdiParent = this;
+            frmRptVent.Show();
+            VerificarFormulario(frmRptVent);
+
+            //frmRptVentas = FrmRptVentas.Instance();
+            //frmRptVentas.ShowDialog();
         }
 
         private void barBtnStockMinimo_ItemClick(object sender, ItemClickEventArgs e)

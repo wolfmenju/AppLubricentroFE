@@ -71,6 +71,19 @@
       <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.2.2.5\lib\net45\Mono.Security.dll</HintPath>
@@ -144,6 +157,12 @@
     </Compile>
     <Compile Include="FrmPagoDetalle.Designer.cs">
       <DependentUpon>FrmPagoDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRptVent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRptVent.Designer.cs">
+      <DependentUpon>FrmRptVent.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmServicioListar.cs">
       <SubType>Form</SubType>
@@ -668,6 +687,9 @@
     <EmbeddedResource Include="FrmPagoDetalle.resx">
       <DependentUpon>FrmPagoDetalle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmRptVent.resx">
+      <DependentUpon>FrmRptVent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmServicioListar.resx">
       <DependentUpon>FrmServicioListar.cs</DependentUpon>
     </EmbeddedResource>
@@ -1046,6 +1068,7 @@
     <Content Include="Imagenes\xVencidos.ico" />
     <Content Include="Imagenes\xVendidos.ico" />
     <Content Include="Imagenes\xVenta.ico" />
+    <None Include="Reporte\CARNET_FAMILIAR_VERSION.rdlc" />
     <None Include="Resources\xSalir.ico" />
     <None Include="Resources\xListadoCaja.ico" />
     <None Include="Resources\xFormato.ico" />

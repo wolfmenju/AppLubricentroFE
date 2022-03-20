@@ -29,7 +29,15 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@IdVenta", objVenta.nIdVenta);
                 cmd.Parameters.AddWithValue("@IdAlmacen", objVenta.nIdAlmacen);
                 cmd.Parameters.AddWithValue("@IdPedido", objVenta.nIdPedido);
-                cmd.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
+                if (objVenta.nTipo == 14)
+                {
+                    if (objVenta.sIdDocumento == "") cmd.Parameters.AddWithValue("@IdDocumento", DBNull.Value);
+                    else cmd.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@IdDocumento", objVenta.sIdDocumento);
+                }
                 cmd.Parameters.AddWithValue("@Serie", objVenta.sSerie);
                 cmd.Parameters.AddWithValue("@Numero", objVenta.nNumero);
                 cmd.Parameters.AddWithValue("@Fecha", objVenta.dFecha);
@@ -128,6 +136,27 @@ namespace Datos
                     {
                         objVent.sProducto =dr[0].ToString()+"-"+ dr[1].ToString();
                         objVent.fTotal = Convert.ToDecimal(dr[2].ToString());
+
+                    }
+                    else if (objVenta.nTipo == 13)
+                    {
+                        objVent.nNumero =Convert.ToInt32(dr[0]);
+                        objVent.sDescripDocumento =dr[1].ToString();
+                        objVent.fTotal = Convert.ToDecimal(dr[2].ToString());
+
+                    }
+                    else if (objVenta.nTipo == 14)
+                    {
+                        objVent.sDescripDocumento = dr[0].ToString();
+                        objVent.sSerie = dr[1].ToString();
+                        objVent.sSunat= dr[2].ToString();
+                        objVent.dFecha = Convert.ToDateTime(dr[3].ToString());
+                        objVent.sNombre = dr[4].ToString();
+                        objVent.sLaboratorio = dr[5].ToString();
+                        objVent.sMedioPago = dr[6].ToString();
+                        objVent.fSubTotal = Convert.ToDecimal(dr[7].ToString());
+                        objVent.fIgv = Convert.ToDecimal(dr[8].ToString());
+                        objVent.fTotal = Convert.ToDecimal(dr[9].ToString());
 
                     }
                     else if (objVenta.nTipo == 2)

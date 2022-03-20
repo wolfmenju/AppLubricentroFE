@@ -52,6 +52,7 @@ namespace Entidad
             this.bIgvAplica = false;
             this.bServicio = false;
             this.sDocumentoAnulacion = "";
+            this.sMedioPago = "";
         }
         
         public int nTipo { get; set; }
@@ -92,6 +93,7 @@ namespace Entidad
         public DateTime? FechaAnuladoSunat { get; set; }
         public bool bIgvAplica { get; set; }
         public bool bServicio { get; set; }
+        public string sMedioPago { get; set; }
 
         public List<VentaDetalle> listVentaDetalle { get; set; }
         public List<VentaMedioPago> listVentaMedioPago { get; set; }
