@@ -269,9 +269,11 @@ namespace AppInguiri
 
                 SaveFileDialog fichero = new SaveFileDialog();
                 fichero.Filter = "Excel (*.xls)|*.xls";
+                double nImporte = 0.00;
 
                 for (int i = 0; i < dgvReporteVentas.Rows.Count; i++)
                 {
+                    nImporte = nImporte + Convert.ToDouble(dgvReporteVentas.Rows[i].Cells["fTotal"].Value);
                     fila = (HSSFRow)hoja.CreateRow(i + 1);
                     for (int j = 0; j < (dgvReporteVentas.Columns.Count); j++)
                     {
@@ -280,6 +282,12 @@ namespace AppInguiri
                             fila.CreateCell(j).SetCellValue(dgvReporteVentas.Rows[i].Cells[j].Value == null ? "" : dgvReporteVentas.Rows[i].Cells[j].Value.ToString());
                         }
                     }
+                }
+
+                if (fila.RowNum > 0)
+                {
+                    fila = (HSSFRow)hoja.CreateRow(dgvReporteVentas.Rows.Count + 2);
+                    fila.CreateCell(dgvReporteVentas.Columns.Count - 1).SetCellValue(nImporte.ToString("C"));
                 }
 
                 for (int i = 0; i < dgvReporteVentas.Columns.Count; i++)

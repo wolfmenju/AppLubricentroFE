@@ -74,8 +74,8 @@ namespace AppInguiri
 
             foreach (var item in lis)
             {
-                if (item.sDescripcion == "FACTURA" || item.sDescripcion == "TICKET" 
-                    || item.sDescripcion == "BOLETA" || item.sDescripcion == "NOTA DE VENTA")
+                if (item.sDescripcion == "01" || item.sIdDocumento == "03" 
+                    || item.sIdDocumento == "13")
                 {
                     lis2.Add(item);
                 }

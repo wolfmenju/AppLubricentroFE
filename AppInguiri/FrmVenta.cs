@@ -110,8 +110,8 @@ namespace AppInguiri
 
             foreach (var item in lis)
             {
-                if (item.sDescripcion == "FACTURA" || item.sDescripcion == "TICKET"
-                    || item.sDescripcion == "BOLETA")
+                if (item.sIdDocumento == "01" || item.sIdDocumento == "13"
+                    || item.sIdDocumento == "03")
                 {
                     lis2.Add(item);
                 }
@@ -124,7 +124,7 @@ namespace AppInguiri
             
             for (int i = 0; i < lis2.Count; i++)
             {
-                if (lis2[i].sDescripcion == "TICKET")
+                if (lis2[i].sIdDocumento == "13")
                 {
                     cboDocumento.SelectedIndex = i;
                     DocDefault = i;
@@ -180,6 +180,8 @@ namespace AppInguiri
                     btnBuscar_Click(sender, e);
                     break;
                 case Keys.F9:
+                    if (!chkCliente.Checked) chkCliente.Checked = true;
+                    else chkCliente.Checked = false;
                     Contado();
                     break;
                 case Keys.Escape:
@@ -367,7 +369,7 @@ namespace AppInguiri
         private void Contado()
         {
             if (txtPedido.Enabled)
-            {
+            { 
                 if (chkCliente.CheckState == CheckState.Checked)
                 {
                     ClienteContado();
@@ -506,7 +508,7 @@ namespace AppInguiri
 
             if (nidVentaRespu > 0)
             {
-                if (!cboDocumento.Text.Equals("TICKET"))
+                if (!cboDocumento.SelectedValue.Equals("13"))
                 {
                     if (sSunatOnline.Equals("SI"))
                     {
@@ -728,7 +730,7 @@ namespace AppInguiri
                     {
                         ReciboRpt reciboRpt = new ReciboRpt();
                         reciboRpt.sDocumento = item.sDescripDocumento;
-                        reciboRpt.nNumero = string.Format("{0:00000000}", item.nNumero); 
+                        reciboRpt.nNumero = string.Format("{0:00000000}", item.nNumero);
                         reciboRpt.fTotal = item.fTotal;
                         reciboRpt.fPrecio = item.fPrecioVenta;
                         reciboRpt.nCantidad = item.nCodigo;
@@ -740,25 +742,25 @@ namespace AppInguiri
                         reciboRpt.sHash = item.dFecha.ToShortDateString();
                         LisRecibo.Add(reciboRpt);
                     }
-                    
+
                     Rep.Load(Application.StartupPath + "\\Reporte\\RptRecibo.rpt");
 
                     Rep.SetDataSource(LisRecibo);
-                 
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: " + ex.Message.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            //Factura O boleta
-            else 
+            //Nota de Venta
+            else if (LisVenRep[0].sIdDocumento.Equals("13"))
             {
                 try
                 {
                     cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
 
-                    string sSerie = "", sDescripcionDocumento="", sSigla="", sPaginaPie="", sTipoDoc="";
+                    string sSerie = "", sDescripcionDocumento = "", sSigla = "", sPaginaPie = "", sTipoDoc = "";
 
                     if (cliente.sNumeroDoc.Length > 8)
                     {
@@ -776,6 +778,71 @@ namespace AppInguiri
                         }
                     }
                     
+                    sDescripcionDocumento = "NOTA DE VENTA";
+                    sSigla = "NV";
+
+                    foreach (var item in LisVenRep)
+                    {
+                        ReciboRpt reciboRpt = new ReciboRpt();
+                        sSerie = sSigla + item.sSerie;
+                        reciboRpt.sDocumento = sDescripcionDocumento;
+                        reciboRpt.nNumero = sSerie + "-" + string.Format("{0:00000000}", item.nNumero);
+                        reciboRpt.fTotal = item.fTotal;
+                        reciboRpt.fPrecio = item.fPrecioVenta;
+                        reciboRpt.fPrecioUnitario = decimal.Round((item.fPrecioVenta / item.nCodigo), 2);
+                        reciboRpt.nCantidad = item.nCodigo;
+                        reciboRpt.sIdVendedor = item.sIdVendedor;
+                        reciboRpt.sNombre = item.sNombre;
+                        reciboRpt.sPaginaPie = sPaginaPie;
+                        //reciboRpt.sPaginaTextoExo = item.bIgvAplica ? "" : "BIENES TRANSFERIDOS EN LA AMAZONÍA PARA SER CONSUMIDOS EN LA MISMA";
+                        reciboRpt.fDescuento = item.fDescuento;
+                        reciboRpt.fIgv = item.fIgv;
+                        reciboRpt.sDireccion = cliente.sDireccion.Length == 0 ? "-" : cliente.sDireccion;
+                        reciboRpt.fSubTotal = item.bIgvAplica ? item.fSubTotal : 0.0M;
+                        reciboRpt.fExogerado = item.bIgvAplica ? 0.0M : item.fTotal;
+                        reciboRpt.sProducto = item.sProducto;
+                        reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
+                        reciboRpt.sTotalLetras = Funciones.NumeroALetras(item.fTotal);
+                        reciboRpt.sRuc = cliente.sNumeroDoc;
+                        reciboRpt.sHash = item.sHash;
+                        LisRecibo.Add(reciboRpt);
+                    }
+
+                    Rep.Load(Application.StartupPath + "\\Reporte\\RptNotaVenta.rpt");
+
+                    Rep.SetDataSource(LisRecibo);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            //Factura O boleta
+            else
+            {
+                try
+                {
+                    cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
+
+                    string sSerie = "", sDescripcionDocumento = "", sSigla = "", sPaginaPie = "", sTipoDoc = "";
+
+                    if (cliente.sNumeroDoc.Length > 8)
+                    {
+                        sTipoDoc = "6";
+                    }
+                    else
+                    {
+                        if (cliente.sNumeroDoc.Length.Equals("00000000"))
+                        {
+                            sTipoDoc = "0";
+                        }
+                        else
+                        {
+                            sTipoDoc = "1";
+                        }
+                    }
+
                     if (LisVenRep[0].sIdDocumento.Equals("01"))
                     {
                         sDescripcionDocumento = "FACTURA ELECTRÓNICA";
@@ -823,7 +890,7 @@ namespace AppInguiri
                         reciboRpt.sHash = item.sHash;
                         LisRecibo.Add(reciboRpt);
                     }
-                    
+
                     Rep.Load(Application.StartupPath + "\\Reporte\\RptDocumentoFE.rpt");
 
                     Rep.SetDataSource(LisRecibo);
