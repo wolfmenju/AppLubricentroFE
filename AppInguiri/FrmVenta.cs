@@ -37,17 +37,17 @@ namespace AppInguiri
         private List<DocumentoSerie> listDocumentoSerie = new List<DocumentoSerie>();
         public List<VentaMedioPago> listRespVentaMedioPago = new List<VentaMedioPago>();
         private ClienteNegocio objCliNeg = new ClienteNegocio();
-        private Cliente cliente= new Cliente();
-        
+        private Cliente cliente = new Cliente();
+
         int DocDefault = 0;
         int nidVentaRespu = 0;
         WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
-        string sDireccion = "", sRuc = "", sRazonSocial = "", 
-            sUbigeo = "", sDepart="", sProvi="",sDist="",
-            _sUrlSunat="", _RutaArchivosXml="", sAplicaIgv="",
-            sUserSunat="",sPassSunat="",sCertClaSunat="",
-            sSunatOnline="", sUrlXmlSunat="";
-        private static ILog Log= LogManager.GetLogger(typeof(FrmVenta));
+        string sDireccion = "", sRuc = "", sRazonSocial = "",
+            sUbigeo = "", sDepart = "", sProvi = "", sDist = "", sCodigoAnexoSede,
+            _sUrlSunat = "", _RutaArchivosXml = "", sAplicaIgv = "",
+            sUserSunat = "", sPassSunat = "", sCertClaSunat = "",
+            sSunatOnline = "", sUrlXmlSunat = "";
+        private static ILog Log = LogManager.GetLogger(typeof(FrmVenta));
 
         //Singleton
         public static FrmVenta Instance()
@@ -59,7 +59,7 @@ namespace AppInguiri
             frmInstance.BringToFront();
             return frmInstance;
         }
-        
+
         public FrmVenta()
         {
             InitializeComponent();
@@ -87,6 +87,8 @@ namespace AppInguiri
             sPassSunat = objParamNeg.LeerUnParametro("ID_PASS_SUNAT");
             sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
             sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
+            sCodigoAnexoSede = objParamNeg.LeerUnParametro("ID_ANEXO_SEDE");
+
             sSunatOnline = objParamNeg.LeerUnParametro("ID_SUNAT_ONLINE");
             if (sSunatOnline.Equals("SI"))
             {
@@ -94,11 +96,11 @@ namespace AppInguiri
                 lblEstadoSunat.TextAlign = ContentAlignment.MiddleCenter;
                 lblEstadoSunat.Image = Properties.Resources.Online;
             }
-            
+
             sAplicaIgv = objParamNeg.LeerUnParametro("ID_IGV_APLICA");
 
             if (sAplicaIgv.Equals("NO")) lblTotalTextoSinIgv.Visible = true;
-            
+
         }
 
         public void CargarMaestro()
@@ -119,9 +121,9 @@ namespace AppInguiri
 
             cboDocumento.ValueMember = "sIdDocumento";
             cboDocumento.DisplayMember = "sDescripcion";
-            
+
             cboDocumento.DataSource = lis2;
-            
+
             for (int i = 0; i < lis2.Count; i++)
             {
                 if (lis2[i].sIdDocumento == "13")
@@ -147,7 +149,7 @@ namespace AppInguiri
 
         private void FrmVenta_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date && e.KeyCode!=Keys.Escape)
+            if (Globales.FechaActual().Date != Funciones.CodFechaActual().Date && e.KeyCode != Keys.Escape)
             {
                 MessageBox.Show("No puede realizar Ventas con Fechas Anterior. Verifique si se Cerro Caja.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -202,7 +204,7 @@ namespace AppInguiri
                 txtNombre.Text = frmCliente._cliente.sNombres.ToUpper();
             }
         }
-        
+
         private void ListarProducto()
         {
             if (rdMedicamento.Checked)
@@ -229,18 +231,18 @@ namespace AppInguiri
         private void CalcularTotal()
         {
             fTotal = 0;
-            
+
             if (dgvProducto.RowCount > 0)
             {
                 foreach (DataGridViewRow item in dgvProducto.Rows)
                 {
-                    fTotal = fTotal+(Convert.ToDecimal(item.Cells["fSubTotal"].Value)- Convert.ToDecimal(item.Cells["fDescuento"].Value.ToString().Replace("S/","")));
+                    fTotal = fTotal + (Convert.ToDecimal(item.Cells["fSubTotal"].Value) - Convert.ToDecimal(item.Cells["fDescuento"].Value.ToString().Replace("S/", "")));
                 }
             }
 
             lblTotal.Text = fTotal.ToString("C");
             fTotal = decimal.Round(fTotal, 2);
-           
+
             if (sAplicaIgv.Equals("SI"))
             {
                 lblIgv.Text = ((fIgv / 100) * fTotal).ToString("C");
@@ -249,7 +251,7 @@ namespace AppInguiri
                 fIgvResto = decimal.Round(((fIgv / 100) * fTotal), 2);
             }
         }
-        
+
         private void btnDescuento_Click(object sender, EventArgs e)
         {
             Descuento();
@@ -263,14 +265,14 @@ namespace AppInguiri
             {
                 Int32 filaselecionada = dgvProducto.CurrentCell.RowIndex;
                 DataGridViewRow row = dgvProducto.Rows[dgvProducto.CurrentCell.RowIndex];
-                
+
                 FrmDescuento frmDescuento = new FrmDescuento();
                 frmDescuento.frmVenta = frmInstance;
                 frmDescuento.lblTotal.Text = Convert.ToDecimal(row.Cells["fSubTotal"].Value).ToString("#0.00");
                 frmDescuento.lblVuelto.Text = "0.00";
                 //frmDescuento.txtPago.Text = Convert.ToDecimal(row.Cells["fSubTotal"].Value).ToString("#0.00");
                 frmDescuento.ShowDialog();
-                
+
                 CalcularTotal();
             }
 
@@ -313,7 +315,7 @@ namespace AppInguiri
         {
             lblSerie.Focus();
             listDocumentoSerie.Clear();
-            DocumentoSerie objDocSerie = new DocumentoSerie() {nTipo=5, sIdDocumento=cboDocumento.SelectedValue.ToString(),bEstado=true };
+            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5, sIdDocumento = cboDocumento.SelectedValue.ToString(), bEstado = true };
             listDocumentoSerie = objDocumentSerieNeg.ListarDocumentoSerie(objDocSerie);
 
             if (listDocumentoSerie.Count == 0)
@@ -329,7 +331,7 @@ namespace AppInguiri
                 lblSerie.Text = item.sSerie;
                 lblNumero.Text = string.Format("{0:00000000}", item.nUltimo + 1);
                 break;
-            }    
+            }
         }
 
         private void cboTipo_SelectionChangeCommitted(object sender, EventArgs e)
@@ -369,7 +371,7 @@ namespace AppInguiri
         private void Contado()
         {
             if (txtPedido.Enabled)
-            { 
+            {
                 if (chkCliente.CheckState == CheckState.Checked)
                 {
                     ClienteContado();
@@ -395,7 +397,7 @@ namespace AppInguiri
         {
             Cliente objCliente = new Cliente() { nTipo = 6, bEstado = true };
 
-            List<Cliente> ListCliente= objCliNeg.ListarCliente(objCliente);
+            List<Cliente> ListCliente = objCliNeg.ListarCliente(objCliente);
 
             if (ListCliente.Count > 0)
             {
@@ -433,13 +435,13 @@ namespace AppInguiri
         {
             if (dgvProducto.Rows.Count < 1) return;
             if (!VerificacionDatos()) return;
-            
+
             //FrmPago frmPago = new FrmPago();
             FrmPagoDetalle frmPago = new FrmPagoDetalle();
             frmPago.frmVenta = frmInstance;
             frmPago.lblTotal.Text = fTotal.ToString("C");
             frmPago.lblVuelto.Text = "0.00";
-            frmPago.txtMonto.Text=fTotal.ToString("#0.00");
+            frmPago.txtMonto.Text = fTotal.ToString("#0.00");
             frmPago.ShowDialog();
         }
 
@@ -545,25 +547,25 @@ namespace AppInguiri
         }
 
 
-        private bool NotificacionSunat( int nidVentaRespu)
+        private bool NotificacionSunat(int nidVentaRespu)
         {
             if (!Funciones.VerificarConexionInternet())
             {
-                Log.Info("No existe Conexion a Internet. No se Puede Realizar la Venta del codigo N° "+ nidVentaRespu+" "+ DateTime.Now);
+                Log.Info("No existe Conexion a Internet. No se Puede Realizar la Venta del codigo N° " + nidVentaRespu + " " + DateTime.Now);
                 return false;
             }
             Venta objVenta = new Venta() { nTipo = 8, nIdVenta = nidVentaRespu };
-            
+
             List<Venta> LisVenRep = objVentNeg.ListarVentas(objVenta);
             WsDocumentoFeResponseData data = null;
-            
+
             if (LisVenRep.Count > 0)
             {
                 try
                 {
                     data = new WsDocumentoFeResponseData();
                     data.tipo_operacion = "01";
-                    data.total_gravadas = LisVenRep[0].bIgvAplica? (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString():"0.00";
+                    data.total_gravadas = LisVenRep[0].bIgvAplica ? (LisVenRep[0].fTotal - Decimal.Round(((LisVenRep[0].fTotal - LisVenRep[0].fIgv) * (LisVenRep[0].fPorcentajeIgv / 100)), 2)).ToString() : "0.00";
                     data.total_inafecta = "0.00";
                     data.total_exoneradas = LisVenRep[0].bIgvAplica ? "0.00" : LisVenRep[0].fTotal.ToString();
                     data.total_gratuitas = "0.00";
@@ -601,15 +603,15 @@ namespace AppInguiri
 
                     data.cliente_nro_doc = cliente.sNumeroDoc;
                     data.cliente_nombre = cliente.sNombres;
-                    data.cliente_direccion = cliente.sDireccion==""? "null": cliente.sDireccion;
+                    data.cliente_direccion = cliente.sDireccion == "" ? "null" : cliente.sDireccion;
 
                     data.serie_comprobante = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie;
-                    data.numero_comprobante = string.Format("{0:00000000}", LisVenRep[0].nNumero); 
+                    data.numero_comprobante = string.Format("{0:00000000}", LisVenRep[0].nNumero);
                     data.fecha_comprobante = LisVenRep[0].dFechaRegistrado.ToString("yyyy-MM-dd");
                     data.fecha_vto_comprobante = LisVenRep[0].dFechaRegistrado.ToString("yyyy-MM-dd");
                     data.moneda_cod = "PEN";
                     data.tipo_tributo = LisVenRep[0].bIgvAplica ? "IGV" : "EXO";
-                    data.tipo_igv = LisVenRep[0].bIgvAplica? "1000" : "9997";
+                    data.tipo_igv = LisVenRep[0].bIgvAplica ? "1000" : "9997";
                     data.tipo_comprobante_cod = LisVenRep[0].sIdDocumento;
                     data.cliente_pais = "PE";
                     data.cliente_codigo_ubigeo = "null";
@@ -632,7 +634,7 @@ namespace AppInguiri
                     data.emisor.clave_certificado = sCertClaSunat;
                     data.emisor.url_xml = sUrlXmlSunat;
                     data.emisor.url_ws = _sUrlSunat;
-                    data.emisor.codigo_estab_anexo_sun = "0000";
+                    data.emisor.codigo_estab_anexo_sun = sCodigoAnexoSede;
 
                     data.detalle = new detalle[LisVenRep.Count];
 
@@ -640,7 +642,7 @@ namespace AppInguiri
                     {
                         data.detalle[i] = new detalle();
                         data.detalle[i].txtITEM = (i + 1).ToString();
-                        data.detalle[i].txtUNIDAD_MEDIDA_DET = LisVenRep[i].bServicio? "ZZ":"NI";
+                        data.detalle[i].txtUNIDAD_MEDIDA_DET = LisVenRep[i].bServicio ? "ZZ" : "NI";
                         data.detalle[i].txtCANTIDAD_DET = LisVenRep[i].nCodigo.ToString();
                         data.detalle[i].txtPRECIO_UNIT = (LisVenRep[i].fPrecioVenta / LisVenRep[i].nCodigo).ToString();
                         data.detalle[i].txtPRECIO_UNIT_SIN_IGV = ((LisVenRep[i].fPrecioVenta - LisVenRep[i].fIgvDetalle) / LisVenRep[i].nCodigo).ToString();
@@ -654,18 +656,18 @@ namespace AppInguiri
                         data.detalle[i].txtCODIGO_PROD_SUNAT = "";
                         data.detalle[i].txtAFECTACION_CODIGO = LisVenRep[0].bIgvAplica ? "1000" : "9997";
                         data.detalle[i].txtAFECTACION_CODIGO_ALT = LisVenRep[0].bIgvAplica ? "10" : "20";
-                        data.detalle[i].txtAFECTACION_NOMBRE = LisVenRep[0].bIgvAplica ? "IGV": "EXO";
+                        data.detalle[i].txtAFECTACION_NOMBRE = LisVenRep[0].bIgvAplica ? "IGV" : "EXO";
                         data.detalle[i].txtAFECTACION_TIPO = "VAT";
                     }
 
                     string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
-                    Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante);
+                    Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante);
 
-                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput,1);
+                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput, 1);
 
                     if (!resultado.data.cdr.Equals("") && resultado.data.respuesta.Equals("ok"))
                     {
-                        Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante + "->" + resultado.mensaje);
+                        Log.Info("Fin de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante + "->" + resultado.mensaje);
 
                         Venta objVentaFE = new Venta();
                         objVentaFE.nTipo = 1;
@@ -687,14 +689,14 @@ namespace AppInguiri
                     }
                     else
                     {
-                        Log.Error("Error de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante +"-"+ data.numero_comprobante + " Mensaje: " + resultado.mensaje+" Codigo: "+resultado.code);
+                        Log.Error("Error de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante + " Mensaje: " + resultado.mensaje + " Codigo: " + resultado.code);
                         MessageBox.Show(resultado.mensaje.ToString(), "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Error de Not. Sunat:"+ ex.Message+"->" + data.serie_comprobante +"-"+ data.numero_comprobante);
+                    Log.Error("Error de Not. Sunat:" + ex.Message + "->" + data.serie_comprobante + "-" + data.numero_comprobante);
                     return false;
                 }
 
@@ -702,7 +704,7 @@ namespace AppInguiri
             else
             {
                 return true;
-            } 
+            }
         }
 
         private void ImprimirComprobante()
@@ -777,7 +779,7 @@ namespace AppInguiri
                             sTipoDoc = "1";
                         }
                     }
-                    
+
                     sDescripcionDocumento = "NOTA DE VENTA";
                     sSigla = "NV";
 
@@ -942,7 +944,7 @@ namespace AppInguiri
             {
                 Int32 filaselecionada = dgvProducto.CurrentCell.RowIndex;
                 bool servicio = false;
-                servicio =(bool)dgvProducto.Rows[filaselecionada].Cells["bServicio"].Value;
+                servicio = (bool)dgvProducto.Rows[filaselecionada].Cells["bServicio"].Value;
 
                 if (!servicio)
                 {
@@ -972,14 +974,14 @@ namespace AppInguiri
             lblSubtotal.Text = "S/. 0.00";
             lblIgv.Text = "S/. 0.00";
             lblTotal.Text = "S/. 0.00";
-            txtNombre .Text = "";
-            LblCodigoCliente .Text = "";
+            txtNombre.Text = "";
+            LblCodigoCliente.Text = "";
             cboDocumento.SelectedIndex = 0;
             cboTipo.SelectedIndex = 0;
             txtDia.Enabled = false;
             txtDescripcion.Focus();
             lblNumero.Text = "";
-            lblSerie.Text="";
+            lblSerie.Text = "";
             txtDia.Clear();
             fTotal = 0M;
             fIgvResto = 0M;

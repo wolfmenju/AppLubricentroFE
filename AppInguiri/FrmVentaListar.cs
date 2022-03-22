@@ -37,12 +37,12 @@ namespace AppInguiri
         private static ILog Log = LogManager.GetLogger(typeof(FrmVentaListar));
         private ParametroNegocio objParamNeg = new ParametroNegocio();
         private WsRestServiceDocumentoFeNegocio objneg = new WsRestServiceDocumentoFeNegocio();
-        private int nNumeroEnvioMasivo =0, nNumeroDiasPermitidoNotficar=0;
+        private int nNumeroEnvioMasivo = 0, nNumeroDiasPermitidoNotficar = 0;
         string sDireccion = "", sRuc = "", sRazonSocial = "",
-            sUbigeo = "", sDepart = "", sProvi = "", sDist = "",
+            sUbigeo = "", sDepart = "", sProvi = "", sDist = "", sCodigoAnexoSede, sTipoSede = "",
             _sUrlSunat = "", _sUrlAnulacionIntermSunat = "", _UrlServicioIntermedioSunat = "", _UrlServicioIntermeAnuladocionBoletaSunat, _RutaArchivosXml = "",
             sUserSunat = "", sPassSunat = "", sCertClaSunat = "",
-            sUrlXmlSunat = "",sNumeroDocAnula="";
+            sUrlXmlSunat = "", sNumeroDocAnula = "";
 
         #endregion
 
@@ -53,10 +53,10 @@ namespace AppInguiri
             CargarDatosConfiguracion();
         }
 
-        private string CargarCorrelativo( string sIdDocum)
+        private string CargarCorrelativo(string sIdDocum)
         {
 
-            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5,sIdDocumento= sIdDocum, bEstado = true };
+            DocumentoSerie objDocSerie = new DocumentoSerie() { nTipo = 5, sIdDocumento = sIdDocum, bEstado = true };
 
             listDocumentoSerie = objDocumentSerieNeg.ListarDocumentoSerie(objDocSerie);
 
@@ -65,8 +65,8 @@ namespace AppInguiri
                 MessageBox.Show("Debe Registrar un Correlativo para este El Documento de Baja de Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return "";
             }
-           
-            
+
+
             foreach (var item in listDocumentoSerie)
             {
                 sNumeroDocAnula = string.Format("{0:0000}", item.nUltimo + 1);
@@ -99,8 +99,10 @@ namespace AppInguiri
             sPassSunat = objParamNeg.LeerUnParametro("ID_PASS_SUNAT");
             sCertClaSunat = objParamNeg.LeerUnParametro("ID_CERT_SUNAT");
             sUrlXmlSunat = objParamNeg.LeerUnParametro("ID_URL_XML_SUNAT");
-            nNumeroEnvioMasivo=Convert.ToInt32(objParamNeg.LeerUnParametro("ID_NUMERO_ENVIO_MASIVO"));
-            nNumeroDiasPermitidoNotficar= Convert.ToInt32(objParamNeg.LeerUnParametro("ID_DIAS_PEMIIDO_NOTIFICACION_SUNAT"));
+            nNumeroEnvioMasivo = Convert.ToInt32(objParamNeg.LeerUnParametro("ID_NUMERO_ENVIO_MASIVO"));
+            nNumeroDiasPermitidoNotficar = Convert.ToInt32(objParamNeg.LeerUnParametro("ID_DIAS_PEMIIDO_NOTIFICACION_SUNAT"));
+            sCodigoAnexoSede = objParamNeg.LeerUnParametro("ID_ANEXO_SEDE");
+            sTipoSede = objParamNeg.LeerUnParametro("ID_TIPO_SEDE");
 
         }
 
@@ -115,18 +117,18 @@ namespace AppInguiri
             {
                 MessageBox.Show("La fecha de final no puede ser menor a la fecha inicial", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
-            }  
+            }
 
             Venta objVenta = new Venta()
             {
-                nTipo=2,
-                dFecha=dFechaInicio.Value,
-                sSerie=dFechaFin.Value.ToString("yyyyMMdd"),
-                nIdAlmacen=Funciones.CodAlmacenActual()
+                nTipo = 2,
+                dFecha = dFechaInicio.Value,
+                sSerie = dFechaFin.Value.ToString("yyyyMMdd"),
+                nIdAlmacen = Funciones.CodAlmacenActual()
             };
 
             ListVentas = new List<Venta>();
-            ListVentas= objVentNeg.ListarVentas(objVenta);
+            ListVentas = objVentNeg.ListarVentas(objVenta);
 
             if (ListVentas.Count > 0)
             {
@@ -160,7 +162,7 @@ namespace AppInguiri
             {
                 btnImprimir.Enabled = false;
                 BtnEliminar.Enabled = false;
-                lblCantidadNotificar.Text = "Se notificadará de "+ nNumeroEnvioMasivo + "  en " + nNumeroEnvioMasivo + " Documentos.";
+                lblCantidadNotificar.Text = "Se notificadará de " + nNumeroEnvioMasivo + "  en " + nNumeroEnvioMasivo + " Documentos.";
                 lblCantidadNotificar.Visible = true;
                 List<Venta> dt = new List<Venta>();
 
@@ -174,7 +176,7 @@ namespace AppInguiri
                 }
                 if (dt.Count > 0)
                 {
-                    
+
                     dgvVenta.DataSource = dt;
                 }
                 else
@@ -267,10 +269,10 @@ namespace AppInguiri
 
                     foreach (var item in ListVenta)
                     {
-                      dgvDetalle.Rows.Add(item.listVentaDetalle[0].nIdVentaDetalle , item.nIdVenta, item.nIdTarjeta,
-                      item.nIdProducto, item.sProducto, item.listVentaDetalle[0].sLote, item.listVentaDetalle[0].nCantidad, 
-                      item.listVentaDetalle[0].fPrecioVenta, item.listVentaDetalle[0].fSubTotal, item.listVentaDetalle[0].fDescuento,
-                      item.fTotal);
+                        dgvDetalle.Rows.Add(item.listVentaDetalle[0].nIdVentaDetalle, item.nIdVenta, item.nIdTarjeta,
+                        item.nIdProducto, item.sProducto, item.listVentaDetalle[0].sLote, item.listVentaDetalle[0].nCantidad,
+                        item.listVentaDetalle[0].fPrecioVenta, item.listVentaDetalle[0].fSubTotal, item.listVentaDetalle[0].fDescuento,
+                        item.fTotal);
                     }
                 }
                 else
@@ -313,14 +315,14 @@ namespace AppInguiri
                         {
                             string sParte = "";
 
-                            if (_venta.bSunat ==1 ) sParte = "Debe Notificar la Anulación a Sunat";
+                            if (_venta.bSunat == 1) sParte = "Debe Notificar la Anulación a Sunat";
 
-                            MessageBox.Show("El Documento se Encuentra Anulado. "+ sParte, "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("El Documento se Encuentra Anulado. " + sParte, "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             cerrarFormulario = false;
                             return;
                         }
 
-                        if (_venta.bSunat==0)
+                        if (_venta.bSunat == 0)
                         {
                             MessageBox.Show("El Documento Aun no Fue Notificado a Sunat.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             cerrarFormulario = false;
@@ -366,7 +368,7 @@ namespace AppInguiri
 
                         objVenta.listVentaDetalle = listVentDeta;
 
-                        resp= objVentNeg.AnularVenta(objVenta);
+                        resp = objVentNeg.AnularVenta(objVenta);
 
                         if (resp > 0)
                         {
@@ -391,7 +393,7 @@ namespace AppInguiri
                         else
                         {
                             MessageBox.Show("La Venta No Se Puede Anular", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }   
+                        }
                     }
                 }
             }
@@ -417,7 +419,7 @@ namespace AppInguiri
 
                     ImprimirComprobante(_venta.nIdVenta);
                 }
-            }  
+            }
         }
 
         private void ImprimirComprobante(int nidVentaRespu)
@@ -457,7 +459,8 @@ namespace AppInguiri
                         LisRecibo.Add(reciboRpt);
                     }
 
-                    Rep.Load(Application.StartupPath + "\\Reporte\\RptRecibo.rpt");
+                    Rep.Load(Application.StartupPath + "\\RptRecibo.rpt");
+                    //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
 
                     Rep.SetDataSource(LisRecibo);
 
@@ -590,7 +593,7 @@ namespace AppInguiri
                         reciboRpt.fDescuento = item.fDescuento;
                         reciboRpt.fIgv = item.fIgv;
                         reciboRpt.sDireccion = cliente.sDireccion.Length == 0 ? "-" : cliente.sDireccion;
-                        reciboRpt.fSubTotal = item.bIgvAplica ? item.fSubTotal: 0.0M;
+                        reciboRpt.fSubTotal = item.bIgvAplica ? item.fSubTotal : 0.0M;
                         reciboRpt.fExogerado = item.bIgvAplica ? 0.0M : item.fTotal;
                         reciboRpt.sProducto = item.sProducto;
                         reciboRpt.sFechaRegistro = item.dFecha.ToShortDateString();
@@ -693,7 +696,7 @@ namespace AppInguiri
                         {
                             if (_venta.bSunat == 0)
                             {
-                                if(mtd_condicion_fecha(_venta.dFecha))
+                                if (mtd_condicion_fecha(_venta.dFecha))
                                 {
                                     if (MessageBox.Show("¿Desea Notificar a Sunat La Venta Seleccionada?", "InguiriSoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                     {
@@ -753,7 +756,7 @@ namespace AppInguiri
                                 return;
                             }
 
-                        }                      
+                        }
                     }
                 }
                 else
@@ -801,7 +804,7 @@ namespace AppInguiri
 
         private bool mtd_condicion_fecha(DateTime FechaEmision)
         {
-            double numeroDeDias = (Globales.FechaActual().Date- FechaEmision.Date).TotalDays;
+            double numeroDeDias = (Globales.FechaActual().Date - FechaEmision.Date).TotalDays;
 
             bool condicion = numeroDeDias < 0 || numeroDeDias > nNumeroDiasPermitidoNotficar;
             if (condicion)
@@ -840,7 +843,7 @@ namespace AppInguiri
                     else
                     {
                         xTipo = 3;
-                        Cliente cliente = new Cliente(); 
+                        Cliente cliente = new Cliente();
                         cliente = objCliNeg.LeerCliente(LisVenRep[0].nIdCliente);
                         sNumeroDoc = cliente.sNumeroDoc;
 
@@ -862,9 +865,9 @@ namespace AppInguiri
 
                         data.codigo = "RC";
                         data.serie = Globales.FechaActual().ToString("yyyyMMdd");
-                        data.secuencia= CargarCorrelativo("15"); 
+                        data.secuencia = CargarCorrelativo("15");
                         data.fecha_referencia = LisVenRep[0].dFecha.ToString("yyyy-MM-dd");
-                        data.fecha_documento = Globales.FechaActual().ToString("yyyy-MM-dd"); 
+                        data.fecha_documento = Globales.FechaActual().ToString("yyyy-MM-dd");
                     }
 
                     data.emisor = new emisor();
@@ -872,7 +875,7 @@ namespace AppInguiri
                     data.emisor.tipo_doc = "6";
                     data.emisor.nom_comercial = "null";
                     data.emisor.razon_social = sRazonSocial;
-                    data.emisor.sede= "PRINCIPAL";
+                    data.emisor.sede = sTipoSede;
                     data.emisor.codigo_ubigeo = sUbigeo;
                     data.emisor.direccion = sDireccion;
                     data.emisor.direccion_departamento = sDepart;
@@ -883,8 +886,8 @@ namespace AppInguiri
                     data.emisor.clavesol = sPassSunat;
                     data.emisor.clave_certificado = sCertClaSunat;
                     data.emisor.url_xml = sUrlXmlSunat;
-                    data.emisor.url_ws =_sUrlSunat;
-                    data.emisor.codigo_estab_anexo_sun = "0000";
+                    data.emisor.url_ws = _sUrlSunat;
+                    data.emisor.codigo_estab_anexo_sun = sCodigoAnexoSede;
 
                     data.detalle = new detalle[LisVenRep.Count];
 
@@ -904,11 +907,11 @@ namespace AppInguiri
                             data.detalle[i] = new detalle();
                             data.detalle[i].ITEM = (i + 1).ToString();
                             data.detalle[i].TIPO_COMPROBANTE = LisVenRep[0].sIdDocumento;
-                            data.detalle[i].NRO_COMPROBANTE = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie+"-" + string.Format("{0:00000000}", LisVenRep[0].nNumero);
+                            data.detalle[i].NRO_COMPROBANTE = LisVenRep[0].sDescripDocumento.Substring(0, 1) + LisVenRep[0].sSerie + "-" + string.Format("{0:00000000}", LisVenRep[0].nNumero);
                             data.detalle[i].NRO_DOCUMENTO = sNumeroDoc;
                             data.detalle[i].TIPO_DOCUMENTO = sCodTipoDoc;
                             data.detalle[i].NRO_COMPROBANTE_REF = "0";
-                            data.detalle[i].TIPO_COMPROBANTE_REF ="0";
+                            data.detalle[i].TIPO_COMPROBANTE_REF = "0";
                             data.detalle[i].STATUS = "3";
                             data.detalle[i].MONEDA_COD = "PEN";
                             data.detalle[i].TOTAL = LisVenRep[0].fTotal.ToString();
@@ -925,14 +928,14 @@ namespace AppInguiri
 
                         }
                     }
-                    
+
                     string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
 
                     if (LisVenRep[0].sIdDocumento.Equals("01"))
                         Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + "RA" + data.nro_serie + "-" + data.nro_correlativo);
                     else
-                        Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + "RC"+data.serie + "-" + data.secuencia);
-                    
+                        Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + "RC" + data.serie + "-" + data.secuencia);
+
                     var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput, xTipo);
 
                     if (!resultado.data.cdr.Equals("") && resultado.data.respuesta.Equals("ok"))
@@ -945,7 +948,7 @@ namespace AppInguiri
                         Venta objVentaFE = new Venta();
                         objVentaFE.nTipo = 2;
                         objVentaFE.nIdVenta = LisVenRep[0].nIdVenta;
-                        objVentaFE.sIdDocumento = LisVenRep[0].sIdDocumento.Equals("01")?"14":"15";
+                        objVentaFE.sIdDocumento = LisVenRep[0].sIdDocumento.Equals("01") ? "14" : "15";
                         objVentaFE.sCdr = resultado.data.cdr;
                         objVentaFE.sHash = resultado.data.hash_cdr;
                         objVentaFE.sCodigoResp = resultado.data.cod_sunat;
@@ -988,7 +991,7 @@ namespace AppInguiri
             {
                 return true;
             }
-            
+
         }
 
         private bool NotificacionSunat(int nidVentaRespu)
@@ -1110,7 +1113,7 @@ namespace AppInguiri
                     string SerializeRequestPerOutput = JsonConvert.SerializeObject(data);
                     Log.Info("Inicio de Not. Sunat: " + DateTime.Now + "->" + data.serie_comprobante + "-" + data.numero_comprobante);
 
-                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput,1);
+                    var resultado = objneg.RegistroDocumentoFe(SerializeRequestPerOutput, 1);
 
                     if (!resultado.data.cdr.Equals("") && resultado.data.respuesta.Equals("ok"))
                     {
