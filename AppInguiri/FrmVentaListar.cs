@@ -457,8 +457,7 @@ namespace AppInguiri
                         LisRecibo.Add(reciboRpt);
                     }
 
-                    Rep.Load(Application.StartupPath + "\\RptRecibo.rpt");
-                    //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
+                    Rep.Load(Application.StartupPath + "\\Reporte\\RptRecibo.rpt");
 
                     Rep.SetDataSource(LisRecibo);
 
@@ -607,7 +606,7 @@ namespace AppInguiri
                     }
 
 
-                    Rep.Load(Application.StartupPath + "\\RptDocumentoFE.rpt");
+                    Rep.Load(Application.StartupPath + "\\Reporte\\RptDocumentoFE.rpt");
                     //Rep.Load("D:\\PROYECTOS_VS_2015\\AppSGV\\AppInguiri\\Reporte"+"\\RptRecibo.rpt");
 
                     Rep.SetDataSource(LisRecibo);
