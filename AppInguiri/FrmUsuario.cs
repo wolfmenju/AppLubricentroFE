@@ -238,6 +238,7 @@ namespace AppInguiri
             FrmUsuarioActualiza frmUsuario = new FrmUsuarioActualiza();
             frmUsuario.tipo = 2;
             frmUsuario.Text = "Registar Usuario";
+            frmUsuario.frmUsuario = this;
 
             if (frmUsuario.ShowDialog() == DialogResult.OK)
             {

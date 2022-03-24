@@ -247,7 +247,8 @@ namespace AppInguiri
             frmSede.descripcion = descSele;
             frmSede.direccion = direSele;
             frmSede.Text = "Actualizar Sede";
-            
+            frmSede.frmSede = this;
+
             if (frmSede.ShowDialog() == DialogResult.OK)
             {
                 CargarSede();
@@ -259,6 +260,7 @@ namespace AppInguiri
             FrmSedeActualiza frmSede = new FrmSedeActualiza();
             //frmPresent.MdiParent = this.MdiParent;
             frmSede.tipo = 2;
+            frmSede.frmSede = this;
             frmSede.Text = "Registar Sede";
        
             if (frmSede.ShowDialog() == DialogResult.OK)

@@ -21,6 +21,7 @@ namespace AppInguiri
         public string descripcion = "";
         public string abreviatura="";
         private bool cerrarFormulario = true;
+        public FrmDocumento frmDocumento = null;
 
         public FrmDocumentoActualiza()
         {
@@ -64,6 +65,15 @@ namespace AppInguiri
             string abrevi = "";
 
             if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmDocumento.DgvDocumento))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+
             if (tipo == 2)
             {
                 idDocSele = txtCodigo.Text;

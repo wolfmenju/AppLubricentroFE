@@ -249,7 +249,8 @@ namespace AppInguiri
             frmAlm.descripcion = descSele;
             frmAlm.direccion = direSele;
             frmAlm.Text = "Actualizar Almacén";
-            
+            frmAlm.frmAlmacen = this;
+
             if (frmAlm.ShowDialog() == DialogResult.OK)
             {
                 CargarAlmacen();
@@ -262,7 +263,8 @@ namespace AppInguiri
             //frmPresent.MdiParent = this.MdiParent;
             frmAlm.tipo = 2;
             frmAlm.Text = "Registar Almacen";
-       
+            frmAlm.frmAlmacen = this;
+
             if (frmAlm.ShowDialog() == DialogResult.OK)
             {
                 CargarAlmacen();

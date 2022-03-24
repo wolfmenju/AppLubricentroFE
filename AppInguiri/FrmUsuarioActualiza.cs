@@ -18,7 +18,8 @@ namespace AppInguiri
         UsuarioNegocio objUserNeg = new UsuarioNegocio();
         public int tipo=0;
         private bool cerrarFormulario = true;
-        
+        public FrmUsuario frmUsuario = null;
+
         public FrmUsuarioActualiza()
         {
             InitializeComponent();
@@ -65,7 +66,15 @@ namespace AppInguiri
         private void CmdGuardar_Click(object sender, EventArgs e)
         {
             int respuesta = 0;
-            
+
+            if (!Funciones.Duplicados(txtNombres.Text, frmUsuario.DgvUsuario))
+            {
+                txtNombres.Clear();
+                txtNombres.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+
             if (tipo == 2)
             {
                 if (Validar())

@@ -19,6 +19,7 @@ namespace AppInguiri
         public int tipo = 0;
         private bool cerrarFormulario = true;
         private Proveedor proveedor = null;
+        public FrmProveedor frmProveedor = null;
 
         public FrmProveedorActualiza(Proveedor _proveedor)
         {
@@ -68,10 +69,16 @@ namespace AppInguiri
         {
             int respuesta = 0;
 
-            if (Validar())
-            { }
-            else { return; }
+            if (!Validar()) return;
 
+            if (!Funciones.Duplicados(txtRazonSocial.Text, frmProveedor.DgvProveedor))
+            {
+                txtRazonSocial.Clear();
+                txtRazonSocial.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+            
             Proveedor objProvee = new Proveedor()
             {
                 sRazonSocial = txtRazonSocial.Text.ToUpper().Trim(),

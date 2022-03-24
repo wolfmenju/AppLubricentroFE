@@ -18,8 +18,8 @@ namespace AppInguiri
         private ParametroNegocio objRepreNeg = new ParametroNegocio();
         public FrmPrincipal frmPrincipal = null;
         public int tipo=0;
-        Parametro Parametro;
-
+        private Parametro Parametro;
+        public FrmParametro frmParametro = null;
 
         private bool cerrarFormulario = true;
 
@@ -79,6 +79,15 @@ namespace AppInguiri
             string descripParameSele = "";
             
             if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtClave.Text, frmParametro.DgvParametros))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+            
             if (tipo == 2)
             {
                 claveParameSele = txtClave.Text.ToUpper();

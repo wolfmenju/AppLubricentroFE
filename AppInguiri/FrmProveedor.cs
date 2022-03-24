@@ -102,6 +102,7 @@ namespace AppInguiri
         {
             FrmProveedorActualiza frmProveedor = new FrmProveedorActualiza();
             frmProveedor.Text = "Registar Proveedor";
+            frmProveedor.frmProveedor = this;
 
             if (frmProveedor.ShowDialog() == DialogResult.OK)
             {
@@ -127,6 +128,7 @@ namespace AppInguiri
                 FrmProveedorActualiza frmProveedor = new FrmProveedorActualiza(proveedor);
                 frmProveedor.tipo = 1;
                 frmProveedor.Text = "Actualizar Proveedor";
+                frmProveedor.frmProveedor = this;
 
                 if (frmProveedor.ShowDialog() == DialogResult.OK)
                 {

@@ -21,6 +21,7 @@ namespace AppInguiri
         public string descripcion = "";
         public List<MedioPago> listarMedioPago = null;
         private bool cerrarFormulario = true;
+        public FrmMedioPago frmMedioPago = null;
 
         public FrmMedioPagoActualiza()
         {
@@ -47,10 +48,19 @@ namespace AppInguiri
             string descSele = "";
 
             if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmMedioPago.DgvMedioPago))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+
             if (tipo == 2)
             {
                 descSele = txtDescripcion.Text;
-
+                
                 MedioPago objMedPago = new MedioPago()
                 {
                     sDescripcion = descSele,

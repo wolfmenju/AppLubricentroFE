@@ -185,6 +185,19 @@ namespace Comun
             return 1;
         }
 
+        public static bool Duplicados(string texto, DataGridView datagriview)
+        {
+            foreach (DataGridViewRow item in datagriview.Rows)
+            {
+                if (item.Cells["sDescripcion"].Value.ToString() == texto)
+                {
+                    MessageBox.Show("La Descripción " + texto + " Ya Existe.", "InguiriSoft", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public static string NumeroALetras(this decimal numberAsString)
         {
             string dec;

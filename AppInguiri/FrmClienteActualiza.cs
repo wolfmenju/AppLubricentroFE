@@ -21,6 +21,7 @@ namespace AppInguiri
         public int tipo = 0;
         private bool cerrarFormulario = true;
         private Cliente cliente = null;
+        public FrmCliente frmCliente = null;
 
         public FrmClienteActualiza(Cliente _cliente)
         {
@@ -87,7 +88,15 @@ namespace AppInguiri
         {
             int respuesta = 0;
 
-            if (!Validar()){ return; }
+            if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtRazonSocial.Text, frmCliente.DgvCliente))
+            {
+                txtRazonSocial.Clear();
+                txtRazonSocial.Focus();
+                cerrarFormulario = false;
+                return;
+            }
 
             Cliente objClien = new Cliente()
             {

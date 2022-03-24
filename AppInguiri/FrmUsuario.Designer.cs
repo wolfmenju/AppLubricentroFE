@@ -36,7 +36,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsuario));
             this.DgvUsuario = new System.Windows.Forms.DataGridView();
             this.nIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sNombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +81,7 @@
             this.DgvUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nIdUsuario,
-            this.sNombres,
+            this.sDescripcion,
             this.sLogin,
             this.sDni,
             this.sDireccion,
@@ -121,16 +121,16 @@
             this.nIdUsuario.ReadOnly = true;
             this.nIdUsuario.Visible = false;
             // 
-            // sNombres
+            // sDescripcion
             // 
-            this.sNombres.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sNombres.DataPropertyName = "sNombres";
+            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sDescripcion.DataPropertyName = "sNombres";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sNombres.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sNombres.HeaderText = "Nombres";
-            this.sNombres.Name = "sNombres";
-            this.sNombres.ReadOnly = true;
-            this.sNombres.Width = 96;
+            this.sDescripcion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sDescripcion.HeaderText = "Nombres";
+            this.sDescripcion.Name = "sDescripcion";
+            this.sDescripcion.ReadOnly = true;
+            this.sDescripcion.Width = 96;
             // 
             // sLogin
             // 
@@ -378,7 +378,7 @@
         internal System.Windows.Forms.Label LblTotal;
         internal System.Windows.Forms.Panel PanTodo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sNombres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn sLogin;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDni;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDireccion;

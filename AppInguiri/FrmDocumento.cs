@@ -266,6 +266,7 @@ namespace AppInguiri
             frmDocument.tipo = 2;
             frmDocument.Text = "Registar Documento";
 
+
             if (frmDocument.ShowDialog() == DialogResult.OK)
             {
                 CargarDocumento();

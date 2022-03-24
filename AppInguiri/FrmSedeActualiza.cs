@@ -21,6 +21,7 @@ namespace AppInguiri
         public string descripcion = "";
         public string direccion = "";
         private bool cerrarFormulario = true;
+        public FrmSede frmSede = null;
 
         public FrmSedeActualiza()
         {
@@ -52,6 +53,15 @@ namespace AppInguiri
             string descSele = "", direSele="";
 
             if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmSede.DgvSede))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+
             if (tipo == 2)
             {
                 descSele = txtDescripcion.Text;

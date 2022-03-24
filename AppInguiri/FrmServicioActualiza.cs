@@ -17,8 +17,7 @@ namespace AppInguiri
     {
         private ServicioNegocio objServicNeg = new ServicioNegocio();
         private ProductoNegocio objProducNeg = new ProductoNegocio();
-        public FrmServicioActualiza frmServicioActualiza = null;
-
+        public FrmServicio frmServicio = null;
         public int tipo = 0;
         private bool cerrarFormulario = true;
         private Servicio servicio = null;
@@ -57,9 +56,15 @@ namespace AppInguiri
         {
             int respuesta = 0;
 
-            if (Validar())
-            { }
-            else { return; }
+            if (!Validar()) return;
+            
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmServicio.DgvServicio))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
 
             Servicio objServ = new Servicio()
             {

@@ -31,9 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAlmacen));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAlmacen));
             this.DgvAlmacen = new System.Windows.Forms.DataGridView();
+            this.nIdAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanOpciones = new System.Windows.Forms.Panel();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
@@ -45,9 +48,6 @@
             this.ChkTodos = new System.Windows.Forms.CheckBox();
             this.LblTotal = new System.Windows.Forms.Label();
             this.PanTodo = new System.Windows.Forms.Panel();
-            this.nIdAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgvAlmacen)).BeginInit();
             this.PanOpciones.SuspendLayout();
             this.PanInferior.SuspendLayout();
@@ -96,6 +96,35 @@
             this.DgvAlmacen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvAlmacen.Size = new System.Drawing.Size(887, 458);
             this.DgvAlmacen.TabIndex = 10;
+            // 
+            // nIdAlmacen
+            // 
+            this.nIdAlmacen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nIdAlmacen.DataPropertyName = "nIdAlmacen";
+            this.nIdAlmacen.HeaderText = "nIdSede";
+            this.nIdAlmacen.Name = "nIdAlmacen";
+            this.nIdAlmacen.ReadOnly = true;
+            this.nIdAlmacen.Visible = false;
+            // 
+            // sDescripcion
+            // 
+            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sDescripcion.DataPropertyName = "sDescripcion";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.sDescripcion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sDescripcion.HeaderText = "Descripción";
+            this.sDescripcion.Name = "sDescripcion";
+            this.sDescripcion.ReadOnly = true;
+            this.sDescripcion.Width = 108;
+            // 
+            // sDireccion
+            // 
+            this.sDireccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sDireccion.DataPropertyName = "sDireccion";
+            this.sDireccion.HeaderText = "Direccion";
+            this.sDireccion.Name = "sDireccion";
+            this.sDireccion.ReadOnly = true;
+            this.sDireccion.Width = 93;
             // 
             // PanOpciones
             // 
@@ -271,36 +300,6 @@
             this.PanTodo.Size = new System.Drawing.Size(889, 460);
             this.PanTodo.TabIndex = 17;
             // 
-            // nIdAlmacen
-            // 
-            this.nIdAlmacen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nIdAlmacen.DataPropertyName = "nIdAlmacen";
-            this.nIdAlmacen.HeaderText = "nIdSede";
-            this.nIdAlmacen.Name = "nIdAlmacen";
-            this.nIdAlmacen.ReadOnly = true;
-            this.nIdAlmacen.Visible = false;
-            this.nIdAlmacen.Width = 66;
-            // 
-            // sDescripcion
-            // 
-            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sDescripcion.DataPropertyName = "sDescripcion";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sDescripcion.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sDescripcion.HeaderText = "Descripción";
-            this.sDescripcion.Name = "sDescripcion";
-            this.sDescripcion.ReadOnly = true;
-            this.sDescripcion.Width = 108;
-            // 
-            // sDireccion
-            // 
-            this.sDireccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sDireccion.DataPropertyName = "sDireccion";
-            this.sDireccion.HeaderText = "Direccion";
-            this.sDireccion.Name = "sDireccion";
-            this.sDireccion.ReadOnly = true;
-            this.sDireccion.Width = 93;
-            // 
             // FrmAlmacen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,7 +329,6 @@
         }
 
         #endregion
-        internal System.Windows.Forms.DataGridView DgvAlmacen;
         internal System.Windows.Forms.Panel PanOpciones;
         internal System.Windows.Forms.Button BtnEliminar;
         internal System.Windows.Forms.Button BtnSalir;
@@ -345,5 +343,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdAlmacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDireccion;
+        public System.Windows.Forms.DataGridView DgvAlmacen;
     }
 }

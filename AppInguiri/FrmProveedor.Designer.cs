@@ -46,7 +46,7 @@
             this.PanTodo = new System.Windows.Forms.Panel();
             this.DgvProveedor = new System.Windows.Forms.DataGridView();
             this.nIdProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sRuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sCelular = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -254,7 +254,7 @@
             this.DgvProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvProveedor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nIdProveedor,
-            this.sRazonSocial,
+            this.sDescripcion,
             this.sRuc,
             this.sDireccion,
             this.sCelular,
@@ -285,17 +285,18 @@
             this.nIdProveedor.Name = "nIdProveedor";
             this.nIdProveedor.ReadOnly = true;
             this.nIdProveedor.Visible = false;
+            this.nIdProveedor.Width = 73;
             // 
-            // sRazonSocial
+            // sDescripcion
             // 
-            this.sRazonSocial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sRazonSocial.DataPropertyName = "sRazonSocial";
+            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sDescripcion.DataPropertyName = "sRazonSocial";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.sRazonSocial.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sRazonSocial.HeaderText = "Razón Social";
-            this.sRazonSocial.Name = "sRazonSocial";
-            this.sRazonSocial.ReadOnly = true;
-            this.sRazonSocial.Width = 92;
+            this.sDescripcion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sDescripcion.HeaderText = "Razón Social";
+            this.sDescripcion.Name = "sDescripcion";
+            this.sDescripcion.ReadOnly = true;
+            this.sDescripcion.Width = 92;
             // 
             // sRuc
             // 
@@ -367,9 +368,9 @@
         internal System.Windows.Forms.CheckBox ChkTodos;
         internal System.Windows.Forms.Label LblTotal;
         internal System.Windows.Forms.Panel PanTodo;
-        internal System.Windows.Forms.DataGridView DgvProveedor;
+        public System.Windows.Forms.DataGridView DgvProveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdProveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sRazonSocial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn sRuc;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDireccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn sCelular;

@@ -261,7 +261,8 @@ namespace AppInguiri
             frmParame.tipo = 3;
             frmParame.Text = "Actualizar Parametro";
             frmParame.frmPrincipal = frmPrincipal;
-            
+            frmParame.frmParametro = this;
+
             if (frmParame.ShowDialog() == DialogResult.OK)
             {
                 CargarParametros();
@@ -275,6 +276,7 @@ namespace AppInguiri
             //frmPresent.MdiParent = this.MdiParent;
             frmParametro.tipo = 2;
             frmParametro.Text = "Registrar Parametro";
+            frmParametro.frmParametro = this;
 
             if (frmParametro.ShowDialog() == DialogResult.OK)
             {

@@ -47,18 +47,19 @@ namespace AppInguiri
             string descSele = "";
 
             if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmCategoria.DgvCategoria))
+            { 
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+
             if (tipo == 2)
             {
                 descSele = txtDescripcion.Text;
-
-                if (!Funciones.Duplicados(descSele, frmCategoria.DgvCategoria))
-                {
-                    txtDescripcion.Clear();
-                    txtDescripcion.Focus();
-                    cerrarFormulario = false;
-                    return;
-                }
-
+                
                 Categoria objCat = new Categoria()
                 {
                     sDescripcion = descSele,
@@ -83,14 +84,6 @@ namespace AppInguiri
             {
                 idCateSele = Convert.ToInt32(LblCodigo.Text);
                 descSele = txtDescripcion.Text;
-
-                if (!Funciones.Duplicados(descSele, frmCategoria.DgvCategoria))
-                {
-                    txtDescripcion.Clear();
-                    txtDescripcion.Focus();
-                    cerrarFormulario = false;
-                    return;
-                }
 
                 Categoria objCat = new Categoria()
                 {

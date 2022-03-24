@@ -47,18 +47,19 @@ namespace AppInguiri
             string descSele = "";
 
             if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmPresentacion.DgvPresentacion))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
+
             if (tipo == 2)
             {
                 descSele = txtDescripcion.Text;
-
-                if (!Funciones.Duplicados(descSele, frmPresentacion.DgvPresentacion))
-                {
-                    txtDescripcion.Clear();
-                    txtDescripcion.Focus();
-                    cerrarFormulario = false;
-                    return;
-                }
-
+                
                 Presentacion objPre = new Presentacion()
                 {
                     sDescripcion = descSele,
@@ -82,14 +83,6 @@ namespace AppInguiri
             {
                 idPresSele = Convert.ToInt32(LblCodigo.Text);
                 descSele = txtDescripcion.Text;
-
-                if (!Funciones.Duplicados(descSele, frmPresentacion.DgvPresentacion))
-                {
-                    txtDescripcion.Clear();
-                    txtDescripcion.Focus();
-                    cerrarFormulario = false;
-                    return;
-                }
 
                 Presentacion objPre = new Presentacion()
                 {

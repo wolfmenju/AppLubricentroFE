@@ -23,7 +23,7 @@ namespace AppInguiri
         ClienteNegocio objClienNeg = new ClienteNegocio();
         List<Cliente> listCliente = new List<Cliente>();
         bool estado = true;
-
+        
         //Singleton
         public static FrmCliente Instance()
         {
@@ -103,6 +103,7 @@ namespace AppInguiri
         private void Agregar()
         {
             FrmClienteActualiza frmCliente = new FrmClienteActualiza();
+            frmCliente.frmCliente = this;
             frmCliente.Text = "Registar Cliente";
 
             if (frmCliente.ShowDialog() == DialogResult.OK)
@@ -129,6 +130,7 @@ namespace AppInguiri
                 FrmClienteActualiza frmCliente = new FrmClienteActualiza(Rescliente);
                 frmCliente.tipo = 1;
                 frmCliente.Text = "Actualizar Cliente";
+                frmCliente.frmCliente = this;
 
                 if (frmCliente.ShowDialog() == DialogResult.OK)
                 {

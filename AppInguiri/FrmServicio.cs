@@ -100,7 +100,7 @@ namespace AppInguiri
         private void Agregar()
         {
             FrmServicioActualiza frmServicioActualiza = new FrmServicioActualiza();
-            //frmServicioActualiza.frmProducto = this;
+            frmServicioActualiza.frmServicio = this;
             frmServicioActualiza.Text = "Registro Servicio";
 
             if (frmServicioActualiza.ShowDialog() == DialogResult.OK)
@@ -126,6 +126,7 @@ namespace AppInguiri
 
                 FrmServicioActualiza frmServicio = new FrmServicioActualiza(servicio);
                 frmServicio.tipo = 1;
+                frmServicio.frmServicio = this;
                 frmServicio.Text = "Actualizar Servicio";
 
                 if (frmServicio.ShowDialog() == DialogResult.OK)

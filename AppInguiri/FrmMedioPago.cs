@@ -249,7 +249,7 @@ namespace AppInguiri
             frmMedPago.tipo = 3;
             frmMedPago.idCategoria = idCategSele;
             frmMedPago.descripcion = descSele;
-            frmMedPago.listarMedioPago = listMedioPago;
+            frmMedPago.frmMedioPago = this;
             frmMedPago.Text = "Actualizar Medio de Pago";
 
             if (frmMedPago.ShowDialog() == DialogResult.OK)
@@ -262,6 +262,7 @@ namespace AppInguiri
         {
             FrmMedioPagoActualiza frmMedPago = new FrmMedioPagoActualiza();
             //frmPresent.MdiParent = this.MdiParent;
+            frmMedPago.frmMedioPago = this;
             frmMedPago.tipo = 2;
             frmMedPago.Text = "Registar de Medio de Pago";
 
