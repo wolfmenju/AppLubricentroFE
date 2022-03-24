@@ -43,7 +43,7 @@ namespace AppInguiri
             cbxLaboratorio.ValueMember = "nIdCategoria";
             cbxLaboratorio.DisplayMember = "sDescripcion";
             cbxLaboratorio.DataSource = lisCat;
-            
+
             List<Presentacion> lisPrese = objPreseNeg.ListarPresentacion(true);
             cbxPresentacion.ValueMember = "nIdPresentacion";
             cbxPresentacion.DisplayMember = "sDescripcion";
@@ -110,24 +110,30 @@ namespace AppInguiri
         {
             int respuesta = 0;
 
-            if (Validar())
-            { }
-            else { return; }
+            if (!Validar()) return;
+
+            if (!Funciones.Duplicados(txtDescripcion.Text, frmProducto.DgvProducto))
+            {
+                txtDescripcion.Clear();
+                txtDescripcion.Focus();
+                cerrarFormulario = false;
+                return;
+            }
 
             Producto objProduc = new Producto()
             {
                 sDescripcion = txtDescripcion.Text.ToUpper().Trim(),
-                sCodigoInterno=lblCodigoInterno.Text,
+                sCodigoInterno = lblCodigoInterno.Text,
                 bAlternativo = ChkAlternativo.Checked,
                 sPrincipioActivo = txtPrincipioActivo.Text.ToUpper().Trim(),
                 nIdLaboratorio = (int)cbxLaboratorio.SelectedValue,
                 nIdPresentacion = (int)cbxPresentacion.SelectedValue,
                 sUsuario = Funciones.UsuarioActual(),
-                nStockMinimo=Convert.ToInt32(NdMinimo.Value),
+                nStockMinimo = Convert.ToInt32(NdMinimo.Value),
                 bEstado = true
             };
 
-            if (tipo ==0)
+            if (tipo == 0)
             {
                 respuesta = objProducNeg.RegistrarProducto(objProduc);
 
@@ -179,18 +185,18 @@ namespace AppInguiri
                 txtDescripcion.Text = producto.sDescripcion.ToUpper();
                 txtPrincipioActivo.Text = producto.sPrincipioActivo.ToUpper();
                 ChkAlternativo.Checked = producto.bAlternativo;
-                NdMinimo.Text =  producto.nStockMinimo.ToString();
+                NdMinimo.Text = producto.nStockMinimo.ToString();
             }
         }
 
         private string GeneradaCodigo()
         {
             List<Producto> listProducto = new List<Producto>();
-            Producto objProducto = new Producto() { bEstado = true, nTipo=11 };
+            Producto objProducto = new Producto() { bEstado = true, nTipo = 11 };
             listProducto = objProducNeg.ListarProducto(objProducto);
             int total = 0;
             total = listProducto[0].nIdProducto;
-            
+
             if (total < 1)
                 return "P0001";
             else
@@ -198,7 +204,7 @@ namespace AppInguiri
                 return "P" + (total + 1).ToString("0000");
             }
         }
-        
+
         private void CmdCancelar_Click(object sender, EventArgs e)
         {
             cerrarFormulario = true;

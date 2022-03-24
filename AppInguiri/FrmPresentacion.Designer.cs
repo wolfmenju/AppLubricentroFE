@@ -318,7 +318,6 @@
         }
 
         #endregion
-        internal System.Windows.Forms.DataGridView DgvPresentacion;
         internal System.Windows.Forms.Panel PanOpciones;
         internal System.Windows.Forms.Button BtnEliminar;
         internal System.Windows.Forms.Button BtnSalir;
@@ -332,5 +331,6 @@
         internal System.Windows.Forms.Panel PanTodo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdPresentacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDescripcion;
+        public System.Windows.Forms.DataGridView DgvPresentacion;
     }
 }

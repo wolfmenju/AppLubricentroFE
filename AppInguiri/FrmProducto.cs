@@ -47,7 +47,7 @@ namespace AppInguiri
         }
 
         #endregion
-        
+
         #region Metodo Privados
         private void CargarProducto()
         {
@@ -130,6 +130,7 @@ namespace AppInguiri
                 FrmProductoActualiza frmProducto = new FrmProductoActualiza(producto);
                 frmProducto.tipo = 1;
                 frmProducto.Text = "Actualizar Producto";
+                frmProducto.frmProducto = this;
 
                 if (frmProducto.ShowDialog() == DialogResult.OK)
                 {
@@ -137,7 +138,7 @@ namespace AppInguiri
                 }
             }
         }
-        
+
         private void BtnRefrescar_Click(object sender, EventArgs e)
         {
             CargarProducto();

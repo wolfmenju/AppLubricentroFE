@@ -392,7 +392,6 @@
         internal System.Windows.Forms.CheckBox ChkTodos;
         internal System.Windows.Forms.Label LblTotal;
         internal System.Windows.Forms.Panel PanTodo;
-        internal System.Windows.Forms.DataGridView DgvProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn sCodigoInterno;
         private System.Windows.Forms.DataGridViewTextBoxColumn sDescripcion;
@@ -401,5 +400,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nIdPresentacion;
         private System.Windows.Forms.DataGridViewCheckBoxColumn bAlternativo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nStockMinimo;
+        public System.Windows.Forms.DataGridView DgvProducto;
     }
 }

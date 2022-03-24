@@ -17,11 +17,11 @@ namespace AppInguiri
     {
         CategoriaNegocio objCategNeg = new CategoriaNegocio();
 
-        public int tipo=0;
+        public int tipo = 0;
         public int idCategoria = 0;
         public string descripcion = "";
-        public List<Categoria> listarCategoria = null;
         private bool cerrarFormulario = true;
+        public FrmCategoria frmCategoria = null;
 
         public FrmCategoriaActualiza()
         {
@@ -41,16 +41,23 @@ namespace AppInguiri
             return resp;
         }
 
-
         private void CmdGuardar_Click(object sender, EventArgs e)
         {
-            int respuesta =0, idCateSele=0;
+            int respuesta = 0, idCateSele = 0;
             string descSele = "";
 
             if (!Validar()) return;
             if (tipo == 2)
             {
                 descSele = txtDescripcion.Text;
+
+                if (!Funciones.Duplicados(descSele, frmCategoria.DgvCategoria))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
 
                 Categoria objCat = new Categoria()
                 {
@@ -76,6 +83,14 @@ namespace AppInguiri
             {
                 idCateSele = Convert.ToInt32(LblCodigo.Text);
                 descSele = txtDescripcion.Text;
+
+                if (!Funciones.Duplicados(descSele, frmCategoria.DgvCategoria))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
 
                 Categoria objCat = new Categoria()
                 {

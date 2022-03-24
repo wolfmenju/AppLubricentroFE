@@ -16,10 +16,11 @@ namespace AppInguiri
     public partial class FrmPresentacionActualiza : Form
     {
         PresentacionNegocio objPresenNeg = new PresentacionNegocio();
-        public int tipo=0;
+        public int tipo = 0;
         public int idPresentacion = 0;
         public string descripcion = "";
         private bool cerrarFormulario = true;
+        public FrmPresentacion frmPresentacion = null;
 
         public FrmPresentacionActualiza()
         {
@@ -42,13 +43,21 @@ namespace AppInguiri
 
         private void CmdGuardar_Click(object sender, EventArgs e)
         {
-            int respuesta =0, idPresSele=0;
+            int respuesta = 0, idPresSele = 0;
             string descSele = "";
 
             if (!Validar()) return;
             if (tipo == 2)
             {
                 descSele = txtDescripcion.Text;
+
+                if (!Funciones.Duplicados(descSele, frmPresentacion.DgvPresentacion))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
 
                 Presentacion objPre = new Presentacion()
                 {
@@ -74,9 +83,17 @@ namespace AppInguiri
                 idPresSele = Convert.ToInt32(LblCodigo.Text);
                 descSele = txtDescripcion.Text;
 
+                if (!Funciones.Duplicados(descSele, frmPresentacion.DgvPresentacion))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 Presentacion objPre = new Presentacion()
                 {
-                    nIdPresentacion= idPresSele,
+                    nIdPresentacion = idPresSele,
                     sDescripcion = descSele,
                     sUsuario = Funciones.UsuarioActual()
                 };

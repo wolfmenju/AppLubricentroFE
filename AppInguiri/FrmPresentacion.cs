@@ -34,7 +34,7 @@ namespace AppInguiri
             frmInstance.BringToFront();
             return frmInstance;
         }
-        
+
         public FrmPresentacion()
         {
             InitializeComponent();
@@ -68,7 +68,7 @@ namespace AppInguiri
                     break;
             }
         }
-        
+
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
             Agregar();
@@ -93,7 +93,7 @@ namespace AppInguiri
         {
             CargarPresentacion();
         }
-        
+
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -117,7 +117,7 @@ namespace AppInguiri
             CargarPresentacion();
 
         }
-    
+
         #endregion
 
         #region Metodo Privados
@@ -159,7 +159,7 @@ namespace AppInguiri
                         bEstado = estado,
                         sUsuario = Funciones.UsuarioActual()
                     };
-                    
+
                     respuesta = objPresenNeg.EliminarActivarPresentacion(objPre);
 
                     if (respuesta == 1)
@@ -239,11 +239,12 @@ namespace AppInguiri
 
             FrmPresentacionActualiza frmPresent = new FrmPresentacionActualiza();
             //frmPresent.MdiParent = this.MdiParent;
+            frmPresent.frmPresentacion = this;
             frmPresent.tipo = 3;
             frmPresent.idPresentacion = idPresSele;
             frmPresent.descripcion = descSele;
             frmPresent.Text = "Actualizar Presentación De Productos";
-            
+
             if (frmPresent.ShowDialog() == DialogResult.OK)
             {
                 CargarPresentacion();
@@ -255,6 +256,7 @@ namespace AppInguiri
         {
             FrmPresentacionActualiza frmPresent = new FrmPresentacionActualiza();
             //frmPresent.MdiParent = this.MdiParent;
+            frmPresent.frmPresentacion = this;
             frmPresent.tipo = 2;
             frmPresent.Text = "Registar Presentación De Productos";
 

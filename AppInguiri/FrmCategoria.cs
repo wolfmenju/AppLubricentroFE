@@ -70,7 +70,7 @@ namespace AppInguiri
                     break;
             }
         }
-        
+
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
             Agregar();
@@ -95,7 +95,7 @@ namespace AppInguiri
         {
             CargarPresentacion();
         }
-        
+
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -119,7 +119,7 @@ namespace AppInguiri
             CargarPresentacion();
 
         }
-    
+
         #endregion
 
         #region Metodo Privados
@@ -132,7 +132,7 @@ namespace AppInguiri
             {
                 DgvCategoria.AutoGenerateColumns = false;
                 DgvCategoria.DataSource = listCategoria;
-               
+
             }
             else
             {
@@ -233,7 +233,7 @@ namespace AppInguiri
                 DgvCategoria.DataSource = listCategoria;
             }
         }
-        
+
         private void Modificar()
         {
             if (DgvCategoria.Rows.Count == 0) return;
@@ -246,7 +246,7 @@ namespace AppInguiri
             frmCateg.tipo = 3;
             frmCateg.idCategoria = idCategSele;
             frmCateg.descripcion = descSele;
-            frmCateg.listarCategoria =listCategoria;
+            frmCateg.frmCategoria = this;
             frmCateg.Text = "Actualizar Categoria De Productos";
 
             if (frmCateg.ShowDialog() == DialogResult.OK)
@@ -261,6 +261,7 @@ namespace AppInguiri
             //frmPresent.MdiParent = this.MdiParent;
             frmCateg.tipo = 2;
             frmCateg.Text = "Registar Categoria De Productos";
+            frmCateg.frmCategoria = this;
 
             if (frmCateg.ShowDialog() == DialogResult.OK)
             {
