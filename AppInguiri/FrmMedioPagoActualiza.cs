@@ -49,16 +49,16 @@ namespace AppInguiri
 
             if (!Validar()) return;
 
-            if (!Funciones.Duplicados(txtDescripcion.Text, frmMedioPago.DgvMedioPago))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
             if (tipo == 2)
             {
+                if (!Funciones.Duplicados(txtDescripcion.Text, frmMedioPago.DgvMedioPago))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 descSele = txtDescripcion.Text;
                 
                 MedioPago objMedPago = new MedioPago()

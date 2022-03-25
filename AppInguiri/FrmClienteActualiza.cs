@@ -89,15 +89,7 @@ namespace AppInguiri
             int respuesta = 0;
 
             if (!Validar()) return;
-
-            if (!Funciones.Duplicados(txtRazonSocial.Text, frmCliente.DgvCliente))
-            {
-                txtRazonSocial.Clear();
-                txtRazonSocial.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
+            
             Cliente objClien = new Cliente()
             {
                 sNombres = txtRazonSocial.Text.ToUpper().Trim(),
@@ -117,6 +109,14 @@ namespace AppInguiri
 
             if (tipo ==0)
             {
+                if (!Funciones.Duplicados(txtRazonSocial.Text, frmCliente.DgvCliente))
+                {
+                    txtRazonSocial.Clear();
+                    txtRazonSocial.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 respuesta = objClienNeg.RegistrarCliente(objClien);
 
                 if (respuesta == 1)

@@ -66,19 +66,19 @@ namespace AppInguiri
         private void CmdGuardar_Click(object sender, EventArgs e)
         {
             int respuesta = 0;
-
-            if (!Funciones.Duplicados(txtNombres.Text, frmUsuario.DgvUsuario))
-            {
-                txtNombres.Clear();
-                txtNombres.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
+            
             if (tipo == 2)
             {
                 if (Validar())
                 {
+                    if (!Funciones.Duplicados(txtNombres.Text, frmUsuario.DgvUsuario))
+                    {
+                        txtNombres.Clear();
+                        txtNombres.Focus();
+                        cerrarFormulario = false;
+                        return;
+                    }
+
                     Usuario objUser = new Usuario();
                     objUser.sNombres = txtNombres.Text.ToUpper().Trim();
                     objUser.sDni = txtDni.Text.ToUpper().Trim();

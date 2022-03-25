@@ -70,15 +70,7 @@ namespace AppInguiri
             int respuesta = 0;
 
             if (!Validar()) return;
-
-            if (!Funciones.Duplicados(txtRazonSocial.Text, frmProveedor.DgvProveedor))
-            {
-                txtRazonSocial.Clear();
-                txtRazonSocial.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-            
+  
             Proveedor objProvee = new Proveedor()
             {
                 sRazonSocial = txtRazonSocial.Text.ToUpper().Trim(),
@@ -92,6 +84,13 @@ namespace AppInguiri
 
             if (tipo ==0)
             {
+                if (!Funciones.Duplicados(txtRazonSocial.Text, frmProveedor.DgvProveedor))
+                {
+                    txtRazonSocial.Clear();
+                    txtRazonSocial.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
 
                 respuesta = objProveeNeg.RegistrarProveedor(objProvee);
 

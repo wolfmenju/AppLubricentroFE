@@ -112,14 +112,6 @@ namespace AppInguiri
 
             if (!Validar()) return;
 
-            if (!Funciones.Duplicados(txtDescripcion.Text, frmProducto.DgvProducto))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
             Producto objProduc = new Producto()
             {
                 sDescripcion = txtDescripcion.Text.ToUpper().Trim(),
@@ -135,6 +127,15 @@ namespace AppInguiri
 
             if (tipo == 0)
             {
+
+                if (!Funciones.Duplicados(txtDescripcion.Text, frmProducto.DgvProducto))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 respuesta = objProducNeg.RegistrarProducto(objProduc);
 
                 if (respuesta == 1)

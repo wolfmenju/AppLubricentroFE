@@ -79,20 +79,20 @@ namespace AppInguiri
             string descripParameSele = "";
             
             if (!Validar()) return;
-
-            if (!Funciones.Duplicados(txtClave.Text, frmParametro.DgvParametros))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
             
             if (tipo == 2)
             {
                 claveParameSele = txtClave.Text.ToUpper();
                 valorParameSele = txtValor.Text;
                 descripParameSele = txtDescripcion.Text.ToUpper();
+                
+                if (!Funciones.Duplicados(txtClave.Text, frmParametro.DgvParametros))
+                {
+                    txtClave.Clear();
+                    txtClave.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
 
                 Parametro objPara = new Parametro()
                 {

@@ -58,14 +58,6 @@ namespace AppInguiri
 
             if (!Validar()) return;
             
-            if (!Funciones.Duplicados(txtDescripcion.Text, frmServicio.DgvServicio))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
             Servicio objServ = new Servicio()
             {
                 nTipo=1,
@@ -79,6 +71,14 @@ namespace AppInguiri
 
             if (tipo ==0)
             {
+                if (!Funciones.Duplicados(txtDescripcion.Text, frmServicio.DgvServicio))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 respuesta = objServicNeg.RegistrarServicio(objServ);
 
                 if (respuesta == 1)

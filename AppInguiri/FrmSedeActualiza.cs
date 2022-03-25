@@ -53,17 +53,17 @@ namespace AppInguiri
             string descSele = "", direSele="";
 
             if (!Validar()) return;
-
-            if (!Funciones.Duplicados(txtDescripcion.Text, frmSede.DgvSede))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
+            
             if (tipo == 2)
             {
+                if (!Funciones.Duplicados(txtDescripcion.Text, frmSede.DgvSede))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 descSele = txtDescripcion.Text;
                 direSele = txtDireccion.Text;
 

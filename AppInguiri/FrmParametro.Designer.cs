@@ -32,9 +32,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmParametro));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmParametro));
             this.DgvParametros = new System.Windows.Forms.DataGridView();
+            this.IdParametro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanOpciones = new System.Windows.Forms.Panel();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
@@ -46,10 +50,6 @@
             this.ChkTodos = new System.Windows.Forms.CheckBox();
             this.LblTotal = new System.Windows.Forms.Label();
             this.PanTodo = new System.Windows.Forms.Panel();
-            this.IdParametro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgvParametros)).BeginInit();
             this.PanOpciones.SuspendLayout();
             this.PanInferior.SuspendLayout();
@@ -107,6 +107,43 @@
             this.DgvParametros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvParametros.Size = new System.Drawing.Size(887, 458);
             this.DgvParametros.TabIndex = 10;
+            // 
+            // IdParametro
+            // 
+            this.IdParametro.DataPropertyName = "nIdParametro";
+            this.IdParametro.HeaderText = "nIdParametro";
+            this.IdParametro.Name = "IdParametro";
+            this.IdParametro.ReadOnly = true;
+            this.IdParametro.Visible = false;
+            // 
+            // sDescripcion
+            // 
+            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sDescripcion.DataPropertyName = "sClave";
+            this.sDescripcion.HeaderText = "Clave";
+            this.sDescripcion.Name = "sDescripcion";
+            this.sDescripcion.ReadOnly = true;
+            this.sDescripcion.Width = 67;
+            // 
+            // sValor
+            // 
+            this.sValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sValor.DataPropertyName = "sValor";
+            this.sValor.HeaderText = "Valor";
+            this.sValor.Name = "sValor";
+            this.sValor.ReadOnly = true;
+            this.sValor.Width = 65;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Descripcion.DataPropertyName = "sDescripcion";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 108;
             // 
             // PanOpciones
             // 
@@ -281,43 +318,6 @@
             this.PanTodo.Name = "PanTodo";
             this.PanTodo.Size = new System.Drawing.Size(889, 460);
             this.PanTodo.TabIndex = 17;
-            // 
-            // IdParametro
-            // 
-            this.IdParametro.DataPropertyName = "nIdParametro";
-            this.IdParametro.HeaderText = "nIdParametro";
-            this.IdParametro.Name = "IdParametro";
-            this.IdParametro.ReadOnly = true;
-            this.IdParametro.Visible = false;
-            // 
-            // sDescripcion
-            // 
-            this.sDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sDescripcion.DataPropertyName = "sClave";
-            this.sDescripcion.HeaderText = "Clave";
-            this.sDescripcion.Name = "sDescripcion";
-            this.sDescripcion.ReadOnly = true;
-            this.sDescripcion.Width = 67;
-            // 
-            // sValor
-            // 
-            this.sValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sValor.DataPropertyName = "sValor";
-            this.sValor.HeaderText = "Valor";
-            this.sValor.Name = "sValor";
-            this.sValor.ReadOnly = true;
-            this.sValor.Width = 65;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Descripcion.DataPropertyName = "sDescripcion";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            this.Descripcion.Width = 108;
             // 
             // FrmParametro
             // 

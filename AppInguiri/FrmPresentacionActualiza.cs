@@ -47,17 +47,17 @@ namespace AppInguiri
             string descSele = "";
 
             if (!Validar()) return;
-
-            if (!Funciones.Duplicados(txtDescripcion.Text, frmPresentacion.DgvPresentacion))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
+            
             if (tipo == 2)
             {
+                if (!Funciones.Duplicados(txtDescripcion.Text, frmPresentacion.DgvPresentacion))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+
                 descSele = txtDescripcion.Text;
                 
                 Presentacion objPre = new Presentacion()

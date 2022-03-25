@@ -65,17 +65,17 @@ namespace AppInguiri
             string abrevi = "";
 
             if (!Validar()) return;
-
-            if (!Funciones.Duplicados(txtDescripcion.Text, frmDocumento.DgvDocumento))
-            {
-                txtDescripcion.Clear();
-                txtDescripcion.Focus();
-                cerrarFormulario = false;
-                return;
-            }
-
+            
             if (tipo == 2)
             {
+                if (!Funciones.Duplicados(txtDescripcion.Text, frmDocumento.DgvDocumento))
+                {
+                    txtDescripcion.Clear();
+                    txtDescripcion.Focus();
+                    cerrarFormulario = false;
+                    return;
+                }
+                
                 idDocSele = txtCodigo.Text;
                 descSele = txtDescripcion.Text;
                 abrevi = txtAbreviatura.Text;
