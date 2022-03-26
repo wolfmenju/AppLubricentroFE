@@ -74,7 +74,7 @@ namespace AppInguiri
 
             foreach (var item in lis)
             {
-                if (item.sDescripcion == "01" || item.sIdDocumento == "03" 
+                if (item.sIdDocumento == "01" || item.sIdDocumento == "03" 
                     || item.sIdDocumento == "13")
                 {
                     lis2.Add(item);
