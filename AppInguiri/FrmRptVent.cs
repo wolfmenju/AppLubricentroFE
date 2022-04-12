@@ -54,7 +54,18 @@ namespace AppInguiri
             cbxOpcionDetalle.ValueMember = "nIdMedioPago";
             cbxOpcionDetalle.DisplayMember = "sDescripcion";
             cbxOpcionDetalle.DataSource = ListMedPago;
-            cbxOpcionDetalle.SelectedIndex = 0;
+
+            if (ListMedPago.Count > 0)
+            {
+                cbxOpcionDetalle.SelectedIndex = 0;
+            }
+            else
+            {
+                cbxOpcionDetalle.Enabled = false;
+                btnBuscar.Enabled = false;
+                btnDescargar.Enabled = false;
+                MessageBox.Show("Falta Agregar los medios de pagos.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             dgvReporteVentas.Columns.Clear();
             dgvReporteVentas.Columns.Add("nNumero", "N°");
@@ -62,6 +73,7 @@ namespace AppInguiri
             dgvReporteVentas.Columns.Add("fTotal", "Total");
 
         }
+
 
         private void dtFechaInicio_KeyDown(object sender, KeyEventArgs e)
         {
@@ -227,7 +239,15 @@ namespace AppInguiri
             else
             {
                 cbxOpcionDetalle.Enabled = true;
-                cbxOpcionDetalle.SelectedIndex = 0;
+
+                if (cbxOpcionDetalle.Items.Count > 0)
+                {
+                    cbxOpcionDetalle.SelectedIndex = 0;
+                }
+                else
+                {
+                    cbxOpcionDetalle.Enabled = false;
+                }
             }
         }
 

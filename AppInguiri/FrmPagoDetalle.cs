@@ -34,18 +34,30 @@ namespace AppInguiri
         private void CargarMaestros()
         {
             ListMedPago = objMedPagoNeg.ListarMedioPago(true);
-            
+
             cbxTipoMedioPago.ValueMember = "nIdMedioPago";
             cbxTipoMedioPago.DisplayMember = "sDescripcion";
             cbxTipoMedioPago.DataSource = ListMedPago;
 
-            cbxTipoMedioPago.SelectedIndex = 0;
+            if (ListMedPago.Count > 0)
+            {
+                cbxTipoMedioPago.SelectedIndex = 0;
+            }
+            else
+            {
+                CmdGuardar.Enabled = false;
+                txtMonto.Enabled = false;
+                btnAgregar.Enabled = false;
+
+                MessageBox.Show("Falta Agregar los medios de pagos.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             foreach (var item in ListMedPago)
             {
                 list.Add(item);
             }
         }
+
 
         private void FrmPagoDetalle_Load(object sender, EventArgs e)
         {

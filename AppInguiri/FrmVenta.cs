@@ -988,6 +988,7 @@ namespace AppInguiri
             fSubTotal2 = 0M;
             cboDocumento.SelectedIndex = DocDefault;
             dgvProducto.DataSource = null;
+            chkCliente.CheckState = CheckState.Unchecked;
         }
 
         private bool VerificacionDatos()
