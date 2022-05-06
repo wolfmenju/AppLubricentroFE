@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace AppInguiri
 {
+    //jj
     public partial class FrmCaja : Form
     {
         private static FrmCaja frmInstance = null;
